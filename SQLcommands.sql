@@ -22,3 +22,7 @@ WHERE name = 'david';
 DELETE FROM STUDENTS
 WHERE name = 'david';
 
+SELECT *
+FROM MESSAGES
+ORDER BY id_message DESC
+LIMIT 2;

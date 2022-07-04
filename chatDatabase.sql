@@ -31,7 +31,3 @@ CREATE TABLE isInGroup(
     FOREIGN KEY (isInGroup_group_id) REFERENCES GROUPCHAT (group_id)
 );
 
-SELECT *
-FROM MESSAGES
-ORDER BY id_message DESC
-LIMIT 2;
