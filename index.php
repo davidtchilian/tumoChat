@@ -7,14 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>
-        hello
-        <?php
-            echo "hey im using php";
-        ?>
-    </h1>
-    <?php
-            echo "hey im using php";
-        ?>
+    <form action="connexion.php" method="post">
+        <input type="text" name="input">
+        <button type="submit">GO</button>
+    </form>
 </body>
 </html>
