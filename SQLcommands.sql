@@ -1,5 +1,6 @@
 DROP TABLE STUDENTS;
 CREATE TABLE STUDENTS(
+    id_student INT AUTO_INCREMENT NOT NULL,
     name TEXT,
     grade INT,
     age INT
