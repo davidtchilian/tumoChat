@@ -18,3 +18,7 @@ AND name = 'david';
 UPDATE STUDENTS
 SET grade = 10
 WHERE name = 'david';
+
+DELETE FROM STUDENTS
+WHERE name = 'david';
+
