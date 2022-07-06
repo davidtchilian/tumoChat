@@ -50,7 +50,7 @@
                     <input type="submit" name="Login" id="exampleInputSubmit" class="btn btn-primary" href="page-accueil.html" style="float: left; background : #6C4B93">
                     <div class="col-10 text-sm" style="float: left; color: rgb(83, 100, 113);">
                         Not yet a member ?
-                        <a class="btn btn-link btn-sm" href="signUp.html">
+                        <a class="btn btn-link btn-sm" href="signUp.php">
                             Sign up
                         </a>
                     </div>
