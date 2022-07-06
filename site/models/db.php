@@ -2,9 +2,10 @@
 $servername = "localhost";
 $username = "root";
 $password = "root";
+$database = "tumochat"; // Database name
 
 // Create connection
-$conn = mysqli_connect($servername, $username, $password);
+$conn = mysqli_connect($servername, $username, $password, $database);
 
 // Check connection
 if (!$conn) {

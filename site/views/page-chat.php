@@ -1,3 +1,7 @@
+<?php
+$id = $_GET['id'];
+var_dump($id);
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -31,18 +35,20 @@
             </li>
           </ul>
           <div class="d-flex">
-            <button
-              type="button"
-              class="btn info"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-            >
-              <img
-                src="le_vrai_i.png"
-                alt="Information"
-                style="width: 35px; height: 35px;"
-              />
-            </button>
+              <form action="getgroupinfo.php" method="POST">
+                <button
+                  type="button"
+                  class="btn info"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <img
+                    src="le_vrai_i.png"
+                    alt="Information"
+                    style="width: 35px; height: 35px;"
+                  />
+                </button>
+              </form>
           </div>
           <div
             class="modal fade"
@@ -126,9 +132,11 @@
       <nav class="navbar navbar-expand-lg" style="background-color:#6c4b93">
         <div class="container">
           <div class="container-fluid">
-            <form class="d-flex" role="search" action="../controllers/sendmessage.php">
-              <input type="hidden" name="groupchatid" value="<?php echo $groupchatid; ?>">
+            <form class="d-flex" role="search" action="../controllers/sendmessage.php" method="post">
+              <input type="hidden" name="group_id" value="<?php echo 1; ?>">
+              <input type="hidden" name="user_id" value="<?php echo 1; ?>">
               <input
+                name="message_content"
                 class="form-control me-2"
                 type="text"
                 placeholder="Enter your message here"
