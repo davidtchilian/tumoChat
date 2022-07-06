@@ -10,7 +10,7 @@ CREATE TABLE USERS(
 CREATE TABLE GROUPCHAT(
     group_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     group_name TEXT,
-    group_bio TEXT
+    group_bio TEXT,
     group_admin_id INT,
     FOREIGN KEY (group_admin_id) REFERENCES USERS (user_id)
 );
