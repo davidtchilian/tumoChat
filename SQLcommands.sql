@@ -1,28 +1,3 @@
-DROP TABLE IF EXISTS STUDENTS ;
-CREATE TABLE STUDENTS(
-    id_student INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    name TEXT,
-    grade INT,
-    age INT
-);
-
-INSERT INTO STUDENTS (name, grade, age) VALUES ('david', 4, 4);
-INSERT INTO STUDENTS (name, grade, age) VALUES ('david', 4, 4);
-INSERT INTO STUDENTS (name, grade, age) VALUES ('gevork', 10, 10);
-
-SELECT DISTINCT *
-FROM STUDENTS
-WHERE grade > 4 
-AND name = 'david';
-
-UPDATE STUDENTS
-SET grade = 10
-WHERE name = 'david';
-
-DELETE FROM STUDENTS
-WHERE name = 'david';
-
-
 -- Connexion
 SELECT user_id
 FROM USERS
@@ -63,7 +38,17 @@ INSERT INTO MESSAGE(message_content,message_sender_id,message_group_id,message_d
 VALUES ('$messagecontent', $userid, $groupid, NOW());
 
 -- createGroup.php
-INSERT INTO GROUPCHAT (group_name, group_bio)
-VALUES ('$groupname', '$groupbio');
+INSERT INTO GROUPCHAT (group_name, group_bio, group_admin_id)
+VALUES ('$groupname', '$groupbio', $adminid);
+
+INSERT INTO isInGroup (isInGroup_user_id, isInGroup_group_id)
+VALUES ($u, $groupid);
 
 -- deleteGroup.php
+DELETE FROM MESSAGE WHERE message_group_id = $groupid;
+DELETE FROM isInGroup WHERE isInGroup_group_id = $groupid;
+DELETE FROM GROUPCHAT WHERE group_id = $groupid;
+
+-- deleteUserFromGroup.php
+DELETE FROM MESSAGE WHERE message_sender_id = $userid;
+DELETE FROM isInGroup WHERE isInGroup_user_id = $userid;
