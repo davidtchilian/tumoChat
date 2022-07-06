@@ -1,3 +1,7 @@
+<?php
+$id = $_GET['id'];
+var_dump($id);
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -31,18 +35,20 @@
             </li>
           </ul>
           <div class="d-flex">
-            <button
-              type="button"
-              class="btn info"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-            >
-              <img
-                src="le_vrai_i.png"
-                alt="Information"
-                style="width: 35px; height: 35px;"
-              />
-            </button>
+              <form action="getgroupinfo.php" method="POST">
+                <button
+                  type="button"
+                  class="btn info"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <img
+                    src="le_vrai_i.png"
+                    alt="Information"
+                    style="width: 35px; height: 35px;"
+                  />
+                </button>
+              </form>
           </div>
           <div
             class="modal fade"
