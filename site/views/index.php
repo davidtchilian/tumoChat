@@ -35,7 +35,7 @@
             </p>
 
             </h1>
-            <a class="btn btn-primary button-accueil" href="signUp.html" role="button"
+            <a class="btn btn-primary button-accueil" href="signUp.php" role="button"
                 style="float: center; background : #6C4B93; width: 200px">
                 Jump into the real world
             </a>
