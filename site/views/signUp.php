@@ -42,7 +42,7 @@
                     <input type="submit">
                     <div class="col-10 text-sm" style="float: left; color: rgb(83, 100, 113);">
                         Already a member ?
-                        <a class="btn btn-link btn-sm" href="logIn.html">
+                        <a class="btn btn-link btn-sm" href="logIn.php">
                             Log in
                         </a>
                     </div>
