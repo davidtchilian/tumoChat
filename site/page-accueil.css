@@ -1,0 +1,36 @@
+.html.body {
+  font-family: "Roboto", sans-serif;
+  height: 100%;
+}
+
+.Titre {
+  text-align: center;
+  color: #ffffff;
+}
+
+.div-titre {
+}
+
+.card {
+  text-align: center;
+  margin: auto;
+}
+
+.navigationbar {
+}
+
+.boutton {
+}
+
+.search {
+  color: white;
+  border-color: white;
+}
+
+.search:hover {
+  border-color: white;
+}
+
+.groupec {
+  text-decoration: none;
+}

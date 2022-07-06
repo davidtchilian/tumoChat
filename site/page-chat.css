@@ -1,0 +1,46 @@
+html,
+body {
+  height: 100%;
+}
+
+.messageEnvoye {
+  background-color: #a69bc7;
+  border-color: #a69bc7;
+  float: right;
+}
+
+.messageEnvoye:hover {
+  background-color: #a69bc7;
+  border-color: #a69bc7;
+}
+
+.messageEnvoye:focus {
+  background-color: #a69bc7;
+  border-color: #a69bc7;
+}
+
+.messageRecu {
+  background-color: #d1d3d4;
+  border-color: #d1d3d4;
+}
+
+.messageRecu:hover {
+  background-color: #d1d3d4;
+  border-color: #d1d3d4;
+}
+
+.messageRecu:focus {
+  background-color: #d1d3d4;
+  border-color: #d1d3d4;
+}
+
+.info:hover {
+  border-color: #6c4b93;
+}
+
+.messageRecu.disabled,
+.messageRecu:disabled {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
