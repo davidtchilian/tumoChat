@@ -20,3 +20,9 @@ INSERT INTO isInGroup(isInGroup_user_id, isInGroup_group_id) VALUES
 (2, 2),
 (3, 1);
 
+INSERT INTO MESSAGE (message_content,message_sender_id,message_group_id,message_date)
+VALUES 
+('1Barev', 1, 1, NOW()),
+('2Barev Davit', 2, 1, NOW()),
+('3Barev dzez', 3, 1, NOW());
+
