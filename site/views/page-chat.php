@@ -126,7 +126,7 @@
       <nav class="navbar navbar-expand-lg" style="background-color:#6c4b93">
         <div class="container">
           <div class="container-fluid">
-            <form class="d-flex" role="search" action="../controllers/sendmessage.php">
+            <form class="d-flex" role="search" action="../controllers/sendmessage.php" method = "POST">
               <input type="hidden" name="groupchatid" value="<?php echo $groupchatid; ?>">
               <input
                 class="form-control me-2"

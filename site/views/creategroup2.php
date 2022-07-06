@@ -34,7 +34,7 @@
                     <option>Person 4</option>
                 </select>
             </div>
-            <a href="creategroup.html" class="btn btn-primary mt-3 "
+            <a href="creategroup.php" class="btn btn-primary mt-3 "
                 style="background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119);">Return</a>
             <button type="submit" class="btn btn-primary mt-3"
                 style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Create</button>

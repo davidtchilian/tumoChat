@@ -24,7 +24,7 @@
     <nav class="navbar navbar-expand-lg light-nav" style="background: #F8F9FA;">
         <div class="container mt-5">
             <div class="container-fluid mt-5z">
-                <a href="page-accueil.html"
+                <a href="page-accueil.php"
           ><img
             src="flèche_retour3.png"
             alt="Retour"

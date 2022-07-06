@@ -40,12 +40,12 @@
                         <label for="exampleInputPassword1" class="form-label">Password</label>
                         <input type="password" class="form-control" id="exampleInputPassword1">
                     </div>
-                    <a class="btn btn-primary" href="page-accueil.html" role="button" style="float: left; background : #6C4B93">
+                    <a class="btn btn-primary" href="page-accueil.php" role="button" style="float: left; background : #6C4B93">
                         Log In
                     </a>
                     <div class="col-10 text-sm" style="float: left; color: rgb(83, 100, 113);">
                         Not yet a member ?
-                        <a class="btn btn-link btn-sm" href="signUp.html">
+                        <a class="btn btn-link btn-sm" href="signUp.php">
                             Sign up
                         </a>
                     </div>
