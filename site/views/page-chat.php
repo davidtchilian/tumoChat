@@ -1,7 +1,13 @@
 <?php
-$id = $_GET['id'];
-var_dump($id);
+  require_once('../models/db.php');
+  $sql = 'SELECT * FROM message';
+  $messages = mysqli_query($conn, $sql);
+  mysqli_close($conn);
+
+  $userid = 1;
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -35,20 +41,18 @@ var_dump($id);
             </li>
           </ul>
           <div class="d-flex">
-              <form action="getgroupinfo.php" method="POST">
-                <button
-                  type="button"
-                  class="btn info"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  <img
-                    src="le_vrai_i.png"
-                    alt="Information"
-                    style="width: 35px; height: 35px;"
-                  />
-                </button>
-              </form>
+            <button
+              type="button"
+              class="btn info"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <img
+                src="le_vrai_i.png"
+                alt="Information"
+                style="width: 35px; height: 35px;"
+              />
+            </button>
           </div>
           <div
             class="modal fade"
@@ -91,41 +95,37 @@ var_dump($id);
         </div>
       </nav>
     </div>
-    <div
-      class="container mt-5"
-      style="min-height : 100vh"
-      style="position : relative"
-    >
-      <br />
-      <div class="row">
-        <div class="col-8">
-          <button
-            type="button"
-            class="btn btn-primary messageRecu mt-2"
-            style="float : left; color: black;"
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-          </button>
-        </div>
-        <div class="col-4"></div>
-      </div>
-      <div class="row">
-        <div class="col-4"></div>
-        <div class="col-8">
-          <button
-            class="btn btn-primary messageEnvoye mt-2"
-            style="float : right; color: black;"
-          >
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex,
-            dolorum et error, quisquam natus vero culpa aperiam in repudiandae
-            sapiente, inventore commodi earum veritatis id laboriosam saepe
-            libero doloremque consequatur. Earum, quaerat. Delectus tenetur
-            tempora distinctio necessitatibus sint ducimus minus.
-          </button>
-        </div>
-      </div>
-
-      <br />
+    <div class="container mt-5" style="min-height : 100vh" style="position : relative">
+      <br/>
+      <?php
+        while ($message = mysqli_fetch_assoc($messages)) {
+          if ($message['message_sender_id'] == $userid) {
+            ?>
+              <div class="row">
+                <div class="col-4"></div>
+                <div class="col-8">
+                  <button class="btn btn-primary messageRecu mt-2" style="float : right; color: black;">
+                    <?php echo $message['message_content'] ?>
+                  </button>
+                </div>
+              </div>
+            <?php
+          }
+          else {
+            ?>
+              <div class="row">
+                <div class="col-8">
+                  <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
+                    <?php  $message['message_content'] ?>
+                  </button>
+                </div>
+                <div class="col-4"></div>
+              </div>
+            <?php
+          }
+        }
+      ?>
+      <br/>
     </div>
 
     <div class="fixed-bottom">
