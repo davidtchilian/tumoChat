@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col text-center mt-5">
                 <h1>Welcome <img src="logo_tuyu.png" class="logo" alt="TUYU"></h1>
-                <h5>Sign up for free !</h5>
+                <h5>Sign up for free!</h5>
             </div>
         </div>
         <div class="card centered-card-bg">
@@ -39,10 +39,7 @@
                         <label for="exampleInputPassword1" class="form-label"> Confirm Password</label>
                         <input type="password" class="form-control" id="exampleInputPassword1" name="confirmPassword">
                     </div>
-                    <a class="btn btn-primary" href="#" role="button"
-                        style="float: left; background : #6C4B93">
-                        Sign Up
-                    </a>
+                    <input type="submit">
                     <div class="col-10 text-sm" style="float: left; color: rgb(83, 100, 113);">
                         Already a member ?
                         <a class="btn btn-link btn-sm" href="logIn.html">
