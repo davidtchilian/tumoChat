@@ -44,7 +44,7 @@ $name = $_POST['Group_Name']
                             }
                     }
                         foreach($users as $i){
-                            echo'<option>'. $i .'</option >';
+                            echo'<option>'. explode("@",$i)[0] .'</option >';
                         }
                     ?>
                 <!--<option value="id" >Person 1</option>

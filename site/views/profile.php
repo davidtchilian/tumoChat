@@ -98,17 +98,9 @@ require_once '../models/db.php';
                     <div class="card-body">
                         <h5><span class="badge bg-secondary">sokol.bozanic</span></h5>
                         <h6 class="card-subtitle mb-2 text-muted">sokol.bozanic@tumo.world</h6>
-<<<<<<< HEAD
                         <p class="card-text"> <?php  echo $usrbio;
     }?></p>
                         <a href="editProfile.php" class="card-link">edit profile</a>
-=======
-                        <p class="card-text"> Biography : Some quick example text to build on the card title and make up
-                            the bulk of
-                            the card's content.</p>
-                        <a href="#" class="card-link">send a message</a>
-                        <a href="#" class="card-link">create a group</a>
->>>>>>> bd62ebb84fb8c85ba96aadf2463d108a88546c82
                     </div>
                 </div>
             </div>
