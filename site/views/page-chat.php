@@ -23,12 +23,12 @@
     />
     <link rel="stylesheet" href="page-chat.css" />
   </head>
-  <body style='background-image: url("super_fond_violet.jpg");'>
+  <body style='background-image: url("../assets/images/super_fond_violet.jpg");'>
     <div class="fixed-top">
       <nav class="navbar navbar-expand-lg" style="background-color : #6c4b93">
         <a href="page-accueil.html"
           ><img
-            src="flèche_retour3.png"
+            src="../assets/images/flèche_retour3.png"
             alt="Retour"
             style="width : 35px; height: 35px; margin-left: 10px"
         /></a>
@@ -49,7 +49,7 @@
               data-bs-target="#exampleModal"
             >
               <img
-                src="le_vrai_i.png"
+                src="../assets/images/le_vrai_i.png"
                 alt="Information"
                 style="width: 35px; height: 35px;"
               />
@@ -144,7 +144,7 @@
               />
               <button class="btn search" type="submit" value="Message">
                 <img
-                  src="avion_papier_nour_1.png"
+                  src="../assets/images/avion_papier_nour_1.png"
                   alt="envoye"
                   style="width :40px"
                   style="height : 40px"
