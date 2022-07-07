@@ -1,3 +1,11 @@
+<?php
+    $actual_link = "$_SERVER[REQUEST_URI]";
+    $url_components = parse_url($actual_link);
+
+    parse_str($url_components['query'], $params);
+
+    $err_code = $params['err'];
+?>
 <!doctype html>
 <html lang="fr">
 
@@ -47,6 +55,15 @@
                         Log In
                     </a> -->
 
+                    <?php if($err_code != NULL) {
+                        if($err_code == 1){
+                        ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo "Incorrect email or password"; ?>
+                            </div> 
+                            <?php }
+                    } ?>    
+
                     <input type="submit" name="Login" id="exampleInputSubmit" class="btn btn-primary" href="page-accueil.html" style="float: left; background : #6C4B93">
                     <div class="col-10 text-sm" style="float: left; color: rgb(83, 100, 113);">
                         Not yet a member ?
@@ -62,3 +79,4 @@
 </body>
 
 </html>
+
