@@ -4,7 +4,7 @@
   $sql = 'SELECT * FROM message';
   $messages = mysqli_query($conn, $sql);
   mysqli_close($conn);
-  $group_id = 1;
+  $group_id = $_GET['id'];
   $userid = $_SESSION['user_id'];
 
   if (!$userid) {
