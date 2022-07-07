@@ -62,9 +62,8 @@
                             <?php echo "Incorrect email or password"; ?>
                             </div> 
                             <?php }
-                    } ?>
+                    } ?>    
 
-                    
                     <input type="submit" name="Login" id="exampleInputSubmit" class="btn btn-primary" href="page-accueil.html" style="float: left; background : #6C4B93">
                     <div class="col-10 text-sm" style="float: left; color: rgb(83, 100, 113);">
                         Not yet a member ?

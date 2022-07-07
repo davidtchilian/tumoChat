@@ -4,7 +4,7 @@ session_start();
 
 
 $user_email = $_POST['user_email'];
-$user_pwrd = $_POST['user_pass'];
+$user_pwrd = md5($_POST['user_pass']);
 
 // var_dump($user_email);
 // var_dump($user_pwrd);
