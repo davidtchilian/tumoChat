@@ -7,8 +7,10 @@ echo "group id :".$groupid."<br>";
    
     $result = mysqli_query($conn,$sql);
     if ($result->num_rows > 0) {
-        while($row = mysqli_fetch_array($result)) {
-            echo "<br> group name : ". $row["group_name"]."<br>". "group bio : ". $row["group_bio"]. " " . "<br>";
+        while($row = mysqli_fetch_assoc($result)) {
+            echo json_encode($row);
+            echo "<br>";
+           // echo "<br> group name : ". $row["group_name"]."<br>". "group bio : ". $row["group_bio"]. " " . "<br>";
         }
     } else {
         echo "0 results";
@@ -17,8 +19,9 @@ echo "group id :".$groupid."<br>";
     $sql2 = "SELECT isInGroup_user_id FROM isInGroup WHERE isInGroup_group_id = $groupid";
     $result2 = mysqli_query($conn,$sql2);
     if ($result2->num_rows > 0) {
-        while($row = mysqli_fetch_array($result2)) {
-            echo "<br> group users id : ". $row["isInGroup_user_id"];
+        while($row = mysqli_fetch_assoc($result2)) {
+            echo json_encode($row)."<br>";
+            //echo "<br> group users id : ". $row["isInGroup_user_id"];
         }
     } else {
         echo "0 results";
