@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php 
     require_once '../models/db.php';
     session_start();
@@ -12,3 +13,5 @@
     $mysqli -> close();
 
 ?>
+=======
+>>>>>>> bd62ebb84fb8c85ba96aadf2463d108a88546c82
