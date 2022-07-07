@@ -1,3 +1,12 @@
+<?php
+require_once '../models/db.php';
+
+
+ " SELECT user_bio FROM USERS WHERE user_id = 1";
+
+ if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $usrbio = htmlspecialchars($_REQUEST['bio']); 
+?>
 <!doctype html>
 <html lang="fr">
 
@@ -83,30 +92,28 @@
                     <img src="../assets/images/dino.png" class="card-img-top" alt="profile_" style="height: 70px; width: 70px">
                 </div>
             </div>
+
             <div class="col-4">
                 <div class="card centered-card" style="width: 288px; height: 300px">
-                    <div class="card-body" style="color: black">
+                    <div class="card-body">
                         <h5><span class="badge bg-secondary">sokol.bozanic</span></h5>
                         <h6 class="card-subtitle mb-2 text-muted">sokol.bozanic@tumo.world</h6>
+<<<<<<< HEAD
+                        <p class="card-text"> <?php  echo $usrbio;
+    }?></p>
+                        <a href="editProfile.php" class="card-link">edit profile</a>
+=======
                         <p class="card-text"> Biography : Some quick example text to build on the card title and make up
                             the bulk of
                             the card's content.</p>
-                        <a href="editProfile.php" class="card-link">edit profile</a>
+                        <a href="#" class="card-link">send a message</a>
+                        <a href="#" class="card-link">create a group</a>
+>>>>>>> bd62ebb84fb8c85ba96aadf2463d108a88546c82
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        const list = document.querySelectorAll('.list');
-        function activeLink() {
-            list.forEach((item) => item.classList.remove('active'));
-            this.classList.add('active');
-        }
-        list.forEach((item) => item.addEventListener('click', activeLink))
-    </script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>

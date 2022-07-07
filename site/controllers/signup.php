@@ -10,31 +10,40 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully";
 // require_once('../models/db.php');
 $email = $_POST['email'];
 $password = $_POST['password'];
+$password_hash = md5($password);
 $confirmPassword = $_POST['confirmPassword'];
-echo($password);
-echo($confirmPassword);
 
 // echo($email);
 // $select = mysqli_query($conn, "SELECT * FROM USERS WHERE user_email = '$email'");
 $checkedEmail = mysqli_query($conn, "SELECT user_email FROM USERS WHERE user_email = '$email'");
 if(mysqli_num_rows($checkedEmail)) {
-    echo('This username already exists');
+    header("Location: ../views/signUp.php?err=1");
 }
 else{
-    if($password==$confirmPassword){
-        $sql = "
-        INSERT INTO USERS(user_email,user_password,user_bio,user_theme,user_icon)
-        VALUES ('$email', '$password', '', 0, 0);";
-        $conn->query($sql);
-
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        header("Location: ../views/signUp.php?err=5");
+    }
+    else if(!strlen(str_replace(' ', '', $password))>0){
+        header("Location: ../views/signUp.php?err=4");
     }
     else{
-        echo("The passwords dont match!");
+    if($password==$confirmPassword){
+        if(strlen($password)<=8){
+            header("Location: ../views/signUp.php?err=3");
+        }else{
+        $sql = "
+        INSERT INTO USERS(user_email,user_password,user_bio,user_theme,user_icon)
+        VALUES ('$email', '$password_hash', '', 0, 0);";
+        $conn->query($sql);
+        header("Location: ../views/page-accueil.php");
+        }
+    }
+    else{
+        header("Location: ../views/signUp.php?err=2");
     }
 }
-
+}
 ?>

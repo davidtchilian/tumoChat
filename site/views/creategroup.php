@@ -29,8 +29,8 @@
 			<textarea name= "bio" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 			<a href="page-accueil.html" class="btn btn-primary mt-3 "
 				style="background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119);">Return</a>
-			 <button style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Continue</button>
-				
+			<a href="creategroup2.php" class="btn btn-primary mt-3"
+				style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Continue</a>
 		</div>
     </form>
 
