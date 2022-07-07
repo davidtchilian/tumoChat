@@ -1,18 +1,12 @@
 <?php
+
 $name =  $_POST['name'];
 $bio =  $_POST['bio'];
 $select = $_POST['select'];
-"INSERT INTO GROUPCHAT(group_name, group_bio) VALUES ('$name', '$bio')";
-    
-?>
 
-
-
-<?php
-
-
-$sql = "INSERT INTO MyGuests (firstname, lastname, email)
-VALUES ('John', 'Doe', 'john@example.com')";
+include '../models/db.php';
+$sql = "INSERT INTO GROUPCHAT(group_name, group_bio)
+VALUES ('$name', '$bio')";
 
 if ($conn->query($sql) === TRUE) {
   echo "New record created successfully";
@@ -21,4 +15,7 @@ if ($conn->query($sql) === TRUE) {
 }
 
 $conn->close();
+    
 ?>
+
+
