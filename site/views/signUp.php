@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="col text-center mt-5">
-                <h1>Welcome <img src="logo_tuyu.png" class="logo" alt="TUYU"></h1>
+                <h1>Welcome <img src="../assets/images/logo_tuyu.png" class="logo" alt="TUYU"></h1>
                 <h5>Sign up for free!</h5>
             </div>
         </div>

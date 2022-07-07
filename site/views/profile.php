@@ -1,3 +1,12 @@
+<?php
+require_once '../models/db.php';
+
+
+ " SELECT user_bio FROM USERS WHERE user_id = 1";
+
+ if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $usrbio = htmlspecialchars($_REQUEST['bio']); 
+?>
 <!doctype html>
 <html lang="fr">
 
@@ -88,9 +97,8 @@
                     <div class="card-body" style="color: black">
                         <h5><span class="badge bg-secondary">sokol.bozanic</span></h5>
                         <h6 class="card-subtitle mb-2 text-muted">sokol.bozanic@tumo.world</h6>
-                        <p class="card-text"> Biography : Some quick example text to build on the card title and make up
-                            the bulk of
-                            the card's content.</p>
+                        <p class="card-text"> <?php  echo $usrbio;
+    }?></p>
                         <a href="editProfile.php" class="card-link">edit profile</a>
                     </div>
                 </div>
