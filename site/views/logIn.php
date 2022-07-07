@@ -12,7 +12,7 @@
 <head>
     <meta charset="utf-8">
     <title>TUYU | connexion </title>
-    <link rel="icon" type="image/png" href="logo_tuyu-sm.png" />
+    <link rel="icon" type="image/png" href="../assets/images/logo_tuyu-sm.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
@@ -32,8 +32,8 @@
 
     <div class="container">
         <div class="row">
-            <div class="col text-center mt-5">
-                <h1>Welcome back <img src="../assets/images/logo_tuyu.png" class="logo" alt="TUYU"></h1>
+            <div class="col text-center welcome">
+                <h1><img src="../assets/images/logo_tuyu.png" class="logo" alt="TUYU"></h1>
             </div>
         </div>
         <div class="card centered-card">
