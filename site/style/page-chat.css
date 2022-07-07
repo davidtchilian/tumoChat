@@ -48,6 +48,6 @@ body {
   border-color: #007bff;
 }
 
-.form-control {
-  text-transform: capitalize;
+.mt-5 {
+  padding-bottom: 3rem;
 }

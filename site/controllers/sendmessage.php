@@ -1,6 +1,6 @@
 <?php
 
-$messagecontent = $_POST['message_content'];
+$messagecontent = strip_tags(htmlspecialchars($_POST['message_content']));
 
 if (!empty($messagecontent) && !ctype_space($messagecontent)) {
 
