@@ -11,10 +11,10 @@
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="page-accueil.css" />
+    <link rel="stylesheet" href="../style/page-accueil.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
   </head>
-  <body style='background-image: url("super_fond_violet.jpg");'>
+  <body style='background-image: url("../assets/images/super_fond_violet.jpg");'>
     <div class="fixed-top">
       <!-- <nav class="navbar navbar-expand-lg" style="background-color: #6c4b93">
         <div class="container">
@@ -100,7 +100,7 @@
               />
               <button class="btn search">
                 <img
-                  src="loupe.png"
+                  src="../assets/images/loupe.png"
                   alt="Rechercher"
                   style="width : 20px; height: 30px; margin-top : 3px"
                 />
@@ -117,7 +117,7 @@
       </div>
       <div class="row">
         <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
+          <a href="page-chat.php" style="text-decoration :none">
             <div class="card mt-5">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">GROUPE</li>
@@ -130,7 +130,7 @@
           </a>
         </div>
         <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
+          <a href="page-chat.php" style="text-decoration :none">
             <div class="card mt-5">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">GROUPE</li>
@@ -143,48 +143,7 @@
           </a>
         </div>
         <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
+          <a href="page-chat.php" style="text-decoration :none">
             <div class="card mt-5">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">GROUPE</li>
@@ -199,7 +158,7 @@
       </div>
       <div class="row">
         <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
+          <a href="page-chat.php" style="text-decoration :none">
             <div class="card mt-5">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">GROUPE</li>
@@ -212,7 +171,7 @@
           </a>
         </div>
         <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
+          <a href="page-chat.php" style="text-decoration :none">
             <div class="card mt-5">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">GROUPE</li>
@@ -225,48 +184,7 @@
           </a>
         </div>
         <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
+          <a href="page-chat.php" style="text-decoration :none">
             <div class="card mt-5">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">GROUPE</li>
@@ -281,7 +199,7 @@
       </div>
       <div class="row">
         <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
+          <a href="page-chat.php" style="text-decoration :none">
             <div class="card mt-5">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">GROUPE</li>
@@ -294,7 +212,7 @@
           </a>
         </div>
         <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
+          <a href="page-chat.php" style="text-decoration :none">
             <div class="card mt-5">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">GROUPE</li>
@@ -307,48 +225,7 @@
           </a>
         </div>
         <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
+          <a href="page-chat.php" style="text-decoration :none">
             <div class="card mt-5">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">GROUPE</li>
@@ -363,7 +240,7 @@
       </div>
       <div class="row">
         <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
+          <a href="page-chat.php" style="text-decoration :none">
             <div class="card mt-5">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">GROUPE</li>
@@ -376,7 +253,7 @@
           </a>
         </div>
         <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
+          <a href="page-chat.php" style="text-decoration :none">
             <div class="card mt-5">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">GROUPE</li>
@@ -389,7 +266,130 @@
           </a>
         </div>
         <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.html" style="text-decoration :none">
+          <a href="page-chat.php" style="text-decoration :none">
+            <div class="card mt-5">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">GROUPE</li>
+                <li class="list-group-item">
+                  <p>message 1</p>
+                  <p>message 2</p>
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-12">
+          <a href="page-chat.php" style="text-decoration :none">
+            <div class="card mt-5">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">GROUPE</li>
+                <li class="list-group-item">
+                  <p>message 1</p>
+                  <p>message 2</p>
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+          <a href="page-chat.php" style="text-decoration :none">
+            <div class="card mt-5">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">GROUPE</li>
+                <li class="list-group-item">
+                  <p>message 1</p>
+                  <p>message 2</p>
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+          <a href="page-chat.php" style="text-decoration :none">
+            <div class="card mt-5">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">GROUPE</li>
+                <li class="list-group-item">
+                  <p>message 1</p>
+                  <p>message 2</p>
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-12">
+          <a href="page-chat.php" style="text-decoration :none">
+            <div class="card mt-5">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">GROUPE</li>
+                <li class="list-group-item">
+                  <p>message 1</p>
+                  <p>message 2</p>
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+          <a href="page-chat.php" style="text-decoration :none">
+            <div class="card mt-5">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">GROUPE</li>
+                <li class="list-group-item">
+                  <p>message 1</p>
+                  <p>message 2</p>
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+          <a href="page-chat.php" style="text-decoration :none">
+            <div class="card mt-5">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">GROUPE</li>
+                <li class="list-group-item">
+                  <p>message 1</p>
+                  <p>message 2</p>
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-12">
+          <a href="page-chat.php" style="text-decoration :none">
+            <div class="card mt-5">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">GROUPE</li>
+                <li class="list-group-item">
+                  <p>message 1</p>
+                  <p>message 2</p>
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+          <a href="page-chat.php" style="text-decoration :none">
+            <div class="card mt-5">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">GROUPE</li>
+                <li class="list-group-item">
+                  <p>message 1</p>
+                  <p>message 2</p>
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+          <a href="page-chat.php" style="text-decoration :none">
             <div class="card mt-5">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">GROUPE</li>

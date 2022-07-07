@@ -35,20 +35,28 @@
         <div class="card centered-card-bg">
             <div class="card-body">
                 <form action="../controllers/signup.php" method="POST">
+
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" required>
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
-                    <div class="mb-1">
+
+                    <div class="mb-2">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <div class="fake-input">
                         <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
-                        <img id="passEye" width="25px" src="../assets/images/closed.png" alt="" onclick="change1()">
+                        <img id="passEye" width="25px" src="../assets/images/closed.png" alt="" onclick="change1()" class="eye">
+                        </div>  
                     </div>
-                    <div class="mb-5">
+
+                    <div class="mb-4">
                         <label for="exampleInputPassword1" class="form-label"> Confirm Password</label>
+                        <div class="fake-input">
                         <input type="password" class="form-control" id="exampleInputPassword2" name="confirmPassword" required>
-                        <img id="confEye" width="25px" src="../assets/images/closed.png" alt="" onclick="change2()">
+                        <img id="confEye" width="25px" src="../assets/images/closed.png" alt="" onclick="change2()" class="eye">    
+                        </div>
+                        
                     </div>
                     <?php if($err_code != NULL) {
                         if($err_code == 1){

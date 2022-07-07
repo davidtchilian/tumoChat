@@ -31,7 +31,7 @@ else{
     }
     else{
     if($password==$confirmPassword){
-        if(strlen($password)<=8){
+        if(strlen($password)<8){
             header("Location: ../views/signUp.php?err=3");
         }else{
         $sql = "

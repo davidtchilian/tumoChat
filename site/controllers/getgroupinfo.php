@@ -1,4 +1,7 @@
 <?php
+if(!isset($_GET['id'])){
+    die("id not found");
+}
 require_once("../models/db.php");
 $groupid = $_GET['id'];
 echo "group id :".$groupid."<br>";
