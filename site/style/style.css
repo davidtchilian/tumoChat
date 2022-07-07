@@ -164,7 +164,7 @@
 
 body{
   font-family: "Roboto", sans-serif;
-  background-image: url('fondBlanc.png');;
+  background-image: url('../assets/images/fondBlanc.png');;
   background-size: 10%;
 }
 
