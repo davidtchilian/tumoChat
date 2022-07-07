@@ -1,6 +1,9 @@
-html,
-body {
+html, body {
   height: 100%;
+}
+
+body {
+  background-image: url("../assets/images/super_fond_violet.jpg");
 }
 
 .messageEnvoye {
@@ -43,4 +46,8 @@ body {
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
+}
+
+.form-control {
+  text-transform: capitalize;
 }

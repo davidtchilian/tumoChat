@@ -1,7 +1,7 @@
 <?php
+require_once '../models/db.php';
 $bio= $_POST['bio'];
-$name = $_POST['Group_Name'];
-
+$name = $_POST['Group_Name']
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@ $name = $_POST['Group_Name'];
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Create group page</title>
-    <link rel="stylesheet" href="chosen.css" />
+    <link rel="stylesheet" href="../style/chosen.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
@@ -33,12 +33,25 @@ $name = $_POST['Group_Name'];
             <div class="center clear">
 
                 <div id="promoNode"></div>
-                <select name = 'select'class="chosen" multiple="true" style="width:400px;">
-                    <option>Person 1</option>
+                <select name = 'select[]'class="chosen" multiple="true" style="width:400px;">
+                    <?php
+                    $users = array();
+                    $sql = "SELECT user_email FROM USERS";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            array_push($users, $row["user_email"]);
+                            }
+                    }
+                        foreach($users as $i){
+                            echo'<option>'. explode("@",$i)[0] .'</option >';
+                        }
+                    ?>
+                <!--<option value="id" >Person 1</option>
                     <option>Person 2</option>
                     <option>Person 3</option>
                     <option>Person 4</option>
-                </select>
+                </select>-->
             </div>
             <a href="../controllers/creategroup.php" class="btn btn-primary mt-3 "
                 style="background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119);">Return</a>
@@ -53,7 +66,7 @@ $name = $_POST['Group_Name'];
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.js" integrity="sha512-eSeh0V+8U3qoxFnK3KgBsM69hrMOGMBy3CNxq/T4BArsSQJfKVsKb5joMqIPrNMjRQSTl4xG8oJRpgU2o9I7HQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-    <script src="chosen.jquery.js"></script>
+    <script src="../scripts/chosen.jquery.js"></script>
     <script>
         jQuery(document).ready(function () {
             jQuery(".chosen").data("placeholder", "Select persons you want to add...").chosen();
@@ -66,5 +79,4 @@ $name = $_POST['Group_Name'];
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
 </body>
-
 </html>
