@@ -3,7 +3,7 @@
   $sql = 'SELECT * FROM message';
   $messages = mysqli_query($conn, $sql);
   mysqli_close($conn);
-
+  $group_id = 1;
   $userid = 1;
 
 ?>
@@ -41,6 +41,7 @@
             </li>
           </ul>
           <div class="d-flex">
+            <a href="../controllers/getgroupinfo.php?id=<?php echo $group_id; ?>">
             <button
               type="button"
               class="btn info"
@@ -52,7 +53,7 @@
                 alt="Information"
                 style="width: 35px; height: 35px;"
               />
-            </button>
+            </button></a>
           </div>
           <div
             class="modal fade"
