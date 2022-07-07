@@ -33,7 +33,7 @@
     <div class="container">
         <div class="row">
             <div class="col text-center mt-5">
-                <h1>Welcome back <img src="../assets/images/logo_tuyu.png" class="logo" alt="TUYU"></h1>
+                <h1>Welcome back <img src="logo_tuyu.png" class="logo" alt="TUYU"></h1>
             </div>
         </div>
         <div class="card centered-card">
@@ -62,9 +62,8 @@
                             <?php echo "Incorrect email or password"; ?>
                             </div> 
                             <?php }
-                    } ?>
+                    } ?>    
 
-                    
                     <input type="submit" name="Login" id="exampleInputSubmit" class="btn btn-primary" href="page-accueil.html" style="float: left; background : #6C4B93">
                     <div class="col-10 text-sm" style="float: left; color: rgb(83, 100, 113);">
                         Not yet a member ?
@@ -80,3 +79,4 @@
 </body>
 
 </html>
+
