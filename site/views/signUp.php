@@ -20,32 +20,29 @@
         <div class="row">
             <div class="col text-center mt-5">
                 <h1>Welcome <img src="logo_tuyu.png" class="logo" alt="TUYU"></h1>
-                <h5>Sign up for free !</h5>
+                <h5>Sign up for free!</h5>
             </div>
         </div>
         <div class="card centered-card-bg">
             <div class="card-body">
-                <form>
+                <form action="../controllers/signup.php" method="POST">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="mb-1">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="password">
                     </div>
                     <div class="mb-5">
                         <label for="exampleInputPassword1" class="form-label"> Confirm Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="confirmPassword">
                     </div>
-                    <a class="btn btn-primary" href="#" role="button"
-                        style="float: left; background : #6C4B93">
-                        Sign Up
-                    </a>
+                    <input type="submit">
                     <div class="col-10 text-sm" style="float: left; color: rgb(83, 100, 113);">
                         Already a member ?
-                        <a class="btn btn-link btn-sm" href="logIn.html">
+                        <a class="btn btn-link btn-sm" href="logIn.php">
                             Log in
                         </a>
                     </div>

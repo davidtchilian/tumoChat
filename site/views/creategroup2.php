@@ -1,3 +1,9 @@
+<?php
+$bio= $_POST['bio'];
+$name = $_POST['Group_Name'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="utf-8">
@@ -21,21 +27,23 @@
 
     <div class="card mx-auto card-body mb-3 mt-4 " style="width: 27rem;">
         <h5 class="card-title">Creating Groups</h5>
-        <form action="#" method="post">
+        <form action= "../controllers/creategroup.php " method="post">
 
             <label for="exampleFormControlTextarea1" class="form-label; float: left;">Name of Persons</label>
             <div class="center clear">
 
                 <div id="promoNode"></div>
-                <select class="chosen" multiple="true" style="width:400px;">
+                <select name = 'select'class="chosen" multiple="true" style="width:400px;">
                     <option>Person 1</option>
                     <option>Person 2</option>
                     <option>Person 3</option>
                     <option>Person 4</option>
                 </select>
             </div>
-            <a href="creategroup.html" class="btn btn-primary mt-3 "
+            <a href="../controllers/creategroup.php" class="btn btn-primary mt-3 "
                 style="background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119);">Return</a>
+                <input type="hidden" value="<?php echo $bio;  ?>" name="bio">
+                <input type="hidden" value="<?php echo $name;  ?>" name="name">
             <button type="submit" class="btn btn-primary mt-3"
                 style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Create</button>
         </form>

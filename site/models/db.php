@@ -1,14 +1,15 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "root";
+$database = "tumochat"; // Database name
 
 // Create connection
-$conn = mysqli_connect($servername, $username, $password);
+$conn = mysqli_connect($servername, $username, $password, $database);
 
 // Check connection
 if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
-echo "Connected successfully";
+
 ?>

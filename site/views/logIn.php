@@ -30,22 +30,27 @@
         </div>
         <div class="card centered-card">
             <div class="card-body">
-                <form>
+                <form action="../controllers/logIn.php" method="post">
+
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="user_email">
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
+
                     <div class="mb-5">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="user_pass">
                     </div>
-                    <a class="btn btn-primary" href="page-accueil.html" role="button" style="float: left; background : #6C4B93">
+
+                    <!-- <a class="btn btn-primary" href="page-accueil.html" role="button" style="float: left; background : #6C4B93">
                         Log In
-                    </a>
+                    </a> -->
+
+                    <input type="submit" name="Login" id="exampleInputSubmit" class="btn btn-primary" href="page-accueil.html" style="float: left; background : #6C4B93">
                     <div class="col-10 text-sm" style="float: left; color: rgb(83, 100, 113);">
                         Not yet a member ?
-                        <a class="btn btn-link btn-sm" href="signUp.html">
+                        <a class="btn btn-link btn-sm" href="signUp.php">
                             Sign up
                         </a>
                     </div>
