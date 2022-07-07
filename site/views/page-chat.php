@@ -105,7 +105,7 @@
                 <div class="col-4"></div>
                 <div class="col-8">
                   <button class="btn btn-primary messageRecu mt-2" style="float : right; color: black;">
-                    <?php echo $message['message_content'] ?>
+                    <?php echo $message['message_content']; ?>
                   </button>
                 </div>
               </div>
