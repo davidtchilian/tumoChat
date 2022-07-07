@@ -33,7 +33,7 @@
     <div class="container">
         <div class="row">
             <div class="col text-center mt-5">
-                <h1>Welcome back <img src="logo_tuyu.png" class="logo" alt="TUYU"></h1>
+                <h1>Welcome back <img src="../assets/images/logo_tuyu.png" class="logo" alt="TUYU"></h1>
             </div>
         </div>
         <div class="card centered-card">
