@@ -52,4 +52,3 @@ DELETE FROM GROUPCHAT WHERE group_id = $groupid;
 -- deleteUserFromGroup.php
 DELETE FROM MESSAGE WHERE message_sender_id = $userid;
 DELETE FROM isInGroup WHERE isInGroup_user_id = $userid;
-nbhnhggh
