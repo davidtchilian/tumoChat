@@ -1,3 +1,13 @@
+<?php
+  require_once('../models/db.php');
+  $sql = 'SELECT * FROM message';
+  $messages = mysqli_query($conn, $sql);
+  mysqli_close($conn);
+
+  $userid = 1;
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -85,50 +95,48 @@
         </div>
       </nav>
     </div>
-    <div
-      class="container mt-5"
-      style="min-height : 100vh"
-      style="position : relative"
-    >
-      <br />
-      <div class="row">
-        <div class="col-8">
-          <button
-            type="button"
-            class="btn btn-primary messageRecu mt-2"
-            style="float : left; color: black;"
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-          </button>
-        </div>
-        <div class="col-4"></div>
-      </div>
-      <div class="row">
-        <div class="col-4"></div>
-        <div class="col-8">
-          <button
-            class="btn btn-primary messageEnvoye mt-2"
-            style="float : right; color: black;"
-          >
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex,
-            dolorum et error, quisquam natus vero culpa aperiam in repudiandae
-            sapiente, inventore commodi earum veritatis id laboriosam saepe
-            libero doloremque consequatur. Earum, quaerat. Delectus tenetur
-            tempora distinctio necessitatibus sint ducimus minus.
-          </button>
-        </div>
-      </div>
-
-      <br />
+    <div class="container mt-5" style="min-height : 100vh" style="position : relative">
+      <br/>
+      <?php
+        while ($message = mysqli_fetch_assoc($messages)) {
+          if ($message['message_sender_id'] == $userid) {
+            ?>
+              <div class="row">
+                <div class="col-4"></div>
+                <div class="col-8">
+                  <button class="btn btn-primary messageRecu mt-2" style="float : right; color: black;">
+                    <?php echo $message['message_content'] ?>
+                  </button>
+                </div>
+              </div>
+            <?php
+          }
+          else {
+            ?>
+              <div class="row">
+                <div class="col-8">
+                  <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
+                    <?php echo $message['message_content'] ?>
+                  </button>
+                </div>
+                <div class="col-4"></div>
+              </div>
+            <?php
+          }
+        }
+      ?>
+      <br/>
     </div>
 
     <div class="fixed-bottom">
       <nav class="navbar navbar-expand-lg" style="background-color:#6c4b93">
         <div class="container">
           <div class="container-fluid">
-            <form class="d-flex" role="search" action="../controllers/sendmessage.php" method = "POST">
-              <input type="hidden" name="groupchatid" value="<?php echo $groupchatid; ?>">
+            <form class="d-flex" role="search" action="../controllers/sendmessage.php" method="post">
+              <input type="hidden" name="group_id" value="<?php echo 1; ?>">
+              <input type="hidden" name="user_id" value="<?php echo 1; ?>">
               <input
+                name="message_content"
                 class="form-control me-2"
                 type="text"
                 placeholder="Enter your message here"

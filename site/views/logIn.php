@@ -1,3 +1,11 @@
+<?php
+    $actual_link = "$_SERVER[REQUEST_URI]";
+    $url_components = parse_url($actual_link);
+
+    parse_str($url_components['query'], $params);
+
+    $err_code = $params['err'];
+?>
 <!doctype html>
 <html lang="fr">
 
@@ -30,19 +38,33 @@
         </div>
         <div class="card centered-card">
             <div class="card-body">
-                <form>
+                <form action="../controllers/logIn.php" method="post">
+
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="user_email">
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
+
                     <div class="mb-5">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="user_pass">
                     </div>
-                    <a class="btn btn-primary" href="page-accueil.php" role="button" style="float: left; background : #6C4B93">
+
+                    <!-- <a class="btn btn-primary" href="page-accueil.html" role="button" style="float: left; background : #6C4B93">
                         Log In
-                    </a>
+                    </a> -->
+
+                    <?php if($err_code != NULL) {
+                        if($err_code == 1){
+                        ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo "Incorrect email or password"; ?>
+                            </div> 
+                            <?php }
+                    } ?>    
+
+                    <input type="submit" name="Login" id="exampleInputSubmit" class="btn btn-primary" href="page-accueil.html" style="float: left; background : #6C4B93">
                     <div class="col-10 text-sm" style="float: left; color: rgb(83, 100, 113);">
                         Not yet a member ?
                         <a class="btn btn-link btn-sm" href="signUp.php">
@@ -57,3 +79,4 @@
 </body>
 
 </html>
+
