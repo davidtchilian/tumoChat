@@ -37,7 +37,6 @@ require_once '../models/db.php';
                 <div class="card centered-card" style="width: 288px; height: 300px">
                     <a href="profile.php" class="btn-close"></a>
                     <form action="./profile.php " method="POST">
-                        <input type="email" name="email">
                     <textarea name="bio" class="form-control" style="height: 170px"> Some quick example text to build on the card title and make up the bulk of the card's content.</textarea>
                     <input type="submit" value="Save">
                     </form>
