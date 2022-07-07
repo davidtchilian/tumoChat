@@ -191,10 +191,9 @@ body{
   height: 70px;
 }
 
-.profil {
+.profil{
   position: absolute;
-  top: 24.5%; right: 60%;
-  transform: translate(50%,-50%); 
+  top: 10%;
 }
 
 .html {

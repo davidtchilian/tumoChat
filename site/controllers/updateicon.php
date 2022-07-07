@@ -3,11 +3,11 @@
     session_start();
 
 
-    $usrbio = $_POST['bio'];
+    $usricon = $_POST['icon'];
     $usrid = 1;
     // $usrid = $_SESSION['user_id'];
 
-    $sql = "  UPDATE USERS SET user_bio = '$usrbio' WHERE user_id = $usrid";
+    $sql = "UPDATE USERS SET user_icon = $usricon WHERE user_id = $usrid";
     mysqli_query($sql);
     $mysqli -> close();
 

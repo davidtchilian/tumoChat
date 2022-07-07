@@ -1,11 +1,11 @@
 <?php
 require_once '../models/db.php';
 
-
- " SELECT user_bio FROM USERS WHERE user_id = 1";
-
  if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usrbio = htmlspecialchars($_REQUEST['bio']); 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $usrmail = htmlspecialchars($_REQUEST['email']);
 ?>
 <!doctype html>
 <html lang="fr">
@@ -87,19 +87,13 @@ require_once '../models/db.php';
     </nav>
     <div class="container">
         <div class="row">
-            <div class="col-2">
-                <div class="card profil">
-                    <img src="../assets/images/dino.png" class="card-img-top" alt="profile_" style="height: 70px; width: 70px">
-                </div>
-            </div>
-
             <div class="col-4">
                 <div class="card centered-card" style="width: 288px; height: 300px">
                     <div class="card-body">
+                    <img src="../assets/images/dino.png" class="card-img-top" alt="profile_" style="height: 70px; width: 70px; margin-bottom: 10px;">
                         <h5><span class="badge bg-secondary">sokol.bozanic</span></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">sokol.bozanic@tumo.world</h6>
-                        <p class="card-text"> <?php  echo $usrbio;
-    }?></p>
+                        <h6 class="card-subtitle mb-2 text-muted"><?php  echo $usrmail; }?></h6>
+                        <p class="card-text"> <?php  echo $usrbio; }?> </p>
                         <a href="editProfile.php" class="card-link">edit profile</a>
                     </div>
                 </div>
