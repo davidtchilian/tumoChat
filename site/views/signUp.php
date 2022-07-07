@@ -15,10 +15,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>TUYU | inscription</title>
-    <link rel="icon" type="image/png" href="logo_tuyu-sm.png" />
+    <link rel="icon" type="image/png" href="../assets/images/logo_tuyu-sm.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../style/style.css" />
     <style>
 
     </style>
@@ -28,7 +28,7 @@
     <div class="container">
         <div class="row">
             <div class="col text-center mt-5">
-                <h1>Welcome <img src="logo_tuyu.png" class="logo" alt="TUYU"></h1>
+                <h1>Welcome <img src="../assets/images/logo_tuyu.png" class="logo" alt="TUYU"></h1>
                 <h5>Sign up for free!</h5>
             </div>
         </div>
@@ -86,7 +86,7 @@
                     <br>
                     <div class="col-10 text-sm" style="float: left; color: rgb(83, 100, 113);">
                         Already a member ?
-                        <a class="btn btn-link btn-sm" href="logIn.php">
+                        <a class="btn btn-link btn-sm" href="logIn.php" >
                             Log in
                         </a>
                     </div>
