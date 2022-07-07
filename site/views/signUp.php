@@ -51,7 +51,7 @@
                         <img id="confEye" width="25px" src="../assets/images/closed.png" alt="" onclick="change2()">
                     </div>
                     <?php if($err_code != NULL) {
-                        if($err_code == 1){
+                        if($err_code == 1)
                         ?>
                         <div class="alert alert-danger" role="alert">
                             <?php echo "This username already exists"; ?>
