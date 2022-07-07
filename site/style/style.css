@@ -170,7 +170,7 @@ body{
 
 .centered-card {
   position: absolute;
-  top: 35%; right: 50%;
+  top: 40%; right: 50%;
   transform: translate(50%,-50%); 
 }
 
@@ -218,4 +218,23 @@ body{
 .imaj{
   height: 1070px;
   width: auto;
+}
+.eye{
+  cursor: pointer;
+}
+.fake-input{
+  position: relative;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+.fake-input input{
+  border: none;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+.fake-input img {
+  position: absolute;
+  top: 5px;
+  right: 8px;
 }

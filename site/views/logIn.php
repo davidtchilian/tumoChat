@@ -24,7 +24,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
         integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style/style.css">
     <script src="script.js"></script>
 </head>
 
@@ -46,10 +46,14 @@
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
 
-                    <div class="mb-5">
+                    <div class="mb-4">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <div class="fake-input">
                         <input type="password" class="form-control" id="exampleInputPassword1" name="user_pass" required>
+                        <img id="PassEye" width="25px" src="../assets/images/closed.png" alt="" onclick="changePassType()" class="eye" >
+                        </div>
                     </div>
+                        
 
                     <!-- <a class="btn btn-primary" href="page-accueil.html" role="button" style="float: left; background : #6C4B93">
                         Log In
@@ -89,6 +93,19 @@
             </div>
         </div>
     </div>
+    <script>
+        function changePassType(){
+            let x = document.getElementById("exampleInputPassword1");
+            let img = document.getElementById("PassEye");
+            if (x.type === "password") {
+                x.type = "text";
+                img.src = "../assets/images/open.png";
+            } else {
+                x.type = "password";
+                img.src = "../assets/images/closed.png";
+            }
+        }
+    </script>
 </body>
 
 </html>
