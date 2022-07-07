@@ -1,8 +1,17 @@
 <?php
 require_once '../models/db.php';
+$usrid = $_SESSION['user_id'];
 
-
- " SELECT user_bio FROM USERS WHERE user_id = 1";
+$sql = "SELECT user_email FROM USERS WHERE user_id = $usrid";
+   
+$result = mysqli_query($conn,$sql);
+    if ($result->num_rows > 0) {
+        while($row1 = mysqli_fetch_assoc($result)) {
+            echo $row1;
+        }
+    } else {
+        echo "0 results";
+    }
 
  if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usrbio = htmlspecialchars($_REQUEST['bio']); 
@@ -87,19 +96,13 @@ require_once '../models/db.php';
     </nav>
     <div class="container">
         <div class="row">
-            <div class="col-2">
-                <div class="card profil">
-                    <img src="../assets/images/dino.png" class="card-img-top" alt="profile_" style="height: 70px; width: 70px">
-                </div>
-            </div>
-
             <div class="col-4">
                 <div class="card centered-card" style="width: 288px; height: 300px">
                     <div class="card-body">
-                        <h5><span class="badge bg-secondary">sokol.bozanic</span></h5>
+                    <img src="../assets/images/dino.png" class="card-img-top" alt="profile_" style="height: 70px; width: 70px; margin-bottom: 10px;">
+                        <h5><span class="badge bg-secondary"><?php print_r (explode("@",$usrmail)[0]);?></span></h5>
                         <h6 class="card-subtitle mb-2 text-muted">sokol.bozanic@tumo.world</h6>
-                        <p class="card-text"> <?php  echo $usrbio;
-    }?></p>
+                        <p class="card-text"> <?php  echo $usrbio; }?> </p>
                         <a href="editProfile.php" class="card-link">edit profile</a>
                     </div>
                 </div>
