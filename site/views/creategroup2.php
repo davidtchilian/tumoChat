@@ -27,24 +27,27 @@ $name = $_POST['Group_Name']
 
     <div class="card mx-auto card-body mb-3 mt-4 " style="width: 27rem;">
         <h5 class="card-title">Creating Groups</h5>
-        <form action= "../controllers/creategroup.php " method="post">
+        <form action= "../controllers/creationgroup.php " method="post">
 
             <label for="exampleFormControlTextarea1" class="form-label; float: left;">Name of Persons</label>
             <div class="center clear">
 
                 <div id="promoNode"></div>
-                <select name = 'select[]'class="chosen" multiple="true" style="width:400px;">
+                <select name='select[]'class="chosen" multiple="true" style="width:400px;">
                     <?php
                     $users = array();
-                    $sql = "SELECT user_email FROM USERS";
+                    $sql = "SELECT user_email, user_id FROM USERS";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
-                            array_push($users, $row["user_email"]);
+                            $temp = array();
+                            array_push($temp, $row["user_id"]);
+                            array_push($temp, $row["user_email"]);
+                            $users[] = $temp;
                             }
                     }
                         foreach($users as $i){
-                            echo'<option>'. explode("@",$i)[0] .'</option >';
+                            echo "<option value='$i[0]'>". explode("@",$i[1])[0] ."</option >";
                         }
                     ?>
                 <!--<option value="id" >Person 1</option>
@@ -57,6 +60,7 @@ $name = $_POST['Group_Name']
                 style="background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119);">Return</a>
                 <input type="hidden" value="<?php echo $bio;  ?>" name="bio">
                 <input type="hidden" value="<?php echo $name;  ?>" name="name">
+                
             <button type="submit" class="btn btn-primary mt-3"
                 style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Create</button>
         </form>
