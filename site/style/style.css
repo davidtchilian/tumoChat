@@ -187,6 +187,12 @@ a{
   .centered-card{width:60%;}
 }
 @media (max-width:555px) and (min-width:410px){
+  .card-body span{
+    font-size: 14px;
+  }
+  .card-body a{
+    font-size: 14px;
+  }
   .form-text{
     font-size: 10px;
   }
