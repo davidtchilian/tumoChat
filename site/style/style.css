@@ -288,6 +288,14 @@ body {
 .imaj {
   height: 1070px;
   width: auto;
+
+}
+
+.main-buttons{
+}
+
+.flex-container {
+  display: flex;
 }
 
 .eye {
@@ -329,3 +337,4 @@ body {
 .profil {
   display: flex;
 }
+
