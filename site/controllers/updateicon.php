@@ -7,8 +7,12 @@
     $usrid = $_SESSION['user_id'];
 
     $sql = "UPDATE USERS SET user_icon = $usricon WHERE user_id = $usrid";
+
+    $result = $conn->query($sql); 
+     $conn->close();
     header("Location: ../views/profile.php");
-    mysqli_query($sql);
-    $mysqli -> close();
+
+    
+
     
 ?>
