@@ -8,6 +8,6 @@
 
     $sql = "  UPDATE USERS SET user_bio = '$usrbio' WHERE user_id = $usrid";
     mysqli_query($sql);
-    $mysqli -> close();
+    $conn->close();
 
 ?>
