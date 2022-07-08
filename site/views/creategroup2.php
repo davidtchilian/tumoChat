@@ -1,8 +1,9 @@
 <?php
-require_once '../models/db.php';
-$bio= $_POST['bio'];
-$name = $_POST['Group_Name']
+require_once '../models/db.php';    
+$bio= $_POST['grpbio'];
+$name = $_POST['grpname'];
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,8 +59,8 @@ $name = $_POST['Group_Name']
             </div>
             <a href="../controllers/creategroup.php" class="btn btn-primary mt-3 "
                 style="background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119);">Return</a>
-                <input type="hidden" value="<?php echo $bio;  ?>" name="bio">
-                <input type="hidden" value="<?php echo $name;  ?>" name="name">
+                <input type="hidden" value="<?php echo $bio;  ?>" name="groupbio">
+                <input type="hidden" value="<?php echo $name;  ?>" name="groupname">
                 
             <button type="submit" class="btn btn-primary mt-3"
                 style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Create</button>
