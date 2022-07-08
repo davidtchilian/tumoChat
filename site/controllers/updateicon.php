@@ -3,12 +3,12 @@
     session_start();
 
 
-    $usricon = $_POST['icon'];
-    $usrid = 1;
-    // $usrid = $_SESSION['user_id'];
+    $usricon = $_GET['icon'];
+    $usrid = $_SESSION['user_id'];
 
     $sql = "UPDATE USERS SET user_icon = $usricon WHERE user_id = $usrid";
+    header("Location: ../views/profile.php");
     mysqli_query($sql);
     $mysqli -> close();
-
+    
 ?>
