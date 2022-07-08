@@ -98,7 +98,7 @@ session_start();
             </ul>
             <form class="d-flex" role="search">
               <input
-                class="form-control me-2"
+                class="form-control me-2 srch-input"
                 type="search"
                 placeholder="Search group"
                 aria-label="Search"
@@ -408,5 +408,7 @@ session_start();
         </div>
       </div>
     </div>
+
+    <script src="../scripts/search.js"></script>
   </body>
 </html>
