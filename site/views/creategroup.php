@@ -13,9 +13,9 @@
 	<link rel="stylesheet" type="test/css" href="css/style.css">
 </head>
 
-<body style="background-image: url('super_fond_violet.jpg');">
+<body style="background-image: url('../assets/images/super_fond_violet.jpg');">
 
-
+  
 	<div class="card mx-auto mt-5" style="width: 18rem;">
   
 		<div class="card-body mb-3 mt-2">
@@ -42,56 +42,3 @@
 </body>
 
 </html>
-
-<!-- <!DOCTYPE html >
-
-  <html lang="fr">
-  <head>
-    
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
-     <title>home</title>
-       <link rel="stylesheet" type="test/css" href="css/style.css">
-
-    
-  </head>
-  <body>
-    <div >
-       <select class="select" multiple>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-        <option value="4">Four</option>
-        <option value="5">Five</option>
-        <option value="6">Six</option>
-        <option value="7">Seven</option>
-        <option value="8">Eight</option>
-      </select>
-
-
-
-       </select>
-    </div>
-
-
-
-      </body>
-  </html> -->
-<!-- <html>
-  <head>
-    <link href="path/to/multiselect.css" media="screen" rel="stylesheet" type="text/css">
-  </head>
-  <body>
-    <select multiple="multiple" id="my-select" name="my-select[]">
-      <option value='elem_1'>elem 1</option>
-      <option value='elem_2'>elem 2</option>
-      <option value='elem_3'>elem 3</option>
-      <option value='elem_4'>elem 4</option>
-      ...
-      <option value='elem_100'>elem 100</option>
-    </select>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="path/to/jquery.multi-select.js" type="text/javascript"></script>
-  </body>
-</html> -->

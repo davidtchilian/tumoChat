@@ -25,35 +25,36 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
+    <div class="wrap">
+        <div class="row pb-5">
             <div class="col text-center mt-5">
                 <img src="../assets/images/logo_tuyu.png" class="logo" alt="TUYU">
-                <h5>Sign up for free!</h5>
+                
             </div>
         </div>
-        <div class="card centered-card-bg">
+        <div class="card centered-card">
             <div class="card-body">
+                <h5>Sign up for free!</h5>
                 <form action="../controllers/signup.php" method="POST">
 
-                    <div class="mb-3">
+                    <div class="mb-2 responsive-input">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" required>
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
 
                     <div class="mb-2">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <div class="fake-input">
-                        <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
+                        <label for="exampleInputPassword1" class="form-label ">Password</label>
+                        <div class="fake-input responsive-input">
+                        <input type="password" class="form-control responsive-input" id="exampleInputPassword1" name="password" required>
                         <img id="passEye" width="25px" src="../assets/images/closed.png" alt="" onclick="change1()" class="eye">
                         </div>  
                     </div>
 
                     <div class="mb-4">
-                        <label for="exampleInputPassword1" class="form-label"> Confirm Password</label>
-                        <div class="fake-input">
-                        <input type="password" class="form-control" id="exampleInputPassword2" name="confirmPassword" required>
+                        <label for="exampleInputPassword1" class="form-label responsive-input"> Confirm Password</label>
+                        <div class="fake-input responsive-input">
+                        <input type="password" class="form-control " id="exampleInputPassword2" name="confirmPassword" required>
                         <img id="confEye" width="25px" src="../assets/images/closed.png" alt="" onclick="change2()" class="eye">    
                         </div>
                         
@@ -89,12 +90,12 @@
                             <?php echo "Invalid email!"; ?>
                             </div> 
                     <?php }}?>
-                    <input type="submit" name="Login" id="exampleInputSubmit" class="btn btn-primary" href="page-accueil.html" style="float: left; background : #6C4B93">
+                    <input type="submit" name="Login" id="exampleInputSubmit" class="btn btn-primary" href="page-accueil.html" style="float: center; background : #6C4B93">
                     <br>
                     <br>
-                    <div class="col-10 text-sm" style="float: left; color: rgb(83, 100, 113);">
-                        Already a member ?
-                        <a class="btn btn-link btn-sm" href="logIn.php" >
+                    <div class="col-12" style="float: left; color: rgb(83, 100, 113);">
+                        <span>Already a member?</span>
+                        <a class="" href="logIn.php" >
                             Log in
                         </a>
                     </div>
