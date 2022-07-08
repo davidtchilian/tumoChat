@@ -2,9 +2,6 @@
 require_once '../models/db.php';    
 $bio= $_POST['grpbio'];
 $name = $_POST['grpname'];
-var_dump($_POST);
-var_dump($bio);
-var_dump($name);
 ?>
 
 
