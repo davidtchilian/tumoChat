@@ -27,14 +27,16 @@
         </div>
         <div class="col-1"></div>
         <div class="col-2">
+
+            
+
+            <div class="main_buttons">
             <p></p>
             <p>
                 <strong>
                     JOIN TUYU NOW
                 </strong>
             </p>
-
-            <div class="main_buttons">
 
             <a class="" href="signUp.php" role="button"
                 style="float: center; background : #6C4B93; width: 400px">
