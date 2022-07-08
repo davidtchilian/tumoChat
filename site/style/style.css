@@ -309,6 +309,9 @@ body {
   width: 100%;
   box-sizing: border-box;
 }
+.fake-input input:focus{
+  outline: none;
+}
 
 .welcome{
   margin-top: 3%;
