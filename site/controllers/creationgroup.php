@@ -1,13 +1,13 @@
 <?php
 require_once '../models/db.php';
-
+$user_id = $_SESSION['user_id'];
 $name =  $_POST['groupname'];
 $bio =  $_POST['groupbio'];
 $select = $_POST['select'];
 
 
 
-$sql = "INSERT INTO GROUPCHAT(group_name, group_bio)
+$sql = "INSERT INTO GROUPCHAT(group_name, group_bio, )
 VALUES ('$name', '$bio')";
 
 
@@ -34,6 +34,7 @@ else{
 
 $isInGroup_user_id = $_POST['select'];
 $insert="INSERT INTO isInGroup(isInGroup_user_id, isInGroup_group_id) VALUES ";
+$insert = $insert . "(" . $user_id . "," . $groupid . "),";
 for($j = 0; $j<count($isInGroup_user_id); $j++){
   $insert=$insert . "(" . $isInGroup_user_id[$j] . "," . $groupid . ")";
   if($j == count($isInGroup_user_id)-1){
@@ -42,6 +43,7 @@ for($j = 0; $j<count($isInGroup_user_id); $j++){
   else{
     $insert=$insert  . ",";
   }
+
   
 }
 
