@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("../models/db.php");
 $groupid = $_GET['id'];
 $deletingid = $_GET['delid'];
@@ -11,19 +12,19 @@ if($result->num_rows > 1){
         
     }else {
         mysqli_close();
-        header("Location: ../views/page-chat.php?id=$groupid");
+        
     }
 }
 else{
     mysqli_close();
-    header("Location: ../views/page-chat.php?id=$groupid");
+    
 }
 if($groupadminid == $userid){
     
     $sql = "DELETE FROM isINGROUP WHERE user_id = $deletingid";
     $result = mysqli_query($conn,$sql);
     mysqli_close();
-    header("Location: ../views/page-chat.php?id=$groupid");
+    
 }
 
 ?>

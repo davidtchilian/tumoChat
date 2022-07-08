@@ -83,8 +83,8 @@
 
                     <input type="submit" name="Login" id="exampleInputSubmit" class="btn btn-primary" href="page-accueil.html" style="float: left; background : #6C4B93">
                     <div class="col-10 text-sm" style="float: left; color: rgb(83, 100, 113);">
-                        <span> Not yet a member ? </span> 
-                        <a class="btn btn-link btn-sm" href="signUp.php">
+                        <span> Not yet a member? </span> 
+                        <a class="" href="signUp.php">
                             Sign up
                         </a>
                     </div>

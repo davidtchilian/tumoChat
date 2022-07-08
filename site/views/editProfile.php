@@ -1,5 +1,4 @@
 <?php 
-
 require_once '../models/db.php';
 
 $dir    = '../assets/icons/';
@@ -35,7 +34,6 @@ $files = array_values(array_diff(scandir($dir), array('..', '.')));
         <div class="row">
             <div class="col-2">
                 <div class="card profil">
-                    <!-- <img src="<?php echo $result ?>" class="card-img-top" alt="profile_" style="height: 70px; width: 70px"> -->
                 </div>
                 <?php
                     for ($i = 0;$i < count($files);$i++) {

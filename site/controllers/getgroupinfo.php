@@ -1,4 +1,5 @@
 <?php
+
 if(!isset($_GET['id'])){
     die("id not found");
 }
