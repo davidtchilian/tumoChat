@@ -34,11 +34,19 @@
                 </strong>
             </p>
 
-            </h1>
-            <a class="btn btn-primary button-accueil" href="signUp.php" role="button"
-                style="float: center; background : #6C4B93; width: 200px">
-                Jump into the real world
+            <div class="main_buttons">
+
+            <a class="" href="signUp.php" role="button"
+                style="float: center; background : #6C4B93; width: 400px">
+                Sign up
             </a>
+        
+            <a class="" href="Login.php" role="button"
+                style="float: center; background : #6C4B93; width: 200px">
+                <!-- Jump into the real world -->
+                Sign in
+            </a>
+</div>
         </div>
         <div class="col-1"></div>
     </div>
