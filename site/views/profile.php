@@ -38,6 +38,7 @@ $result = mysqli_query($conn,$sql);
         integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../style/style.css">
+    <script src="changetheme.js"></script>
 </head>
 
 <body>
@@ -59,7 +60,7 @@ $result = mysqli_query($conn,$sql);
                         <div class="navigation modes">
                             <ul>
                                 <li class="list active">
-                                    <a href="#">
+                                    <a onclick="changetheme(0)" href="#">
                                         <span class="icon">
                                             <ion-icon name="sunny-outline"></ion-icon>
                                         </span>
@@ -67,7 +68,7 @@ $result = mysqli_query($conn,$sql);
                                     </a>
                                 </li>
                                 <li class="list">
-                                    <a href="#">
+                                    <a onclick="changetheme(1)" href="#">
                                         <span class="icon">
                                             <ion-icon name="moon-outline"></ion-icon>
                                         </span>
@@ -75,7 +76,7 @@ $result = mysqli_query($conn,$sql);
                                     </a>
                                 </li>
                                 <li class="list">
-                                    <a href="#">
+                                    <a onclick="changetheme(2)" href="#">
                                         <span class="icon">
                                             <ion-icon name="radio-button-off-outline"></ion-icon>
                                         </span>
@@ -83,7 +84,7 @@ $result = mysqli_query($conn,$sql);
                                     </a>
                                 </li>
                                 <li class="list">
-                                    <a href="#">
+                                    <a onclick="changetheme(3)" href="#">
                                         <span class="icon">
                                             <ion-icon name="radio-button-on-outline"></ion-icon>
                                         </span>
