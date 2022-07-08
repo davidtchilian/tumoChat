@@ -9,6 +9,13 @@
 a{
   padding:0 12px;
 }
+
+.eye{
+  width:25px;
+  height:25px;
+  margin:auto 6px auto 0; 
+}
+
 :root {
   --clr: #222327
 }
@@ -196,7 +203,9 @@ a{
   }
   .fake-input
   .eye{
-    width:19px;
+    width:22px;
+    height:22px;
+    margin:auto 6px auto 0; 
   }
 }
 @media (max-width:410px){
@@ -222,7 +231,8 @@ a{
   }
   .eye{
     width:19px;
-    top: 9.5px !important;
+    height:19px;
+    margin:auto 6px auto 0; 
   }
 }
 
