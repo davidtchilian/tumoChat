@@ -1,21 +1,23 @@
 <?php
+session_start();
 require_once '../models/db.php';
 $usrid = $_SESSION['user_id'];
 
 $sql = "SELECT user_email FROM USERS WHERE user_id = $usrid";
    
 $result = mysqli_query($conn,$sql);
-    if ($result->num_rows > 0) {
-        while($row1 = mysqli_fetch_assoc($result)) {
-            echo $row1;
-        }
-    } else {
-        echo "0 results";
-    }
+    // if ($result->num_rows > 0) {
+    //     while($row1 = mysqli_fetch_assoc($result)) {
+    //         // echo $row1;
+    //     }
+    // } else {
+    //     // echo "0 results";
+    // }
 
  if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usrbio = htmlspecialchars($_REQUEST['bio']); 
 }
+
 ?>
 <!doctype html>
 <html lang="fr">
@@ -100,8 +102,8 @@ $result = mysqli_query($conn,$sql);
             <div class="col-4">
                 <div class="card centered-card" style="width: 288px; height: 300px">
                     <div class="card-body">
-                        <img src="../assets/images/dino.png" class="card-img-top" alt="profile_" style="height: 70px; width: 70px; margin-bottom: 10px;">
-                        <h5><span class="badge bg-secondary"><?php print_r (explode("@",$usrmail)[0]);?></span></h5>
+                        <img src="../assets/icons/0.png" class="card-img-top" alt="profile_" style="height: 70px; width: 70px; margin-bottom: 10px;">
+                        <h5><span class="badge bg-secondary"><?php echo explode("@",$usrmail)[0];?></span></h5>
                         <h6 class="card-subtitle mb-2 text-muted">sokol.bozanic@tumo.world</h6>
                         <p class="card-text"> <?php  echo $usrbio; ?> </p>
                         <a href="editProfile.php" class="card-link">edit profile</a>

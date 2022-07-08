@@ -4,8 +4,7 @@
 
 
     $usrbio = $_POST['bio'];
-    $usrid = 1;
-    // $usrid = $_SESSION['user_id'];
+    $usrid = $_SESSION['user_id'];
 
     $sql = "  UPDATE USERS SET user_bio = '$usrbio' WHERE user_id = $usrid";
     mysqli_query($sql);
