@@ -65,7 +65,7 @@
       </nav> -->
       <nav class="navbar navbar-expand-lg" style="background-color: #6c4b93">
         <div class="container">
-          <a class="navbar-brand" href="profileEdit.php" style="color :white"
+          <a class="navbar-brand" href="profile.php" style="color :white"
             >Profile</a
           >
           <button
