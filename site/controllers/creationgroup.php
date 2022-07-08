@@ -1,19 +1,21 @@
 <?php
-
-$name =  $_POST['name'];
-$bio =  $_POST['bio'];
-$select = $_POST['select'];
-
-
 require_once '../models/db.php';
-// $sql = "INSERT INTO GROUPCHAT(group_name, group_bio)
-// VALUES ('$name', '$bio')";
 
-// if ($conn->query($sql) === TRUE) {
-//   echo "New record created successfully";
-// } else {
-//   echo "Error: " . $sql . "<br>" . $conn->error;
-// }
+$name =  $_POST['groupname'];
+$bio =  $_POST['groupbio'];
+$select = $_POST['select'];
+var_dump($name);
+
+
+$sql = "INSERT INTO GROUPCHAT(group_name, group_bio)
+VALUES ('$name', '$bio')";
+
+
+if ($conn->query($sql) === TRUE) {
+  echo "New record created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
 $groupid = "";
 $sql = "SELECT MAX(group_id) AS group_id FROM GROUPCHAT";
 $result = $conn->query($sql);
@@ -25,7 +27,7 @@ if ($result->num_rows == 1) {
 else{
   die("merav");
 }
-var_dump($groupid);
+
 
 
 
@@ -47,7 +49,7 @@ echo $insert;
 
 
 
-// $conn->close();
+$conn->close();
     
 ?>
 
