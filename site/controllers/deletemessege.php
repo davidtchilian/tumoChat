@@ -19,7 +19,6 @@ else{
     mysqli_close();
 }
 if($sender == $userid){
-    
     $sql = "DELETE FROM MESSAGE WHERE message_id = $messageid";
     $result = mysqli_query($conn,$sql);
     mysqli_close();
