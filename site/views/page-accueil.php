@@ -1,3 +1,11 @@
+<?php
+  session_start();
+  $user_id = $_SESSION['user_id'];
+  require_once("../models/db.php");
+  // $db = mysqli_connect("localhost", "root", "root", "tumochat");
+  $sql = "SELECT group_id, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE isInGroup_user_id = ".$user_id;
+  $result = mysqli_query($conn, $sql);
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,53 +24,6 @@
   </head>
   <body style='background-image: url("../assets/images/super_fond_violet.jpg");'>
     <div class="fixed-top">
-      <!-- <nav class="navbar navbar-expand-lg" style="background-color: #6c4b93">
-        <div class="container">
-          <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a
-                    class="nav-link active"
-                    aria-current="page"
-                    href="#"
-                    style="color :white"
-                    >Home</a
-                  >
-                </li>
-                <li>
-                  <a class="nav-link" href="#" style="color : white; "
-                    >Profile</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="nav-link"
-                    href="creategroup.html"
-                    style="color:white; border: 1px white solid; border-radius: 5px"
-                    >Create group</a
-                  >
-                </li>
-              </ul>
-              <form class="d-flex" role="search">
-                <input
-                  class="form-control me-2"
-                  type="search"
-                  placeholder="Search group"
-                  aria-label="Search"
-                />
-                <button class="btn search">
-                  <img
-                    src="loupe.png"
-                    alt="Rechercher"
-                    style="width : 20px; height: 30px; margin-top : 3px"
-                  />
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </nav> -->
       <nav class="navbar navbar-expand-lg" style="background-color: #6c4b93">
         <div class="container">
           <a class="navbar-brand" href="profile.php" style="color :white"
@@ -93,7 +54,7 @@
             </ul>
             <form class="d-flex" role="search">
               <input
-                class="form-control me-2 srch-input"
+                class="form-control me-2"
                 type="search"
                 placeholder="Search group"
                 aria-label="Search"
@@ -117,8 +78,23 @@
       </div>
       <div class="row">
         <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
+            <?php
+              while($group = mysqli_fetch_assoc($result)){?>
+                <a href="page-chat.php?<?php echo $group["group_id"]; ?>" style="text-decoration :none">
+                <div class="card mt-5">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><?php echo $group["group_name"]; ?></li>
+                    <li class="list-group-item">
+                      <p>message 1</p>
+                      <p>message 2</p>
+                    </li>
+                  </ul>
+                </div>
+              <?php
+              }
+              ?>
+            
+            <!-- <div class="card mt-5">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">GROUPE</li>
                 <li class="list-group-item">
@@ -126,284 +102,10 @@
                   <p>message 2</p>
                 </li>
               </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <a href="page-chat.php" style="text-decoration :none">
-            <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div>
+            </div> -->
           </a>
         </div>
       </div>
     </div>
-
-    <script src="../scripts/search.js"></script>
   </body>
 </html>
