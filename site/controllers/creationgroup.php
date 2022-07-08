@@ -4,7 +4,7 @@ require_once '../models/db.php';
 $name =  $_POST['groupname'];
 $bio =  $_POST['groupbio'];
 $select = $_POST['select'];
-var_dump($name);
+
 
 
 $sql = "INSERT INTO GROUPCHAT(group_name, group_bio)
@@ -44,7 +44,17 @@ for($j = 0; $j<count($isInGroup_user_id); $j++){
   }
   
 }
-echo $insert;
+
+
+$isInGroup = $insert;
+
+
+
+if ($conn->query($isInGroup) === TRUE) {
+  echo "New record created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
 
 
 
