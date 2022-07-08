@@ -1,6 +1,10 @@
 <?php 
-
 require_once '../models/db.php';
+
+$dir    = '../assets/icons/';
+$files = array_values(array_diff(scandir($dir), array('..', '.')));
+
+
 
 ?>
 
@@ -30,15 +34,22 @@ require_once '../models/db.php';
         <div class="row">
             <div class="col-2">
                 <div class="card profil">
-                    <img src="../assets/images/dino.png" class="card-img-top" alt="profile_" style="height: 70px; width: 70px">
                 </div>
+                <?php
+                    for ($i = 0;$i < count($files);$i++) {
+                        $result =  $dir . $files[$i]."\n";
+                        $number = explode(".",$files[$i])[0];
+                        
+                        echo "<a href='../controllers/updateicon.php?icon=$number'><img src='$result' class='card-img-top' alt='profile_' style='height: 70px; width: 70px'></a>";
+                       }
+                ?>
             </div>
             <div class="col-4">
                 <div class="card centered-card" style="width: 288px; height: 300px">
                     <a href="profile.php" class="btn-close"></a>
                     <form action="./profile.php " method="POST">
                     <textarea name="bio" class="form-control" style="height: 170px"> Some quick example text to build on the card title and make up the bulk of the card's content.</textarea>
-                    <input type="submit" value="Save">
+                    <input type="submit" value="Save">   
                     </form>
                 </div>
             </div>

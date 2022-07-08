@@ -2,9 +2,6 @@
 require_once '../models/db.php';    
 $bio= $_POST['grpbio'];
 $name = $_POST['grpname'];
-var_dump($_POST);
-var_dump($bio);
-var_dump($name);
 ?>
 
 
@@ -23,7 +20,7 @@ var_dump($name);
 
 </head>
 
-<body style="background-image: url('super_fond_violet.jpg');height: 100vh;">
+<body style="background-image: url('../assets/images/super_fond_violet.jpg');height: 100vh;">
 
     <!-- Background image -->
     <div class="bg-image d-flex justify-content-center align-items-center"></div>

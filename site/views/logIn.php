@@ -25,13 +25,13 @@
         integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../style/style.css">
-    <script src="script.js"></script>
+
 </head>
 
 <body>
 
-    <div class="container">
-        <div class="row">
+    <div class="wrap">
+        <div class="row pb-5">
             <div class="col text-center welcome">
                 <h1><img src="../assets/images/logo_tuyu.png" class="logo" alt="TUYU"></h1>
             </div>
@@ -83,7 +83,7 @@
 
                     <input type="submit" name="Login" id="exampleInputSubmit" class="btn btn-primary" href="page-accueil.html" style="float: left; background : #6C4B93">
                     <div class="col-10 text-sm" style="float: left; color: rgb(83, 100, 113);">
-                        Not yet a member ?
+                        <span> Not yet a member ? </span> 
                         <a class="btn btn-link btn-sm" href="signUp.php">
                             Sign up
                         </a>
