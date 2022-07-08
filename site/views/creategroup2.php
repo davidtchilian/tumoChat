@@ -20,7 +20,7 @@ $name = $_POST['grpname'];
 
 </head>
 
-<body style="background-image: url('super_fond_violet.jpg');height: 100vh;">
+<body style="background-image: url('../assets/images/super_fond_violet.jpg');height: 100vh;">
 
     <!-- Background image -->
     <div class="bg-image d-flex justify-content-center align-items-center"></div>
