@@ -1,19 +1,21 @@
 <?php
+require_once '../models/db.php';
 
-$name =  $_POST['name'];
-$bio =  $_POST['bio'];
+$name =  $_POST['groupname'];
+$bio =  $_POST['groupbio'];
 $select = $_POST['select'];
 
 
-require_once '../models/db.php';
-// $sql = "INSERT INTO GROUPCHAT(group_name, group_bio)
-// VALUES ('$name', '$bio')";
 
-// if ($conn->query($sql) === TRUE) {
-//   echo "New record created successfully";
-// } else {
-//   echo "Error: " . $sql . "<br>" . $conn->error;
-// }
+$sql = "INSERT INTO GROUPCHAT(group_name, group_bio)
+VALUES ('$name', '$bio')";
+
+
+if ($conn->query($sql) === TRUE) {
+  echo "New record created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
 $groupid = "";
 $sql = "SELECT MAX(group_id) AS group_id FROM GROUPCHAT";
 $result = $conn->query($sql);
@@ -25,7 +27,7 @@ if ($result->num_rows == 1) {
 else{
   die("merav");
 }
-var_dump($groupid);
+
 
 
 
@@ -42,12 +44,22 @@ for($j = 0; $j<count($isInGroup_user_id); $j++){
   }
   
 }
-echo $insert;
+
+
+$isInGroup = $insert;
+
+
+
+if ($conn->query($isInGroup) === TRUE) {
+  echo "New record created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
 
 
 
 
-// $conn->close();
+$conn->close();
     
 ?>
 
