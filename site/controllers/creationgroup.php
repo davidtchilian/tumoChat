@@ -1,5 +1,6 @@
 <?php
 require_once '../models/db.php';
+session_start();
 $user_id = $_SESSION['user_id'];
 $name =  $_POST['groupname'];
 $bio =  $_POST['groupbio'];
@@ -7,12 +8,12 @@ $select = $_POST['select'];
 
 
 
-$sql = "INSERT INTO GROUPCHAT(group_name, group_bio, )
-VALUES ('$name', '$bio')";
+$sql = "INSERT INTO GROUPCHAT(group_name, group_bio, group_admin_id)
+VALUES ('$name', '$bio', $user_id)";
 
 
 if ($conn->query($sql) === TRUE) {
-  echo "New record created successfully";
+  // echo "New record created successfully";
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
@@ -34,7 +35,8 @@ else{
 
 $isInGroup_user_id = $_POST['select'];
 $insert="INSERT INTO isInGroup(isInGroup_user_id, isInGroup_group_id) VALUES ";
-$insert = $insert . "(" . $user_id . "," . $groupid . "),";
+
+// echo $insert;
 for($j = 0; $j<count($isInGroup_user_id); $j++){
   $insert=$insert . "(" . $isInGroup_user_id[$j] . "," . $groupid . ")";
   if($j == count($isInGroup_user_id)-1){
@@ -46,6 +48,7 @@ for($j = 0; $j<count($isInGroup_user_id); $j++){
 
   
 }
+// echo $insert;
 
 
 $isInGroup = $insert;
@@ -53,7 +56,8 @@ $isInGroup = $insert;
 
 
 if ($conn->query($isInGroup) === TRUE) {
-  echo "New record created successfully";
+  header("Location: ../views/page-accueil.php");
+
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
