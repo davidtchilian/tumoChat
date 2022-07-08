@@ -6,6 +6,9 @@
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
 }
+a {
+  padding: 0 12px;
+}
 :root
 {
   --clr: #222327
@@ -143,11 +146,82 @@
 }
 
 /* ---------------------------------------------------------------------------------------------------------------------------------- */
-
-@media only screen and (max-width: 1000px) {
+@media  (min-width:1000px){
+  .centered-card{width:40%;}
+}
+@media (max-width: 1000px)and (min-width:700px) {
 
   .imaj {display:none;}
 
+  .centered-card{width:50%;}
+}
+@media (max-width:700px) and (min-width:555px){
+  .form-text{
+    font-size: 11px;
+  }
+  .form-label{
+    font-size: 14px;
+  }
+  .card-body h5{
+    margin-bottom: 0.3rem;
+  }
+  .card-body span{
+    font-size: 15px;
+  }
+  .card-body a{
+    font-size: 15px;
+  }
+  .responsive-input{
+    width:85%;
+    margin: 0 auto;
+  }
+  .centered-card{width:60%;}
+}
+@media (max-width:555px) and (min-width:410px){
+  .form-text{
+    font-size: 10px;
+  }
+  .form-label{
+    font-size: 13px;
+  }
+  .card-body h5{
+    margin-bottom: 0.3rem;
+  }
+  .centered-card{width: 70%;}
+  .responsive-input{
+    width:90%;
+    margin: 0 auto;
+  }
+  .fake-input
+  .eye{
+    width:19px;
+  }
+}
+@media (max-width:410px){
+  .card-body span{
+    font-size: 13px;
+  }
+  .card-body a{
+    font-size: 13px;
+  }
+  .form-text{
+    font-size: 8px;
+  }
+  .form-label{
+    font-size: 13px;
+  }
+  .card-body h5{
+    margin-bottom: 0.3rem;
+  }
+  .centered-card{width: 80%;}
+  .responsive-input{
+    width:90%;
+    margin: 0 auto;
+  }
+  .eye{
+    width:19px;
+    top: 9.5px !important;
+  }
 }
 
 /* ---------------------------------------------------------------------------------------------------------------------------------- */
@@ -169,21 +243,8 @@ body{
 }
 
 .centered-card {
-  position: absolute;
-  top: 40%; right: 50%;
-  transform: translate(50%,-50%); 
-}
+  position: relative;
 
-.centered-card-bg {
-  position: absolute;
-  top: 37%; right: 50%;
-  transform: translate(50%,-50%); 
-}
-
-.centered-card-index {
-  position: absolute;
-  top: 40%; right: 35%;
-  transform: translate(50%,-50%); 
 }
 
 .logo {
@@ -221,11 +282,14 @@ body{
 }
 .eye{
   cursor: pointer;
+  right: 8px;
 }
 .fake-input{
   position: relative;
+  display: flex;
+  
   border: 1px solid #ced4da;
-  border-radius: 0.25rem;
+  border-radius: 0.4rem;
 }
 .fake-input input{
   border: none;
@@ -233,11 +297,17 @@ body{
   width: 100%;
   box-sizing: border-box;
 }
-.fake-input img {
-  position: absolute;
-  top: 5px;
-  right: 8px;
-}
+
 .welcome{
   margin-top: 3%;
+}
+
+.wrap{
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-right: auto;
+  margin-left: auto;
 }
