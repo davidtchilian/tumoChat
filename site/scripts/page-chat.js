@@ -1,22 +1,26 @@
 var modal = document.getElementById("infoModal");
 var btn = document.getElementById("infoButton");
 var span = document.getElementById("closeButton");
+var info = document.getElementById("groupInfo");
+var usersInfo = document.getElementById("usersInfo");
 
 btn.onclick = function() {
   modal.style.display = "block";
 }
 
-span.onclick = function() {
-  modal.style.display = "none";
-}
+span.onclick = onClose;
 
 window.onclick = function(event) {
   if (event.target == modal) {
-    modal.style.display = "none";
+    onClose();
   }
 }
 
-let info = document.getElementById("groupInfo");
+function onClose() {
+  modal.style.display = "none";
+  usersInfo.innerHTML = "";
+}
+
 
 function getGroupIdInfo(groupId) {
   info.innerText = "Loading...";
@@ -34,6 +38,12 @@ function getGroupIdInfo(groupId) {
       return;
     }
     let groupInfo = jsonObject[0][0];
+    let groupUsersInfo = jsonObject[1];
     info.innerText = groupInfo.group_name + " - " + groupInfo.group_bio;
+    for (let user of groupUsersInfo) {
+      let userInfo = document.createElement("li");
+      userInfo.innerText = user[0].user_email;
+      usersInfo.appendChild(userInfo);
+    }
   }
 }

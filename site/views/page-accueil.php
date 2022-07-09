@@ -88,7 +88,7 @@ session_start();
         <div class="col-lg-4 col-sm-12">
             <?php
               while($group = mysqli_fetch_assoc($result)){?>
-                <a href="page-chat.php?<?php echo $group["group_id"]; ?>" style="text-decoration :none">
+                <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
                 <div class="card mt-5">
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item"><?php echo $group["group_name"]; ?></li>

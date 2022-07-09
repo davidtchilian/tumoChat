@@ -1,15 +1,25 @@
 <?php
-  require_once('../models/db.php');
+
+  $groupId = $_GET['id'];
+
   session_start();
-  $sql = 'SELECT * FROM message';
+  $userId = $_SESSION["user_id"];
+
+  if (!$userId) {
+    header("Location: login.php");
+    return;
+  }
+
+  if (!$groupId) {
+    header("Location: page-accueil.php");
+    return;
+  }
+
+  require_once('../models/db.php');
+ 
+  $sql = "SELECT * FROM message WHERE message_group_id='$groupId'";
   $messages = mysqli_query($conn, $sql);
   mysqli_close($conn);
-  $group_id = $_GET['id'];
-  $userid = $_SESSION['user_id'];
-
-  if (!$userid) {
-      header("Location: login.php");
-  }
 
 ?>
 
@@ -34,7 +44,7 @@
                     </li>
                 </ul>             
                 <div class="d-flex">
-                    <a onClick="getGroupIdInfo('<?php echo $group_id; ?>')">
+                    <a onClick="getGroupIdInfo('<?php echo $groupId; ?>')">
                         <button id="infoButton" type="button" class="btn info">
                             <img src="../assets/images/le_vrai_i.png" alt="Information" style="width: 35px; height: 35px;" />
                         </button>
@@ -43,6 +53,7 @@
                 <div id="infoModal" class="modal">
                     <div class="modal-content">
                         <p id="groupInfo"></p>
+                        <ol id="usersInfo"></ol>
                         <div class="modal-info-buttons">
                             <button id="closeButton" class="close btn">Close</button>
                         </div>
@@ -55,7 +66,7 @@
         <br>
         <?php
     while ($message = mysqli_fetch_assoc($messages)) {
-        if ($message['message_sender_id'] == $userid) {
+        if ($message['message_sender_id'] == $userId) {
         ?>
         <div class="row">
             <div class="col-4"></div>
@@ -87,8 +98,8 @@
             <div class="container">
                 <div class="container-fluid">
                     <form class="d-flex" role="search" action="../controllers/sendmessage.php" method="post">
-                        <input type="hidden" name="group_id" value="<?php echo 1; ?>">
-                        <input type="hidden" name="user_id" value="<?php echo $userid; ?>">
+                        <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
+                        <input type="hidden" name="group_id" value="<?php echo $groupId; ?>">
                         <input name="message_content" class="form-control me-2" type="text" placeholder="Enter your message here" />
                         <button class="btn search" type="submit" value="Message">
                             <img src="../assets/images/avion_papier_nour_1.png" alt="envoye" style="width :40px" style="height : 40px" />
