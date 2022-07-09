@@ -34,7 +34,7 @@
                     </li>
                 </ul>             
                 <div class="d-flex">
-                    <a href="../controllers/getgroupinfo.php?id=<?php echo $group_id; ?>">
+                    <a onClick="getGroupIdInfo('<?php echo $group_id; ?>')">
                         <button id="infoButton" type="button" class="btn info">
                             <img src="../assets/images/le_vrai_i.png" alt="Information" style="width: 35px; height: 35px;" />
                         </button>
@@ -42,7 +42,7 @@
                 </div>
                 <div id="infoModal" class="modal">
                     <div class="modal-content">
-                        <p>TODO: Group Information Here</p>
+                        <p id="groupInfo"></p>
                         <div class="modal-info-buttons">
                             <button id="closeButton" class="close btn">Close</button>
                         </div>
