@@ -7,13 +7,6 @@
   $sql = "SELECT group_id, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE isInGroup_user_id = ".$user_id;
   $result = mysqli_query($conn, $sql);
 ?>
-=======
-<?php 
-session_start();
-
-?>
-
->>>>>>> 603664c556fd922785906b5e1c03f044837fe9b7
 <!DOCTYPE html>
 <html lang="en">
   <head>
