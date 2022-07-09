@@ -15,10 +15,14 @@
     return;
   }
 
-  require_once('../models/db.php');
+  require('../models/db.php');
  
   $sql = "SELECT * FROM message WHERE message_group_id='$groupId'";
   $messages = mysqli_query($conn, $sql);
+
+  $sql = "SELECT group_name FROM groupchat WHERE group_id='$groupId'";
+  $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
+
   mysqli_close($conn);
 
 ?>
@@ -40,7 +44,9 @@
             <div class="container">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color : white">Group Name</a>
+                        <a class="nav-link" href="#" style="color : white">
+                            <?php echo $groupName; ?>
+                        </a>
                     </li>
                 </ul>             
                 <div class="d-flex">
