@@ -20,6 +20,6 @@ if (!empty($messagecontent) && !ctype_space($messagecontent)) {
 
 }
 
-header("Location: ../views/page-chat.php?id=$groupId");
+header("Location: ../views/page-chat.php?id=".$groupId);
 
 ?>

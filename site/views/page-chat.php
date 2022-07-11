@@ -22,6 +22,7 @@
 
   $sql = "SELECT group_name FROM groupchat WHERE group_id='$groupId'";
   $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
+  
 
   mysqli_close($conn);
 
