@@ -63,3 +63,26 @@ function getGroupIdInfo(groupId) {
     }
   }
 }
+const edit = document.getElementById("editId")
+const txt = document.getElementById("text")
+
+
+function myFunction(event) { 
+  var x = event.target;
+  console.log(x.innerText);
+  console.log(x.name);
+  console.log(x)
+  if(x != edit){
+    txt.value = x.innerText
+    console.log(true)
+  }
+}
+
+
+
+
+function update(){
+  form.action = ".../controllers/update.php"
+  txt.innerText = "<?= $message?>"
+  console.log(1)
+}

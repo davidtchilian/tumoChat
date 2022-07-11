@@ -19,6 +19,12 @@
  
   $sql = "SELECT * FROM message WHERE message_group_id='$groupId'";
   $messages = mysqli_query($conn, $sql);
+  $message = mysqli_fetch_assoc($messages);
+
+
+  
+
+  
 
   $sql = "SELECT group_name FROM groupchat WHERE group_id='$groupId'";
   $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
@@ -38,6 +44,44 @@
     <link rel="stylesheet" href="../style/page-chat.css" />
     <title><?php echo $groupName." - TUYU"; ?></title>
     <style>
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+}
+
+.dropdown-content {
+  display: block;
+  position: relative;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
         @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100&display=swap');
         .user_icon{
             height: 35px;
@@ -49,6 +93,12 @@
     </style>
 </head>
 <body>
+    <script>
+
+
+    </script>
+  
+   
     <div class="fixed-top">
         <nav class="navbar navbar-expand-lg" style="background-color : #6c4b93">
             <a href="page-accueil.php"><img src="../assets/images/flèche_retour3.png" alt="Retour" style="width : 35px; height: 35px; margin-left: 10px" /></a>
@@ -82,7 +132,7 @@
             </div>
         </nav>
     </div>
-    <div class="container mt-5" style="min-height : 100vh" style="position : relative">
+    <div class="container mt-5" style="min-height : 100vh"  style="position : relative" >
         <br>
         <?php
     while ($message = mysqli_fetch_assoc($messages)) {
@@ -90,14 +140,24 @@
         $user_email = file_get_contents("http://localhost:8888/site/controllers/getuseremail.php?id=".$message["message_sender_id"]);
         if ($message['message_sender_id'] == $userId) {
         ?>
-        <div class="row">
+        <div class="row" id = "messages" >
             <div class="col-4"></div>
             <div class="col-7">
-                <button class="btn btn-primary messageRecu mt-2" style="float : right; color: black;">
+            <button class="btn btn-primary messageEnvoye mt-2" style="float : right; color: black;" onclick="myFunction(event)" name="<?= $message['message_id']?> " id = "name">
                     <?php 
                     echo "<p class='user_email'>".$user_email."</p>";
                     echo $message['message_content']; ?>
                 </button>
+                <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;">
+                
+                <div class="dropdown-content" id = "dropdown-content">
+                    <a href="#" onclick = "update()" id = "editId">Edit</a>
+                    <a href="#">Delete</a>
+                    <a href="#">Reply</a>
+                    </div>
+
+                </div> 
+    </div>
             </div>
             <div class="col-1">
                 <img src="../assets/icons/<?php echo $icon; ?>.png" class="user_icon">
@@ -127,11 +187,12 @@
         <nav class="navbar navbar-expand-lg" style="background-color:#6c4b93">
             <div class="container">
                 <div class="container-fluid">
-                    <form class="d-flex" role="search" action="../controllers/sendmessage.php" method="post">
+                    <form class="d-flex" role="search" action="../controllers/sendmessage.php" method="post" id = "form">
                         <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
                         <input type="hidden" name="group_id" value="<?php echo $groupId; ?>">
-                        <input name="message_content" class="form-control me-2" type="text" placeholder="Enter your message here" autofocus/>
+                        <input name="message_content" class="form-control me-2" type="text" id="text" placeholder="Enter your message here" autofocus />
                         <button class="btn search" type="submit" value="Message">
+                            <a href="page-chat.php?id=<?php echo $groupId;?>"></a>
                             <img src="../assets/images/avion_papier_nour_1.png" alt="envoye" style="width :40px" style="height : 40px" />
                         </button>
                     </form>
@@ -139,7 +200,9 @@
             </div>
         </nav>
     </div>
-    <script src="../scripts/page-chat.js"></script>
+    <script src="../scripts/page-chat.js"> 
+
+   </script>
 
 </body>
 </html>
