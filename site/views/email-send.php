@@ -1,5 +1,7 @@
 <?php
-include('db.php');
+require_once('../models/db.php');
+error_reporting(E_ALL);
+ini_set('error_reporting', E_ALL);
 if(isset($_POST["email"]) && (!empty($_POST["email"]))){
 $email = $_POST["email"];
 $email = filter_var($email, FILTER_SANITIZE_EMAIL);
@@ -7,9 +9,12 @@ $email = filter_var($email, FILTER_VALIDATE_EMAIL);
 if (!$email) {
    $error .="<p>Invalid email address please type a valid email address!</p>";
    }else{
-   $sel_query = "SELECT * FROM `users` WHERE email='".$email."'";
-   $results = mysqli_query($con,$sel_query);
+   $sel_query = "SELECT * FROM USERS WHERE user_email='$email'";
+   echo $sel_query;
+   $results = mysqli_query($conn,$sel_query);
+   
    $row = mysqli_num_rows($results);
+   var_dump($row);
    if ($row==""){
    $error .= "<p>No user is registered with this email address!</p>";
    }
@@ -25,11 +30,12 @@ if (!$email) {
    $key = md5(2418*2+$email);
    $addKey = substr(md5(uniqid(rand(),1)),3,10);
    $key = $key . $addKey;
-// Insert Temp Table
-mysqli_query($con,
-"INSERT INTO `password_reset_temp` (`email`, `key`, `expDate`)
-VALUES ('".$email."', '".$key."', '".$expDate."');");
 
+   echo $email;
+// Insert Temp Table
+$sql= "INSERT INTO password_reset_temp(`email`, `key`, `expDate`) VALUES ('$email', '$key', '$expDate');";
+echo $sql;
+mysqli_query($conn, $sql);
 $output='<p>Dear user,</p>';
 $output.='<p>Please click on the following link to reset your password.</p>';
 $output.='<p>-------------------------------------------------------------</p>';
@@ -44,9 +50,9 @@ $output.='<p>If you did not request this forgotten password email, no action
 is needed, your password will not be reset. However, you may want to log into 
 your account and change your security password as someone may have guessed it.</p>';   	
 $output.='<p>Thanks,</p>';
-$output.='<p>AllPHPTricks Team</p>';
+$output.='<p>TUYU Team</p>';
 $body = $output; 
-$subject = "Password Recovery - AllPHPTricks.com";
+$subject = "Password Recovery - TUYU";
 
 $email_to = $email;
 $fromserver = "noreply@yourwebsite.com"; 
