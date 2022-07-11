@@ -93,6 +93,9 @@
                         <a class="" href="signUp.php">
                             Sign up
                         </a>
+                        <a class="" href="../controllers/reset-password.php">
+                            Forgot password?
+                        </a>
                     </div>
 
                 </form>

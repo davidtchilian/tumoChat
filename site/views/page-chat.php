@@ -114,7 +114,7 @@
                     <form class="d-flex" role="search" action="../controllers/sendmessage.php" method="post">
                         <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
                         <input type="hidden" name="group_id" value="<?php echo $groupId; ?>">
-                        <input name="message_content" class="form-control me-2" type="text" placeholder="Enter your message here" />
+                        <input name="message_content" class="form-control me-2" type="text" placeholder="Enter your message here" autofocus/>
                         <button class="btn search" type="submit" value="Message">
                             <img src="../assets/images/avion_papier_nour_1.png" alt="envoye" style="width :40px" style="height : 40px" />
                         </button>
