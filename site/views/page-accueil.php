@@ -86,12 +86,11 @@
                         <li class="list-group-item"><?php echo $group["group_name"]; ?></li>
                         <li class="list-group-item">
                           <?php
-                            $groupId = $group['group_id'];
-                            $sql = "SELECT * FROM message WHERE message_group_id=$groupId ORDER BY message_date DESC LIMIT 2";
-                            $lastMessages = mysqli_query($conn, $sql);
-                            while ($message = mysqli_fetch_assoc($lastMessages)) {
-                              echo "<p>".$message['message_content']."</p>"; 
-                            }
+                            $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['group_id']);
+                            $message = json_decode($messages);
+                            echo $message[0];
+                            echo "<br>";
+                            echo $message[1];
                           ?>
                         </li>
                       </ul>
