@@ -1,4 +1,4 @@
-:q<?php
+<?php
 
   $groupId = $_GET['id'];
 
@@ -10,21 +10,12 @@
     return;
   }
 
-  if (!isset($groupId)) {
+  if (!$groupId) {
     header("Location: page-accueil.php");
     return;
   }
 
   require('../models/db.php');
-
-  $sql = "SELECT * FROM groupchat WHERE group_id=$groupId";
-  $result = mysqli_query($conn, $sql);
-
-  if (empty(mysqli_fetch_assoc($result))) {
-    mysqli_close($conn);
-    header("Location: page-accueil.php");
-    return;
-  }
  
   $sql = "SELECT * FROM message WHERE message_group_id='$groupId'";
   $messages = mysqli_query($conn, $sql);
@@ -32,7 +23,7 @@
   $sql = "SELECT group_name FROM groupchat WHERE group_id='$groupId'";
   $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
   
-  
+
   mysqli_close($conn);
 
 ?>
@@ -64,12 +55,17 @@
                         </button>
                     </a>
                 </div>
-                <div id="infoModal" class="modal">
+                <div id="infoModal" class="modal_user">
                     <div class="modal-content">
-                        <p id="groupInfo"></p>
-                        <ol id="usersInfo"></ol>
-                        <div class="modal-info-buttons">
-                            <button id="closeButton" class="close btn">Close</button>
+                        <div class="groupinfo_div">
+                            <p id="groupInfo"></p>
+                        </div>
+                        <div class="usersinfo_div">
+                            <ol id="usersInfo"></ol>
+                            <div class="userinfo_buttons">
+                                <button id="closeButton" class="close btn">Close</button>
+                                <button id="add_user" class="add_user btn">Add user</button>
+                            </div>
                         </div>
                     </div>
                 </div>
