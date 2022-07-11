@@ -58,7 +58,7 @@
             </ul>
             <form class="d-flex" role="search">
               <input
-                class="form-control me-2"
+                class="form-control me-2 srch-input"
                 type="search"
                 placeholder="Search group"
                 aria-label="Search"
@@ -83,6 +83,17 @@
       <div class="row">
             <?php
               while($group = mysqli_fetch_assoc($result)){?>
+<<<<<<< HEAD
+                <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
+                <div class="card mt-5">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item group-name"><?php echo $group["group_name"]; ?></li>
+                    <li class="list-group-item">
+                      <p>message 1</p>
+                      <p>message 2</p>
+                    </li>
+                  </ul>
+=======
                 <div class="col-lg-4 col-sm-12">
                   <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
                     <div class="card mt-5">
@@ -95,11 +106,15 @@
                       </ul>
                     </div>
                   </a>
+>>>>>>> 17b6f2b3710fe8baa783e0cb57e2795d6eebfb08
                 </div>
               <?php
               }
               ?>
       </div>
     </div>
+
+
+    <script src="../scripts/search.js"></script>
   </body>
 </html>
