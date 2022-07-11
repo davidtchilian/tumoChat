@@ -60,23 +60,29 @@
                     </a> -->
 
                     <?php if($err_code != NULL) {
+                        if($err_code == 0){
+                            ?>
+                        <div class="alert alert-success" role="alert">
+                            <?php echo "You are successfully signed up!";?>
+                        </div>
+                        <?php }
                         if($err_code == 1){
                             ?>
                         <div class="alert alert-danger" role="alert">
-                            <?php echo "Empty Email Line"; ?>
+                            <?php echo "Empty email line!"; ?>
                         </div> 
                         <?php }
                         if($err_code == 2){
                         ?>
                         <div class="alert alert-danger" role="alert">
-                            <?php echo "Incorrect email or password"; ?>
+                            <?php echo "Incorrect email or password!"; ?>
                         </div> 
                             <?php }
                         
                         if($err_code == 3){
                             ?>
                         <div class="alert alert-danger" role="alert">
-                            <?php echo "Empty Password Line"; ?>
+                            <?php echo "Empty password line!"; ?>
                         </div> 
                              <?php }
                     } ?>    

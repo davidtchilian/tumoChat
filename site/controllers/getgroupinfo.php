@@ -15,9 +15,6 @@ $groupid = $_GET['id'];
             $temper = array();
             $temper[] = $row1;
             $groups = $temper;
-            // echo json_encode($row1);
-            // echo "<br>";
-           // echo "<br> group name : ". $row["group_name"]."<br>". "group bio : ". $row["group_bio"]. " " . "<br>";
         }
     } else {
         echo "0 results";
@@ -31,8 +28,6 @@ $groupid = $_GET['id'];
             $temp = array();
             $temp[] =$row2; 
             $users[] = $temp;
-           // echo json_encode($row2)."<br>";
-            //echo "<br> group users id : ". $row["isInGroup_user_id"];
         }
     } else {
         echo "0 results";
