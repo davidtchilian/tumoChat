@@ -32,9 +32,7 @@ $files = array_values(array_diff(scandir($dir), array('..', '.')));
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-2">
-                <div class="card profil">
-                </div>
+            <div class="col-12" style="text-align: center; margin-top: 50px;   ">
                 <?php
                     for ($i = 0;$i < count($files);$i++) {
                         $result =  $dir . $files[$i]."\n";
@@ -44,12 +42,13 @@ $files = array_values(array_diff(scandir($dir), array('..', '.')));
                        }
                 ?>
             </div>
-            <div class="col-4">
-                <div class="card centered-card" style="width: 288px; height: 300px">
+            <div class="col-4" style="margin: 20px auto;">
+                <div class="card centered-card" style = "  width: 400px; height: 300px;  ">
                     <a href="profile.php" class="btn-close"></a>
                     <form action="./profile.php " method="POST">
                     <textarea name="bio" class="form-control" style="height: 170px"></textarea>
-                    <input type="submit" value="Save">   
+                    <!-- <input type="submit" value="Save" style="w">   -->
+                    <input type="submit" class="btn btn-outline-success" value='Save' style="margin-top:25px;"></input> 
                     </form>
                 </div>
             </div>
