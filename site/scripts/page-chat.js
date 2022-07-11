@@ -29,6 +29,9 @@ function getGroupIdInfo(groupId) {
   Http.open("GET", url);
   Http.send();
   Http.onreadystatechange = (e) => {
+    if(Http.readyState !== XMLHttpRequest.DONE) {
+      return;
+    }
     let output = Http.responseText;
     let jsonObject = null;
     try {
@@ -39,11 +42,24 @@ function getGroupIdInfo(groupId) {
     }
     let groupInfo = jsonObject[0][0];
     let groupUsersInfo = jsonObject[1];
+    let id = 1
     info.innerText = groupInfo.group_name + " - " + groupInfo.group_bio;
     for (let user of groupUsersInfo) {
       let userInfo = document.createElement("li");
+      userInfo.classList.add("user_info_page")
       userInfo.innerText = user[0].user_email;
+
+
+      let user_delete_button = document.createElement("button")
+      user_delete_button.classList.add("user_delete_button")
+      user_delete_button.innerText = "X"
+
+      //let user_id = document.createTextNode(id)
+
       usersInfo.appendChild(userInfo);
+      //userInfo.insertBefore(user_id,userInfo.firstChild)
+      userInfo.appendChild(user_delete_button)
+      //id++;
     }
   }
 }

@@ -28,6 +28,7 @@
 
   $sql = "SELECT group_name FROM groupchat WHERE group_id='$groupId'";
   $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
+  
 
   mysqli_close($conn);
 
@@ -41,7 +42,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/page-chat.css" />
-    <title>Document</title>
+    <title><?php echo $groupName." - TUYU"; ?></title>
     <style>
 .dropbtn {
   background-color: #4CAF50;
@@ -80,7 +81,16 @@
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
 }
-</style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100&display=swap');
+        .user_icon{
+            height: 35px;
+        }
+        .user_email{
+            font-family: 'Roboto', sans-serif;
+            padding: 0 10px;
+        }
+    </style>
 </head>
 <body>
     <script>
@@ -105,12 +115,17 @@
                         </button>
                     </a>
                 </div>
-                <div id="infoModal" class="modal" >
+                <div id="infoModal" class="modal_user">
                     <div class="modal-content">
-                        <p id="groupInfo"></p>
-                        <ol id="usersInfo"></ol>
-                        <div class="modal-info-buttons">
-                            <button id="closeButton" class="close btn">Close</button>
+                        <div class="groupinfo_div">
+                            <p id="groupInfo"></p>
+                        </div>
+                        <div class="usersinfo_div">
+                            <ol id="usersInfo"></ol>
+                            <div class="userinfo_buttons">
+                                <button id="closeButton" class="close btn">Close</button>
+                                <button id="add_user" class="add_user btn">Add user</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -121,13 +136,17 @@
         <br>
         <?php
     while ($message = mysqli_fetch_assoc($messages)) {
+        $icon = file_get_contents("http://localhost:8888/site/controllers/getusericon.php?id=".$message["message_sender_id"]);
+        $user_email = file_get_contents("http://localhost:8888/site/controllers/getuseremail.php?id=".$message["message_sender_id"]);
         if ($message['message_sender_id'] == $userId) {
         ?>
         <div class="row" id = "messages" >
             <div class="col-4"></div>
-            <div class="col-8">
-                <button class="btn btn-primary messageEnvoye mt-2" style="float : right; color: black;" onclick="myFunction(event)" name="<?= $message['message_id']?> " id = "name">
-                    <?php echo $message['message_content']; ?>
+            <div class="col-7">
+            <button class="btn btn-primary messageEnvoye mt-2" style="float : right; color: black;" onclick="myFunction(event)" name="<?= $message['message_id']?> " id = "name">
+                    <?php 
+                    echo "<p class='user_email'>".$user_email."</p>";
+                    echo $message['message_content']; ?>
                 </button>
                 <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;">
                 
@@ -140,13 +159,19 @@
                 </div> 
     </div>
             </div>
-           
+            <div class="col-1">
+                <img src="../assets/icons/<?php echo $icon; ?>.png" class="user_icon">
+            </div>
+        </div>
         <?php }
         else { ?>
         <div class="row">
-            <div class="col-8">
-                <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;" >
-                    <?php echo $message['message_content'] ?>
+            <div class="col-1"><img src="../assets/icons/<?php echo $icon; ?>.png" class="user_icon"></div>
+            <div class="col-7">
+                <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
+                    <?php 
+                     echo "<p class='user_email'>".$user_email."</p>";
+                    echo $message['message_content'] ?>
                 </button>
             </div>
             <div class="col-4"></div>
@@ -165,8 +190,7 @@
                     <form class="d-flex" role="search" action="../controllers/sendmessage.php" method="post" id = "form">
                         <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
                         <input type="hidden" name="group_id" value="<?php echo $groupId; ?>">
-
-                        <input name="message_content" class="form-control me-2" type="text" placeholder="Enter your message here" id = "text" value="gggg">
+                        <input name="message_content" class="form-control me-2" type="text" id="text" placeholder="Enter your message here" autofocus />
                         <button class="btn search" type="submit" value="Message">
                             <a href="page-chat.php?id=<?php echo $groupId;?>"></a>
                             <img src="../assets/images/avion_papier_nour_1.png" alt="envoye" style="width :40px" style="height : 40px" />

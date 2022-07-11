@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 <?php
   session_start();
   $user_id = $_SESSION['user_id'];
+  $_SESSION['user_id'] = $user_id;
   require_once("../models/db.php");
-  // $db = mysqli_connect("localhost", "root", "root", "tumochat");
   $sql = "SELECT group_id, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE isInGroup_user_id = ".$user_id;
   $result = mysqli_query($conn, $sql);
 ?>
@@ -78,34 +77,30 @@
         <h1 class="Titre">Home</h1>
       </div>
       <div class="row">
-        <div class="col-lg-4 col-sm-12">
             <?php
               while($group = mysqli_fetch_assoc($result)){?>
-                <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
-                <div class="card mt-5">
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><?php echo $group["group_name"]; ?></li>
-                    <li class="list-group-item">
-                      <p>message 1</p>
-                      <p>message 2</p>
-                    </li>
-                  </ul>
+                <div class="col-lg-4 col-sm-12">
+                  <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
+                    <div class="card mt-5">
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><?php echo $group["group_name"]; ?></li>
+                        <li class="list-group-item">
+                          <?php
+                            $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['group_id']);
+                            $message = json_decode($messages);
+
+                            echo $message[0];
+                            echo "<br>";
+                            echo $message[1];
+                          ?>
+                        </li>
+                      </ul>
+                    </div>
+                  </a>
                 </div>
               <?php
               }
               ?>
-            
-            <!-- <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div> -->
-          </a>
-        </div>
       </div>
     </div>
   </body>
