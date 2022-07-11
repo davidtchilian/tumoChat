@@ -85,8 +85,14 @@
                       <ul class="list-group list-group-flush">
                         <li class="list-group-item"><?php echo $group["group_name"]; ?></li>
                         <li class="list-group-item">
-                          <p>message 1</p>
-                          <p>message 2</p>
+                          <?php
+                            $groupId = $group['group_id'];
+                            $sql = "SELECT * FROM message WHERE message_group_id=$groupId ORDER BY message_date DESC LIMIT 2";
+                            $lastMessages = mysqli_query($conn, $sql);
+                            while ($message = mysqli_fetch_assoc($lastMessages)) {
+                              echo "<p>".$message['message_content']."</p>"; 
+                            }
+                          ?>
                         </li>
                       </ul>
                     </div>
