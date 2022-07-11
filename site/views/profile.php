@@ -6,19 +6,14 @@ $usrid = $_SESSION['user_id'];
 $sql = "SELECT user_email, user_icon FROM USERS WHERE user_id = $usrid";
    
 $result = mysqli_query($conn,$sql);
-    if ($result->num_rows > 0) {
-        if($row1 = mysqli_fetch_assoc($result)) {
-            $usrmail = $row1['user_email'];
-            $usricon = $row1['user_icon'];
-        }
-    } else {
-        // echo "0 results";
+if ($result->num_rows > 0) {
+    if($row1 = mysqli_fetch_assoc($result)) {
+        $usrmail = $row1['user_email'];
+        $usricon = $row1['user_icon'];
     }
-
- if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usrbio = htmlspecialchars($_REQUEST['bio']); 
+} else {
+    // echo "0 results";
 }
-
 ?>
 <!doctype html>
 <html lang="fr">
@@ -107,7 +102,12 @@ $result = mysqli_query($conn,$sql);
                         <?php  echo "<img src='../assets/icons/$usricon.png' class='card-img-top' alt='profile_' style='height: 100px; width: 100px; margin-bottom:10px'>" ?>
                         <h3><span class="badge bg-secondary"><?php echo explode("@",$usrmail)[0];?></span></h5>
                         <h5 class="card-subtitle mb-2 text-muted"><?php echo $usrmail;?></h4>
-                        <p class="card-text"> <?php  echo $usrbio; ?> </p>
+                        <p class="card-text" > 
+                            <?php 
+                                $bio = file_get_contents($domain_name."/controllers/getbio.php?id=".$usrid);
+                                echo $bio;
+                            ?> 
+                        </p>
                         <a  href="editProfile.php" class="card-link" style="font-size: 20px; color: gray;">Edit Profile</a>
                     </div>
                 </div>
