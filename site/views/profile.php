@@ -101,14 +101,14 @@ $result = mysqli_query($conn,$sql);
     </nav>
     <div class="container">
         <div class="row">
-            <div class="col-4">
-                <div class="card centered-card" style="width: 288px; height: 300px">
+            <div style ="margin-top: 20px; ">
+                <div class="card centered-card" style = "  width: 400px; height: 300px;  ">
                     <div class="card-body">
-                        <?php  echo "<img src='../assets/icons/$usricon.png' class='card-img-top' alt='profile_' style='height: 70px; width: 70px; margin-bottom:10px'>" ?>
-                        <h5><span class="badge bg-secondary"><?php echo explode("@",$usrmail)[0];?></span></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><?php echo $usrmail;?></h6>
+                        <?php  echo "<img src='../assets/icons/$usricon.png' class='card-img-top' alt='profile_' style='height: 100px; width: 100px; margin-bottom:10px'>" ?>
+                        <h3><span class="badge bg-secondary"><?php echo explode("@",$usrmail)[0];?></span></h5>
+                        <h5 class="card-subtitle mb-2 text-muted"><?php echo $usrmail;?></h4>
                         <p class="card-text"> <?php  echo $usrbio; ?> </p>
-                        <a href="editProfile.php" class="card-link">edit profile</a>
+                        <a  href="editProfile.php" class="card-link" style="font-size: 20px; color: gray;">Edit Profile</a>
                     </div>
                 </div>
             </div>

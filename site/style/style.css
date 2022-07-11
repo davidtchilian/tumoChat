@@ -174,9 +174,8 @@ background
   .card-body h5{
     margin-bottom: 0.3rem;
   }
-  .card-body span{
-    font-size: 15px;
-  }
+
+ 
   .card-body a{
     font-size: 15px;
   }
@@ -340,7 +339,5 @@ body {
   margin-right: auto;
   margin-left: auto;
 }
-.profil {
-  display: flex;
-}
+
 
