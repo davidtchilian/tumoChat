@@ -48,7 +48,7 @@ $files = array_values(array_diff(scandir($dir), array('..', '.')));
                     <form action="./profile.php " method="POST">
                     <textarea name="bio" class="form-control" style="height: 170px"></textarea>
                     <!-- <input type="submit" value="Save" style="w">   -->
-                    <button type="button" class="btn btn-outline-success" style="margin-top:25px;">Save</button> 
+                    <input type="submit" class="btn btn-outline-success" value='Save' style="margin-top:25px;"></input> 
                     </form>
                 </div>
             </div>

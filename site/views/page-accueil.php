@@ -1,9 +1,12 @@
+<<<<<<< HEAD
+=======
 
+>>>>>>> 3084e8cfcf8d667be9ea5fee2d1e0796635628b3
 <?php
   session_start();
   $user_id = $_SESSION['user_id'];
+  $_SESSION['user_id'] = $user_id;
   require_once("../models/db.php");
-  // $db = mysqli_connect("localhost", "root", "root", "tumochat");
   $sql = "SELECT group_id, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE isInGroup_user_id = ".$user_id;
   $result = mysqli_query($conn, $sql);
 ?>
@@ -78,34 +81,24 @@
         <h1 class="Titre">Home</h1>
       </div>
       <div class="row">
-        <div class="col-lg-4 col-sm-12">
             <?php
               while($group = mysqli_fetch_assoc($result)){?>
-                <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
-                <div class="card mt-5">
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><?php echo $group["group_name"]; ?></li>
-                    <li class="list-group-item">
-                      <p>message 1</p>
-                      <p>message 2</p>
-                    </li>
-                  </ul>
+                <div class="col-lg-4 col-sm-12">
+                  <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
+                    <div class="card mt-5">
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><?php echo $group["group_name"]; ?></li>
+                        <li class="list-group-item">
+                          <p>message 1</p>
+                          <p>message 2</p>
+                        </li>
+                      </ul>
+                    </div>
+                  </a>
                 </div>
               <?php
               }
               ?>
-            
-            <!-- <div class="card mt-5">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">GROUPE</li>
-                <li class="list-group-item">
-                  <p>message 1</p>
-                  <p>message 2</p>
-                </li>
-              </ul>
-            </div> -->
-          </a>
-        </div>
       </div>
     </div>
   </body>

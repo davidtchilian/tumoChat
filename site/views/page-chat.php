@@ -31,6 +31,7 @@
 
   $sql = "SELECT group_name FROM groupchat WHERE group_id='$groupId'";
   $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
+  
 
   mysqli_close($conn);
 
@@ -44,7 +45,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/page-chat.css" />
-    <title>Document</title>
+    <title><?php echo $groupName." - TUYU"; ?></title>
 </head>
 <body>
     <div class="fixed-top">
@@ -113,7 +114,7 @@
                     <form class="d-flex" role="search" action="../controllers/sendmessage.php" method="post">
                         <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
                         <input type="hidden" name="group_id" value="<?php echo $groupId; ?>">
-                        <input name="message_content" class="form-control me-2" type="text" placeholder="Enter your message here" />
+                        <input name="message_content" class="form-control me-2" type="text" placeholder="Enter your message here" autofocus/>
                         <button class="btn search" type="submit" value="Message">
                             <img src="../assets/images/avion_papier_nour_1.png" alt="envoye" style="width :40px" style="height : 40px" />
                         </button>
