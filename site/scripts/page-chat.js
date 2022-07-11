@@ -29,6 +29,9 @@ function getGroupIdInfo(groupId) {
   Http.open("GET", url);
   Http.send();
   Http.onreadystatechange = (e) => {
+    if(Http.readyState !== XMLHttpRequest.DONE) {
+      return;
+    }
     let output = Http.responseText;
     let jsonObject = null;
     try {
