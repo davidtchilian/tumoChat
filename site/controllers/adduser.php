@@ -1,8 +1,8 @@
 <?php
 session_start();
 require_once("../models/db.php");
-$groupid = $_GET['id'];
-$deletingid = $_GET['delid'];
+$groupid = $_GET['group_id'];
+$newuserid = $_GET['new_user_id'];
 $userid = $_SESSION['user_id'];
 $sql1 = "SELECT group_admin_id FROM GROUPCHAT WHERE group_admin_id = $userid AND group_id = $groupid";
 $result = $conn->query($sql1);
@@ -21,7 +21,7 @@ else{
 }
 if($groupadminid == $userid){
     
-    $sql = "DELETE FROM isINGROUP WHERE user_id = $deletingid";
+    $sql = "INSERT INTO isInGroup(isInGroup_group_id,isInGroup_user_id) VALUES($groupid,$newuserid)";
     $result = mysqli_query($conn,$sql);
     mysqli_close();
     

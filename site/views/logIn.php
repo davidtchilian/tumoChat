@@ -60,23 +60,29 @@
                     </a> -->
 
                     <?php if($err_code != NULL) {
+                        if($err_code == 0){
+                            ?>
+                        <div class="alert alert-success" role="alert">
+                            <?php echo "You are successfully signed up!";?>
+                        </div>
+                        <?php }
                         if($err_code == 1){
                             ?>
                         <div class="alert alert-danger" role="alert">
-                            <?php echo "Empty Email Line"; ?>
+                            <?php echo "Empty email line!"; ?>
                         </div> 
                         <?php }
                         if($err_code == 2){
                         ?>
                         <div class="alert alert-danger" role="alert">
-                            <?php echo "Incorrect email or password"; ?>
+                            <?php echo "Incorrect email or password!"; ?>
                         </div> 
                             <?php }
                         
                         if($err_code == 3){
                             ?>
                         <div class="alert alert-danger" role="alert">
-                            <?php echo "Empty Password Line"; ?>
+                            <?php echo "Empty password line!"; ?>
                         </div> 
                              <?php }
                     } ?>    
@@ -86,6 +92,9 @@
                         <span> Not yet a member? </span> 
                         <a class="" href="signUp.php">
                             Sign up
+                        </a>
+                        <a class="" href="../controllers/reset-password.php">
+                            Forgot password?
                         </a>
                     </div>
 
