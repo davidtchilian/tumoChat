@@ -69,7 +69,7 @@ if ($conn->query($isInGroup) === TRUE) {
 
 
 
-
+header("Location: page-accueil.php");
 $conn->close();
     
 ?>
