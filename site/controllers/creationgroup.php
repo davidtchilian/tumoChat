@@ -48,7 +48,6 @@ if(!empty($select)){
       $insert=$insert  . ",";
     }
   }
-
 }
 else{
   header("Location: ../views/creategroup2.php?err=1");

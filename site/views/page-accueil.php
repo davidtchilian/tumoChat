@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 3084e8cfcf8d667be9ea5fee2d1e0796635628b3
 <?php
   session_start();
   $user_id = $_SESSION['user_id'];
@@ -58,7 +54,7 @@
             </ul>
             <form class="d-flex" role="search">
               <input
-                class="form-control me-2 srch-input"
+                class="form-control me-2"
                 type="search"
                 placeholder="Search group"
                 aria-label="Search"
@@ -100,21 +96,24 @@
                       <ul class="list-group list-group-flush">
                         <li class="list-group-item"><?php echo $group["group_name"]; ?></li>
                         <li class="list-group-item">
-                          <p>message 1</p>
-                          <p>message 2</p>
+                          <?php
+                            $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['group_id']);
+                            $message = json_decode($messages);
+
+                            echo $message[0];
+                            echo "<br>";
+                            echo $message[1];
+                          ?>
                         </li>
                       </ul>
                     </div>
                   </a>
->>>>>>> 17b6f2b3710fe8baa783e0cb57e2795d6eebfb08
+>>>>>>> b3da7349c76c8e80163ea5e21ede6ad323279fa6
                 </div>
               <?php
               }
               ?>
       </div>
     </div>
-
-
-    <script src="../scripts/search.js"></script>
   </body>
 </html>

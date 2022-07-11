@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <title>| TUYU | </title>
     <link rel="icon" type="image/png" href="../assets/images/logo_tuyu-sm.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
@@ -23,28 +26,22 @@
 
 <body>
     <div class="flex-container">
-        <div class="col-6">
-            <img id="logo" src="../assets/images/fond_page_dacceuil.jpg" class="imaj" style="height: 1070px; width:auto">
+        <div class="col-6 main-img">
+            <img src="../assets/images/white_logo.png" class="indexlogo">
+            <!-- <img id="logo" src="../assets/images/fond_page_dacceuil.jpg" class="imaj" style="width:auto"> -->
         </div>
 
-            <div class="main_buttons">
-            <p></p>
-            <p>
-                <strong>
-                    JOIN TUYU NOW
-                </strong>
-            </p>
-
-            <a class="" href="signUp.php" role="button"
-                style="float: center; background : #6C4B93; width: 400px">
-                Sign up
-            </a>
-        
-            <a class="" href="Login.php" role="button"
-                style="float: center; background : #6C4B93; width: 200px">
-                <!-- Jump into the real world -->
-                Sign in
-            </a>
+            <div class="main-buttons">
+            <!-- <p id="indexheader">JOIN TUYU NOW!</p> -->
+                <img src="../assets/images/welcome.png" id="indexheader">
+            <div class="buttons">
+            <a href="./logIn.php" class="indexbtn btn-cta" style="font-size: 1vw;">Log In<svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="arrow" x="0px" y="0px" width="0.5vw" height="0.75vw" viewBox="0 0 11.121 19.414" enable-background="new 0 0 11.121 19.414" xml:space="preserve">
+<polygon fill="#fff" points="1.414,19.414 0,18 8.293,9.707 0,1.414 1.414,0 11.121,9.707 "/>
+</svg></a>
+<a href="./logIn.php" class="indexbtn btn-cta" style="font-size: 1vw;">Sign In<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="arrow" x="0px" y="0px" width="0.5vw" height="0.75vw" viewBox="0 0 11.121 19.414" enable-background="new 0 0 11.121 19.414" xml:space="preserve">
+<polygon fill="#fff" points="1.414,19.414 0,18 8.293,9.707 0,1.414 1.414,0 11.121,9.707 "/>
+</svg></a>
+            </div>       
     </div>
         </div>
     <script>
