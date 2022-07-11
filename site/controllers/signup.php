@@ -46,7 +46,7 @@ else if($password == $confirmPassword){
         INSERT INTO USERS(user_email,user_password,user_bio,user_theme,user_icon)
         VALUES ('$email', '$password_hash', '', 0, 0);";
         $conn->query($sql);
-        header("Location: ../views/logIn.php");
+        header("Location: ../views/logIn.php?err=0");
         }
     }
     else{    
