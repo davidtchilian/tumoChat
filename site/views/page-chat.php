@@ -44,6 +44,7 @@
         }
         .user_email{
             font-family: 'Roboto', sans-serif;
+            padding: 0 10px;
         }
     </style>
 </head>
@@ -105,11 +106,11 @@
         <?php }
         else { ?>
         <div class="row">
-            <div class="col-8">
+            <div class="col-1"><img src="../assets/icons/<?php echo $icon; ?>.png" class="user_icon"></div>
+            <div class="col-7">
                 <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
                     <?php 
-                    echo $user_name;
-                    echo "<br>";
+                     echo "<p class='user_email'>".$user_email."</p>";
                     echo $message['message_content'] ?>
                 </button>
             </div>
