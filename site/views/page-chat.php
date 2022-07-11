@@ -1,4 +1,4 @@
-<?php
+:q<?php
 
   $groupId = $_GET['id'];
 

@@ -90,7 +90,7 @@
                             <?php echo "Invalid email!"; ?>
                             </div> 
                     <?php }}?>
-                    <input type="submit" name="Login" id="exampleInputSubmit" class="btn btn-primary" href="page-accueil.html" style="float: center; background : #6C4B93">
+                    <input type="submit" name="Login" id="exampleInputSubmit" class="btn btn-primary" href="page-accueil.php" style="float: center; background : #6C4B93">
                     <br>
                     <br>
                     <div class="col-12" style="float: left; color: rgb(83, 100, 113);">

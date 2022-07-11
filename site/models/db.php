@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "root";
-$database = "TumoChat"; // Database name
+$database = "tumoChat"; // Database name
 
 
 // Create connection
