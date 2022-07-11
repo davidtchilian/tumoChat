@@ -12,16 +12,12 @@ if($result->num_rows > 0){
         
     }else {
         mysqli_close();
-        header("Location: ../views/page-chat.php?id=$groupid");
     }
 }
 else{
     mysqli_close();
-    header("Location: ../views/page-chat.php?id=$groupid");
 }
 if($groupadminid == $userid){
-    
-    
     $sql2 = "DELETE FROM MESSAGE WHERE message_group_id = $groupid";
     $result2 = mysqli_query($conn,$sql2);
     $sql3 = "DELETE FROM isInGroup WHERE isInGroup_group_id = $groupid";
