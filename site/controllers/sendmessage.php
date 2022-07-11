@@ -1,10 +1,9 @@
 <?php
 
 $messagecontent = strip_tags(htmlspecialchars($_POST['message_content']));
+$groupId = $_POST['group_id'];
 
 if (!empty($messagecontent) && !ctype_space($messagecontent)) {
-
-    $groupId = $_POST['group_id'];
     
     session_start();
     $userId = $_SESSION["user_id"];
@@ -20,6 +19,6 @@ if (!empty($messagecontent) && !ctype_space($messagecontent)) {
 
 }
 
-header("Location: ../views/page-chat.php?id=$groupId");
+header("Location: ../views/page-chat.php?id=".$groupId);
 
 ?>

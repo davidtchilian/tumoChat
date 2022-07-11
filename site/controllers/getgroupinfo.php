@@ -20,7 +20,9 @@ $groupid = $_GET['id'];
         echo "0 results";
     }
   
-    $sql2 = "SELECT DISTINCT user_id, user_email FROM USERS, isInGroup WHERE isInGroup_group_id = $groupid";
+    $sql2 = "SELECT DISTINCT user_id, user_email 
+    FROM USERS INNER JOIN isInGroup ON isInGroup.isInGroup_user_id = USERS.user_id
+    WHERE isInGroup_group_id = $groupid";
     $result2 = mysqli_query($conn,$sql2);
     $users = array();
     if ($result2->num_rows > 0) {
