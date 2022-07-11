@@ -31,7 +31,7 @@ session_start();
 
 			<label for="exampleFormControlTextarea1" class="form-label; float: left;">Bio</label>
 			<textarea name="grpbio" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-			<a href="page-accueil.html" class="btn btn-primary mt-3 "
+			<a href="page-accueil.php" class="btn btn-primary mt-3 "
 				style="background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119);">Return</a>
 			<button  class="btn btn-primary mt-3" type="submit"
 				style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Continue</button>
