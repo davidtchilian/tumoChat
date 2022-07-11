@@ -9,6 +9,7 @@ if($result->num_rows > 0){
     if($row = $result->fetch_assoc()) {
         $groupadminid = $row["group_admin_id"];
         
+        
     }else {
         mysqli_close();
         header("Location: ../views/page-chat.php?id=$groupid");

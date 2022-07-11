@@ -1,5 +1,5 @@
 <?php
-
+header('Access-Control-Allow-Origin: *');
 if(!isset($_GET['id'])){
     die("id not found");
 }
