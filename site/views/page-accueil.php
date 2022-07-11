@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3084e8cfcf8d667be9ea5fee2d1e0796635628b3
 <?php
   session_start();
   $user_id = $_SESSION['user_id'];
