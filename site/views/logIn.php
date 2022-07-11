@@ -93,7 +93,7 @@
                         <a class="" href="signUp.php">
                             Sign up
                         </a>
-                        <a class="" href="../controllers/reset-password.php">
+                        <a class="" href="email-send.php">
                             Forgot password?
                         </a>
                     </div>
