@@ -79,17 +79,6 @@
       <div class="row">
             <?php
               while($group = mysqli_fetch_assoc($result)){?>
-<<<<<<< HEAD
-                <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
-                <div class="card mt-5">
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item group-name"><?php echo $group["group_name"]; ?></li>
-                    <li class="list-group-item">
-                      <p>message 1</p>
-                      <p>message 2</p>
-                    </li>
-                  </ul>
-=======
                 <div class="col-lg-4 col-sm-12">
                   <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
                     <div class="card mt-5">
@@ -108,7 +97,6 @@
                       </ul>
                     </div>
                   </a>
->>>>>>> b3da7349c76c8e80163ea5e21ede6ad323279fa6
                 </div>
               <?php
               }
