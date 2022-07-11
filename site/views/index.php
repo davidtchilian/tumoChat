@@ -24,7 +24,7 @@
 <body>
     <div class="flex-container">
         <div class="col-6">
-            <img id="logo" src="../assets/images/fond_page_dacceuil.png" class="imaj" style="height: 1070px; width:auto">
+            <img id="logo" src="../assets/images/fond_page_dacceuil.jpg" class="imaj" style="height: 1070px; width:auto">
         </div>
 
             <div class="main_buttons">
