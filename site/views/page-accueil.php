@@ -88,6 +88,7 @@
                           <?php
                             $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['group_id']);
                             $message = json_decode($messages);
+
                             echo $message[0];
                             echo "<br>";
                             echo $message[1];

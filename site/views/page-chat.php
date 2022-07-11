@@ -1,4 +1,4 @@
-:q<?php
+<?php
 
   $groupId = $_GET['id'];
 
@@ -46,6 +46,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/page-chat.css" />
     <title><?php echo $groupName." - TUYU"; ?></title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100&display=swap');
+        .user_icon{
+            height: 35px;
+        }
+        .user_email{
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
 </head>
 <body>
     <div class="fixed-top">
@@ -80,14 +89,21 @@
         <br>
         <?php
     while ($message = mysqli_fetch_assoc($messages)) {
+        $icon = file_get_contents("http://localhost:8888/site/controllers/getusericon.php?id=".$message["message_sender_id"]);
+        $user_email = file_get_contents("http://localhost:8888/site/controllers/getuseremail.php?id=".$message["message_sender_id"]);
         if ($message['message_sender_id'] == $userId) {
         ?>
         <div class="row">
             <div class="col-4"></div>
-            <div class="col-8">
+            <div class="col-7">
                 <button class="btn btn-primary messageRecu mt-2" style="float : right; color: black;">
-                    <?php echo $message['message_content']; ?>
+                    <?php 
+                    echo "<p class='user_email'>".$user_email."</p>";
+                    echo $message['message_content']; ?>
                 </button>
+            </div>
+            <div class="col-1">
+                <img src="../assets/icons/<?php echo $icon; ?>.png" class="user_icon">
             </div>
         </div>
         <?php }
@@ -95,7 +111,10 @@
         <div class="row">
             <div class="col-8">
                 <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
-                    <?php echo $message['message_content'] ?>
+                    <?php 
+                    echo $user_name;
+                    echo "<br>";
+                    echo $message['message_content'] ?>
                 </button>
             </div>
             <div class="col-4"></div>
