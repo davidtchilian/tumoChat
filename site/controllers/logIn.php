@@ -2,7 +2,7 @@
 require_once('../models/db.php');
 
 $user_email = $_POST['user_email'];
-$user_pwrd = md5($_POST['user_pass']);
+$user_pwrd = $_POST['user_pass'];
 
 $sql = "SELECT user_id, user_theme FROM USERS WHERE user_email = '$user_email' AND user_password = '$user_pwrd'";
 $result = $conn->query($sql);

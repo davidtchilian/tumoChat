@@ -1,4 +1,4 @@
-<?php
+:q<?php
 
   $groupId = $_GET['id'];
 
@@ -10,12 +10,21 @@
     return;
   }
 
-  if (!$groupId) {
+  if (!isset($groupId)) {
     header("Location: page-accueil.php");
     return;
   }
 
   require('../models/db.php');
+
+  $sql = "SELECT * FROM groupchat WHERE group_id=$groupId";
+  $result = mysqli_query($conn, $sql);
+
+  if (empty(mysqli_fetch_assoc($result))) {
+    mysqli_close($conn);
+    header("Location: page-accueil.php");
+    return;
+  }
  
   $sql = "SELECT * FROM message WHERE message_group_id='$groupId'";
   $messages = mysqli_query($conn, $sql);
