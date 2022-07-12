@@ -150,7 +150,7 @@
                             <p id="groupInfo"></p>
                         </div>
                         <div class="usersinfo_div">
-                            <ol id="usersInfo"></ol>
+                            <div id="usersInfo"></div>
                             <div id = "modal_buttons" class="userinfo_buttons">
                                 <div id="modal-extra-interactions"></div>
                                 <div id="modal-default-interactions">
