@@ -15,7 +15,7 @@
     </style>
 </head>
 
-<body>
+<body style='display:flex; align-items: center; background-image: url("../assets/images/themes/3.jpg");'>
     <div class="wrap">
         <div class="row pb-5">
             <div class="col text-center mt-5">
@@ -81,12 +81,12 @@
                             <?php echo "Invalid email!"; ?>
                             </div> 
                     <?php }}?>
-                    <input type="submit" name="Login" id="exampleInputSubmit" class="btn btn-primary" href="page-accueil.php" style="float: center; background : #6C4B93">
+                    <input type="submit" name="Login" id="exampleInputSubmit" class="submit-btn" href="page-accueil.php" style="float: center;">
                     <br>
                     <br>
                     <div class="col-12" style="float: left; color: rgb(83, 100, 113);">
                         <span>Already a member?</span>
-                        <a class="" href="logIn.php" >
+                        <a class="signlink" href="logIn.php" >
                             Log in
                         </a>
                     </div>

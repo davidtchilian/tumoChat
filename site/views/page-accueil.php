@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="../style/page-accueil.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
   </head>
-  <body style='background-image: url("../assets/images/super_fond_violet.jpg");'>
+  <body style='background-image: url("../assets/images/themes/3.jpg");'>
     <div class="fixed-top">
       <nav class="navbar navbar-expand-lg" style="background-color: #6c4b93">
         <div class="container">
@@ -54,7 +54,7 @@
             </ul>
             <form class="d-flex" role="search">
               <input
-                class="form-control me-2"
+                class="form-control me-2 srch-input"
                 type="search"
                 placeholder="Search group"
                 aria-label="Search"
@@ -84,7 +84,7 @@
                   <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
                     <div class="card mt-5">
                       <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><?php echo $group["group_name"]; ?></li>
+                        <li class="list-group-item group-name"><?php echo $group["group_name"]; ?></li>
                         <li class="list-group-item">
                           <?php
                             $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['group_id']);
@@ -93,7 +93,6 @@
                             echo $message[0];
                             echo "<br>";
                             echo $message[1];
-                            echo $result;
                           ?>
                         </li>
                       </ul>
@@ -105,5 +104,6 @@
               ?>
       </div>
     </div>
+    <script src="../scripts/search.js"></script>
   </body>
 </html>

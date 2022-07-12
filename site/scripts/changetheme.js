@@ -1,6 +1,7 @@
 function changetheme(id) {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "../controllers/changetheme.php?theme="+id,true);
+    let rq = "../controllers/changetheme.php?theme=" + id;console.log(rq);
+    xmlhttp.open("GET", rq,false);
     xmlhttp.send();
-
+    // location.reload(true);
 }

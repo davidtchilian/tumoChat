@@ -15,7 +15,9 @@ html{
   height:25px;
   margin:auto 6px auto 0; 
 }
-
+body ::after {
+  opacity: 0.5;
+}
 :root {
   --clr: #222327
 }
@@ -38,6 +40,10 @@ html{
   align-items: center;
   min-height: 100vh;
   background: var(--clr);
+}
+
+.card-body{
+  margin: 0.6vw 0
 }
 
 .navigation {
@@ -104,7 +110,6 @@ html{
   opacity: 1;
   transform: translateY(10px)
 }
-background
 .indicator {
   position: absolute;
   top: -60%;
@@ -157,15 +162,29 @@ background
   transform: translateX(calc(70px * 3));
 }
 
+.logo {
+    width: 35vw;
+  }
+.form-control, .fake-input{
+  width: 95% !important;
+  margin: 0 auto;
+}
 /* ---------------------------------------------------------------------------------------------------------------------------------- */
 @media  (min-width:1000px){
-  .centered-card{width:40%;}
+  .logo {
+    width: 20vw !important;
+  }
+  .centered-card{width:50%;}
 }
 @media (max-width: 1000px)and (min-width:700px) {
   .imaj {
     display: none;
   }
-  .centered-card{width:50%;}
+  .centered-card{width:65%;}
+  /* .logo {
+    width: 36vw !important;
+    height: 15vw !important;
+  } */
 }
 @media (max-width:700px) and (min-width:555px){
   .form-text{
@@ -186,9 +205,13 @@ background
     width:85%;
     margin: 0 auto;
   }
-  .centered-card{width:60%;}
+  .centered-card{
+    width:70%;
+  }
+  
 }
 @media (max-width:555px) and (min-width:410px){
+  
   .card-body span{
     font-size: 14px;
   }
@@ -255,7 +278,10 @@ background
   }
   .indexbtn{
     font-size: 1.7vw !important;
-    padding: 1vw 2vw !important;
+    padding: .9vw 1.8vw .9vw 1.8vw !important;
+  }
+  .indexbtn:hover{
+    padding: .9vw 3vw .9vw 1.8vw !important;
   }
   .indexbtn svg{
     width: 1vw;
@@ -291,19 +317,18 @@ background
 body {
   height: 100%;
   font-family: "Roboto", sans-serif;
-  background-image: url('../assets/images/fondBlanc.png');
-  ;
+  background-image: url('../assets/images/themes/0.jpg');
   background-size: 10%;
 }
 
 .centered-card {
   position: relative;
 }
-
+/* 
 .logo {
   width: 19.2vw;
   height: 8vw;
-}
+} */
 
 
 
@@ -357,9 +382,6 @@ body {
 
 
 }
-.fake-input input:focus{
-  
-}
 
 .welcome{
   margin-top: 3%;
@@ -412,10 +434,12 @@ body {
 }
 
 .btn-cta {
-  border: none;
-  background: #6c4b93;
-	color: #fff;
-	overflow: hidden;
+  background: white;
+  border: 2px solid #6c4b93;
+  border-radius: 0.375rem;
+  color: #6c4b93;
+  padding: .45vw .9vw .45vw .9vw;
+  transition: all .3s ease-in-out;
 }
 
 .btn-cta:active {
@@ -423,11 +447,14 @@ body {
 }
 
 .btn-cta:hover {
-	background: #9575ba;
-  color: #fff;
+  padding: .45vw 1.5vw .45vw .9vw;
+  background: #6c4b93;
+  color: white;
+  transition: all .3s ease-in-out;
 }
 
 .btn-cta svg {
+  visibility: hidden; 
 	position: absolute;
   left: 130%;
 	top: 0;
@@ -445,6 +472,7 @@ body {
 }
 
 .btn-cta:hover svg {
+  visibility: visible;
 	left: 84%;
 }
 .indexlogo{
@@ -469,4 +497,25 @@ body {
 
 .buttons{
   margin-top: 2vw;
+}
+.submit-btn{
+  background: none;
+  border: 2px solid #6c4b93;
+  border-radius: 0.375rem;
+  color: #6c4b93;
+  padding: .45vw;
+  transition: all .3s ease-in-out;
+}
+.submit-btn:hover{
+  background: #6c4b93;
+  color: white;
+  transition: all .3s ease-in-out;
+}
+.signlink{
+  color: #6c4b93; 
+  transition: all .2s ease-in-out;
+}
+.signlink:hover{
+  color: #9575ba;
+  transition: all .2s ease-in-out;
 }
