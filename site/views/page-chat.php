@@ -1,6 +1,8 @@
 <?php
+    require('../models/db.php');
 
   $groupId = $_GET['id'];
+  $isingroup = false;
 
   session_start();
   $userId = $_SESSION["user_id"];
@@ -14,17 +16,25 @@
     header("Location: page-accueil.php");
     return;
   }
-
-  require('../models/db.php');
  
-  $sql = "SELECT * FROM message WHERE message_group_id='$groupId'";
-  $messages = mysqli_query($conn, $sql);
-  $message = mysqli_fetch_assoc($messages);
-
-
   
 
+  $group_users = file_get_contents($domain_name."/controllers/getgroupusers.php?id=".$groupId);
+  $group_users = json_decode($group_users);
+
+  for ($i=0; $i < count($group_users); $i++) { 
+      if($group_users[$i] == $userId){
+        $isingroup = true;
+      }
+  }
   
+  if ($isingroup == false) {
+      header("Location: page-accueil.php");
+  }
+
+  $messages = file_get_contents($domain_name."/controllers/getmessages?id=".$groupId);
+  $messages = json_decode($messages);
+  var_dump($messages);
 
   $sql = "SELECT group_name FROM groupchat WHERE group_id='$groupId'";
   $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
@@ -136,8 +146,8 @@
         <br>
         <?php
     while ($message = mysqli_fetch_assoc($messages)) {
-        $icon = file_get_contents("http://localhost:8888/site/controllers/getusericon.php?id=".$message["message_sender_id"]);
-        $user_email = file_get_contents("http://localhost:8888/site/controllers/getuseremail.php?id=".$message["message_sender_id"]);
+        $icon = file_get_contents($domain_name."/controllers/getusericon.php?id=".$message["message_sender_id"]);
+        $user_email = file_get_contents($domain_name."/site/controllers/getuseremail.php?id=".$message["message_sender_id"]);
         $user_name = explode("@", $user_email)[0];
         if ($message['message_sender_id'] == $userId) {
         ?>
