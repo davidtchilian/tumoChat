@@ -113,6 +113,12 @@ body {
   padding: 5px;
 }
 
+#usersInfo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .userinfo_buttons{
   display: flex;
   flex-direction: row;
@@ -133,19 +139,37 @@ body {
   margin-bottom: 2px;
 }
 
+.userinfo_buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}
+
 /* The Close Button */
 .modal_interaction {
   color: #aaaaaa;
   float: right;
   font-size: 15px;
   font-weight: bold;
-  margin-right: 5px;
+  margin: 0 4px;
   background-color: #664C8F;
   transition: 0.1s transform ease-out;
 }
 
-.modal_interaction:hover {
+.modal_interaction:hover ,.modal_interaction:focus{
   color: white;
+  text-decoration: none;
+  cursor: pointer;
+  transform:scale(1.05);
+}
+
+.delete_group,.leave_group{
+  color: #ff5b4f;
+}
+
+.delete_group:hover,.leave_group:hover{
+  color: #ff5b4f;
   text-decoration: none;
   cursor: pointer;
   transform:scale(1.05);
@@ -156,12 +180,14 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  justify-self: center;
+  width: 95%;
+  background-color: white;
+  margin: 5px 0;
+  padding: 5px;
 }
 
 .user_delete_button {
-  display: flex;
-  justify-self: flex-end;
-  /* font-family: 'Kanit', sans-serif; */
   font-family: 'PT Sans', sans-serif;
   text-decoration: none;
   width: 20px;

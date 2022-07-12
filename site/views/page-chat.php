@@ -4,6 +4,8 @@
 
   session_start();
   $userId = $_SESSION["user_id"];
+  $isingroup = false;
+  $isingroup_message = false;
 
   if (!isset($userId)) {
     header("Location: login.php");
@@ -67,7 +69,7 @@
 
         .dropdown {
         position: relative;
-        display: inline-block;
+        display: none;
 
         }
 
@@ -101,6 +103,11 @@
             font-family: 'Roboto', sans-serif;
             padding: 0 10px;
         }
+        .delated_user{
+            font-family: 'Roboto', sans-serif;
+            padding: 0 10px;
+            color: #ff5b4f;
+        }
 
         <?php
 
@@ -131,7 +138,7 @@
                     </li>
                 </ul>             
                 <div class="d-flex">
-                    <a onClick="getGroupIdInfo('<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>')">
+                    <a onClick="getGroupIdInfo('<?php echo $userId; ?>', '<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>')">
                         <button id="infoButton" type="button" class="btn info">
                             <img src="../assets/images/le_vrai_i.png" alt="Information" style="width: 35px; height: 35px;" />
                         </button>
@@ -143,7 +150,7 @@
                             <p id="groupInfo"></p>
                         </div>
                         <div class="usersinfo_div">
-                            <ol id="usersInfo"></ol>
+                            <div id="usersInfo"></div>
                             <div id = "modal_buttons" class="userinfo_buttons">
                                 <div id="modal-extra-interactions"></div>
                                 <div id="modal-default-interactions">
@@ -168,36 +175,54 @@
         <div class="row" id = "messages" >
             <div class="col-4"></div>
             <div class="col-7">
-            <button class="btn btn-primary messageEnvoye mt-2" style="float : right; color: black;" onclick="myFunction(event)" name="<?= $message['message_id']?> " id = "name">
+            <button class="btn btn-primary messageEnvoye mt-2" onclick="show(event)" style="float : right; color: black;" id="<?= $message['message_id']?>" >
                     <?php 
-                    echo "<p class='user_email'>".$user_name."</p>";
+                    // echo "<p class='user_email'>".$user_name."</p>";
                     echo $message['message_content']; ?>
                 </button>
-                <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;">
+                <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;" id = "<?= "dropdown".$message['message_id']?>">
                 
-                <div class="dropdown-content" id = "dropdown-content">
-                    <a href="#" onclick = "update()" id = "editId">Edit</a>
-                    <a href="#">Delete</a>
-                    <a href="#">Reply</a>
-                    </div>
+                    <div class="dropdown-content" id = "dropdown-content">
+                        <a href="#" onclick = "myFunction(event)" id = "editId" name = "<?= $message['message_id']?>">Edit</a>
+                        <a href="#">Delete</a>
+                        </div>
 
-                </div> 
-            </div>
-            <div class="col-1">
-                <img src="../assets/icons/<?php echo $icon; ?>.png" class="user_icon">
+                    </div> 
             </div>
         </div>
         <?php }
-        else { ?>
+        else { 
+            for ($i=0; $i < count($group_users); $i++) { 
+                if($group_users[$i] == $message["message_sender_id"]){
+                    $isingroup_message = true;
+                }
+            }
+            ?>
         <div class="row">
-            <div class="col-1"><img src="../assets/icons/<?php echo $icon; ?>.png" class="user_icon"></div>
-            <div class="col-7">
-                <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
-                    <?php 
-                     echo "<p class='user_email'>".$user_name."</p>";
-                    echo $message['message_content'] ?>
-                </button>
-            </div>
+            <?php
+                if($isingroup_message == true){?>
+                    <div class="col-1"><img src="../assets/icons/<?php echo $icon; ?>.png" class="user_icon"></div>
+                    <div class="col-7">
+                        <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
+                            <?php 
+                            echo "<p class='user_email'>".$user_name."</p>";
+                            echo $message['message_content'] ?>
+                        </button>
+                    </div>
+                <?php
+                }
+                else{?>
+                    <div class="col-1"><img src="../assets/icons/10.png" class="user_icon"></div>
+                    <div class="col-7">
+                        <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
+                            <?php 
+                            echo "<p class='delated_user'>Delated user</p>";
+                            echo $message['message_content'] ?>
+                        </button>
+                    </div>
+                <?php
+                }
+            ?>
             <div class="col-4"></div>
         </div>
         <?php 
@@ -224,9 +249,13 @@
             </div>
         </nav>
     </div>
-    <script src="../scripts/page-chat.js"> 
-
-   </script>
-
+    <script src="../scripts/page-chat.js"></script>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        if (params.getAll('modal')[0] == 1) {
+            getGroupIdInfo('<?php echo $userId; ?>', '<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>');
+            modal.style.display = "block";
+        }
+    </script>
 </body>
 </html>

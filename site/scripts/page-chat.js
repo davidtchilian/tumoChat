@@ -6,9 +6,11 @@ var usersInfo = document.getElementById("usersInfo");
 
 var extraInteractions = document.getElementById("modal-extra-interactions");
 
-
 window.onload = () => {
-  window.scrollTo(0, document.body.scrollHeight);
+  window.scrollTo({
+    top: 1000,
+    behavior: 'instant'
+  }, document.body.scrollHeight);
 }
 
 btn.onclick = function() {
@@ -27,10 +29,11 @@ function onClose() {
   modal.style.display = "none";
   usersInfo.innerHTML = "";
   extraInteractions.innerHTML = "";
+  window.location.replace(removeParam("modal", window.location.href));
 }
 
 
-function getGroupIdInfo(groupId, isAdmin, groupAdminId) {
+function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
   info.innerText = "Loading...";
   const Http = new XMLHttpRequest();
   const url=`../controllers/getgroupinfo.php?id=${groupId}`;
@@ -81,28 +84,31 @@ function getGroupIdInfo(groupId, isAdmin, groupAdminId) {
     }
 
     if (isAdmin) {
-      let addUserButton = createButton("add_user", "add_user", "Add User");
+      let addUserButton = createButton("add_user", "add_user", "Add User", null);
       extraInteractions.appendChild(addUserButton);
-      let deleteGroup = createButton("delete_group", "delete_group", "Delete Group");
+
+      let deleteGroup = createButton("delete_group", "delete_group", "Delete Group", `../controllers/deletegroup.php?id=${groupId}`);
       extraInteractions.appendChild(deleteGroup);
     }
     else {
-      let leaveGroup = createButton("leave_group", "leave_group", "Leave Group");
+      let leaveGroup = createButton("leave_group", "leave_group", "Leave Group", `../controllers/deleteuserfromgroup.php?delid=${userId}&id=${groupId}`);
       extraInteractions.appendChild(leaveGroup);
     }
 
   }
 }
-const edit = document.getElementById("editId")
-const txt = document.getElementById("text")
 
-function createButton(className, id, innerText) {
-  let button = document.createElement("button");
+function createButton(className, id, innerText, href) {
+  let button = document.createElement("a");
+  if (href != null) {
+    button.href = href;
+  }
   button.classList.add(className, "btn", "modal_interaction");
   button.setAttribute("id", id);
   button.innerText = innerText;
   return button;
 }
+
 
 function myFunction(event) { 
   var x = event.target;
@@ -119,4 +125,55 @@ function update(){
   // form.action = ".../controllers/update.php"
   txt.innerText = "<?= $message?>"
   console.log(1)
+}
+
+
+const edit = document.getElementById("editId")
+const txt = document.getElementById("text")
+const form = document.getElementById("form")
+ 
+ 
+function myFunction(event) {
+ var x = event.target.name;
+ console.log(x)
+ const messageCont = document.getElementById(x)
+ console.log(messageCont.innerText)
+
+   txt.value = messageCont.innerText
+   form.action = "../controllers/update.php"
+
+
+}
+
+function show(event){
+  let dropdownDiv = document.getElementsByClassName("dropdown")
+  for (let i = 0; i < dropdownDiv.length; i++) {
+    dropdownDiv[i].style.display = "none"
+    
+  }
+
+
+  var y = event.target.id
+  let id = "dropdown" + y
+
+  const dropdown = document.getElementById(id)
+  dropdown.style.display = "inline-block"
+  dropdown.style.position = "absolute"
+}
+function removeParam(key, sourceURL) {
+  var rtn = sourceURL.split("?")[0],
+      param,
+      params_arr = [],
+      queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
+  if (queryString !== "") {
+      params_arr = queryString.split("&");
+      for (var i = params_arr.length - 1; i >= 0; i -= 1) {
+          param = params_arr[i].split("=")[0];
+          if (param === key) {
+              params_arr.splice(i, 1);
+          }
+      }
+      if (params_arr.length) rtn = rtn + "?" + params_arr.join("&");
+  }
+  return rtn;
 }

@@ -21,12 +21,3 @@ button.onclick = function(){
     return false;
 };
 
-//<li class="list-group-item group-name">myGroup2</li>
-// var groups = document.querySelector('.col-lg-4')
-
-// button.addEventListener("click", search());
-
-// function search() {
-//     input.value = "Hello";
-// };
-
