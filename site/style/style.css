@@ -5,7 +5,12 @@
   font-family: 'Roboto', sans-serif;
 }
 a{
+  transition: 0.3s;
+  color: #6c4b93;
   padding:0 12px;
+}
+a:hover{
+  color: #9575ba;
 }
 html{
   height: 100%;
@@ -16,6 +21,9 @@ html{
   margin:auto 6px auto 0; 
 }
 
+input[type="text"], input[type="password"], textarea, select { 
+  outline: none;
+}
 :root {
   --clr: #222327
 }
@@ -99,7 +107,7 @@ html{
   opacity: 1;
   transform: translateY(10px)
 }
-background
+
 .indicator {
   position: absolute;
   top: -60%;
@@ -293,6 +301,7 @@ body {
 
 .centered-card {
   position: relative;
+  height: auto;
 }
 
 .logo {
@@ -354,11 +363,8 @@ body {
   outline: none;
 }
 
-.welcome{
-  margin-top: 3%;
-}
-
 .wrap{
+  
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
   width: 100%;
