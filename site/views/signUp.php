@@ -15,7 +15,7 @@
     </style>
 </head>
 
-<body style="display:flex; align-items: center;">
+<body style='display:flex; align-items: center; background-image: url("../assets/images/themes/3.jpg");'>
     <div class="wrap">
         <div class="row pb-5">
             <div class="col text-center mt-5">

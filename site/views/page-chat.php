@@ -250,9 +250,13 @@
             </div>
         </nav>
     </div>
-    <script src="../scripts/page-chat.js"> 
-
-   </script>
-
+    <script src="../scripts/page-chat.js"></script>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        if (params.getAll('modal')[0] == 1) {
+            getGroupIdInfo('<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>');
+            modal.style.display = "block";
+        }
+    </script>
 </body>
 </html>
