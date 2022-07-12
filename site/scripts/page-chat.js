@@ -90,8 +90,6 @@ function getGroupIdInfo(groupId, isAdmin, groupAdminId) {
 
   }
 }
-const edit = document.getElementById("editId")
-const txt = document.getElementById("text")
 
 function createButton(className, id, innerText) {
   let button = document.createElement("button");
@@ -100,6 +98,7 @@ function createButton(className, id, innerText) {
   button.innerText = innerText;
   return button;
 }
+
 
 function myFunction(event) { 
   var x = event.target;
@@ -116,4 +115,39 @@ function update(){
   // form.action = ".../controllers/update.php"
   txt.innerText = "<?= $message?>"
   console.log(1)
+}
+
+
+const edit = document.getElementById("editId")
+const txt = document.getElementById("text")
+const form = document.getElementById("form")
+ 
+ 
+function myFunction(event) {
+ var x = event.target.name;
+ console.log(x)
+ const messageCont = document.getElementById(x)
+ console.log(messageCont.innerText)
+
+   txt.value = messageCont.innerText
+   form.action = "../controllers/update.php"
+
+
+}
+
+function show(event){
+  let dropdownDiv = document.getElementsByClassName("dropdown")
+  for (let i = 0; i < dropdownDiv.length; i++) {
+    dropdownDiv[i].style.display = "none"
+    
+  }
+
+
+  var y = event.target.id
+  let id = "dropdown" + y
+
+  const dropdown = document.getElementById(id)
+  dropdown.style.display = "inline-block"
+  dropdown.style.position = "absolute"
+  //dropdown154
 }

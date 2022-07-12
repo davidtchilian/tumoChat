@@ -67,7 +67,7 @@
 
         .dropdown {
         position: relative;
-        display: inline-block;
+        display: none;
 
         }
 
@@ -151,20 +151,19 @@
         <div class="row" id = "messages" >
             <div class="col-4"></div>
             <div class="col-7">
-            <button class="btn btn-primary messageEnvoye mt-2" style="float : right; color: black;" onclick="myFunction(event)" name="<?= $message['message_id']?> " id = "name">
+            <button class="btn btn-primary messageEnvoye mt-2" onclick="show(event)" style="float : right; color: black;" id="<?= $message['message_id']?>" >
                     <?php 
-                    echo "<p class='user_email'>".$user_name."</p>";
+                    // echo "<p class='user_email'>".$user_name."</p>";
                     echo $message['message_content']; ?>
                 </button>
-                <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;">
+                <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;" id = "<?= "dropdown".$message['message_id']?>">
                 
-                <div class="dropdown-content" id = "dropdown-content">
-                    <a href="#" onclick = "update()" id = "editId">Edit</a>
-                    <a href="#">Delete</a>
-                    <a href="#">Reply</a>
-                    </div>
+                    <div class="dropdown-content" id = "dropdown-content">
+                        <a href="#" onclick = "myFunction(event)" id = "editId" name = "<?= $message['message_id']?>">Edit</a>
+                        <a href="#">Delete</a>
+                        </div>
 
-                </div> 
+                    </div> 
             </div>
             <div class="col-1">
                 <img src="../assets/icons/<?php echo $icon; ?>.png" class="user_icon">
