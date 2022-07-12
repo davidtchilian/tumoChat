@@ -44,45 +44,45 @@
     <link rel="stylesheet" href="../style/page-chat.css" />
     <title><?php echo $groupName." - TUYU"; ?></title>
     <style>
-.dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-
-}
-
-.dropdown-content {
-  display: block;
-  position: relative;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-
-.dropdown:hover .dropbtn {
-  background-color: #3e8e41;
-}
-
         @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100&display=swap');
+        .dropbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        }
+
+        .dropdown {
+        position: relative;
+        display: inline-block;
+
+        }
+
+        .dropdown-content {
+        display: block;
+        position: relative;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        }
+
+        .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1}
+
+
+        .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+        }
+
         .user_icon{
             height: 35px;
         }
@@ -138,6 +138,7 @@
     while ($message = mysqli_fetch_assoc($messages)) {
         $icon = file_get_contents("http://localhost:8888/site/controllers/getusericon.php?id=".$message["message_sender_id"]);
         $user_email = file_get_contents("http://localhost:8888/site/controllers/getuseremail.php?id=".$message["message_sender_id"]);
+        $user_name = explode("@", $user_email)[0];
         if ($message['message_sender_id'] == $userId) {
         ?>
         <div class="row" id = "messages" >
@@ -145,7 +146,7 @@
             <div class="col-7">
             <button class="btn btn-primary messageEnvoye mt-2" style="float : right; color: black;" onclick="myFunction(event)" name="<?= $message['message_id']?> " id = "name">
                     <?php 
-                    echo "<p class='user_email'>".$user_email."</p>";
+                    echo "<p class='user_email'>".$user_name."</p>";
                     echo $message['message_content']; ?>
                 </button>
                 <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;">
@@ -157,7 +158,6 @@
                     </div>
 
                 </div> 
-    </div>
             </div>
             <div class="col-1">
                 <img src="../assets/icons/<?php echo $icon; ?>.png" class="user_icon">
@@ -170,13 +170,13 @@
             <div class="col-7">
                 <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
                     <?php 
-                     echo "<p class='user_email'>".$user_email."</p>";
+                     echo "<p class='user_email'>".$user_name."</p>";
                     echo $message['message_content'] ?>
                 </button>
             </div>
             <div class="col-4"></div>
         </div>
-        <?php
+        <?php 
         }
     }
     ?>
