@@ -71,10 +71,10 @@
                             <?php }
                     } ?>    
 
-                    <input type="submit" name="Login" id="exampleInputSubmit" class="btn btn-primary mb-3" href="page-accueil.html" style="margin:0 auto; background : #6C4B93">
+                    <input type="submit" name="Login" id="exampleInputSubmit" class="submit-btn mb-3" href="page-accueil.html" style="margin:0 auto;">
                     <div class="col-12" style="color: rgb(83, 100, 113);">
                         <span> Not yet a member? </span> 
-                        <a class="" href="signUp.php">
+                        <a class="signlink" href="signUp.php">
                             Sign up
                         </a>
                     </div>

@@ -32,6 +32,7 @@
   margin-left: 2vw;
   text-decoration: none;
   color:#ffffff;
+  transition: all .3s ease-in-out;
 } 
 .signout-btn:hover{
   color: aliceblue;
@@ -39,10 +40,6 @@
   border-color: #592d8a;
   background: #592d8a;
 }
-.signout-btn:not(:hover){
-  transition: all .3s ease-in-out;
-}
-
 /* ---------------------------------------------------------------------------------------------------------------------------------- */
 @media(max-width:992px){
   .signout-btn{
