@@ -19,7 +19,7 @@
     <div class="wrap">
         <div class="row pb-5">
             <div class="col text-center mt-5">
-                <img src="../assets/images/logo_tuyu.png" class="logo" alt="TUYU">
+            <a href="index.php"><img src="../assets/images/logo_tuyu.png" class="logo" alt="TUYU"></a>
                 
             </div>
         </div>
@@ -50,32 +50,32 @@
                         </div>
                         
                     </div>
-                    <?php if($_GET['err'] != NULL) {
-                        if($_GET['err'] == 1){
+                    <?php if($_GET['id'] != NULL) {
+                        if($_GET['id'] == 1){
                         ?>
                         <div class="alert alert-danger" role="alert">
                             <?php echo "This username already exists"; ?>
                             </div> 
                             <?php }
-                        if($_GET['err'] == 2){
+                        if($_GET['id'] == 2){
                         ?>
                             <div class="alert alert-danger" role="alert">
                             <?php echo "Passwords do not match!"; ?>
                             </div> 
                             <?php }
-                        if($_GET['err'] == 3){
+                        if($_GET['id'] == 3){
                         ?>
                             <div class="alert alert-danger" role="alert">
                             <?php echo "The password is too short!"; ?>
                             </div> 
                     <?php }
-                    if($_GET['err'] == 4){
+                    if($_GET['id'] == 4){
                         ?>
                             <div class="alert alert-danger" role="alert">
                             <?php echo "The password has to include a symbol other than space!"; ?>
                             </div> 
                     <?php }
-                    if($_GET['err'] == 5){
+                    if($_GET['id'] == 5){
                         ?>
                             <div class="alert alert-danger" role="alert">
                             <?php echo "Invalid email!"; ?>

@@ -5,6 +5,9 @@ $user_id = $_SESSION['user_id'];
 $name =  $_POST['groupname'];
 $bio =  $_POST['groupbio'];
 $select = $_POST['select'];
+if (count($select) == 0) {
+  header("Location: ../views/creategroup2.php?err=1");
+}
 
 
 
@@ -37,7 +40,8 @@ $isInGroup_user_id = $_POST['select'];
 
 $insert="INSERT INTO isInGroup(isInGroup_user_id, isInGroup_group_id) VALUES ";
 $insert = $insert . "($user_id, $groupid),";
-if(!empty($select)){
+// echo $insert;
+
   for($j = 0; $j<count($isInGroup_user_id); $j++){
     $insert=$insert . "(" . $isInGroup_user_id[$j] . "," . $groupid . ")";
     if($j == count($isInGroup_user_id)-1){
@@ -47,23 +51,25 @@ if(!empty($select)){
       $insert=$insert  . ",";
     }
   }
-}
-else{
-  header("Location: ../views/creategroup2.php?err=1");
-}
-
-$isInGroup = $insert;
-
-if ($conn->query($isInGroup) === TRUE) {
-  header("Location: ../views/page-accueil.php");
-
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
 
 
 
-header("Location: ../views/page-accueil.php");
+// echo "<br>".$insert;
+
+
+
+
+
+
+mysqli_query($conn, $insert);
+header('Location: ../views/page-accueil.php');
+// echo "hello";
+
+
+
+
+
+// header("Location: ../views/page-accueil.php");
 $conn->close();
     
 ?>

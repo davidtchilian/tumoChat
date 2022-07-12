@@ -8,18 +8,9 @@
   color: #ffffff;
 }
 
-.div-titre{
-}
-
 .card {
   text-align: center;
   margin: auto;
-}
-
-.navigationbar {
-}
-
-.boutton {
 }
 
 .search {
@@ -33,4 +24,31 @@
 
 .groupec {
   text-decoration: none;
+}
+.signout-btn{
+  border-radius: 0.375rem;
+  border: 2px solid #9575ba;
+  padding: .5vw;
+  margin-left: 2vw;
+  text-decoration: none;
+  color:#ffffff;
+} 
+.signout-btn:hover{
+  color: aliceblue;
+  transition: all .3s ease-in-out;
+  border-color: #592d8a;
+  background: #592d8a;
+}
+.signout-btn:not(:hover){
+  transition: all .3s ease-in-out;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------------- */
+@media(max-width:992px){
+  .signout-btn{
+    margin-left: 0;
+  }
+  .d-flex{
+    margin-bottom: 2vw;
+  }
 }
