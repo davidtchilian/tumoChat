@@ -67,6 +67,7 @@
                 />
               </button>
             </form>
+            <a href ="../controllers/logout.php" class="signout-btn">Sign out</a>
           </div>
         </div>
       </nav>

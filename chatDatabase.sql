@@ -33,3 +33,14 @@ CREATE TABLE isInGroup(
     FOREIGN KEY (isInGroup_group_id) REFERENCES GROUPCHAT (group_id)
 );
 
+CREATE TABLE NOTIFICATIONS(
+    notification_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    notification_sender_id INT,
+    notification_receiver_id INT,
+    notification_group_id INT,
+    notification_content TEXT,
+    FOREIGN KEY (notification_sender_id) REFERENCES USERS (user_id),
+    FOREIGN KEY (notification_receiver_id) REFERENCES USERS (user_id),
+    FOREIGN KEY (notification_group_id) REFERENCES GROUPCHAT (group_id)
+);
+

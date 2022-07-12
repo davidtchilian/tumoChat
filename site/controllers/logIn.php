@@ -11,12 +11,12 @@ if($result->num_rows == 1) {
     while($row = $result->fetch_assoc()) {
         session_start();
         $_SESSION['user_id'] = $row["user_id"];
-        $_SESSION['theme_id'] = $reow["user_theme"];
+        $_SESSION['user_theme'] = $row["user_theme"];
         header("Location: ../views/page-accueil.php");
     }
   } 
   else {
-    header("Location: ../views/logIn.php?err=2");
+    header("Location: ../views/logIn.php?id=1");
   }
 
 $conn->close();
