@@ -17,7 +17,8 @@
     return;
   }
  
-  
+  $sql = "SELECT * FROM message WHERE message_group_id='$groupId'";
+  $messages = mysqli_query($conn, $sql);
 
   $group_users = file_get_contents($domain_name."/controllers/getgroupusers.php?id=".$groupId);
   $group_users = json_decode($group_users);
@@ -27,14 +28,11 @@
         $isingroup = true;
       }
   }
-  
-  if ($isingroup == false) {
+
+  if($isingroup == false){
       header("Location: page-accueil.php");
   }
 
-  $messages = file_get_contents($domain_name."/controllers/getmessages?id=".$groupId);
-  $messages = json_decode($messages);
-  var_dump($messages);
 
   $sql = "SELECT group_name FROM groupchat WHERE group_id='$groupId'";
   $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
@@ -147,7 +145,7 @@
         <?php
     while ($message = mysqli_fetch_assoc($messages)) {
         $icon = file_get_contents($domain_name."/controllers/getusericon.php?id=".$message["message_sender_id"]);
-        $user_email = file_get_contents($domain_name."/site/controllers/getuseremail.php?id=".$message["message_sender_id"]);
+        $user_email = file_get_contents($domain_name."/controllers/getuseremail.php?id=".$message["message_sender_id"]);
         $user_name = explode("@", $user_email)[0];
         if ($message['message_sender_id'] == $userId) {
         ?>
