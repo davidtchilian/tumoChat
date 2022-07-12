@@ -42,3 +42,13 @@
 .signout-btn:not(:hover){
   transition: all .3s ease-in-out;
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------------------- */
+@media(max-width:992px){
+  .signout-btn{
+    margin-left: 0;
+  }
+  .d-flex{
+    margin-bottom: 2vw;
+  }
+}
