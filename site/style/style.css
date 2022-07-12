@@ -278,7 +278,10 @@ body ::after {
   }
   .indexbtn{
     font-size: 1.7vw !important;
-    padding: 1vw 2vw !important;
+    padding: .9vw 1.8vw .9vw 1.8vw !important;
+  }
+  .indexbtn:hover{
+    padding: .9vw 3vw .9vw 1.8vw !important;
   }
   .indexbtn svg{
     width: 1vw;
@@ -431,10 +434,12 @@ body {
 }
 
 .btn-cta {
-  border: none;
-  background: #6c4b93;
-	color: #fff;
-	overflow: hidden;
+  background: white;
+  border: 2px solid #6c4b93;
+  border-radius: 0.375rem;
+  color: #6c4b93;
+  padding: .45vw .9vw .45vw .9vw;
+  transition: all .3s ease-in-out;
 }
 
 .btn-cta:active {
@@ -442,11 +447,14 @@ body {
 }
 
 .btn-cta:hover {
-	background: #9575ba;
-  color: #fff;
+  padding: .45vw 1.5vw .45vw .9vw;
+  background: #6c4b93;
+  color: white;
+  transition: all .3s ease-in-out;
 }
 
 .btn-cta svg {
+  visibility: hidden; 
 	position: absolute;
   left: 130%;
 	top: 0;
@@ -464,6 +472,7 @@ body {
 }
 
 .btn-cta:hover svg {
+  visibility: visible;
 	left: 84%;
 }
 .indexlogo{
