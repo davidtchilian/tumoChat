@@ -53,12 +53,18 @@ function getGroupIdInfo(groupId) {
       let user_delete_button = document.createElement("button")
       user_delete_button.classList.add("user_delete_button")
       user_delete_button.innerText = "X"
-
+      
       //let user_id = document.createTextNode(id)
-
+      
       usersInfo.appendChild(userInfo);
       //userInfo.insertBefore(user_id,userInfo.firstChild)
       userInfo.appendChild(user_delete_button)
+
+      let AdduserButton = document.createElement("button")
+      AdduserButton.classList.add("add_user","btn")
+      AdduserButton.setAttribute("id","add_user")
+      AdduserButton.innerText = "Add User"
+      document.getElementById("modal_buttons").insertBefore(AdduserButton,document.getElementById("modal_buttons").firstChild)
       //id++;
     }
   }
@@ -78,11 +84,8 @@ function myFunction(event) {
   }
 }
 
-
-
-
 function update(){
-  form.action = ".../controllers/update.php"
+  // form.action = ".../controllers/update.php"
   txt.innerText = "<?= $message?>"
   console.log(1)
 }
