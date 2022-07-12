@@ -489,3 +489,24 @@ body {
 .buttons{
   margin-top: 2vw;
 }
+.submit-btn{
+  background: none;
+  border: 2px solid #6c4b93;
+  border-radius: 0.375rem;
+  color: #6c4b93;
+  padding: .45vw;
+  transition: all .3s ease-in-out;
+}
+.submit-btn:hover{
+  background: #6c4b93;
+  color: white;
+  transition: all .3s ease-in-out;
+}
+.signlink{
+  color: #6c4b93; 
+  transition: all .2s ease-in-out;
+}
+.signlink:hover{
+  color: #9575ba;
+  transition: all .2s ease-in-out;
+}
