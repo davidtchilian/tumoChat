@@ -1,12 +1,3 @@
-<?php
-    $actual_link = "$_SERVER[REQUEST_URI]";
-    $url_components = parse_url($actual_link);
-
-    parse_str($url_components['query'], $params);
-
-    $err_code = $params['err'];
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,32 +50,32 @@
                         </div>
                         
                     </div>
-                    <?php if($err_code != NULL) {
-                        if($err_code == 1){
+                    <?php if($_GET['err'] != NULL) {
+                        if($_GET['err'] == 1){
                         ?>
                         <div class="alert alert-danger" role="alert">
                             <?php echo "This username already exists"; ?>
                             </div> 
                             <?php }
-                        if($err_code == 2){
+                        if($_GET['err'] == 2){
                         ?>
                             <div class="alert alert-danger" role="alert">
                             <?php echo "Passwords do not match!"; ?>
                             </div> 
                             <?php }
-                        if($err_code == 3){
+                        if($_GET['err'] == 3){
                         ?>
                             <div class="alert alert-danger" role="alert">
                             <?php echo "The password is too short!"; ?>
                             </div> 
                     <?php }
-                    if($err_code == 4){
+                    if($_GET['err'] == 4){
                         ?>
                             <div class="alert alert-danger" role="alert">
                             <?php echo "The password has to include a symbol other than space!"; ?>
                             </div> 
                     <?php }
-                    if($err_code == 5){
+                    if($_GET['err'] == 5){
                         ?>
                             <div class="alert alert-danger" role="alert">
                             <?php echo "Invalid email!"; ?>

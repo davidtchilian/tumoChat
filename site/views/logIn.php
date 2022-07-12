@@ -1,11 +1,3 @@
-<?php
-    $actual_link = "$_SERVER[REQUEST_URI]";
-    $url_components = parse_url($actual_link);
-
-    parse_str($url_components['query'], $params);
-
-    $err_code = $params['err'];
-?>
 <!doctype html>
 <html lang="fr">
 
@@ -59,27 +51,27 @@
                         Log In
                     </a> -->
 
-                    <?php if($err_code != NULL) {
-                        if($err_code == 0){
+                    <?php if($_GET['err'] != NULL) {
+                        if($_GET['err'] == 0){
                             ?>
                         <div class="alert alert-success" role="alert">
                             <?php echo "You are successfully signed up!";?>
                         </div>
                         <?php }
-                        if($err_code == 1){
+                        if($_GET['err'] == 1){
                             ?>
                         <div class="alert alert-danger" role="alert">
                             <?php echo "Empty email line!"; ?>
                         </div> 
                         <?php }
-                        if($err_code == 2){
+                        if($_GET['err'] == 2){
                         ?>
                         <div class="alert alert-danger" role="alert">
                             <?php echo "Incorrect email or password!"; ?>
                         </div> 
                             <?php }
                         
-                        if($err_code == 3){
+                        if($_GET['err'] == 3){
                             ?>
                         <div class="alert alert-danger" role="alert">
                             <?php echo "Empty password line!"; ?>
