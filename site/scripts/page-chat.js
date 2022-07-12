@@ -56,7 +56,7 @@ function getGroupIdInfo(groupId, isAdmin, groupAdminId) {
 
     for (let user of groupUsersInfo) {
 
-      let userInfo = document.createElement("li");
+      let userInfo = document.createElement("div");
       userInfo.classList.add("user_info_page")
       userInfo.innerText = user[0].user_email;
       usersInfo.appendChild(userInfo);
@@ -66,12 +66,15 @@ function getGroupIdInfo(groupId, isAdmin, groupAdminId) {
       }
 
       if (user[0].user_id == groupAdminId) {
+        let adminSpan = document.createElement('span');
+        adminSpan.innerText = "⚡";
+        userInfo.appendChild(adminSpan);
         continue;
       }
 
       let userDeleteButton = document.createElement("a");
       userDeleteButton.classList.add("user_delete_button");
-      userDeleteButton.href = "../controllers/deleteuserfromgroup.php?id=" + user[0].user_id;
+      userDeleteButton.href = `../controllers/deleteuserfromgroup.php?delid=${user[0].user_id}&id=${groupId}`;
       userDeleteButton.innerText = "X";
       userInfo.appendChild(userDeleteButton);
     
@@ -79,9 +82,9 @@ function getGroupIdInfo(groupId, isAdmin, groupAdminId) {
 
     if (isAdmin) {
       let addUserButton = createButton("add_user", "add_user", "Add User");
+      extraInteractions.appendChild(addUserButton);
       let deleteGroup = createButton("delete_group", "delete_group", "Delete Group");
       extraInteractions.appendChild(deleteGroup);
-      extraInteractions.appendChild(addUserButton);
     }
     else {
       let leaveGroup = createButton("leave_group", "leave_group", "Leave Group");
