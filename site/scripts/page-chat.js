@@ -139,8 +139,8 @@ function myFunction(event) {
  const messageCont = document.getElementById(x)
  console.log(messageCont.innerText)
 
-   txt.value = messageCont.innerText
-   form.action = "../controllers/update.php"
+  txt.value = messageCont.innerText
+  form.action = "../controllers/update.php"
 
 
 }
