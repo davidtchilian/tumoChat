@@ -4,6 +4,10 @@ var span = document.getElementById("closeButton");
 var info = document.getElementById("groupInfo");
 var usersInfo = document.getElementById("usersInfo");
 
+window.onload = () => {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
 btn.onclick = function() {
   modal.style.display = "block";
 }
