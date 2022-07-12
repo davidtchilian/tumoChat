@@ -21,7 +21,7 @@
  
   $sql = "SELECT * FROM message WHERE message_group_id='$groupId'";
   $messages = mysqli_query($conn, $sql);
-  $message = mysqli_fetch_assoc($messages);
+//   $message = mysqli_fetch_assoc($messages);
 
   $group_users = file_get_contents($domain_name."/controllers/getgroupusers.php?id=".$groupId);
   $group_users = json_decode($group_users);
@@ -164,7 +164,7 @@
         </nav>
     </div>
     <div class="container mt-5" style="min-height : 100vh"  style="position : relative" >
-        <br>
+    <br><br><br><br>
         <?php
     while ($message = mysqli_fetch_assoc($messages)) {
         $icon = file_get_contents($domain_name."/controllers/getusericon.php?id=".$message["message_sender_id"]);
