@@ -54,7 +54,7 @@
             </ul>
             <form class="d-flex" role="search">
               <input
-                class="form-control me-2"
+                class="form-control me-2 srch-input"
                 type="search"
                 placeholder="Search group"
                 aria-label="Search"
@@ -83,7 +83,7 @@
                   <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
                     <div class="card mt-5">
                       <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><?php echo $group["group_name"]; ?></li>
+                        <li class="list-group-item group-name"><?php echo $group["group_name"]; ?></li>
                         <li class="list-group-item">
                           <?php
                             $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['group_id']);
@@ -103,5 +103,6 @@
               ?>
       </div>
     </div>
+    <script src="../scripts/search.js"></script>
   </body>
 </html>
