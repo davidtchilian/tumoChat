@@ -34,7 +34,16 @@ if ($result->num_rows > 0) {
         integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../style/style.css">
-    <script src="changetheme.js"></script>
+    <script src="../scripts/changetheme.js"></script>
+    <style>
+
+        <?php $theme = $_SESSION['user_theme']; ?>
+       
+        body{
+        background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
+        }
+        
+        </style>
 </head>
 
 <body>
@@ -124,6 +133,7 @@ if ($result->num_rows > 0) {
     </script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 </body>
 
 </html>
