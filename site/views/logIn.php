@@ -20,7 +20,7 @@
 
 </head>
 
-<body>
+<body style="display:flex; align-items: center;">
 
     <div class="wrap">
         <div class="row pb-5">
@@ -31,7 +31,6 @@
         <div class="card centered-card">
             <div class="card-body">
                 <form action="../controllers/logIn.php" method="post">
-
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
                         <input type="email" class="form-control responsive-input" id="exampleInputEmail1" aria-describedby="emailHelp" name="user_email" required>
@@ -51,32 +50,25 @@
                         Log In
                     </a> -->
 
-                    <?php if($_GET['err'] != NULL) {
-                        if($_GET['err'] == 0){
+                    <?php if($_GET['id'] != NULL) {
+                        if($_GET['id'] == 0){
                             ?>
                         <div class="alert alert-success" role="alert">
                             <?php echo "You are successfully signed up!";?>
                         </div>
                         <?php }
-                        if($_GET['err'] == 1){
+                        if($_GET['id'] == 1){
                             ?>
-                        <div class="alert alert-danger" role="alert">
-                            <?php echo "Empty email line!"; ?>
-                        </div> 
-                        <?php }
-                        if($_GET['err'] == 2){
-                        ?>
                         <div class="alert alert-danger" role="alert">
                             <?php echo "Incorrect email or password!"; ?>
                         </div> 
-                            <?php }
-                        
-                        if($_GET['err'] == 3){
-                            ?>
-                        <div class="alert alert-danger" role="alert">
-                            <?php echo "Empty password line!"; ?>
+                        <?php }
+                        if($_GET['id'] == 2){
+                        ?>
+                        <div class="alert alert-success" role="alert">
+                            <?php echo "Successfully signed out!"; ?>
                         </div> 
-                             <?php }
+                            <?php }
                     } ?>    
 
                     <input type="submit" name="Login" id="exampleInputSubmit" class="btn btn-primary mb-3" href="page-accueil.html" style="margin:0 auto; background : #6C4B93">

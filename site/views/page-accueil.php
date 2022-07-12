@@ -67,6 +67,7 @@
                 />
               </button>
             </form>
+            <a href ="../controllers/logout.php" class="signout-btn">Sign out</a>
           </div>
         </div>
       </nav>
@@ -92,6 +93,7 @@
                             echo $message[0];
                             echo "<br>";
                             echo $message[1];
+                            echo $result;
                           ?>
                         </li>
                       </ul>

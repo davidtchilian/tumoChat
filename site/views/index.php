@@ -38,7 +38,7 @@
             <a href="./logIn.php" class="indexbtn btn-cta" style="font-size: 1vw;">Log In<svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="arrow" x="0px" y="0px" width="0.5vw" height="0.75vw" viewBox="0 0 11.121 19.414" enable-background="new 0 0 11.121 19.414" xml:space="preserve">
 <polygon fill="#fff" points="1.414,19.414 0,18 8.293,9.707 0,1.414 1.414,0 11.121,9.707 "/>
 </svg></a>
-<a href="./logIn.php" class="indexbtn btn-cta" style="font-size: 1vw;">Sign In<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="arrow" x="0px" y="0px" width="0.5vw" height="0.75vw" viewBox="0 0 11.121 19.414" enable-background="new 0 0 11.121 19.414" xml:space="preserve">
+<a href="./signUp.php" class="indexbtn btn-cta" style="font-size: 1vw;">Sign Up<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="arrow" x="0px" y="0px" width="0.5vw" height="0.75vw" viewBox="0 0 11.121 19.414" enable-background="new 0 0 11.121 19.414" xml:space="preserve">
 <polygon fill="#fff" points="1.414,19.414 0,18 8.293,9.707 0,1.414 1.414,0 11.121,9.707 "/>
 </svg></a>
             </div>       
