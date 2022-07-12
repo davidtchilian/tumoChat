@@ -12,5 +12,9 @@
         mysqli_close();
         
     }
+    else{
+        mysqli_close();
+        die();
+    }
 
 ?>
