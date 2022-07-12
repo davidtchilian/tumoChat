@@ -8,18 +8,9 @@
   color: #ffffff;
 }
 
-.div-titre{
-}
-
 .card {
   text-align: center;
   margin: auto;
-}
-
-.navigationbar {
-}
-
-.boutton {
 }
 
 .search {
@@ -47,4 +38,7 @@
   transition: all .3s ease-in-out;
   border-color: #592d8a;
   background: #592d8a;
+}
+.signout-btn:not(:hover){
+  transition: all .3s ease-in-out;
 }

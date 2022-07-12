@@ -130,9 +130,8 @@
                         </div>
                         <div class="usersinfo_div">
                             <ol id="usersInfo"></ol>
-                            <div class="userinfo_buttons">
+                            <div id = "modal_buttons" class="userinfo_buttons">
                                 <button id="closeButton" class="close btn">Close</button>
-                                <button id="add_user" class="add_user btn">Add user</button>
                             </div>
                         </div>
                     </div>
