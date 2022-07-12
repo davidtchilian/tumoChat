@@ -40,7 +40,7 @@ if ($result->num_rows > 0) {
         <?php $theme = $_SESSION['user_theme']; ?>
        
         body{
-        background-image: url("../assets/images/themes/<?php echo $theme; ?>.png");
+        background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
         }
         
         </style>
