@@ -19,6 +19,11 @@ html{
 :root {
   --clr: #222327
 }
+.form-control:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
 
 .icon-icon {
   position: relative;
@@ -349,9 +354,11 @@ body {
   display: block;
   width: 100%;
   box-sizing: border-box;
+
+
 }
 .fake-input input:focus{
-  outline: none;
+  
 }
 
 .welcome{
