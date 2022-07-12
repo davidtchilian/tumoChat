@@ -5,6 +5,7 @@ $user_id = $_SESSION['user_id'];
 $name =  $_POST['groupname'];
 $bio =  $_POST['groupbio'];
 $select = $_POST['select'];
+
 if (count($select) == 0) {
   header("Location: ../views/creategroup2.php?err=1");
 }
@@ -29,7 +30,7 @@ if ($result->num_rows == 1) {
       }
 }
 else{
-  die("merav");
+  die();
 }
 
 
@@ -54,7 +55,7 @@ $insert = $insert . "($user_id, $groupid),";
 
 
 
-// echo "<br>".$insert;
+//  echo "<br>".$insert;
 
 
 

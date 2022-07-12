@@ -69,7 +69,7 @@
 
         .dropdown {
         position: relative;
-        display: inline-block;
+        display: none;
 
         }
 
@@ -138,7 +138,7 @@
                     </li>
                 </ul>             
                 <div class="d-flex">
-                    <a onClick="getGroupIdInfo('<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>')">
+                    <a onClick="getGroupIdInfo('<?php echo $userId; ?>', '<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>')">
                         <button id="infoButton" type="button" class="btn info">
                             <img src="../assets/images/le_vrai_i.png" alt="Information" style="width: 35px; height: 35px;" />
                         </button>
@@ -150,7 +150,7 @@
                             <p id="groupInfo"></p>
                         </div>
                         <div class="usersinfo_div">
-                            <ol id="usersInfo"></ol>
+                            <div id="usersInfo"></div>
                             <div id = "modal_buttons" class="userinfo_buttons">
                                 <div id="modal-extra-interactions"></div>
                                 <div id="modal-default-interactions">
@@ -174,21 +174,20 @@
         ?>
         <div class="row" id = "messages" >
             <div class="col-4"></div>
-            <div class="col-8">
-            <button class="btn btn-primary messageEnvoye mt-2" style="float : right; color: black;" onclick="myFunction(event)" name="<?= $message['message_id']?> " id = "name">
+            <div class="col-7">
+            <button class="btn btn-primary messageEnvoye mt-2" onclick="show(event)" style="float : right; color: black;" id="<?= $message['message_id']?>" >
                     <?php 
-                    echo "<p class='user_email'>".$user_name."</p>";
+                    // echo "<p class='user_email'>".$user_name."</p>";
                     echo $message['message_content']; ?>
                 </button>
-                <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;">
+                <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;" id = "<?= "dropdown".$message['message_id']?>">
                 
-                <div class="dropdown-content" id = "dropdown-content">
-                    <a href="#" onclick = "update()" id = "editId">Edit</a>
-                    <a href="#">Delete</a>
-                    <a href="#">Reply</a>
-                    </div>
+                    <div class="dropdown-content" id = "dropdown-content">
+                        <a href="#" onclick = "myFunction(event)" id = "editId" name = "<?= $message['message_id']?>">Edit</a>
+                        <a href="#">Delete</a>
+                        </div>
 
-                </div> 
+                    </div> 
             </div>
         </div>
         <?php }
@@ -254,7 +253,7 @@
     <script>
         const params = new URLSearchParams(window.location.search);
         if (params.getAll('modal')[0] == 1) {
-            getGroupIdInfo('<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>');
+            getGroupIdInfo('<?php echo $userId; ?>', '<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>');
             modal.style.display = "block";
         }
     </script>
