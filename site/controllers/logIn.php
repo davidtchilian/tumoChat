@@ -15,7 +15,7 @@ if($result->num_rows == 1) {
         header("Location: ../views/page-accueil.php");
     }
   } 
-  else {
+  else {  
     header("Location: ../views/logIn.php?id=1");
   }
 

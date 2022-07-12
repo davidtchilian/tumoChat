@@ -31,7 +31,6 @@
         <div class="card centered-card">
             <div class="card-body">
                 <form action="../controllers/logIn.php" method="post">
-
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
                         <input type="email" class="form-control responsive-input" id="exampleInputEmail1" aria-describedby="emailHelp" name="user_email" required>

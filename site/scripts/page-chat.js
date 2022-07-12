@@ -4,6 +4,9 @@ var span = document.getElementById("closeButton");
 var info = document.getElementById("groupInfo");
 var usersInfo = document.getElementById("usersInfo");
 
+var extraInteractions = document.getElementById("modal-extra-interactions");
+
+
 window.onload = () => {
   window.scrollTo(0, document.body.scrollHeight);
 }
@@ -23,10 +26,11 @@ window.onclick = function(event) {
 function onClose() {
   modal.style.display = "none";
   usersInfo.innerHTML = "";
+  extraInteractions.innerHTML = "";
 }
 
 
-function getGroupIdInfo(groupId) {
+function getGroupIdInfo(groupId, isAdmin, groupAdminId) {
   info.innerText = "Loading...";
   const Http = new XMLHttpRequest();
   const url=`../controllers/getgroupinfo.php?id=${groupId}`;
@@ -38,44 +42,67 @@ function getGroupIdInfo(groupId) {
     }
     let output = Http.responseText;
     let jsonObject = null;
+
     try {
       jsonObject = JSON.parse(output);
     } catch (e) {
       info.innerText = "Unexpected error, while trying to get the corresponding group information, please try again.";
       return;
     }
+
     let groupInfo = jsonObject[0][0];
     let groupUsersInfo = jsonObject[1];
-    let id = 1
     info.innerText = groupInfo.group_name + " - " + groupInfo.group_bio;
+
     for (let user of groupUsersInfo) {
-      let userInfo = document.createElement("li");
+
+      let userInfo = document.createElement("div");
       userInfo.classList.add("user_info_page")
       userInfo.innerText = user[0].user_email;
-
-
-      let user_delete_button = document.createElement("button")
-      user_delete_button.classList.add("user_delete_button")
-      user_delete_button.innerText = "X"
-      
-      //let user_id = document.createTextNode(id)
-      
       usersInfo.appendChild(userInfo);
-      //userInfo.insertBefore(user_id,userInfo.firstChild)
-      userInfo.appendChild(user_delete_button)
+ 
+      if (!isAdmin) {
+        continue;
+      }
 
-      let AdduserButton = document.createElement("button")
-      AdduserButton.classList.add("add_user","btn")
-      AdduserButton.setAttribute("id","add_user")
-      AdduserButton.innerText = "Add User"
-      document.getElementById("modal_buttons").insertBefore(AdduserButton,document.getElementById("modal_buttons").firstChild)
-      //id++;
+      if (user[0].user_id == groupAdminId) {
+        let adminSpan = document.createElement('span');
+        adminSpan.innerText = "⚡";
+        userInfo.appendChild(adminSpan);
+        continue;
+      }
+
+      let userDeleteButton = document.createElement("a");
+      userDeleteButton.classList.add("user_delete_button");
+      userDeleteButton.href = `../controllers/deleteuserfromgroup.php?delid=${user[0].user_id}&id=${groupId}`;
+      userDeleteButton.innerText = "X";
+      userInfo.appendChild(userDeleteButton);
+    
     }
+
+    if (isAdmin) {
+      let addUserButton = createButton("add_user", "add_user", "Add User");
+      extraInteractions.appendChild(addUserButton);
+      let deleteGroup = createButton("delete_group", "delete_group", "Delete Group");
+      extraInteractions.appendChild(deleteGroup);
+    }
+    else {
+      let leaveGroup = createButton("leave_group", "leave_group", "Leave Group");
+      extraInteractions.appendChild(leaveGroup);
+    }
+
   }
 }
 const edit = document.getElementById("editId")
 const txt = document.getElementById("text")
 
+function createButton(className, id, innerText) {
+  let button = document.createElement("button");
+  button.classList.add(className, "btn", "modal_interaction");
+  button.setAttribute("id", id);
+  button.innerText = innerText;
+  return button;
+}
 
 function myFunction(event) { 
   var x = event.target;
