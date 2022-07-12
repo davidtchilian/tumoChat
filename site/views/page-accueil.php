@@ -3,7 +3,7 @@
   $user_id = $_SESSION['user_id'];
   $_SESSION['user_id'] = $user_id;
   require_once("../models/db.php");
-  $sql = "SELECT group_id, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE isInGroup_user_id = ".$user_id;
+  $sql = "SELECT DISTINCT group_id, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE isInGroup_user_id = ".$user_id;
   $result = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
@@ -79,7 +79,8 @@
       </div>
       <div class="row">
             <?php
-              while($group = mysqli_fetch_assoc($result)){?>
+              while($group = mysqli_fetch_assoc($result)){
+                ?>
                 <div class="col-lg-4 col-sm-12">
                   <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
                     <div class="card mt-5">

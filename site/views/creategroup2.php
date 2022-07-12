@@ -1,9 +1,5 @@
 <?php
 session_start();
-
-?>
-
-<?php
 require_once '../models/db.php';    
 $bio= $_POST['grpbio'];
 $name = $_POST['grpname'];
