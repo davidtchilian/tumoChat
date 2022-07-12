@@ -131,7 +131,7 @@
                     </li>
                 </ul>             
                 <div class="d-flex">
-                    <a onClick="getGroupIdInfo('<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>')">
+                    <a onClick="getGroupIdInfo('<?php echo $userId; ?>', '<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>')">
                         <button id="infoButton" type="button" class="btn info">
                             <img src="../assets/images/le_vrai_i.png" alt="Information" style="width: 35px; height: 35px;" />
                         </button>
@@ -228,7 +228,7 @@
     <script>
         const params = new URLSearchParams(window.location.search);
         if (params.getAll('modal')[0] == 1) {
-            getGroupIdInfo('<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>');
+            getGroupIdInfo('<?php echo $userId; ?>', '<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>');
             modal.style.display = "block";
         }
     </script>

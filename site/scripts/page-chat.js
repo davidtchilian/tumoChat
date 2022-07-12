@@ -6,9 +6,11 @@ var usersInfo = document.getElementById("usersInfo");
 
 var extraInteractions = document.getElementById("modal-extra-interactions");
 
-
 window.onload = () => {
-  window.scrollTo(0, document.body.scrollHeight);
+  window.scrollTo({
+    top: 1000,
+    behavior: 'instant'
+  }, document.body.scrollHeight);
 }
 
 btn.onclick = function() {
@@ -31,7 +33,7 @@ function onClose() {
 }
 
 
-function getGroupIdInfo(groupId, isAdmin, groupAdminId) {
+function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
   info.innerText = "Loading...";
   const Http = new XMLHttpRequest();
   const url=`../controllers/getgroupinfo.php?id=${groupId}`;
@@ -82,13 +84,14 @@ function getGroupIdInfo(groupId, isAdmin, groupAdminId) {
     }
 
     if (isAdmin) {
-      let addUserButton = createButton("add_user", "add_user", "Add User");
+      let addUserButton = createButton("add_user", "add_user", "Add User", null);
       extraInteractions.appendChild(addUserButton);
-      let deleteGroup = createButton("delete_group", "delete_group", "Delete Group");
+
+      let deleteGroup = createButton("delete_group", "delete_group", "Delete Group", `../controllers/deletegroup.php?id=${groupId}`);
       extraInteractions.appendChild(deleteGroup);
     }
     else {
-      let leaveGroup = createButton("leave_group", "leave_group", "Leave Group");
+      let leaveGroup = createButton("leave_group", "leave_group", "Leave Group", `../controllers/deleteuserfromgroup.php?delid=${userId}&id=${groupId}`);
       extraInteractions.appendChild(leaveGroup);
     }
 
@@ -97,8 +100,11 @@ function getGroupIdInfo(groupId, isAdmin, groupAdminId) {
 const edit = document.getElementById("editId")
 const txt = document.getElementById("text")
 
-function createButton(className, id, innerText) {
-  let button = document.createElement("button");
+function createButton(className, id, innerText, href) {
+  let button = document.createElement("a");
+  if (href != null) {
+    button.href = href;
+  }
   button.classList.add(className, "btn", "modal_interaction");
   button.setAttribute("id", id);
   button.innerText = innerText;
