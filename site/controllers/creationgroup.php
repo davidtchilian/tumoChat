@@ -37,7 +37,6 @@ $isInGroup_user_id = $_POST['select'];
 
 $insert="INSERT INTO isInGroup(isInGroup_user_id, isInGroup_group_id) VALUES ";
 $insert = $insert . "($user_id, $groupid),";
-echo $insert;
 if(!empty($select)){
   for($j = 0; $j<count($isInGroup_user_id); $j++){
     $insert=$insert . "(" . $isInGroup_user_id[$j] . "," . $groupid . ")";
@@ -53,12 +52,7 @@ else{
   header("Location: ../views/creategroup2.php?err=1");
 }
 
-echo "<br>".$insert;
-
-
 $isInGroup = $insert;
-
-
 
 if ($conn->query($isInGroup) === TRUE) {
   header("Location: ../views/page-accueil.php");
