@@ -134,7 +134,7 @@ body {
 }
 
 /* The Close Button */
-.close ,.add_user{
+.modal_interaction {
   color: #aaaaaa;
   float: right;
   font-size: 10px;
@@ -144,13 +144,14 @@ body {
   transition: 0.1s transform ease-out;
 }
 
-.close:hover,.add_user:hover,
-.close:focus ,.add_user:focus{
+.modal_interaction:hover {
   color: white;
   text-decoration: none;
   cursor: pointer;
   transform:scale(1.05);
 }
+
+
 .user_info_page{
   display: flex;
   flex-direction: row;
@@ -162,15 +163,17 @@ body {
   justify-self: flex-end;
   /* font-family: 'Kanit', sans-serif; */
   font-family: 'PT Sans', sans-serif;
-
+  text-decoration: none;
   width: 20px;
   height: 20px;
   border: none;
   background-color: transparent;
+  transform-origin: center;
   color: #ff5b4f;
   transition: 0.1s transform ease-out;
 }
 
 .user_delete_button:hover{
+  color: #ff5b4f;
   transform:scale(1.2)
 }
