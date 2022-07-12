@@ -4,15 +4,15 @@
     $groupid = $_GET['group_id'];
     $receiver = $_GET['notification_receiver_id'];
     $userid = $_SESSION['user_id'];
-    $sqlcont = "SELECT group_bio FROM GROUPCHAT WHERE group_id = $groupid";
+    $sqlcont = "SELECT group_name FROM GROUPCHAT WHERE group_id = $groupid";
     $result = $conn->query($sqlcont);
     if($result->num_rows > 0){
         if($row = $result->fetch_assoc()) {
-            $content = $row["group_bio"];
+            $content = $row["group_name"];
             
         }else {
             mysqli_close();
-            
+            die();
         }
     }
     else{
