@@ -20,7 +20,7 @@
 
 </head>
 
-<body>
+<body style="display:flex; align-items: center;">
 
     <div class="wrap">
         <div class="row pb-5">
