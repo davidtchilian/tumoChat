@@ -16,7 +16,7 @@ if($result->num_rows == 1) {
     }
   } 
   else {
-    header("Location: ../views/logIn.php?err=2");
+    header("Location: ../views/logIn.php?id=1");
   }
 
 $conn->close();

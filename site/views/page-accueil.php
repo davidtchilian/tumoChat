@@ -67,7 +67,7 @@
                 />
               </button>
             </form>
-            <a href ="logIn.php" class="signout-btn">Sign out</a>
+            <a href ="logIn.php?id=" class="signout-btn">Sign out</a>
           </div>
         </div>
       </nav>
