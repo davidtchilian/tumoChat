@@ -15,7 +15,9 @@ html{
   height:25px;
   margin:auto 6px auto 0; 
 }
-
+body ::after {
+  opacity: 0.5;
+}
 :root {
   --clr: #222327
 }
@@ -312,8 +314,7 @@ html{
 body {
   height: 100%;
   font-family: "Roboto", sans-serif;
-  background-image: url('../assets/images/fondBlanc.png');
-  ;
+  background-image: url('../assets/images/themes/0.jpg');
   background-size: 10%;
 }
 
