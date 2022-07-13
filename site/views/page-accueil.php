@@ -29,6 +29,7 @@
           <a class="navbar-brand" href="profile.php" style="color :white"
             >Profile</a
           >
+          
           <button
             class="navbar-toggler"
             type="button"
@@ -72,6 +73,13 @@
                 </div>
             </ul> 
           
+              <li class="nav-item">
+              <a class="nav-link active" href="community.php" style="color :white"
+            >Community</a
+          >
+</li>
+            </ul>
+            
             <form class="d-flex" role="search">
           
               <input
