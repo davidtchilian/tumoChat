@@ -146,8 +146,8 @@
                 </div>
                 <div id="infoModal" class="modal_user">
                     <div class="modal-content">
-                        <div class="groupinfo_div">
-                            <p id="groupInfo"></p>
+                        <div class="groupinfo_div" id="groupinfo-container">
+                            <p id="groupInfo" class="group_name"></p>
                         </div>
                         <div class="usersinfo_div">
                             <div id="usersInfo"></div>

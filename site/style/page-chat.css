@@ -5,6 +5,10 @@ html, body {
   height: 100%;
 }
 
+p {
+  margin-top: 1em;
+}
+
 body {
   background-image: url("../assets/images/super_fond_violet.jpg");
 }
@@ -80,6 +84,17 @@ body {
   margin: auto;
   padding: 10px;
   width: 40%;
+  border-radius: var(--bs-navbar-toggler-border-radius);
+}
+
+.group_name {
+  font-weight: bold;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+.group_bio {
+  font-style: italic;
 }
 
 .modal-content > *{
@@ -99,9 +114,11 @@ body {
 .groupinfo_div{
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   background-color: #4F3774;
   text-align: center;
+  border-radius: var(--bs-navbar-toggler-border-radius);
 }
 
 .usersinfo_div{
@@ -110,19 +127,14 @@ body {
   justify-content: center;
   background-color: #4F3774;
   text-align: center;
-  padding: 5px;
+  padding: 15px;
+  border-radius: var(--bs-navbar-toggler-border-radius);
 }
 
 #usersInfo{
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.userinfo_buttons{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
 }
 
 #userInfo {
@@ -143,7 +155,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 10px;
+  margin-top: 10px;
 }
 
 /* The Close Button */
@@ -152,7 +164,6 @@ body {
   float: right;
   font-size: 15px;
   font-weight: bold;
-  margin: 0 4px;
   background-color: #664C8F;
   transition: 0.1s transform ease-out;
 }
@@ -161,7 +172,6 @@ body {
   color: white;
   text-decoration: none;
   cursor: pointer;
-  transform:scale(1.05);
 }
 
 .delete_group,.leave_group{
@@ -172,7 +182,6 @@ body {
   color: #ff5b4f;
   text-decoration: none;
   cursor: pointer;
-  transform:scale(1.05);
 }
 
 
@@ -181,10 +190,18 @@ body {
   flex-direction: row;
   justify-content: space-between;
   justify-self: center;
-  width: 95%;
-  background-color: white;
+  align-items: center;
+  width: 100%;
+  background-color: #664c8f;
   margin: 5px 0;
   padding: 5px;
+  color: #fff;
+  border-radius: var(--bs-navbar-toggler-border-radius);
+}
+
+.user_info_page .user-email {
+  margin: auto 5px;
+  width: auto;
 }
 
 .user_delete_button {
@@ -201,5 +218,8 @@ body {
 
 .user_delete_button:hover{
   color: #ff5b4f;
-  transform:scale(1.2)
+}
+
+.add_user {
+  margin-left: 5px;
 }
