@@ -2,7 +2,6 @@
 session_start();
 require_once '../models/db.php';
 $usrid = $_SESSION['user_id'];
-$theme = $_SESSION['user_theme'];
 
 
 $sql = "SELECT user_email, user_icon FROM USERS WHERE user_id = $usrid";
