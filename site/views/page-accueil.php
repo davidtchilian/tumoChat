@@ -12,6 +12,16 @@
   $notifications = json_decode($notifs);
   var_dump($notifications);
   
+
+  $sql2 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
+  $result2 = mysqli_query($conn, $sql2);
+  if ($result->num_rows > 0) {
+    if($row1 = mysqli_fetch_assoc($result2)) {
+        $usricon = $row1['user_icon'];
+    }
+} else {
+    // echo "0 results";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,9 +50,11 @@
     <div class="fixed-top">
       <nav class="navbar navbar-expand-lg" style="background-color: #6c4b93">
         <div class="container">
-          <a class="navbar-brand" href="profile.php" style="color :white"
-            >Profile</a
-          >
+          <a class="navbar-brand" href="profile.php" style="color :white">
+            <?php  echo "<img src='../assets/icons/$usricon.png' class='card-img-top' alt='profile_' style='height: 45px; width: 45px; margin-bottom:10px;'>" ?>
+            Profile
+          </a>
+          
           <button
             class="navbar-toggler"
             type="button"
@@ -73,7 +85,6 @@
             </li>
             <div id="infoModal" class="modal_user">
                     <div class="modal-content">
-                      
                         <div class="groupinfo_div">
                             <p id="Notification_group"><?php ?></p>
                         </div>
@@ -124,7 +135,7 @@
             <?php
               while($group = mysqli_fetch_assoc($result)){
                 ?>
-                <div class="col-lg-4 col-sm-12">
+                <div class="col-lg-4 col-sm-12 group-chats">
                   <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
                     <div class="card mt-5">
                       <ul class="list-group list-group-flush">

@@ -1,6 +1,6 @@
 var button = document.querySelector('.search');
 var input = document.querySelector('.srch-input');
-var groups = document.getElementsByClassName('card');
+var groups = document.getElementsByClassName('group-chats');
 var names = document.getElementsByClassName('group-name');
 var namesArr = [];
 

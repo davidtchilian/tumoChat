@@ -1,40 +1,149 @@
 <?php
-$communityId = $_GET['id'];
   session_start();
-  $isincommunity = false;
-  $isincommunity_message = false;
+  $user_id = $_SESSION['user_id'];
+  require_once("../models/db.php");
+  $sql = "SELECT DISTINCT group_id, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE isInGroup_user_id = ".$user_id;
+  $result = mysqli_query($conn, $sql);
+  $sendersql = "SELECT notification_sender_id FROM notifications WHERE notification_receiver_id = '$user_id' "
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>TUYU | Home</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../style/page-accueil.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
 
-  if (!isset($user_Id)) {
-    header("Location: login.php");
-    return;
-  }
+        <?php $theme = $_SESSION['user_theme']; ?>
+       
+        body{
+           background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
+        }
+        
+        
+        </style>
+  </head>
+  <body>
+    <div class="fixed-top">
+      <nav class="navbar navbar-expand-lg" style="background-color: #6c4b93">
+        <div class="container">
+          <a class="navbar-brand" href="profile.php" style="color :white"
+            >Profile</a
+          >
+          
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarText"
+            aria-controls="navbarText"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="creategroup.php"
+                  style="color : white"
+                  >Create group</a
+                >
+                
+              </li>
+                
+            <a onClick="notification()" id="infoButton" class="notifications_btn nav-link" style="color : white">Notifications</a>
+            <li class="nav-item">
+              <a class="nav-link active" href="community.php" style="color :white">Community</a>
+            </li>
+            <div id="infoModal" class="modal_user">
+                    <div class="modal-content">
+                      
+                        <div class="groupinfo_div">
+                            <p id="groupInfo"></p>
+                        </div>
+                        <div class="usersinfo_div">
+                            <div id="usersInfo">
+                              
+                            </div>
+                            <div id = "modal_buttons" class="userinfo_buttons">
+                                <div id="modal-extra-interactions"></div>
+                                <div id="modal-default-interactions">
+                                    <button id="closeButton" class="close btn modal_interaction">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ul> 
+            
+            <form class="d-flex" role="search">
+          
+              <input
+                class="form-control me-2 srch-input"
+                type="search"
+                placeholder="Search group"
+                aria-label="Search"
+              />
+              <button class="btn search">
+                <img
+                  src="../assets/images/loupe.png"
+                  alt="Rechercher"
+                  style="width : 20px; height: 30px; margin-top : 3px"
+                />
+              </button>
+            </form>
+            <a href ="../controllers/logout.php" class="signout-btn">Sign out</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <br />
+    <div class="container mt-5">
+      <div class="div-titre mt-4">
+        <h1 class="Titre">Home</h1>
+      </div>
+      <div class="row">
+            <?php
+              while($group = mysqli_fetch_assoc($result)){
+                ?>
+                <div class="col-lg-4 col-sm-12">
+                  <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
+                    <div class="card mt-5">
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item group-name"><?php echo $group["group_name"]; ?></li>
+                        <li class="list-group-item">
+                          <?php
+                            $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['group_id']);
+                            $message = json_decode($messages);
 
-  if (!isset($communityId)) {
-    header("Location: community.php");
-    return;
-  }
-
-  require('../models/db.php');
- 
-  $sql = "SELECT * FROM message WHERE message_group_id='$communityId'";
-  $messages = mysqli_query($conn, $sql);
-//   $message = mysqli_fetch_assoc($messages);
-
-  $comm_users = file_get_contents($domain_name."/controllers/getcommusers.php?id=".$communityId);
-  $comm_users = json_decode($group_users);
-
-  for ($i=0; $i < count($comm_users); $i++) { 
-      if($comm_users[$i] == $userId){
-        $isincommunity = true;
-      }
-  }
-
-  if($isincommunity == false){
-      header("Location: community.php");
-  }
-
-  $sql = "SELECT community_name FROM community WHERE community_id='$communityId'";
-  $commName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["community_name"];
-  
-  mysqli_close($conn);
-  ?>
+                            echo $message[0];
+                            echo "<br>";
+                            echo $message[1];
+                          ?>
+                        </li>
+                      </ul>
+                    </div>
+                  </a>
+                </div>
+              <?php
+              }
+              ?>
+      </div>
+    </div>
+    <script src="../scripts/search.js"></script>
+    <script src="../scripts/notifications.js"></script>
+  </body>
+</html>

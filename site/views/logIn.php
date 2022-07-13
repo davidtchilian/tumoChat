@@ -71,6 +71,12 @@
                             <?php echo "Successfully signed out!"; ?>
                         </div> 
                             <?php }
+                        if($_GET['id'] == 3){
+                            ?>
+                            <div class="alert alert-success" role="alert">
+                                <?php echo "Mail was sent Successfully!"; ?>
+                            </div> 
+                                <?php }
                     } ?>    
 
                     <input type="submit" name="Login" id="exampleInputSubmit" class="submit-btn mb-3" href="page-accueil.html" style="margin:0 auto;">
@@ -79,7 +85,7 @@
                         <a class="signlink" href="signUp.php">
                             Sign up
                         </a>
-                        <a class="signlink" href="email-send.php" >
+                        <a class="signlink" href="forgetpwd.php" >
                             Forgot password?
                         </a>
                     </div>

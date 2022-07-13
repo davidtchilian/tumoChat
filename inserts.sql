@@ -5,7 +5,8 @@ VALUES ('gevork@mail.com', 'goodpassword', 'hi im gevork', 1, 2); -- id 2
 INSERT INTO USERS (user_email,user_password,user_bio,user_theme,user_icon)
 VALUES ('hayk@mail.com', 'insanepassword', 'hi im hayk', 1, 4); -- id 3
 
-INSERT INTO GROUPCHAT (group_name,group_bio, group_admin_id) VALUES 
+INSERT INTO GROUPCHAT (group_name,group_bio, group_type) VALUES
+('Programming', 'This is a programming community',0 ),
 ('Group A', 'the first group', 1), -- id 1
 ('Group B', 'the second group', 1), -- id 2
 ('Group C', 'the third group', 1); -- id 3
@@ -24,5 +25,3 @@ VALUES
 ('2Barev Davit', 2, 1, NOW()),
 ('3Barev dzez', 3, 1, NOW());
 
-INSERT INTO COMMUNITY (community_name, community_bio, community_icon ) VALUES
-('Programming', 'This is a programming community','programming.png' );

@@ -4,6 +4,7 @@ $user_id = $_SESSION['user_id'];
 require_once("../models/db.php");
 $sql = "SELECT DISTINCT community_id, community_name FROM COMMUNITY JOIN isInCommunity ON isInCommunity_community_id = community_id WHERE isInCommunity_user_id = ".$user_id;
 $result = mysqli_query($conn, $sql);
+
 $sendersql = "SELECT notification_sender_id FROM notifications WHERE notification_receiver_id = '$user_id' ";
 ?>
 <!DOCTYPE html>
@@ -89,15 +90,16 @@ $sendersql = "SELECT notification_sender_id FROM notifications WHERE notificatio
             <?php
               while($community = mysqli_fetch_assoc($result)){
                 ?>
-                <div class="col-lg-4 col-sm-12">
-                  <a href="page-chat.php?id=<?php echo $community["community_id"]; ?>" style="text-decoration :none">
+                <!-- <div class="col-lg-4 col-sm-12">
+                  <a href="page-community.php?id=<?php echo $community["community_id"]; ?>" style="text-decoration :none">
                     <div class="card mt-5">
                       <ul class="list-group list-group-flush">
                         <li class="list-group-item group-name"><?php echo $community["community_name"]; ?></li>
                       </ul>
                     </div>
                   </a>
-                </div>
+                </div> -->
+                <p><?php echo "bfkedhbc"; ?></p>
               <?php
               }
               ?>
