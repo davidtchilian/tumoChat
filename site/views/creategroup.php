@@ -16,7 +16,7 @@ session_start();
 	<link rel="stylesheet" type="test/css" href="css/style.css">
 </head>
 
-<body style="background-image: url('../assets/images/super_fond_violet.jpg');">
+<body style="background-image: url('../assets/images/themes/3.jpg');">
 
   
 	<div class="card mx-auto mt-5" style="width: 18rem;">
