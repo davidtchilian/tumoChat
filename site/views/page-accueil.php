@@ -50,9 +50,30 @@
                   style="color : white"
                   >Create group</a
                 >
+                
               </li>
-            </ul>
+                
+            <a onClick="notification()" id="infoButton" class="notifications_btn nav-link" style="color : white">Notifications</a>
+            <div id="infoModal" class="modal_user">
+                    <div class="modal-content">
+                        <div class="groupinfo_div">
+                            <p id="groupInfo"></p>
+                        </div>
+                        <div class="usersinfo_div">
+                            <div id="usersInfo"></div>
+                            <div id = "modal_buttons" class="userinfo_buttons">
+                                <div id="modal-extra-interactions"></div>
+                                <div id="modal-default-interactions">
+                                    <button id="closeButton" class="close btn modal_interaction">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ul> 
+          
             <form class="d-flex" role="search">
+          
               <input
                 class="form-control me-2 srch-input"
                 type="search"
@@ -106,5 +127,6 @@
       </div>
     </div>
     <script src="../scripts/search.js"></script>
+    <script src="../scripts/notifications.js"></script>
   </body>
 </html>
