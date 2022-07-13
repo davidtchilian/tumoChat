@@ -55,6 +55,9 @@
               </li>
                 
             <a onClick="notification()" id="infoButton" class="notifications_btn nav-link" style="color : white">Notifications</a>
+            <li class="nav-item">
+              <a class="nav-link active" href="community.php" style="color :white">Community</a>
+            </li>
             <div id="infoModal" class="modal_user">
                     <div class="modal-content">
                         <div class="groupinfo_div">
@@ -72,13 +75,6 @@
                     </div>
                 </div>
             </ul> 
-          
-              <li class="nav-item">
-              <a class="nav-link active" href="community.php" style="color :white"
-            >Community</a
-          >
-</li>
-            </ul>
             
             <form class="d-flex" role="search">
           
