@@ -49,8 +49,7 @@ CREATE TABLE COMMUNITY(
     community_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     community_name TEXT,
     community_bio TEXT,
-    community_icon TEXT,
-    FOREIGN KEY (community_admin_id) REFERENCES USERS (user_id)
+    community_icon TEXT  
 );
 CREATE TABLE isInCommunity(
     isInCommunity_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -60,3 +59,12 @@ CREATE TABLE isInCommunity(
     FOREIGN KEY (isInCommunity_community_id) REFERENCES COMMUNITY (community_id)
 );
 
+CREATE TABLE MESSAGECOMMUNITY(
+    comm_message_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    comm_message_content TEXT,
+    comm_message_sender_id INT,
+    comm_message_community_id INT,
+    comm_message_date DATETIME,
+    FOREIGN KEY (comm_message_sender_id) REFERENCES USERS (user_id),
+    FOREIGN KEY (comm_message_community_id) REFERENCES COMMUNITY (community_id)
+);

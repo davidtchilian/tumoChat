@@ -25,4 +25,4 @@ VALUES
 ('3Barev dzez', 3, 1, NOW());
 
 INSERT INTO COMMUNITY (community_name, community_bio, community_icon ) VALUES
-('Programming', 'This is a programming community','programming.png', )
+('Programming', 'This is a programming community','programming.png' );
