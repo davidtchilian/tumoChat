@@ -23,25 +23,21 @@
   $messages = mysqli_query($conn, $sql);
 //   $message = mysqli_fetch_assoc($messages);
 
-  $group_users = file_get_contents($domain_name."/controllers/getgroupusers.php?id=".$groupId);
-  $group_users = json_decode($group_users);
+  $comm_users = file_get_contents($domain_name."/controllers/getcommusers.php?id=".$communityId);
+  $comm_users = json_decode($group_users);
 
-  for ($i=0; $i < count($group_users); $i++) { 
-      if($group_users[$i] == $userId){
-        $isingroup = true;
+  for ($i=0; $i < count($comm_users); $i++) { 
+      if($comm_users[$i] == $userId){
+        $isincommunity = true;
       }
   }
 
-  if($isingroup == false){
-      header("Location: page-accueil.php");
+  if($isincommunity == false){
+      header("Location: community.php");
   }
 
-  $sql = "SELECT group_name FROM groupchat WHERE group_id='$groupId'";
-  $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
-
-  $sql = "SELECT group_admin_id FROM groupchat WHERE group_id=$groupId";
-  $groupAdminId = mysqli_fetch_assoc(mysqli_query($conn, $sql))['group_admin_id'];
-  $isAdmin = $userId == $groupAdminId;
+  $sql = "SELECT community_name FROM community WHERE community_id='$communityId'";
+  $commName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["community_name"];
   
   mysqli_close($conn);
 
@@ -121,19 +117,10 @@
               while($community = mysqli_fetch_assoc($result)){
                 ?>
                 <div class="col-lg-4 col-sm-12">
-                  <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
+                  <a href="page-chat.php?id=<?php echo $community["community_id"]; ?>" style="text-decoration :none">
                     <div class="card mt-5">
                       <ul class="list-group list-group-flush">
-                        <li class="list-group-item group-name"><?php echo $group["group_name"]; ?></li>
-                        <li class="list-group-item">
-                          <?php
-                            $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['group_id']);
-                            $message = json_decode($messages);
-                            echo $message[0];
-                            echo "<br>";
-                            echo $message[1];
-                          ?>
-                        </li>
+                        <li class="list-group-item group-name"><?php echo $community["community_name"]; ?></li>
                       </ul>
                     </div>
                   </a>
