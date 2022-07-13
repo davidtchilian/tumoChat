@@ -18,6 +18,7 @@ window.onclick = function(event) {
   }
 }
 
+
 function onClose() {
   infoModal.style.display = "none";
   infoModalUsers.innerHTML = "";
