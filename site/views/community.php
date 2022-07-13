@@ -1,46 +1,10 @@
 <?php
-
-  $communityId = $_GET['id'];
-
-  session_start();
-  $userId = $_SESSION["user_id"];
-  $isincommunity = false;
-  $isincommunity_message = false;
-
-  if (!isset($userId)) {
-    header("Location: login.php");
-    return;
-  }
-
-  if (!isset($communityId)) {
-    header("Location: community.php");
-    return;
-  }
-
-  require('../models/db.php');
- 
-  $sql = "SELECT * FROM message WHERE message_group_id='$communityId'";
-  $messages = mysqli_query($conn, $sql);
-//   $message = mysqli_fetch_assoc($messages);
-
-  $comm_users = file_get_contents($domain_name."/controllers/getcommusers.php?id=".$communityId);
-  $comm_users = json_decode($group_users);
-
-  for ($i=0; $i < count($comm_users); $i++) { 
-      if($comm_users[$i] == $userId){
-        $isincommunity = true;
-      }
-  }
-
-  if($isincommunity == false){
-      header("Location: community.php");
-  }
-
-  $sql = "SELECT community_name FROM community WHERE community_id='$communityId'";
-  $commName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["community_name"];
-  
-  mysqli_close($conn);
-
+session_start();
+$user_id = $_SESSION['user_id'];
+require_once("../models/db.php");
+$sql = "SELECT DISTINCT community_id, community_name FROM COMMUNITY JOIN isInCommunity ON isInCommunity_community_id = community_id WHERE isInCommunity_user_id = ".$user_id;
+$result = mysqli_query($conn, $sql);
+$sendersql = "SELECT notification_sender_id FROM notifications WHERE notification_receiver_id = '$user_id' ";
 ?>
 <!DOCTYPE html>
 <html lang="en">
