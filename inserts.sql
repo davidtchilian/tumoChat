@@ -24,3 +24,5 @@ VALUES
 ('2Barev Davit', 2, 1, NOW()),
 ('3Barev dzez', 3, 1, NOW());
 
+INSERT INTO COMMUNITY (community_name, community_bio, community_icon,community_admin_id  ) VALUES
+('Programming', 'This is a programming community',)
