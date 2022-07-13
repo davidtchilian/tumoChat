@@ -1,10 +1,10 @@
 <?php
   session_start();
   $user_id = $_SESSION['user_id'];
-  $_SESSION['user_id'] = $user_id;
   require_once("../models/db.php");
   $sql = "SELECT DISTINCT group_id, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE isInGroup_user_id = ".$user_id;
   $result = mysqli_query($conn, $sql);
+  $sendersql = "SELECT notification_sender_id FROM notifications WHERE notification_receiver_id = '$user_id' "
 ?>
 <!DOCTYPE html>
 <html lang="en">
