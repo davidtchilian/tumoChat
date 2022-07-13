@@ -60,11 +60,14 @@
             </li>
             <div id="infoModal" class="modal_user">
                     <div class="modal-content">
+                      
                         <div class="groupinfo_div">
                             <p id="groupInfo"></p>
                         </div>
                         <div class="usersinfo_div">
-                            <div id="usersInfo"></div>
+                            <div id="usersInfo">
+                              
+                            </div>
                             <div id = "modal_buttons" class="userinfo_buttons">
                                 <div id="modal-extra-interactions"></div>
                                 <div id="modal-default-interactions">
