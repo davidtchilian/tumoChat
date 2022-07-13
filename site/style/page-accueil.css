@@ -44,6 +44,11 @@
 @media(max-width:992px){
   .signout-btn{
     margin-left: 0;
+    padding: 0;
+    border: none;
+  }
+  .signout-btn:hover{
+    background: none;
   }
   .d-flex{
     margin-bottom: 2vw;

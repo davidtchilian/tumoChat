@@ -506,6 +506,9 @@ body {
   padding: .45vw;
   transition: all .3s ease-in-out;
 }
+.submit-btn:active{
+  box-shadow: 0 0 0 0.25rem rgba(108, 2, 119, 0.4);
+}
 .submit-btn:hover{
   background: #6c4b93;
   color: white;
