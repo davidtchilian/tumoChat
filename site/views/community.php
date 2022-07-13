@@ -1,3 +1,51 @@
+<?php
+
+  $communityId = $_GET['id'];
+
+  session_start();
+  $userId = $_SESSION["user_id"];
+  $isincommunity = false;
+  $isincommunity_message = false;
+
+  if (!isset($userId)) {
+    header("Location: login.php");
+    return;
+  }
+
+  if (!isset($communityId)) {
+    header("Location: page-accueil.php");
+    return;
+  }
+
+  require('../models/db.php');
+ 
+  $sql = "SELECT * FROM message WHERE message_group_id='$groupId'";
+  $messages = mysqli_query($conn, $sql);
+//   $message = mysqli_fetch_assoc($messages);
+
+  $group_users = file_get_contents($domain_name."/controllers/getgroupusers.php?id=".$groupId);
+  $group_users = json_decode($group_users);
+
+  for ($i=0; $i < count($group_users); $i++) { 
+      if($group_users[$i] == $userId){
+        $isingroup = true;
+      }
+  }
+
+  if($isingroup == false){
+      header("Location: page-accueil.php");
+  }
+
+  $sql = "SELECT group_name FROM groupchat WHERE group_id='$groupId'";
+  $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
+
+  $sql = "SELECT group_admin_id FROM groupchat WHERE group_id=$groupId";
+  $groupAdminId = mysqli_fetch_assoc(mysqli_query($conn, $sql))['group_admin_id'];
+  $isAdmin = $userId == $groupAdminId;
+  
+  mysqli_close($conn);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,16 +82,9 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a
-                  class="nav-link active"
-                  aria-current="page"
-                  href="creategroup.php"
-                  style="color : white"
-                  >Create group</a
-                >
+      
                 
-              </li>
+         
               <li class="nav-item">
               <a class="nav-link active" href="page-accueil.php" style="color :white"
             >Home</a
