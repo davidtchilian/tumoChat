@@ -18,10 +18,19 @@ $name = $_POST['grpname'];
     <link rel="stylesheet" href="../style/chosen.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <style>
+
+        <?php $theme = $_SESSION['user_theme']; ?>
+       
+        body{
+           background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
+        }
+        
+        </style>
 
 </head>
 
-<body style="background-image: url('../assets/images/themes/3.jpg');height: 100vh;">
+<body >
 
     <!-- Background image -->
     <div class="bg-image d-flex justify-content-center align-items-center"></div>

@@ -16,7 +16,6 @@ require_once('../models/db.php');
 
 
 
-
 $sql = "INSERT INTO GROUPCHAT(group_name, group_bio, group_admin_id)
 VALUES ('$name', '$bio', $user_id)";
 
@@ -38,37 +37,14 @@ else{
   die();
 }
 
+$insert="INSERT INTO isInGroup(isInGroup_user_id, isInGroup_group_id) VALUES('$user_id','$groupid')";
 
+mysqli_query($conn,$insert);
 
-
-
-$isInGroup_user_id = $_POST['select'];
-
-$insert="INSERT INTO isInGroup(isInGroup_user_id, isInGroup_group_id) VALUES ";
-$insert = $insert . "($user_id, $groupid),";
-// echo $insert;
-
-  for($j = 0; $j<count($isInGroup_user_id); $j++){
-    $insert=$insert . "(" . $isInGroup_user_id[$j] . "," . $groupid . ")";
-    if($j == count($isInGroup_user_id)-1){
-      $insert=$insert  . ";";
-    }
-    else{
-      $insert=$insert  . ",";
-    }
-  }
-
-
-
-//  echo "<br>".$insert;
-
-
-
-
-
-
-mysqli_query($conn, $insert);
-mysqli_close($conn);
+foreach ($select as $key => $receiver) {
+  $notif = "INSERT INTO NOTIFICATIONS(notification_sender_id,notification_receiver_id,notification_group_id,notification_content) VALUES($user_id, $receiver, $groupid, '$name')";
+  mysqli_query($conn,$notif);
+}
 header('Location: ../views/page-accueil.php');
 exit();
 // echo "hello";

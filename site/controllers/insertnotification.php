@@ -20,9 +20,7 @@
         die();
     }
 
-        $sql = "INSERT INTO NOTIFICATIONS(notification_sender_id,notification_receiver_id,notification_group_id,notification_content) 
-        VALUES($userid,$receiver,$groupid,$content)";
-        $result = mysqli_query($conn,$sql);
+       
         mysqli_close();
 
     

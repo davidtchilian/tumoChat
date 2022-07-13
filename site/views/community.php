@@ -1,3 +1,11 @@
+<?php
+session_start();
+$user_id = $_SESSION['user_id'];
+require_once("../models/db.php");
+$sql = "SELECT DISTINCT community_id, community_name FROM COMMUNITY JOIN isInCommunity ON isInCommunity_community_id = community_id WHERE isInCommunity_user_id = ".$user_id;
+$result = mysqli_query($conn, $sql);
+$sendersql = "SELECT notification_sender_id FROM notifications WHERE notification_receiver_id = '$user_id' ";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,8 +21,17 @@
     />
     <link rel="stylesheet" href="../style/page-accueil.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+
+        <?php $theme = $_SESSION['user_theme']; ?>
+       
+        body{
+           background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
+        }
+        
+        </style>
 </head>
-<body style='background-image: url("../assets/images/themes/3.jpg");'>
+<body >
 <div class="fixed-top">
       <nav class="navbar navbar-expand-lg" style="background-color: #6c4b93">
         <div class="container">
@@ -34,16 +51,9 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a
-                  class="nav-link active"
-                  aria-current="page"
-                  href="creategroup.php"
-                  style="color : white"
-                  >Create group</a
-                >
+      
                 
-              </li>
+         
               <li class="nav-item">
               <a class="nav-link active" href="page-accueil.php" style="color :white"
             >Home</a
@@ -77,23 +87,13 @@
       </div>
       <div class="row">
             <?php
-              while($group = mysqli_fetch_assoc($result)){
+              while($community = mysqli_fetch_assoc($result)){
                 ?>
                 <div class="col-lg-4 col-sm-12">
-                  <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
+                  <a href="page-chat.php?id=<?php echo $community["community_id"]; ?>" style="text-decoration :none">
                     <div class="card mt-5">
                       <ul class="list-group list-group-flush">
-                        <li class="list-group-item group-name"><?php echo $group["group_name"]; ?></li>
-                        <li class="list-group-item">
-                          <?php
-                            $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['group_id']);
-                            $message = json_decode($messages);
-
-                            echo $message[0];
-                            echo "<br>";
-                            echo $message[1];
-                          ?>
-                        </li>
+                        <li class="list-group-item group-name"><?php echo $community["community_name"]; ?></li>
                       </ul>
                     </div>
                   </a>
