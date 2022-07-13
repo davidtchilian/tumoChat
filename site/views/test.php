@@ -11,6 +11,15 @@
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
       crossorigin="anonymous"
     />
+    <style>
+
+        <?php $theme = $_SESSION['user_theme']; ?>
+       
+        body{
+           background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
+        }
+        
+        </style>
   </head>
   <body>
     <script>
