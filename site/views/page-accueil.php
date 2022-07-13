@@ -116,7 +116,7 @@
             <?php
               while($group = mysqli_fetch_assoc($result)){
                 ?>
-                <div class="col-lg-4 col-sm-12">
+                <div class="col-lg-4 col-sm-12 group-chats">
                   <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
                     <div class="card mt-5">
                       <ul class="list-group list-group-flush">
