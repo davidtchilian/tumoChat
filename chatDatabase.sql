@@ -44,3 +44,19 @@ CREATE TABLE NOTIFICATIONS(
     FOREIGN KEY (notification_group_id) REFERENCES GROUPCHAT (group_id)
 );
 
+
+CREATE TABLE COMMUNITY(
+    community_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    community_name TEXT,
+    community_bio TEXT,
+    community_icon TEXT,
+    FOREIGN KEY (community_admin_id) REFERENCES USERS (user_id)
+);
+CREATE TABLE isInCommunity(
+    isInCommunity_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    isInCommunity_user_id INT,
+    isInCommunity_community_id INT,
+    FOREIGN KEY (isInCommunity_user_id) REFERENCES USERS (user_id),
+    FOREIGN KEY (isInCommunity_community_id) REFERENCES COMMUNITY (community_id)
+);
+

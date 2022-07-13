@@ -1,10 +1,10 @@
 <?php
   session_start();
   $user_id = $_SESSION['user_id'];
-  $_SESSION['user_id'] = $user_id;
   require_once("../models/db.php");
   $sql = "SELECT DISTINCT group_id, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE isInGroup_user_id = ".$user_id;
   $result = mysqli_query($conn, $sql);
+  $sendersql = "SELECT notification_sender_id FROM notifications WHERE notification_receiver_id = '$user_id' "
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,15 +61,33 @@
                   style="color : white"
                   >Create group</a
                 >
+                
               </li>
-              <li class="nav-item">
-              <a class="nav-link active" href="community.php" style="color :white"
-            >Community</a
-          >
-</li>
-            </ul>
+                
+            <a onClick="notification()" id="infoButton" class="notifications_btn nav-link" style="color : white">Notifications</a>
+            <li class="nav-item">
+              <a class="nav-link active" href="community.php" style="color :white">Community</a>
+            </li>
+            <div id="infoModal" class="modal_user">
+                    <div class="modal-content">
+                        <div class="groupinfo_div">
+                            <p id="groupInfo"></p>
+                        </div>
+                        <div class="usersinfo_div">
+                            <div id="usersInfo"></div>
+                            <div id = "modal_buttons" class="userinfo_buttons">
+                                <div id="modal-extra-interactions"></div>
+                                <div id="modal-default-interactions">
+                                    <button id="closeButton" class="close btn modal_interaction">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ul> 
             
             <form class="d-flex" role="search">
+          
               <input
                 class="form-control me-2 srch-input"
                 type="search"
@@ -123,5 +141,6 @@
       </div>
     </div>
     <script src="../scripts/search.js"></script>
+    <script src="../scripts/notifications.js"></script>
   </body>
 </html>
