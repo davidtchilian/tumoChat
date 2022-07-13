@@ -3,6 +3,7 @@ session_start();
 require_once '../models/db.php';
 $usrid = $_SESSION['user_id'];
 
+
 $sql = "SELECT user_email, user_icon FROM USERS WHERE user_id = $usrid";
    
 $result = mysqli_query($conn,$sql);
@@ -40,7 +41,7 @@ if ($result->num_rows > 0) {
         <?php $theme = $_SESSION['user_theme']; ?>
        
         body{
-        background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
+           background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
         }
         
         </style>
@@ -64,7 +65,20 @@ if ($result->num_rows > 0) {
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <div class="navigation modes">
                             <ul>
-                                <li class="list active">
+                                <?php
+                                    $str = array();
+                                    for ($i=0; $i < 4; $i++) {
+                                        if ((int)$theme == $i) {
+                                            $str[] = "list active";
+                                        }else {
+                                           $str[] = "list";
+                                        }
+                                        
+                                    }
+
+                                ?>
+
+                                <li class="<?php echo $str[0]; ?>">
                                     <a onclick="changetheme(0)" href="#">
                                         <span class="icon">
                                             <ion-icon name="sunny-outline"></ion-icon>
@@ -72,7 +86,7 @@ if ($result->num_rows > 0) {
                                         <span class="text"> Light </span>
                                     </a>
                                 </li>
-                                <li class="list">
+                                <li class="<?php echo $str[1]; ?>">
                                     <a onclick="changetheme(1)" href="#">
                                         <span class="icon">
                                             <ion-icon name="moon-outline"></ion-icon>
@@ -80,7 +94,7 @@ if ($result->num_rows > 0) {
                                         <span class="text"> Dark </span>
                                     </a>
                                 </li>
-                                <li class="list">
+                                <li class="<?php echo $str[2]; ?>">
                                     <a onclick="changetheme(2)" href="#">
                                         <span class="icon">
                                             <ion-icon name="radio-button-off-outline"></ion-icon>
@@ -88,7 +102,7 @@ if ($result->num_rows > 0) {
                                         <span class="text"> Beige </span>
                                     </a>
                                 </li>
-                                <li class="list">
+                                <li class="<?php echo $str[3]; ?>">
                                     <a onclick="changetheme(3)" href="#">
                                         <span class="icon">
                                             <ion-icon name="radio-button-on-outline"></ion-icon>

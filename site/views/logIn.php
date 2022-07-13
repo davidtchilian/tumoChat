@@ -19,7 +19,7 @@
         integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../style/style.css">
-
+    
 </head>
 
 <body style='display:flex; align-items: center; background-image: url("../assets/images/themes/3.jpg");'>

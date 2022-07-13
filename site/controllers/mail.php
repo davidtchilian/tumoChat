@@ -1,10 +1,10 @@
 <?php
 
-$to = 'areg.movsesyan.y@tumo.org';
+$to = 'narek.h30.y@tumo.org';
 $subject = 'Subject';
 $message = 'Hello! How are you?';
 
-$headers = "From: <areg.movsesyan.y@tumo.org>"."\r\n";
+$headers = "From: <narek.h30.y@tumo.org>"."\r\n";
 
 ?>
 
