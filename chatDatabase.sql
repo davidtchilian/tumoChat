@@ -13,6 +13,7 @@ CREATE TABLE GROUPCHAT(
     group_bio TEXT,
     group_admin_id INT,
     group_type INT,
+    group_icon INT,
     FOREIGN KEY (group_admin_id) REFERENCES USERS (user_id)
 );
 

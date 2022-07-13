@@ -36,8 +36,9 @@
       header("Location: page-accueil.php");
   }
 
-  $sql = "SELECT group_name FROM groupchat WHERE group_id='$groupId'";
+  $sql = "SELECT group_name, group_type FROM groupchat WHERE group_id='$groupId'";
   $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
+  $groupType = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_type"];
 
   $sql = "SELECT group_admin_id FROM groupchat WHERE group_id=$groupId";
   $groupAdminId = mysqli_fetch_assoc(mysqli_query($conn, $sql))['group_admin_id'];
@@ -120,7 +121,18 @@
 <body>
     <div class="fixed-top">
         <nav class="navbar navbar-expand-lg" style="background-color : #6c4b93">
+        <?php
+        if($groupType==1){
+        ?>
             <a href="page-accueil.php"><img src="../assets/images/flèche_retour3.png" alt="Retour" style="width : 35px; height: 35px; margin-left: 10px" /></a>
+            <?php
+        }
+        else{
+        ?>
+            <a href="community.php"><img src="../assets/images/flèche_retour3.png" alt="Retour" style="width : 35px; height: 35px; margin-left: 10px" /></a>
+        <?php
+        }
+        ?>
             <div class="container">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">

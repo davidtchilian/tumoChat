@@ -2,7 +2,7 @@
   session_start();
   $user_id = $_SESSION['user_id'];
   require_once("../models/db.php");
-  $sql = "SELECT DISTINCT group_id, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE isInGroup_user_id = ".$user_id;
+  $sql = "SELECT DISTINCT group_id, group_type, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE isInGroup_user_id = ".$user_id;
   $result = mysqli_query($conn, $sql);
   $sendersql = "SELECT notification_sender_id FROM notifications WHERE notification_receiver_id = '$user_id' "
 ?>
@@ -118,6 +118,7 @@
       <div class="row">
             <?php
               while($group = mysqli_fetch_assoc($result)){
+                if($group["group_type"]==1){
                 ?>
                 <div class="col-lg-4 col-sm-12 group-chats">
                   <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
@@ -139,7 +140,7 @@
                   </a>
                 </div>
               <?php
-              }
+              }}
               ?>
       </div>
     </div>
