@@ -70,16 +70,20 @@
         .dropdown {
         position: relative;
         display: none;
+     
 
         }
 
         .dropdown-content {
         display: block;
-        position: relative;
+        position: absolute;
         background-color: #f9f9f9;
         min-width: 160px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
+        margin-left: -160px;
+        width: 200px;
+        margin-top: 70px;
         }
 
         .dropdown-content a {
@@ -163,7 +167,7 @@
             </div>
         </nav>
     </div>
-    <div class="container mt-5" style="min-height : 100vh"  style="position : relative" >
+    <div class="container mt-5" style="min-height : 100vh;"  style="position : relative" >
     <br><br><br><br>
         <?php
     while ($message = mysqli_fetch_assoc($messages)) {
@@ -183,8 +187,8 @@
                 <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;" id = "<?= "dropdown".$message['message_id']?>">
                 
                     <div class="dropdown-content" id = "dropdown-content">
-                        <a href="#" onclick = "myFunction(event)" id = "editId" name = "<?= $message['message_id']?>">Edit</a>
-                        <a href="#">Delete</a>
+                        <a href="#" onclick = "myFunction(event)" id = <?= "editId".$message['message_id']?> name = "<?= $message['message_id']?>">Edit</a>
+                        <a href="#" onclick = "deleteMessage(event)" id = "<?= "delete".$message['message_id']?>">Delete</a>
                         </div>
 
                     </div> 
@@ -239,6 +243,7 @@
                     <form class="d-flex" role="search" action="../controllers/sendmessage.php" method="post" id = "form">
                         <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
                         <input type="hidden" name="group_id" value="<?php echo $groupId; ?>">
+                        <input type="hidden" name = "message_id" value="<?= 56?>">
                         <input name="message_content" class="form-control me-2" type="text" id="text" placeholder="Enter your message here" autofocus />
                         <button class="btn search" type="submit" value="Message">
                             <a href="page-chat.php?id=<?php echo $groupId;?>"></a>

@@ -110,22 +110,22 @@ function createButton(className, id, innerText, href) {
 }
 
 
-function myFunction(event) { 
-  var x = event.target;
-  console.log(x.innerText);
-  console.log(x.name);
-  console.log(x)
-  if(x != edit){
-    txt.value = x.innerText
-    console.log(true)
-  }
-}
+// function myFunction(event) { 
+//   var x = event.target;
+//   console.log(x.innerText);
+//   console.log(x.name);
+//   console.log(x)
+//   if(x != edit){
+//     txt.value = x.innerText
+//     console.log(true)
+//   }
+// }
 
-function update(){
-  // form.action = ".../controllers/update.php"
-  txt.innerText = "<?= $message?>"
-  console.log(1)
-}
+// function update(){
+//   // form.action = ".../controllers/update.php"
+//   txt.innerText = "<?= $message?>"
+//   console.log(1)
+// }
 
 
 const edit = document.getElementById("editId")
@@ -140,7 +140,20 @@ function myFunction(event) {
  console.log(messageCont.innerText)
 
   txt.value = messageCont.innerText
-  form.action = "../controllers/update.php"
+  const url =  "../controllers/update.php?id="+x
+  form.action = url
+  
+  var y = document.getElementById("editId" + x)
+  console.log(y)
+  if(event.target == y){
+    let dropdownDiv = document.getElementsByClassName("dropdown")
+    for (let i = 0; i < dropdownDiv.length; i++) {
+      dropdownDiv[i].style.display = "none"
+      
+    }  
+  
+  }
+  window.scrollTo(0, document.body.scrollHeight)
 
 
 }
@@ -176,4 +189,13 @@ function removeParam(key, sourceURL) {
       if (params_arr.length) rtn = rtn + "?" + params_arr.join("&");
   }
   return rtn;
+}
+
+function deleteMessage(event){  
+  var x = event.target.name;  
+  const url =  "../controllers/delete.php?id="+x
+  form.action = url
+  var y = document.getElementById("delete3")
+  console.log(y)
+
 }
