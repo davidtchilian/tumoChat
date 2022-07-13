@@ -1,10 +1,17 @@
 <?php
   session_start();
   $user_id = $_SESSION['user_id'];
+  $theme = $_SESSION['user_theme'];
   require_once("../models/db.php");
   $sql = "SELECT DISTINCT group_id, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE isInGroup_user_id = ".$user_id;
   $result = mysqli_query($conn, $sql);
-  $sendersql = "SELECT notification_sender_id FROM notifications WHERE notification_receiver_id = '$user_id' "
+
+  $notifications = file_get_contents($domain_name."/controllers/getnotifications.php");
+  echo $user_id;
+  var_dump($notifications);
+  $notifications = json_decode($notifs);
+  var_dump($notifications);
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,9 +29,6 @@
     <link rel="stylesheet" href="../style/page-accueil.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-
-        <?php $theme = $_SESSION['user_theme']; ?>
-       
         body{
            background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
         }
@@ -39,7 +43,6 @@
           <a class="navbar-brand" href="profile.php" style="color :white"
             >Profile</a
           >
-          
           <button
             class="navbar-toggler"
             type="button"
@@ -72,12 +75,14 @@
                     <div class="modal-content">
                       
                         <div class="groupinfo_div">
-                            <p id="groupInfo"></p>
+                            <p id="Notification_group"><?php ?></p>
                         </div>
                         <div class="usersinfo_div">
-                            <div id="usersInfo">
-                              
-                            </div>
+                            <p id="notif_sender_info"><?php ?></p>
+                        </div>
+                        <div class="notif_content_div">
+                            <p id="notification_content"><?php ?></p>
+                        </div>
                             <div id = "modal_buttons" class="userinfo_buttons">
                                 <div id="modal-extra-interactions"></div>
                                 <div id="modal-default-interactions">
