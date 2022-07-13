@@ -21,8 +21,17 @@ $sendersql = "SELECT notification_sender_id FROM notifications WHERE notificatio
     />
     <link rel="stylesheet" href="../style/page-accueil.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+
+        <?php $theme = $_SESSION['user_theme']; ?>
+       
+        body{
+           background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
+        }
+        
+        </style>
 </head>
-<body style='background-image: url("../assets/images/themes/3.jpg");'>
+<body >
 <div class="fixed-top">
       <nav class="navbar navbar-expand-lg" style="background-color: #6c4b93">
         <div class="container">
