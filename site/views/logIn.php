@@ -79,8 +79,8 @@
                         <a class="signlink" href="signUp.php">
                             Sign up
                         </a>
-                        <a class="signlink" href="logIn.php" >
-                            Log in
+                        <a class="signlink" href="email-send.php" >
+                            Forgot password?
                         </a>
                     </div>
 
