@@ -13,13 +13,13 @@
   }
 
   if (!isset($communityId)) {
-    header("Location: page-accueil.php");
+    header("Location: community.php");
     return;
   }
 
   require('../models/db.php');
  
-  $sql = "SELECT * FROM message WHERE message_group_id='$groupId'";
+  $sql = "SELECT * FROM message WHERE message_group_id='$communityId'";
   $messages = mysqli_query($conn, $sql);
 //   $message = mysqli_fetch_assoc($messages);
 
@@ -118,7 +118,7 @@
       </div>
       <div class="row">
             <?php
-              while($group = mysqli_fetch_assoc($result)){
+              while($community = mysqli_fetch_assoc($result)){
                 ?>
                 <div class="col-lg-4 col-sm-12">
                   <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
