@@ -4,7 +4,17 @@
   require_once("../models/db.php");
   $sql = "SELECT DISTINCT group_id, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE isInGroup_user_id = ".$user_id;
   $result = mysqli_query($conn, $sql);
-  $sendersql = "SELECT notification_sender_id FROM notifications WHERE notification_receiver_id = '$user_id' "
+  $sendersql = "SELECT notification_sender_id FROM notifications WHERE notification_receiver_id = '$user_id' ";
+
+  $sql2 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
+  $result2 = mysqli_query($conn, $sql2);
+  if ($result->num_rows > 0) {
+    if($row1 = mysqli_fetch_assoc($result2)) {
+        $usricon = $row1['user_icon'];
+    }
+} else {
+    // echo "0 results";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,24 +31,15 @@
     />
     <link rel="stylesheet" href="../style/page-accueil.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-
-        <?php $theme = $_SESSION['user_theme']; ?>
-       
-        body{
-           background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
-        }
-        
-        
-        </style>
   </head>
-  <body>
+  <body style='background-image: url("../assets/images/themes/3.jpg");'>
     <div class="fixed-top">
       <nav class="navbar navbar-expand-lg" style="background-color: #6c4b93">
         <div class="container">
-          <a class="navbar-brand" href="profile.php" style="color :white"
-            >Profile</a
-          >
+          <a class="navbar-brand" href="profile.php" style="color :white">
+            <?php  echo "<img src='../assets/icons/$usricon.png' class='card-img-top' alt='profile_' style='height: 45px; width: 45px; margin-bottom:10px;'>" ?>
+            Profile
+          </a>
           
           <button
             class="navbar-toggler"
@@ -70,14 +71,11 @@
             </li>
             <div id="infoModal" class="modal_user">
                     <div class="modal-content">
-                      
                         <div class="groupinfo_div">
                             <p id="groupInfo"></p>
                         </div>
                         <div class="usersinfo_div">
-                            <div id="usersInfo">
-                              
-                            </div>
+                            <div id="usersInfo"></div>
                             <div id = "modal_buttons" class="userinfo_buttons">
                                 <div id="modal-extra-interactions"></div>
                                 <div id="modal-default-interactions">
@@ -119,7 +117,7 @@
             <?php
               while($group = mysqli_fetch_assoc($result)){
                 ?>
-                <div class="col-lg-4 col-sm-12 group-chats">
+                <div class="col-lg-4 col-sm-12">
                   <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
                     <div class="card mt-5">
                       <ul class="list-group list-group-flush">

@@ -202,7 +202,7 @@
                 <?php
                 }
                 else{?>
-                    <div class="col-1"><img src="../assets/icons/10.png" class="user_icon"></div>
+                    <div class="col-1"><img src="../assets/comm_icons/10.png" class="user_icon"></div>
                     <div class="col-7">
                         <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
                             <?php 
