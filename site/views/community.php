@@ -1,18 +1,10 @@
-<?php
-  session_start();
-  $user_id = $_SESSION['user_id'];
-  $_SESSION['user_id'] = $user_id;
-  require_once("../models/db.php");
-  $sql = "SELECT DISTINCT group_id, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE isInGroup_user_id = ".$user_id;
-  $result = mysqli_query($conn, $sql);
-?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>TUYU | Home</title>
+    <title>TUYU | Communities</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -21,15 +13,14 @@
     />
     <link rel="stylesheet" href="../style/page-accueil.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-  </head>
-  <body style='background-image: url("../assets/images/themes/3.jpg");'>
-    <div class="fixed-top">
+</head>
+<body style='background-image: url("../assets/images/themes/3.jpg");'>
+<div class="fixed-top">
       <nav class="navbar navbar-expand-lg" style="background-color: #6c4b93">
         <div class="container">
           <a class="navbar-brand" href="profile.php" style="color :white"
             >Profile</a
           >
-          
           <button
             class="navbar-toggler"
             type="button"
@@ -51,14 +42,14 @@
                   style="color : white"
                   >Create group</a
                 >
+                
               </li>
               <li class="nav-item">
-              <a class="nav-link active" href="community.php" style="color :white"
-            >Community</a
+              <a class="nav-link active" href="page-accueil.php" style="color :white"
+            >Home</a
           >
 </li>
             </ul>
-            
             <form class="d-flex" role="search">
               <input
                 class="form-control me-2 srch-input"
@@ -79,10 +70,10 @@
         </div>
       </nav>
     </div>
-    <br />
+    <br>
     <div class="container mt-5">
       <div class="div-titre mt-4">
-        <h1 class="Titre">Home</h1>
+        <h1 class="Titre">Communities</h1>
       </div>
       <div class="row">
             <?php
@@ -113,5 +104,5 @@
       </div>
     </div>
     <script src="../scripts/search.js"></script>
-  </body>
+</body>
 </html>
