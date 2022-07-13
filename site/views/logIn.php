@@ -79,9 +79,6 @@
                         <a class="signlink" href="signUp.php">
                             Sign up
                         </a>
-                        <a class="signlink" href="logIn.php" >
-                            Log in
-                        </a>
                     </div>
 
                 </form>
