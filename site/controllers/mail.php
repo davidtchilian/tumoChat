@@ -1,4 +1,3 @@
-
 <?php
 
 $to = 'areg.movsesyan.y@tumo.org';
