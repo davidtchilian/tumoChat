@@ -49,7 +49,7 @@ CREATE TABLE COMMUNITY(
     community_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     community_name TEXT,
     community_bio TEXT,
-    community_icon INT,
+    community_icon TEXT,
     community_admin_id INT,
     FOREIGN KEY (community_admin_id) REFERENCES USERS (user_id)
 );
