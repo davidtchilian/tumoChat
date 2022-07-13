@@ -1,8 +1,10 @@
 var modal = document.getElementById("infoModal");
 var btn = document.getElementById("infoButton");
 var span = document.getElementById("closeButton");
-var info = document.getElementById("groupInfo");
+var groupName = document.getElementById("groupInfo");
 var usersInfo = document.getElementById("usersInfo");
+
+const groupInfoDiv = document.getElementById("groupinfo-container");
 
 var extraInteractions = document.getElementById("modal-extra-interactions");
 
@@ -34,7 +36,7 @@ function onClose() {
 
 
 function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
-  info.innerText = "Loading...";
+  groupName.innerText = "Loading...";
   const Http = new XMLHttpRequest();
   const url=`../controllers/getgroupinfo.php?id=${groupId}`;
   Http.open("GET", url);
@@ -49,19 +51,30 @@ function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
     try {
       jsonObject = JSON.parse(output);
     } catch (e) {
-      info.innerText = "Unexpected error, while trying to get the corresponding group information, please try again.";
+      groupName.innerText = "Unexpected error, while trying to get the corresponding group information, please try again.";
       return;
     }
 
     let groupInfo = jsonObject[0][0];
     let groupUsersInfo = jsonObject[1];
-    info.innerText = groupInfo.group_name + " - " + groupInfo.group_bio;
+    groupName.innerText = groupInfo.group_name;
+
+    if (groupInfo.group_bio) {
+      let groupBio = document.createElement("p");
+      groupBio.classList.add("group_bio");
+      groupBio.innerText = groupInfo.group_bio;
+      groupInfoDiv.appendChild(groupBio);
+    }
+
 
     for (let user of groupUsersInfo) {
 
       let userInfo = document.createElement("div");
+      let userEmail = document.createElement("p");
+      userEmail.classList.add("user-email");
+      userEmail.innerText = user[0].user_email;
       userInfo.classList.add("user_info_page")
-      userInfo.innerText = user[0].user_email;
+      userInfo.appendChild(userEmail);
       usersInfo.appendChild(userInfo);
  
       if (!isAdmin) {

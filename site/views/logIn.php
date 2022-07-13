@@ -2,7 +2,9 @@
 <html lang="fr">
 
 <head>
-    <meta charset="utf-8">
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>TUYU | connexion </title>
     <link rel="icon" type="image/png" href="../assets/images/logo_tuyu-sm.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -17,7 +19,7 @@
         integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../style/style.css">
-
+    
 </head>
 
 <body style='display:flex; align-items: center; background-image: url("../assets/images/themes/3.jpg");'>
@@ -76,6 +78,9 @@
                         <span> Not yet a member? </span> 
                         <a class="signlink" href="signUp.php">
                             Sign up
+                        </a>
+                        <a class="signlink" href="email-send.php" >
+                            Forgot password?
                         </a>
                     </div>
 

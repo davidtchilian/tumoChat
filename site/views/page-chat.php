@@ -113,22 +113,12 @@
             color: #ff5b4f;
         }
 
-        <?php
-
-        $_SESSION['user_theme']= $theme;
-        echo($theme);
-        if ($theme == 1) {
-            echo("background-image: url('../assets/images/super_fond_beige.png')");
-        }elseif ($theme == 2) {
-            echo("background-image: url('../assets/images/super_fond_beige.png')");
-        }elseif ($theme == 3) {
-            echo("background-image: url('../assets/images/super_fond_violet.png')");
+        <?php $theme = $_SESSION['user_theme']; ?>
+       
+        body{
+           background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
         }
         
-        
-        ?>
-
-
     </style>
 </head>
 <body>
@@ -150,8 +140,8 @@
                 </div>
                 <div id="infoModal" class="modal_user">
                     <div class="modal-content">
-                        <div class="groupinfo_div">
-                            <p id="groupInfo"></p>
+                        <div class="groupinfo_div" id="groupinfo-container">
+                            <p id="groupInfo" class="group_name"></p>
                         </div>
                         <div class="usersinfo_div">
                             <div id="usersInfo"></div>
