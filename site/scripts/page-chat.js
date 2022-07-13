@@ -1,68 +1,66 @@
-var modal = document.getElementById("infoModal");
-var btn = document.getElementById("infoButton");
-var span = document.getElementById("closeButton");
-var info = document.getElementById("groupInfo");
-var usersInfo = document.getElementById("usersInfo");
-
-var extraInteractions = document.getElementById("modal-extra-interactions");
-
 window.onload = () => {
-  window.scrollTo({
-    top: 1000,
-    behavior: 'instant'
-  }, document.body.scrollHeight);
+  window.scrollTo(0, document.body.scrollHeight);
 }
 
-btn.onclick = function() {
-  modal.style.display = "block";
+var infoModal = document.getElementById("infoModal");
+var infoModalButton = document.getElementById("infoButton");
+var infoModalCloseButton = document.getElementById("closeButton");
+
+var infoModalTitle = document.getElementById("groupInfo");
+var infoModalUsers = document.getElementById("usersInfo");
+var infoModalInteractions = document.getElementById("modal-extra-interactions");
+
+infoModalButton.onclick = function() {
+  infoModal.style.display = "block";
 }
 
-span.onclick = onClose;
+infoModalCloseButton.onclick = onClose;
 
 window.onclick = function(event) {
-  if (event.target == modal) {
+  if (event.target == infoModal) {
     onClose();
   }
 }
 
 function onClose() {
-  modal.style.display = "none";
-  usersInfo.innerHTML = "";
-  extraInteractions.innerHTML = "";
+  infoModal.style.display = "none";
+  infoModalUsers.innerHTML = "";
+  infoModalInteractions.innerHTML = "";
   window.location.replace(removeParam("modal", window.location.href));
 }
 
-
 function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
-  info.innerText = "Loading...";
+  infoModalTitle.innerText = "Loading...";
   const Http = new XMLHttpRequest();
   const url=`../controllers/getgroupinfo.php?id=${groupId}`;
   Http.open("GET", url);
   Http.send();
   Http.onreadystatechange = (e) => {
-    if(Http.readyState !== XMLHttpRequest.DONE) {
+
+    if (Http.readyState !== XMLHttpRequest.DONE) {
       return;
     }
+
     let output = Http.responseText;
     let jsonObject = null;
 
     try {
       jsonObject = JSON.parse(output);
     } catch (e) {
-      info.innerText = "Unexpected error, while trying to get the corresponding group information, please try again.";
+      infoModalTitle.innerText = "Unexpected error, while trying to get the corresponding group information, please try again.";
       return;
     }
 
     let groupInfo = jsonObject[0][0];
     let groupUsersInfo = jsonObject[1];
-    info.innerText = groupInfo.group_name + " - " + groupInfo.group_bio;
+    infoModalTitle.innerText = groupInfo.group_name + " - " + groupInfo.group_bio;
 
     for (let user of groupUsersInfo) {
 
       let userInfo = document.createElement("div");
       userInfo.classList.add("user_info_page")
       userInfo.innerText = user[0].user_email;
-      usersInfo.appendChild(userInfo);
+      infoModalUsers.appendChild(userInfo);
  
       if (!isAdmin) {
         continue;
@@ -85,14 +83,14 @@ function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
 
     if (isAdmin) {
       let addUserButton = createButton("add_user", "add_user", "Add User", null);
-      extraInteractions.appendChild(addUserButton);
+      infoModalInteractions.appendChild(addUserButton);
 
       let deleteGroup = createButton("delete_group", "delete_group", "Delete Group", `../controllers/deletegroup.php?id=${groupId}`);
-      extraInteractions.appendChild(deleteGroup);
+      infoModalInteractions.appendChild(deleteGroup);
     }
     else {
       let leaveGroup = createButton("leave_group", "leave_group", "Leave Group", `../controllers/deleteuserfromgroup.php?delid=${userId}&id=${groupId}`);
-      extraInteractions.appendChild(leaveGroup);
+      infoModalInteractions.appendChild(leaveGroup);
     }
 
   }
@@ -109,6 +107,10 @@ function createButton(className, id, innerText, href) {
   return button;
 }
 
+// Info modal end.
+
+
+// Other
 
 function myFunction(event) { 
   var x = event.target;
@@ -127,44 +129,35 @@ function update(){
   console.log(1)
 }
 
+const edit = document.getElementById("editId");
+const txt = document.getElementById("text");
+const form = document.getElementById("form");
 
-const edit = document.getElementById("editId")
-const txt = document.getElementById("text")
-const form = document.getElementById("form")
- 
- 
 function myFunction(event) {
- var x = event.target.name;
- console.log(x)
- const messageCont = document.getElementById(x)
- console.log(messageCont.innerText)
-
-  txt.value = messageCont.innerText
-  form.action = "../controllers/update.php"
-
-
+  var x = event.target.name;
+  console.log(x);
+  const messageCont = document.getElementById(x);
+  console.log(messageCont.innerText);
+  txt.value = messageCont.innerText;
+  form.action = "../controllers/update.php";
 }
 
-function show(event){
-  let dropdownDiv = document.getElementsByClassName("dropdown")
+function show(event) {
+  let dropdownDiv = document.getElementsByClassName("dropdown");
   for (let i = 0; i < dropdownDiv.length; i++) {
-    dropdownDiv[i].style.display = "none"
-    
+    dropdownDiv[i].style.display = "none";
   }
-
-
-  var y = event.target.id
-  let id = "dropdown" + y
-
-  const dropdown = document.getElementById(id)
-  dropdown.style.display = "inline-block"
-  dropdown.style.position = "absolute"
+  let y = event.target.id;
+  let id = "dropdown" + y;
+  const dropdown = document.getElementById(id);
+  dropdown.style.display = "inline-block";
+  dropdown.style.position = "absolute";
 }
+
+// Util to remove parameter from url.
+
 function removeParam(key, sourceURL) {
-  var rtn = sourceURL.split("?")[0],
-      param,
-      params_arr = [],
-      queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
+  var rtn = sourceURL.split("?")[0], param, params_arr = [], queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
   if (queryString !== "") {
       params_arr = queryString.split("&");
       for (var i = params_arr.length - 1; i >= 0; i -= 1) {
