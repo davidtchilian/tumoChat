@@ -28,15 +28,15 @@ $groupid = $_GET['id'];
     if ($result2->num_rows > 0) {
         while($row2 = mysqli_fetch_assoc($result2)) {
             $temp = array();
-            $temp[] = $row2; 
+            $temp[] =$row2; 
             $users[] = $temp;
         }
     } else {
         echo "0 results";
     }
-    s
+    $all = array();
     array_push($all,$groups);
     array_push($all,$users);
     echo json_encode($all);
     mysqli_close($conn);
-?> 
+?>
