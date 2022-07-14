@@ -1,26 +1,23 @@
-var stickerModal = document.getElementById("stickerModal");
-var stickerModalButton = document.getElementById("stickerButton");
-// var infoModalCloseButton = document.getElementById("closeButton");
+var modal = document.getElementById("stickerModal");
+var btn = document.getElementById("stickerButton");
+var span = document.getElementById("stickerCloseButton");
 
-// var infoModalTitle = document.getElementById("groupInfo");
-// var infoModalUsers = document.getElementById("usersInfo");
-var infoModalInteractions = document.getElementById("modal-extra-interactions");
 
-stickerModalButton.onclick = function () {
-  stickerModal.style.display = "block";
-};
+// var stickerModalTitle = document.getElementById("groupsticker");
+// var stickerModalUsers = document.getElementById("userssticker");
 
-// infoModalCloseButton.onclick = onClose;
+btn.onclick = function() {
+  modal.style.display = "block";
+}
 
-// window.onclick = function (event) {
-//   if (event.target == infoModal) {
-//     onClose();
-//   }
-// };
+span.onclick = onClose;
 
-// function onClose() {
-//   infoModal.style.display = "none";
-//   infoModalUsers.innerHTML = "";
-//   infoModalInteractions.innerHTML = "";
-//   window.location.replace(removeParam("modal", window.location.href));
-// }
+window.onclick = function(event) {
+  if (event.target == modal) {
+    onClose();
+  }
+}
+
+function onClose() {
+  modal.style.display = "none";
+}
