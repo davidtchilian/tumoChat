@@ -15,7 +15,7 @@
 
   $sql2 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
   $result2 = mysqli_query($conn, $sql2);
-  if ($result->num_rows > 0) {
+  if ($result2->num_rows > 0) {
     if($row1 = mysqli_fetch_assoc($result2)) {
         $usricon = $row1['user_icon'];
     }
