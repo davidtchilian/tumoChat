@@ -19,13 +19,10 @@ $name = $_POST['grpname'];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <style>
-
         <?php $theme = $_SESSION['user_theme']; ?>
-       
         body{
            background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
         }
-        
         </style>
 
 </head>
@@ -68,11 +65,7 @@ $name = $_POST['grpname'];
                             echo "<option value='$i[0]'>". explode("@",$i[1])[0] ."</option >";
                         }
                     ?>
-                <!--<option value="id" >Person 1</option>
-                    <option>Person 2</option>
-                    <option>Person 3</option>
-                    <option>Person 4</option>
-                </select>-->
+    
             </div>
             <a href="../controllers/creategroup.php" class="btn btn-primary mt-3 "
                 style="background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119);">Return</a>
