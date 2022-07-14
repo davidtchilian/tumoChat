@@ -46,7 +46,12 @@ CREATE TABLE NOTIFICATIONS(
     FOREIGN KEY (notification_group_id) REFERENCES GROUPCHAT (group_id)
 );
 
-
+CREATE TABLE RESET_PWD(
+    reset_pwd_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    reset_pwd_hash TEXT,
+    reset_pwd_user_id INT,
+    reset_pwd_date DATETIME
+);
 -- CREATE TABLE COMMUNITY(
 --     community_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 --     community_name TEXT,
