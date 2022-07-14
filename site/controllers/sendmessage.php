@@ -1,11 +1,13 @@
 <?php
 
+session_start();
 $messagecontent = strip_tags(htmlspecialchars($_POST['message_content']));
-$groupId = $_POST['group_id'];
 
-if (!empty($messagecontent) && !ctype_space($messagecontent)) {
+$groupId = $_POST["group_id"];
+
+
+if ($messagecontent != "" && !ctype_space($messagecontent)) {
     
-    session_start();
     $userId = $_SESSION["user_id"];
 
     require_once('../models/db.php');
@@ -17,7 +19,10 @@ if (!empty($messagecontent) && !ctype_space($messagecontent)) {
     mysqli_query($conn, $sql);
     mysqli_close($conn);
 
+}else{
+    echo 1;
 }
+
 
 header("Location: ../views/page-chat.php?id=".$groupId);
 

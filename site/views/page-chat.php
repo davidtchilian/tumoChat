@@ -122,7 +122,7 @@
         
     </style>
 </head>
-<body>
+<body id = "bodyHTML">
     <div class="fixed-top">
         <nav class="navbar navbar-expand-lg" style="background-color : #6c4b93">
         <?php
@@ -186,10 +186,10 @@
                     // echo "<p class='user_email'>".$user_name."</p>";
                     echo $message['message_content']; ?>
                 </button>
-                <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;" id = "<?= "dropdown".$message['message_id']?>">
+                <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;" id="<?= "dropdown".$message['message_id']?>">
                 
                     <div class="dropdown-content" id = "dropdown-content">
-                        <a href="#" onclick = "myFunction(event)" id = <?= "editId".$message['message_id']?> name = "<?= $message['message_id']?>">Edit</a>
+                        <a href="#"  id = "<?= "editId".$message['message_id']?>" onclick="myFunction(event)" name="<?= $message['message_id']?>">Edit</a>
                         <a href="#" onclick = "deleteMessage(event)" id = "<?= "delete".$message['message_id']?>">Delete</a>
                         </div>
 
@@ -246,8 +246,9 @@
                         <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
                         <input type="hidden" name="group_id" value="<?php echo $groupId; ?>">
                         <input type="hidden" name = "message_id" value="<?= 56?>">
+                        <input type="hidden" id = "jsUserId" value="<?= $userId?>">
                         <input name="message_content" class="form-control me-2" type="text" id="text" placeholder="Enter your message here" autofocus />
-                        <button class="btn search" type="submit" value="Message">
+                        <button class="btn search" type="submit" value="Message" id = "send" >
                             <a href="page-chat.php?id=<?php echo $groupId;?>"></a>
                             <img src="../assets/images/avion_papier_nour_1.png" alt="envoye" style="width :40px" style="height : 40px" />
                         </button>
