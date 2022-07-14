@@ -6,18 +6,17 @@ var infoModalTitle = document.getElementById("groupInfo");
 var infoModalUsers = document.getElementById("usersInfo");
 var infoModalInteractions = document.getElementById("modal-extra-interactions");
 
-infoModalButton.onclick = function() {
+infoModalButton.onclick = function () {
   infoModal.style.display = "block";
-}
+};
 
 infoModalCloseButton.onclick = onClose;
 
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target == infoModal) {
     onClose();
   }
-}
-
+};
 
 function onClose() {
   infoModal.style.display = "none";
