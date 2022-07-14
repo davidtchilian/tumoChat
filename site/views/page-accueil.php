@@ -105,7 +105,7 @@
                 </div>
             </ul> 
             
-            <form class="d-flex" role="search">
+            <form class="d-flex searchform" role="search">
           
               <input
                 class="form-control me-2 srch-input"
