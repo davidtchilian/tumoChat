@@ -107,3 +107,35 @@
   height: 90%;
   color: white;
 }
+
+.CommImg{
+  background: #fff;
+  border-radius: 50% 50% 0 0;
+  justify-content: center;
+}
+
+@media screen and (max-width: 991px){
+  .CommImg{
+    width: 6.5vw !important;
+    
+  }
+  .list-group-item{
+    font-size: 1.5vw !important;
+  }
+}
+
+.list-group-item-margin{
+  margin: 0.8vw 0;
+}
+
+.list-bottom{
+  height:13vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 
+.group-name{
+  margin-top: 1vw;
+} */
