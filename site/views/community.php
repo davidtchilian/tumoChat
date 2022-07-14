@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>TUYU | Communities</title>
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -111,14 +112,15 @@
               while($group = mysqli_fetch_assoc($result)){
                   if($group["group_type"]==0){
                 ?>
-                <div class="col-lg-4 col-sm-12 group-chats">
+                <div class="col-lg-4 col-sm-12 group-chats mb-5">
+                  <div style='width:100%; display: flex; justify-content: center;'>
+                    <img class="CommImg" style="width:4vw" src="../assets/comm_icons/<?php echo $group["group_icon"];?>.png" alt="">
+                  </div>
                   <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
-                    <div class="card mt-5">
+                    <div class="card">
                       <ul class="list-group list-group-flush" style="list-style-type: none;">
-                        
-                        <li class="list-group-item group-name"><h3><?php echo $group["group_name"]; ?></h3></li>
-                        <li><img style="width:5vw" src="../assets/comm_icons/<?php echo $group["group_icon"];?>.png" alt=""></li>
-                        <li class="list-group-item">
+                        <li class="list-group-item group-name" style="font-size: 0.8vw"><h3 class="list-group-item-margin"><?php echo $group["group_name"]; ?></h3></li>
+                        <li class="list-group-item list-bottom list-group-item-margin" style="font-size: 0.7vw">
                           <?php
                             echo  $group["group_bio"];
                           ?>
