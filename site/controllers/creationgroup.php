@@ -47,7 +47,7 @@ foreach ($select as $key => $receiver) {
 }
 header('Location: ../views/page-accueil.php');
 exit();
-// echo "hello";
+
 
 
 

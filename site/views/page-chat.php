@@ -132,8 +132,12 @@
     }
     </style>
 </head>
+<<<<<<< HEAD
+<body id = "bodyHTML">
+=======
 
 <body>
+>>>>>>> c3565aa8e3f42e8ee8e37655ea615a9b8dcbb166
     <div class="fixed-top">
         <nav class="navbar navbar-expand-lg" style="background-color : #6c4b93">
             <?php
@@ -171,6 +175,7 @@
                         </button>
                     </a>
                 </div>
+
                 <div id="infoModal" class="modal_user">
                     <div class="modal-content">
                         <div class="groupinfo_div" id="groupinfo-container">
@@ -187,6 +192,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </nav>
     </div>
@@ -208,6 +214,14 @@
                     // echo "<p class='user_email'>".$user_name."</p>";
                     echo $message['message_content']; ?>
                 </button>
+<<<<<<< HEAD
+                <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;" id="<?= "dropdown".$message['message_id']?>">
+                
+                    <div class="dropdown-content" id = "dropdown-content">
+                        <a href="#"  id = "<?= "editId".$message['message_id']?>" onclick="myFunction(event)" name="<?= $message['message_id']?>">Edit</a>
+                        <a href="#" onclick = "deleteMessage(event)" id = "<?= "delete".$message['message_id']?>">Delete</a>
+                        </div>
+=======
                 <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;"
                     id="<?= "dropdown".$message['message_id']?>">
 
@@ -216,6 +230,7 @@
                             name="<?= $message['message_id']?>">Edit</a>
                         <a href="#" onclick="deleteMessage(event)" id="<?= "delete".$message['message_id']?>">Delete</a>
                     </div>
+>>>>>>> c3565aa8e3f42e8ee8e37655ea615a9b8dcbb166
 
                 </div>
             </div>
@@ -272,21 +287,35 @@
                     <form class="d-flex" role="search" action="../controllers/sendmessage.php" method="post" id="form">
                         <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
                         <input type="hidden" name="group_id" value="<?php echo $groupId; ?>">
+<<<<<<< HEAD
+                        <input type="hidden" name = "message_id" value="<?= 56?>">
+                        <input type="hidden" id = "jsUserId" value="<?= $userId?>">
+                        <input name="message_content" class="form-control me-2" type="text" id="text" placeholder="Enter your message here" autofocus />
+                        <button class="btn search" type="submit" value="Message" id = "send" >
+=======
                         <input type="hidden" name="message_id" value="<?= 56?>">
                         <input name="message_content" class="form-control me-2" type="text" id="text"
                             placeholder="Enter your message here" autofocus />
                         <button class="btn search" type="submit" value="Message">
+>>>>>>> c3565aa8e3f42e8ee8e37655ea615a9b8dcbb166
                             <a href="page-chat.php?id=<?php echo $groupId;?>"></a>
                             <img src="../assets/images/avion_papier_nour_1.png" alt="envoye" style="width :40px"
                                 style="height : 40px" />
                         </button>
                     </form>
 
-                    <div id="stickerModal" class="modal_user">
-                        <div class="modal-content">
-                            <div class="notif_content_div">
-                                <p id="notification_content"><?php echo"stickers"?></p>
-                            </div>
+                </div>
+                <div id="stickerModal" class="modal_user">
+                    <div class="modal-content ">
+                        <div id="modal-extra-interactions"></div>
+                        <div id="modal-default-interactions">
+                            <button id="stickerCloseButton" class="close btn modal_interaction"><img
+                                    src="../assets/images/cllose.png" alt="sticker" style="width :40px"
+                                    style="height : 40px" />
+                            </button>
+                        </div>
+                        <div>
+                            <p><?php echo"stickers"?></p>
                         </div>
                     </div>
                 </div>

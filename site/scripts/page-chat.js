@@ -1,6 +1,6 @@
-var modal = document.getElementById("infoModal");
-var btn = document.getElementById("infoButton");
-var span = document.getElementById("closeButton");
+var stickerModal = document.getElementById("infoModal");
+var sticketrButton = document.getElementById("infoButton");
+var stickerClose = document.getElementById("closeButton");
 var groupName = document.getElementById("groupInfo");
 var usersInfo = document.getElementById("usersInfo");
 
@@ -15,20 +15,21 @@ window.onload = () => {
   }, document.body.scrollHeight);
 }
 
-btn.onclick = function() {
-  modal.style.display = "block";
+sticketrButton.onclick = function() {
+  console.log("Click")
+  stickerModal.style.display = "block";
 }
 
-span.onclick = onClose;
+stickerClose.onclick = onClose;
 
 window.onclick = function(event) {
-  if (event.target == modal) {
+  if (event.target == stickerModal) {
     onClose();
   }
 }
 
 function onClose() {
-  modal.style.display = "none";
+  stickerModal.style.display = "none";
   usersInfo.innerHTML = "";
   extraInteractions.innerHTML = "";
   window.location.replace(removeParam("modal", window.location.href));
@@ -141,51 +142,12 @@ function createButton(className, id, innerText, href) {
 // }
 
 
-const edit = document.getElementById("editId")
-const txt = document.getElementById("text")
-const form = document.getElementById("form")
- 
- 
-function myFunction(event) {
- var x = event.target.name;
- console.log(x)
- const messageCont = document.getElementById(x)
- console.log(messageCont.innerText)
-
-  txt.value = messageCont.innerText
-  const url =  "../controllers/update.php?id="+x
-  form.action = url
-  
-  var y = document.getElementById("editId" + x)
-  console.log(y)
-  if(event.target == y){
-    let dropdownDiv = document.getElementsByClassName("dropdown")
-    for (let i = 0; i < dropdownDiv.length; i++) {
-      dropdownDiv[i].style.display = "none"
-      
-    }  
-  
-  }
-  window.scrollTo(0, document.body.scrollHeight)
 
 
-}
-
-function show(event){
-  let dropdownDiv = document.getElementsByClassName("dropdown")
-  for (let i = 0; i < dropdownDiv.length; i++) {
-    dropdownDiv[i].style.display = "none"
-    
-  }
 
 
-  var y = event.target.id
-  let id = "dropdown" + y
 
-  const dropdown = document.getElementById(id)
-  dropdown.style.display = "inline-block"
-  dropdown.style.position = "absolute"
-}
+
 function removeParam(key, sourceURL) {
   var rtn = sourceURL.split("?")[0],
       param,
@@ -204,11 +166,132 @@ function removeParam(key, sourceURL) {
   return rtn;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+const edit = document.getElementById("editId")
+const txt = document.getElementById("text")
+const form = document.getElementById("form")
+const button = document.getElementById("send")
+const messageSenderId = document.getElementById("jsUserId").value
+
+
+
+
+ 
+
 function deleteMessage(event){  
-  var x = event.target.name;  
-  const url =  "../controllers/delete.php?id="+x
-  form.action = url
-  var y = document.getElementById("delete3")
-  console.log(y)
+  // var x = event.target.name;  
+  // const url =  "../controllers/delete.php?id="+x
+  // form.action = url
+  // var y = document.getElementById("delete3")
+  // console.log(y)
 
 }
+
+
+
+
+function show(event){
+  let dropdownDiv = document.getElementsByClassName("dropdown")
+  for (let i = 0; i < dropdownDiv.length; i++) {
+    dropdownDiv[i].style.display = "none"
+    
+  }
+
+
+  var y = event.target.id
+  let id = "dropdown" + y
+
+  const dropdown = document.getElementById(id)
+  dropdown.style.display = "inline-block"
+  dropdown.style.position = "absolute"
+}
+
+
+//update
+
+var x 
+function myFunction(event) {
+  button.id = "submit"
+
+  x = event.target.name
+
+  const messageCont = document.getElementById(x)
+
+  document.getElementById("submit").addEventListener("click", function(event){
+    event.preventDefault()
+  
+  })
+  txt.value = messageCont.innerText
+  //  const url =  "../controllers/update.php?id="+x
+  //  form.action = url
+   
+   var y = document.getElementById("editId" + x)
+ 
+   if(event.target == y){
+     let dropdownDiv = document.getElementsByClassName("dropdown")
+     for (let i = 0; i < dropdownDiv.length; i++) {
+       dropdownDiv[i].style.display = "none"
+       
+     }  
+   
+   }
+  
+ }
+
+ 
+
+
+// document.getElementById("submit").addEventListener("click", function(event){
+//   var xmlhttp = new XMLHttpRequest();
+//   let rq = "../controllers/update.php?id=" + x;console.log(rq);
+//   xmlhttp.open("POST", rq,false);
+//   xmlhttp.send();
+//   console.log(true)
+//   console.log(txt.value)
+//   txt.value = "asxasx"
+//   button.id = "send"
+
+// })
+
+
+
+document.getElementById("bodyHTML").addEventListener("click", function(event) {
+  if (event.target != edit){
+  let id = button.id
+  
+  document.getElementById(id).addEventListener("click", function(event) {
+    const message_cont = txt.value
+  
+   
+
+    var params = "user_id="+messageSenderId+"&"+"message_id="+x+"&"+"message_content="+message_cont
+    if(message_cont != ""){
+      var xmlhttp = new XMLHttpRequest();
+      let rq = "../controllers/update.php"
+      xmlhttp.open("POST", rq, true);
+      xmlhttp.send(params);
+        
+      console.log(params);
+    
+      txt.value = ""
+      button.id = "send"
+    }
+    
+    
+
+  })
+
+  }
+})
