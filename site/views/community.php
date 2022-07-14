@@ -2,9 +2,9 @@
   session_start();
   $user_id = $_SESSION['user_id'];
   require_once("../models/db.php");
-  $sql = "SELECT DISTINCT group_id, group_type, group_name, group_icon, group_bio FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE isInGroup_user_id = ".$user_id;
+  $sql = "SELECT DISTINCT group_id, group_type, group_name, group_icon, group_bio FROM GROUPCHAT WHERE group_type = 1";
   $result = mysqli_query($conn, $sql);
-  $sendersql = "SELECT notification_sender_id FROM notifications WHERE notification_receiver_id = '$user_id' "
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,23 +80,6 @@
                     </div>
                 </div>
             </ul> 
-            
-            <form class="d-flex" role="search">
-          
-              <input
-                class="form-control me-2 srch-input"
-                type="search"
-                placeholder="Search group"
-                aria-label="Search"
-              />
-              <button class="btn search">
-                <img
-                  src="../assets/images/loupe.png"
-                  alt="Rechercher"
-                  style="width : 20px; height: 30px; margin-top : 3px"
-                />
-              </button>
-            </form>
             <a href ="../controllers/logout.php" class="signout-btn">Sign out</a>
           </div>
         </div>
@@ -110,11 +93,11 @@
       <div class="row">
             <?php
               while($group = mysqli_fetch_assoc($result)){
-                  if($group["group_type"]==0){
                 ?>
                 <div class="col-lg-4 col-sm-12 group-chats mb-5">
                   <div style='width:100%; display: flex; justify-content: center;'>
-                    <img class="CommImg" style="width:4vw" src="../assets/comm_icons/<?php echo $group["group_icon"];?>.png" alt="">
+                  <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
+                    <img class="CommImg" style="width:4vw" src="../assets/comm_icons/<?php echo $group["group_icon"];?>.png" alt=""></a>
                   </div>
                   <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
                     <div class="card">
@@ -130,7 +113,7 @@
                   </a>
                 </div>
               <?php
-              }}
+              }
               ?>
       </div>
     </div>

@@ -21,8 +21,13 @@
  
   $sql = "SELECT * FROM message WHERE message_group_id='$groupId'";
   $messages = mysqli_query($conn, $sql);
-//   $message = mysqli_fetch_assoc($messages);
 
+  $sql = "SELECT group_name, group_type, group_icon FROM groupchat WHERE group_id='$groupId'";
+  $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
+  $groupType = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_type"];
+  $groupIcon = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_icon"];
+//   $message = mysqli_fetch_assoc($messages);
+  if($groupType==2){
   $group_users = file_get_contents($domain_name."/controllers/getgroupusers.php?id=".$groupId);
   $group_users = json_decode($group_users);
 
@@ -35,13 +40,12 @@
   if($isingroup == false){
       header("Location: page-accueil.php");
   }
+  }
 
-  $sql = "SELECT group_name, group_type FROM groupchat WHERE group_id='$groupId'";
-  $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
-  $groupType = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_type"];
+  
 
-  $sql = "SELECT group_admin_id FROM groupchat WHERE group_id=$groupId";
-  $groupAdminId = mysqli_fetch_assoc(mysqli_query($conn, $sql))['group_admin_id'];
+  $sql1 = "SELECT group_admin_id FROM groupchat WHERE group_id=$groupId";
+  $groupAdminId = mysqli_fetch_assoc(mysqli_query($conn, $sql1))['group_admin_id'];
   $isAdmin = $userId == $groupAdminId;
   
   mysqli_close($conn);
@@ -148,6 +152,12 @@
         ?>
             <div class="container">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <?php
+                if($groupType==1){ ?>
+                    <li>
+                        <img style="width: 12px;" src="../images/comm_icons/<?php echo $groupIcon; ?>.png" alt="">
+                    </li>
+                    <?php } ?>
                     <li class="nav-item">
                         <a class="nav-link" href="#" style="color : white"><?php echo $groupName; ?></a>
                     </li>

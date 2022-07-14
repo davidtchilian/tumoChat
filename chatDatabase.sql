@@ -7,6 +7,11 @@ CREATE TABLE USERS(
     user_icon INT  -- '/assets/images/INT.png'
 );
 
+CREATE TABLE typeGroupChat(
+    typeGroupChat_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    typeName TEXT
+);
+
 CREATE TABLE GROUPCHAT(
     group_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     group_name TEXT,
@@ -14,7 +19,8 @@ CREATE TABLE GROUPCHAT(
     group_admin_id INT,
     group_type INT,
     group_icon INT,
-    FOREIGN KEY (group_admin_id) REFERENCES USERS (user_id)
+    FOREIGN KEY (group_admin_id) REFERENCES USERS (user_id),
+    FOREIGN KEY (group_type) REFERENCES typeGroupChat (typeGroupChat_id)
 );
 
 CREATE TABLE MESSAGE(

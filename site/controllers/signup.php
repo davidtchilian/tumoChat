@@ -46,14 +46,14 @@ else if($password == $confirmPassword){
         INSERT INTO USERS(user_email,user_password,user_bio,user_theme,user_icon)
         VALUES ('$email', '$password_hash', '', 0, 0);";
         $conn->query($sql);
-        $user_id = mysqli_query($conn, "SELECT user_id FROM USERS WHERE user_email = '$email'"); //NEED TO ADD FETCH
-        $row = $user_id->fetch_assoc();
-        $userid = $row['user_id'];
+        // $user_id = mysqli_query($conn, "SELECT user_id FROM USERS WHERE user_email = '$email'"); //NEED TO ADD FETCH
+        // $row = $user_id->fetch_assoc();
+        // $userid = $row['user_id'];
         
-        for($i = 1; $i <= 14; $i++){
-            $sqlAdd = "INSERT INTO isInGroup(isInGroup_user_id, isInGroup_group_id) VALUES ($userid, $i)";
-            $conn->query($sqlAdd);
-        }
+        // for($i = 1; $i <= 14; $i++){
+        //     $sqlAdd = "INSERT INTO isInGroup(isInGroup_user_id, isInGroup_group_id) VALUES ($userid, $i)";
+        //     $conn->query($sqlAdd);
+        // }
         header("Location: ../views/logIn.php?id=0");
         }
     }
