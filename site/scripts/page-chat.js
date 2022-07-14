@@ -1,6 +1,6 @@
-var modal = document.getElementById("infoModal");
-var btn = document.getElementById("infoButton");
-var span = document.getElementById("closeButton");
+var stickerModal = document.getElementById("infoModal");
+var sticketrButton = document.getElementById("infoButton");
+var stickerClose = document.getElementById("closeButton");
 var groupName = document.getElementById("groupInfo");
 var usersInfo = document.getElementById("usersInfo");
 
@@ -15,20 +15,21 @@ window.onload = () => {
   }, document.body.scrollHeight);
 }
 
-btn.onclick = function() {
-  modal.style.display = "block";
+sticketrButton.onclick = function() {
+  console.log("Click")
+  stickerModal.style.display = "block";
 }
 
-span.onclick = onClose;
+stickerClose.onclick = onClose;
 
 window.onclick = function(event) {
-  if (event.target == modal) {
+  if (event.target == stickerModal) {
     onClose();
   }
 }
 
 function onClose() {
-  modal.style.display = "none";
+  stickerModal.style.display = "none";
   usersInfo.innerHTML = "";
   extraInteractions.innerHTML = "";
   window.location.replace(removeParam("modal", window.location.href));
