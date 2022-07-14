@@ -522,3 +522,14 @@ body {
   color: #9575ba;
   transition: all .2s ease-in-out;
 }
+
+
+.login-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.g_id_signin {
+  margin-bottom: 10px;
+}

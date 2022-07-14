@@ -19,7 +19,8 @@
         integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../style/style.css">
-    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="../scripts/googleapi/googlelogin.js"></script>
 </head>
 
 <body style='display:flex; align-items: center; background-image: url("../assets/images/themes/3.jpg");'>
@@ -78,8 +79,18 @@
                             </div> 
                                 <?php }
                     } ?>    
-
-                    <input type="submit" name="Login" id="exampleInputSubmit" class="submit-btn mb-3" href="page-accueil.html" style="margin:0 auto;">
+                    <div class="login-buttons">
+                        <input type="submit" name="Login" id="exampleInputSubmit" class="submit-btn mb-3" href="page-accueil.html" style="margin:0 auto;">
+                        <div id="g_id_onload" data-client_id="409821055988-h65mtble4s6aa48ij82cp1alpariqbb1.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+                        <div class="g_id_signin"
+                            data-type="standard"
+                            data-size="large"
+                            data-theme="outline"
+                            data-text="sign_in_with"
+                            data-shape="rectangular"
+                            data-logo_alignment="left">
+                        </div>
+                    </div>
                     <div class="col-12" style="color: rgb(83, 100, 113);">
                         <span> Not yet a member? </span> 
                         <a class="signlink" href="signUp.php">
