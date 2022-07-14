@@ -10,7 +10,7 @@ infoModalButton.onclick = function() {
   infoModal.style.display = "block";
 }
 
-infoModalCloseButton.onclick = onClose;
+
 
 window.onclick = function(event) {
   if (event.target == infoModal) {
@@ -18,10 +18,10 @@ window.onclick = function(event) {
   }
 }
 
-
-function onClose() {
-  infoModal.style.display = "none";
-  infoModalUsers.innerHTML = "";
-  infoModalInteractions.innerHTML = "";
-  window.location.replace(removeParam("modal", window.location.href));
-}
+// infoModalCloseButton.onclick = onClose;
+// function onClose() {
+//   infoModal.style.display = "none";
+//   // infoModalUsers.innerHTML = "";
+//   // infoModalInteractions.innerHTML = "";
+//   // window.location.replace(removeParam("modal", window.location.href));
+// }

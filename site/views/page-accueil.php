@@ -6,13 +6,6 @@
   $sql = "SELECT DISTINCT group_id, group_type, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE isInGroup_user_id = ".$user_id;
   $result = mysqli_query($conn, $sql);
 
-  $notifications = file_get_contents($domain_name."/controllers/getnotifications.php");
-  echo $user_id;
-  var_dump($notifications);
-  $notifications = json_decode($notifs);
-  var_dump($notifications);
-  
-
   $sql2 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
   $result2 = mysqli_query($conn, $sql2);
   if ($result->num_rows > 0) {
@@ -38,6 +31,49 @@
     />
     <link rel="stylesheet" href="../style/page-accueil.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../scripts/jquery.js"></script>
+    <script type="text/javascript">
+
+    // Jquery Method
+    $(function (){
+        $.ajax({
+            url: '../controllers/getnotifications.php',       
+            data: "",
+            dataType: 'json', //data format      
+            success: function (data) {
+              let modal = document.getElementById("modal-content");
+                data.forEach(element => {
+                  console.log(element);
+                let notif_id = document.createElement("div");
+                let notif_group_id = document.createElement("div");
+                let notif_content = document.createElement("div");
+                let notif_sender_id = document.createElement("div");
+                let notif_accept_btn = document.createElement("a");
+                let notif_decline_btn = document.createElement("a");
+                let btns_form = document.createElement("FORM");
+                notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&gID=" + element.notification_group_id ;
+                notif_accept_btn.innerHTML = "Accept";
+                notif_decline_btn.href = "../controllers/notificationdecision.php?gID=" + element.notification_group_id;
+                notif_decline_btn.innerHTML = "decline";
+                notif_id.innerHTML = element.notification_id;
+                modal.appendChild(notif_id);
+                modal.appendChild(notif_accept_btn);
+                modal.appendChild(notif_decline_btn);
+              }
+              )
+              let notif_close_btn = document.createElement("button");
+              let modalInfo = document.getElementById("infoModal");
+                notif_close_btn.id = "closeButton";
+                notif_close_btn.className = "close btn modal_interaction";
+                notif_close_btn.onclick = function(){
+                  modalInfo.style.display = "none";
+                }
+                notif_close_btn.innerHTML = "Close";
+                modal.appendChild(notif_close_btn); 
+            }
+        });
+    });
+</script>
     <style>
         body{
            background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
@@ -74,8 +110,7 @@
                   aria-current="page"
                   href="creategroup.php"
                   style="color : white"
-                  >Create group</a
-                >
+                  >Create group</a>
                 
               </li>
                 
@@ -84,23 +119,27 @@
               <a class="nav-link active" href="community.php" style="color :white">Community</a>
             </li>
             <div id="infoModal" class="modal_user">
-                    <div class="modal-content">
-                        <div class="groupinfo_div">
-                            <p id="Notification_group"><?php ?></p>
+                    <div id="modal-content" class="modal-content">
+                      <!-- <div class="notifInfo_div">
+                        <p id="notifInfo"></p>
+                      </div>
+                        <div class="notif_group_div">
+                            <p id="notification_group"></p>
                         </div>
-                        <div class="usersinfo_div">
-                            <p id="notif_sender_info"><?php ?></p>
+                        <div class="Notif_sender_div">
+                            <p id="notif_sender_info"></p>
                         </div>
                         <div class="notif_content_div">
-                            <p id="notification_content"><?php ?></p>
+                            <p id="notification_content"></p>
                         </div>
                             <div id = "modal_buttons" class="userinfo_buttons">
                                 <div id="modal-extra-interactions"></div>
                                 <div id="modal-default-interactions">
-                                    <button id="closeButton" class="close btn modal_interaction">Close</button>
+                                    
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
+                        <!-- <button id="closeButton" class="close btn modal_interaction">Close</button> -->
                     </div>
                 </div>
             </ul> 
@@ -162,5 +201,6 @@
     </div>
     <script src="../scripts/search.js"></script>
     <script src="../scripts/notifications.js"></script>
+    
   </body>
 </html>
