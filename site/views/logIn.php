@@ -77,6 +77,18 @@
                                 <?php echo "Mail was sent Successfully!"; ?>
                             </div> 
                                 <?php }
+                        if($_GET['id'] == 4){
+                            ?>
+                            <div class="alert alert-danger" role="alert">
+                                <?php echo "Someting went wrong"; ?>
+                            </div> 
+                                <?php }
+                        if($_GET['id'] == 5){
+                            ?>
+                            <div class="alert alert-success" role="alert">
+                                <?php echo "You changed Your password successfully!"; ?>
+                            </div> 
+                                <?php }
                     } ?>    
 
                     <input type="submit" name="Login" id="exampleInputSubmit" class="submit-btn mb-3" href="page-accueil.html" style="margin:0 auto;">

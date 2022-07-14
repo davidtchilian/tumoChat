@@ -161,6 +161,7 @@
                         </button>
                     </a>
                 </div>
+
                 <div id="infoModal" class="modal_user">
                     <div class="modal-content">
                         <div class="groupinfo_div" id="groupinfo-container">
@@ -177,6 +178,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </nav>
     </div>
@@ -272,11 +274,18 @@
                         </button>
                     </form>
 
-                    <div id="stickerModal" class="modal_user">
-                        <div class="modal-content">
-                            <div class="notif_content_div">
-                                <p id="notification_content"><?php echo"stickers"?></p>
-                            </div>
+                </div>
+                <div id="stickerModal" class="modal_user">
+                    <div class="modal-content ">
+                        <div id="modal-extra-interactions"></div>
+                        <div id="modal-default-interactions">
+                            <button id="stickerCloseButton" class="close btn modal_interaction"><img
+                                    src="../assets/images/cllose.png" alt="sticker" style="width :40px"
+                                    style="height : 40px" />
+                            </button>
+                        </div>
+                        <div>
+                            <p><?php echo"stickers"?></p>
                         </div>
                     </div>
                 </div>
