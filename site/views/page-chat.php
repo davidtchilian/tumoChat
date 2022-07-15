@@ -178,9 +178,20 @@
 
                 <div id="infoModal" class="modal_user">
                     <div class="modal-content">
+                        <?php if($groupType==1){ ?>
+                            <div id="modal-default-interactions">
+                                    <button id="closeButton" class="close btn modal_interaction"><img
+                                    src="../assets/images/cllose.png" alt="sticker" style="width :40px"
+                                    style="height : 40px" /></button>
+                                </div> <?php } ?>
                         <div class="groupinfo_div" id="groupinfo-container">
                             <p id="groupInfo" class="group_name"></p>
+                            <p id="groupBio"></p>
+                            
                         </div>
+
+                        <?php if($groupType==2){
+    ?>
                         <div class="usersinfo_div">
                             <div id="usersInfo"></div>
                             <div id="modal_buttons" class="userinfo_buttons">
@@ -190,6 +201,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <?php } ?>
                     </div>
                 </div>
 
@@ -314,6 +327,11 @@
     if($groupType==2){
     ?>
     <script src="../scripts/page-chat.js"></script>
+    <?php } ?>
+    <?php
+    if($groupType==1){
+    ?>
+    <script src="../scripts/comm_chat_page.js"></script>
     <?php } ?>
     <script src="../scripts/sticker.js"></script>
     <script>
