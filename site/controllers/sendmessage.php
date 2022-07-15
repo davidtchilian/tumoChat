@@ -25,5 +25,5 @@ if ($messagecontent != "" && !ctype_space($messagecontent)) {
 
 
 header("Location: ../views/page-chat.php?id=".$groupId);
-
+exit();
 ?>
