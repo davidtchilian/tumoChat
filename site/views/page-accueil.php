@@ -1,5 +1,9 @@
 <?php
   session_start();
+  if (!isset($_SESSION['user_id'])) {
+    header('Location: ./login.php?id=4');
+    exit();
+}
   $user_id = $_SESSION['user_id'];
   $theme = $_SESSION['user_theme'];
   require_once("../models/db.php");
@@ -40,22 +44,24 @@
             success: function (data) {
                 let modal = document.getElementById("modal-content");
                 data.forEach(element => {
-                  // console.log(element);
-                let notif_id = document.createElement("div");
-                let notif_group_id = document.createElement("div");
                 let notif_content = document.createElement("div");
-                let notif_sender_id = document.createElement("div");
+                let notif_buttons = document.createElement("div");
                 let notif_accept_btn = document.createElement("a");
                 let notif_decline_btn = document.createElement("a");
-                let btns_form = document.createElement("FORM");
-                notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&gID=" + element.notification_group_id ;
-                notif_accept_btn.innerHTML = "Accept";
-                notif_decline_btn.href = "../controllers/notificationdecision.php?gID=" + element.notification_group_id;
-                notif_decline_btn.innerHTML = "decline";
-                notif_id.innerHTML = element.notification_id;
-                modal.appendChild(notif_id);
-                modal.appendChild(notif_accept_btn);
-                modal.appendChild(notif_decline_btn);
+                notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&notifId=" + element.notification_id + "&gID=" + element.notification_group_id ;
+                notif_accept_btn.innerHTML = "✅";
+                notif_accept_btn.classList.add("notif_decesion_btn");
+                notif_decline_btn.href = "../controllers/notificationdecision.php?notifId="+ element.notification_id +"&gID=" + element.notification_group_id;
+                notif_decline_btn.innerHTML = "❌";
+                notif_decline_btn.classList.add("notif_decesion_btn");
+                notif_content.innerHTML = element.notification_content;
+                notif_content.classList.add("notif_content_div");
+                notif_buttons.classList.add("notif_buttons");
+                
+                notif_buttons.appendChild(notif_accept_btn);
+                notif_buttons.appendChild(notif_decline_btn);
+                modal.appendChild(notif_content);
+                notif_content.appendChild(notif_buttons);
               }
               )
               let notif_close_btn = document.createElement("button");
@@ -116,6 +122,7 @@
             </li>
             <div id="infoModal" class="modal_user">
                     <div id="modal-content" class="modal-content">
+                      <h3>Notifications<h3>
                       <!-- <div class="notifInfo_div">
                         <p id="notifInfo"></p>
                       </div>

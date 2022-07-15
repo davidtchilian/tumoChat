@@ -1,6 +1,10 @@
 <?php 
-require_once '../models/db.php';
 session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ./login.php?id=4');
+    exit();
+}
+require_once '../models/db.php';
 $dir    = '../assets/icons/';
 $files = array_values(array_diff(scandir($dir), array('..', '.')));
 
@@ -46,7 +50,6 @@ $files = array_values(array_diff(scandir($dir), array('..', '.')));
                     for ($i = 0;$i < count($files);$i++) {
                         $result =  $dir . $files[$i]."\n";
                         $number = explode(".",$files[$i])[0];
-                        
                         echo "<a href='../controllers/updateicon.php?icon=$number'><img src='$result' class='card-img-top' alt='profile_' style='height: 70px; width: 70px'></a>";
                        }
                 ?>

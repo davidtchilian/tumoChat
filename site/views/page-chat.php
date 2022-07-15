@@ -1,8 +1,11 @@
 <?php
-
+    session_start();
+    if (!isset($_SESSION['user_id'])) {
+        header('Location: ./login.php?id=4');
+        exit();
+    }
   $groupId = $_GET['id'];
 
-  session_start();
   $userId = $_SESSION["user_id"];
   $isingroup = false;
   $isingroup_message = false;
@@ -27,7 +30,7 @@
   $groupType = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_type"];
   $groupIcon = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_icon"];
 //   $message = mysqli_fetch_assoc($messages);
-  if($groupType==2){
+  if($groupType == 2){
   $group_users = file_get_contents($domain_name."/controllers/getgroupusers.php?id=".$groupId);
   $group_users = json_decode($group_users);
 
