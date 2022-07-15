@@ -23,9 +23,10 @@ sticketrButton.onclick = function() {
 stickerClose.onclick = onClose;
 
 window.onclick = function(event) {
-  if (event.target == stickerModal) {
-    onClose();
-  }
+  console.log("ad")
+  // if (event.target == stickerModal) {
+  //   onClose();
+  // }
 }
 
 function onClose() {
