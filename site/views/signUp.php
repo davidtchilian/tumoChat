@@ -10,7 +10,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
     <link rel="stylesheet" href="../style/style.css" />
-    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="../scripts/googleapi/googlesignup.js"></script>
 </head>
 
 <body style='display:flex; align-items: center; background-image: url("../assets/images/themes/3.jpg");'>
@@ -25,7 +26,7 @@
             <div class="card-body">
                 <h5>Sign up for free!</h5>
                 <form action="../controllers/signup.php" method="POST">
-
+                    
                     <div class="mb-2 responsive-input">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" required>
@@ -78,17 +79,38 @@
                             <div class="alert alert-danger" role="alert">
                             <?php echo "Invalid email!"; ?>
                             </div> 
+                    <?php }
+                    if($_GET['id'] == 6){
+                        ?>
+                            <div class="alert alert-danger" role="alert">
+                            <?php echo "You may only sign-up with using <b>tumo.org</b> email only."; ?>
+                            </div> 
                     <?php }}?>
-                    <input type="submit" name="Login" id="exampleInputSubmit" class="submit-btn" href="page-accueil.php" style="float: center;">
-                    <br>
-                    <br>
+                    <div class="login-buttons">
+                        <input type="submit" name="Login" id="exampleInputSubmit" class="submit-btn mb-3" href="page-accueil.php" style="float: center;">
+                        <p>━ OR ━</p>
+                        <div id="g_id_onload"
+                            data-client_id="409821055988-h65mtble4s6aa48ij82cp1alpariqbb1.apps.googleusercontent.com"
+                            data-context="signup"
+                            data-ux_mode="popup"
+                            data-auto_prompt="false"
+                            data-callback="handleCredentialResponse"
+                            >
+                        </div>
+                        <div class="g_id_signin"
+                            data-type="standard"
+                            data-shape="pill"
+                            data-theme="filled_blue"
+                            data-text="signup_with"
+                            data-size="large"
+                            data-logo_alignment="left"
+                            data-width="250">
+                        </div>
+                    </div>
                     <div class="col-12" style="float: left; color: rgb(83, 100, 113);">
                         <span>Already a member?</span>
-                        <a class="signlink" href="logIn.php" >
-                            Log in
-                        </a>
+                        <a class="signlink" href="logIn.php">Log in</a>
                     </div>
-
                 </form>
             </div>
         </div>
