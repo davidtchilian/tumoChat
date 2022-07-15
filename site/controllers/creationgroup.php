@@ -19,7 +19,6 @@ require_once('../models/db.php');
 $sql = "INSERT INTO GROUPCHAT(group_name, group_bio, group_admin_id, group_type)
 VALUES ('$name', '$bio', $user_id, 2)";
 
-
 if (mysqli_query($conn,$sql) === TRUE) {
   // echo "New record created successfully";
 } else {
@@ -42,7 +41,7 @@ $insert="INSERT INTO isInGroup(isInGroup_user_id, isInGroup_group_id) VALUES('$u
 mysqli_query($conn,$insert);
 
 foreach ($select as $key => $receiver) {
-  $notif = "INSERT INTO NOTIFICATIONS(notification_sender_id,notification_receiver_id,notification_group_id,notification_content) VALUES($user_id, $receiver, $groupid, '$name')";
+  $notif = "INSERT INTO NOTIFICATIONS(notification_sender_id,notification_receiver_id,notification_group_id,notification_content,notification_type_id) VALUES($user_id, $receiver, $groupid, '$name', 1)";
   mysqli_query($conn,$notif);
 }
 header('Location: ../views/page-accueil.php');
