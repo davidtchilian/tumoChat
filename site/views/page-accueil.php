@@ -40,7 +40,7 @@
             success: function (data) {
                 let modal = document.getElementById("modal-content");
                 data.forEach(element => {
-                  console.log(element);
+                  // console.log(element);
                 let notif_id = document.createElement("div");
                 let notif_group_id = document.createElement("div");
                 let notif_content = document.createElement("div");
