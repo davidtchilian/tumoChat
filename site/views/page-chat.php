@@ -27,7 +27,7 @@
   $groupType = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_type"];
   $groupIcon = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_icon"];
 //   $message = mysqli_fetch_assoc($messages);
-  if($groupType==2){
+  if($groupType == 2){
   $group_users = file_get_contents($domain_name."/controllers/getgroupusers.php?id=".$groupId);
   $group_users = json_decode($group_users);
 
