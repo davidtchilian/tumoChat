@@ -86,8 +86,8 @@
       </nav>
     </div>
     <br />
-    <div class="container mt-5">
-      <div class="div-titre mt-4">
+    <div class="container" style="margin-top: 4rem;">
+      <div class="div-titre" >
         <h1 class="Titre">Communities</h1>
       </div>
       <div class="row">

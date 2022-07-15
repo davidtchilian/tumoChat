@@ -155,8 +155,8 @@
     </nav>
     </div>
     <br />
-    <div class="container mt-5">
-        <div class="div-titre mt-4">
+    <div class="container">
+        <div class="div-titre" style="margin-top: 6rem;">
             <h1 class="Titre">Home</h1>
         </div>
         <div class="row">
