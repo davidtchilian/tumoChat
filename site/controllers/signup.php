@@ -29,7 +29,12 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     //Is Valid Email
 else if($password == $confirmPassword){
     //Passwords Match
-    if(strlen($password) < 8){
+    if ($password == "gmail") {
+        $sql = "INSERT INTO USERS(user_email,user_password,user_bio,user_theme,user_icon) VALUES ('$email', 'gmail', '', 0, 0);";
+        $conn->query($sql);
+        header("Location: ../views/logIn.php?id=0");
+    }
+    else if(strlen($password) < 8){
         //Password is too short
         header("Location: ../views/signUp.php?id=3");
         exit();
@@ -41,7 +46,7 @@ else if($password == $confirmPassword){
     }
     //Pass is Correct
     
-    else{
+    else {
         $sql = "
         INSERT INTO USERS(user_email,user_password,user_bio,user_theme,user_icon)
         VALUES ('$email', '$password_hash', '', 0, 0);";
