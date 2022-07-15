@@ -20,8 +20,11 @@ Students learn and put into practice the skills needed to succeed as a motion ar
 ('Filmmaking', 'Whether students are interested in creating fictional or documentary, art-house or blockbuster, short or feature-length, this workshop is where to get started. By the end of the third level, students conceive, produce, film and edit their own short film. Filmmaking workshops give students insight and hands-on experience with the foundations of filmmaking: planning, shooting, and editing. In short, telling a visual story.', 4,1),
 ('Writing', 'It all begins with the written word… no, no, really. Games, movies, comic books, music, and even graphic design often rely on the written word to convey an idea or message. Regardless of the platform, the foundation is the same.', 14,1);
  
-INSERT INTO typeNotification(typeName) VALUES 
+INSERT INTO typeNotification(typeName) VALUES
 ('GroupInvite');
+
+INSERT INTO Statistics_Types (statistic_type) VALUES ('LoginCount');
+INSERT INTO Statistics_Types (statistic_type) VALUES ('MessageCount');
 
 
 -- INSERT INTO isInGroup(isInGroup_user_id, isInGroup_group_id) VALUES 
