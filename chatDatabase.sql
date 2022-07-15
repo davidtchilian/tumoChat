@@ -12,6 +12,11 @@ CREATE TABLE typeGroupChat(
     typeName TEXT
 );
 
+CREATE TABLE typeNotification(
+    typeNotification_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    typeName TEXT
+);
+
 CREATE TABLE GROUPCHAT(
     group_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     group_name TEXT,
@@ -47,9 +52,11 @@ CREATE TABLE NOTIFICATIONS(
     notification_receiver_id INT,
     notification_group_id INT,
     notification_content TEXT,
+    notification_type_id INT,
     FOREIGN KEY (notification_sender_id) REFERENCES USERS (user_id),
     FOREIGN KEY (notification_receiver_id) REFERENCES USERS (user_id),
-    FOREIGN KEY (notification_group_id) REFERENCES GROUPCHAT (group_id)
+    FOREIGN KEY (notification_group_id) REFERENCES GROUPCHAT (group_id),
+    FOREIGN KEY (notification_type_id) REFERENCES typeNotification (typeNotification_id)
 );
 
 CREATE TABLE RESET_PWD(
