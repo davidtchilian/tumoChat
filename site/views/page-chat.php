@@ -61,7 +61,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="../style/page-chat.css" />
     <title><?php echo $groupName." - TUYU"; ?></title>
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100&display=swap');
@@ -131,6 +130,8 @@
         background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
     }
     </style>
+    <link rel="stylesheet" href="../style/page-chat.css" />
+
 </head>
 
 <body>
@@ -288,8 +289,8 @@
                     </form>
 
                 </div>
-                <div id="stickerModal" class="modal_user">
-                    <div class="modal-content ">
+                <div id="stickerModal" class="modal_sticker">
+                    <div class="modal_sticker-content " style="padding-bottom: 35px;">
                         <div id="modal-extra-interactions"></div>
                         <div id="modal-default-interactions">
                             <button id="stickerCloseButton" class="close btn modal_interaction"><img
