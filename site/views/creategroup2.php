@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ./login.php?id=4');
+    exit();
+}
 require_once '../models/db.php';    
 $bio= $_POST['grpbio'];
 $name = $_POST['grpname'];
@@ -35,7 +39,7 @@ $name = $_POST['grpname'];
 
     <div class="card mx-auto card-body mb-3 mt-4 " style="width: 27rem;">
         <h5 class="card-title">Creating Groups</h5>
-        <form action= "../controllers/creationgroup.php " method="post">
+        <form action= "../controllers/creationgroup.php" method="post">
                 <?php
                 if ($_GET['err'] == '1') {
                     echo "<div class='alert alert-danger' role='alert'>
