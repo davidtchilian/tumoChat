@@ -17,7 +17,7 @@ require_once('../models/db.php');
 
 
 $sql = "INSERT INTO GROUPCHAT(group_name, group_bio, group_admin_id, group_type)
-VALUES ('$name', '$bio', $user_id, 1)";
+VALUES ('$name', '$bio', $user_id, 2)";
 
 
 if (mysqli_query($conn,$sql) === TRUE) {
