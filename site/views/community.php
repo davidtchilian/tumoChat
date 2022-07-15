@@ -1,5 +1,9 @@
 <?php
   session_start();
+  if (!isset($_SESSION['user_id'])) {
+    header('Location: ./login.php?id=4');
+    exit();
+}
   $user_id = $_SESSION['user_id'];
   require_once("../models/db.php");
   $sql = "SELECT DISTINCT group_id, group_type, group_name, group_icon, group_bio FROM GROUPCHAT WHERE group_type = 1";
@@ -86,8 +90,8 @@
       </nav>
     </div>
     <br />
-    <div class="container mt-5">
-      <div class="div-titre mt-4">
+    <div class="container" style="margin-top: 4rem;">
+      <div class="div-titre" >
         <h1 class="Titre">Communities</h1>
       </div>
       <div class="row">
@@ -117,7 +121,6 @@
               ?>
       </div>
     </div>
-    <script src="../scripts/search.js"></script>
     <script src="../scripts/notifications.js"></script>
   </body>
 </html>

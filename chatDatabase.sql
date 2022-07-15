@@ -66,6 +66,7 @@ CREATE TABLE RESET_PWD(
     reset_pwd_date DATETIME
 );
 
+
 CREATE TABLE Statistics_Types(
     statistic_type_id INT AUTO_INCREMENT,
     statistic_type TEXT,
@@ -78,6 +79,14 @@ CREATE TABLE Statistics_Main(
     statistic_count INT,
     FOREIGN KEY (statistic_user_id) REFERENCES USERS (user_id),
     FOREIGN KEY (statistic_type_id) REFERENCES Statistics_Types (statistic_type_id)
+);
+
+CREATE TABLE friends(
+    user_id_1 INT,
+    user_id_2 INT,
+    FOREIGN KEY (user_id_1) REFERENCES USERS (user_id),
+    FOREIGN KEY (user_id_2) REFERENCES USERS (user_id),
+    PRIMARY KEY (user_id_1, user_id_2)
 );
 -- CREATE TABLE COMMUNITY(
 --     community_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
