@@ -56,7 +56,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 
-            <a onClick="notification()" id="infoButton" class="notifications_btn nav-link" style="color : white">Notifications</a>
+            <a href="#" onClick="notification()" id="infoButton" class="notifications_btn nav-link" style="color : white">Notifications</a>
             <li class="nav-item">
               <a class="nav-link active" href="page-accueil.php" style="color :white">Home</a>
             </li>
