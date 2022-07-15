@@ -225,3 +225,30 @@ body {
   margin-left: 5px;
 }
 
+.comm_icon{
+  width: 55px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.start-container{
+  width:20%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navbar-nav{
+  margin-left: 54px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.container{
+  width: 100%;
+}
+
+.navbar{
+  width: 100%;
+}

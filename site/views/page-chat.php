@@ -135,33 +135,36 @@
 
 <body>
     <div class="fixed-top">
-        <nav class="navbar navbar-expand-lg" style="background-color : #6c4b93">
-            <?php
-        if($groupType==1){
+        <nav class="navbar navbar-expand-lg" style="background-color : #6c4b93; padding: 1rem 0;">
+           
+            <div class="container">
+                <div class="start-container">
+                 <?php
+        if($groupType==2){
         ?>
-            <a href="page-accueil.php"><img src="../assets/images/flèche_retour3.png" alt="Retour"
+            <a href="page-accueil.php" style="margin:0"><img src="../assets/images/flèche_retour3.png" alt="Retour"
                     style="width : 35px; height: 35px; margin-left: 10px" /></a>
             <?php
         }
         else{
         ?>
-            <a href="community.php"><img src="../assets/images/flèche_retour3.png" alt="Retour"
+            <a href="community.php" style="margin:0"><img src="../assets/images/flèche_retour3.png" alt="Retour"
                     style="width : 35px; height: 35px; margin-left: 10px" /></a>
             <?php
         }
         ?>
-            <div class="container">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <?php
                 if($groupType==1){ ?>
                     <li>
-                        <img style="width: 12px;" src="../images/comm_icons/<?php echo $groupIcon; ?>.png" alt="">
+                        <img class="comm_icon" src="../assets/comm_icons/<?php echo $groupIcon; ?>.png" alt="">
                     </li>
                     <?php } ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" style="color : white"><?php echo $groupName; ?></a>
+                    <li class="nav-item" style="height:100%; margin: auto 8px">
+                        <a class="nav-link" href="#" style="color : white;"><?php echo $groupName; ?></a>
                     </li>
                 </ul>
+                </div>
                 <div class="d-flex">
                     <a
                         onClick="getGroupIdInfo('<?php echo $userId; ?>', '<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>')">
@@ -306,7 +309,11 @@
     </div>
     </nav>
     </div>
+    <?php
+    if($groupType==2){
+    ?>
     <script src="../scripts/page-chat.js"></script>
+    <?php } ?>
     <script src="../scripts/sticker.js"></script>
     <script>
     const params = new URLSearchParams(window.location.search);

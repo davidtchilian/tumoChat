@@ -5,7 +5,7 @@ var names = document.getElementsByClassName('group-name');
 var namesArr = [];
 
 for (i = 0; i < groups.length; i++) {
-    namesArr[i] = names[i].innerHTML;
+    namesArr[i] = names[i].innerHTML.toLowerCase();
 }
 
 function find(){
@@ -13,10 +13,11 @@ function find(){
         return elements.includes(input.value);
     })
     for (i = 0; i < groups.length; i++) {
-        groups[i].setAttribute("style", "display: none;");
-        if (anun.includes(String(namesArr[i]))) {
+        if (anun.includes(String(namesArr[i]).toLowerCase())) {
             groups[i].setAttribute("style", "display: block;");
-        };
+        }else{
+            groups[i].setAttribute("style", "display: none;");
+        }
     };
     return false;
 }
@@ -27,4 +28,3 @@ input.addEventListener('input', function(){
 
 
 button.onclick = find();
-
