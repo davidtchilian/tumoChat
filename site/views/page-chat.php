@@ -1,8 +1,11 @@
 <?php
-
+    session_start();
+    if (!isset($_SESSION['user_id'])) {
+        header('Location: ./login.php?id=4');
+        exit();
+    }
   $groupId = $_GET['id'];
 
-  session_start();
   $userId = $_SESSION["user_id"];
   $isingroup = false;
   $isingroup_message = false;
