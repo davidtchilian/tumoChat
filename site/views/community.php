@@ -117,7 +117,6 @@
               ?>
       </div>
     </div>
-    <script src="../scripts/search.js"></script>
     <script src="../scripts/notifications.js"></script>
   </body>
 </html>
