@@ -50,23 +50,18 @@ if (mysqli_num_rows($result) != 1) {
                     <div class="mb-2">
                         <label for="exampleInputPassword1" class="form-label ">Password</label>
                         <div class="fake-input responsive-input">
-                        <input type="password" class="form-control responsive-input" name="reset_pass" required>
-                        <img id="passEye" width="25px" src="../assets/images/closed.png" alt="" onclick="changePassType()" class="eye">
+                        <input type="password" class="form-control responsive-input" name="reset_pass" id="exampleInputPassword1" required>
+                        <img id="PassEye" width="25px" src="../assets/images/closed.png" alt="" onclick="changePassType()" class="eye" >
                         </div>  
                     </div>
                     <div class="mb-4">
                         <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
                         <div class="fake-input responsive-input">
                             <input type="hidden" value="<?php echo $user_id ?>"name="user_id">
-                            <input type="password" class="form-control" name="confirm_pass" required>
-                            <img id="PassEye" width="25px" src="../assets/images/closed.png" alt="" onclick="changePassType()" class="eye" >
+                            <input type="password" class="form-control" name="confirm_pass" id="exampleInputPassword2" required>
+                            <img id="PassEye2" width="25px" src="../assets/images/closed.png" alt="" onclick="changePassType2()" class="eye" >
                         </div>
                     </div>
-                    <?php if($_GET['id'] == 1){?>
-                            <div class="alert alert-danger" role="alert">
-                            <?php echo "Invalid email!"; ?>
-                            </div> 
-                    <?php }?>
                     
                            <input value="Reset" type="submit" name="reset" id="exampleInputSubmit" class="submit-btn mb-3" style="margin:0 auto;">
                     
@@ -78,6 +73,17 @@ if (mysqli_num_rows($result) != 1) {
         function changePassType(){
             let x = document.getElementById("exampleInputPassword1");
             let img = document.getElementById("PassEye");
+            if (x.type === "password") {
+                x.type = "text";
+                img.src = "../assets/images/open.png";
+            } else {
+                x.type = "password";
+                img.src = "../assets/images/closed.png";
+            }
+        }
+        function changePassType2(){
+            let x = document.getElementById("exampleInputPassword2");
+            let img = document.getElementById("PassEye2");
             if (x.type === "password") {
                 x.type = "text";
                 img.src = "../assets/images/open.png";
