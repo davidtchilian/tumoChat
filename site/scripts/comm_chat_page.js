@@ -23,15 +23,13 @@ sticketrButton.onclick = function() {
 stickerClose.onclick = onClose;
 
 window.onclick = function(event) {
-  console.log("ad")
-  // if (event.target == stickerModal) {
-  //   onClose();
-  // }
+  if (event.target == stickerModal) {
+    onClose();
+  }
 }
 
 function onClose() {
   stickerModal.style.display = "none";
-  usersInfo.innerHTML = "";
   extraInteractions.innerHTML = "";
   window.location.replace(removeParam("modal", window.location.href));
 }
@@ -40,7 +38,7 @@ function onClose() {
 function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
   groupName.innerText = "Loading...";
   const Http = new XMLHttpRequest();
-  const url=`../controllers/getgroupinfo.php?id=${groupId}`;
+  const url=`../controllers/getcomminfo.php?id=${groupId}`;
   Http.open("GET", url);
   Http.send();
   Http.onreadystatechange = (e) => {
@@ -49,7 +47,7 @@ function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
     }
     let output = Http.responseText;
     let jsonObject = null;
-
+    console.log(JSON.parse(output))
     try {
       jsonObject = JSON.parse(output);
     } catch (e) {
@@ -57,57 +55,59 @@ function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
       return;
     }
 
-    let groupInfo = jsonObject[0][0];
-    let groupUsersInfo = jsonObject[1];
+    
+
+    let groupInfo = jsonObject[0];
     groupName.innerText = groupInfo.group_name;
 
     if (groupInfo.group_bio) {
-      let groupBio = document.createElement("p");
+      let groupBio = document.getElementById("groupBio");
       groupBio.classList.add("group_bio");
       groupBio.innerText = groupInfo.group_bio;
       groupInfoDiv.appendChild(groupBio);
     }
-  
-    for (let user of groupUsersInfo) {
 
-      let userInfo = document.createElement("div");
-      let userEmail = document.createElement("p");
-      userEmail.classList.add("user-email");
-      userEmail.innerText = user[0].user_email;
-      userInfo.classList.add("user_info_page")
-      userInfo.appendChild(userEmail);
-      usersInfo.appendChild(userInfo);
+
+    // for (let user of groupUsersInfo) {
+
+    //   let userInfo = document.createElement("div");
+    //   let userEmail = document.createElement("p");
+    //   userEmail.classList.add("user-email");
+    //   userEmail.innerText = user[0].user_email;
+    //   userInfo.classList.add("user_info_page")
+    //   userInfo.appendChild(userEmail);
+    //   usersInfo.appendChild(userInfo);
  
-      if (!isAdmin) {
-        continue;
-      }
+    //   if (!isAdmin) {
+    //     continue;
+    //   }
 
-      if (user[0].user_id == groupAdminId) {
-        let adminSpan = document.createElement('span');
-        adminSpan.innerText = "⚡";
-        userInfo.appendChild(adminSpan);
-        continue;
-      }
+    //   if (user[0].user_id == groupAdminId) {
+    //     let adminSpan = document.createElement('span');
+    //     adminSpan.innerText = "⚡";
+    //     userInfo.appendChild(adminSpan);
+    //     continue;
+    //   }
 
-      let userDeleteButton = document.createElement("a");
-      userDeleteButton.classList.add("user_delete_button");
-      userDeleteButton.href = `../controllers/deleteuserfromgroup.php?delid=${user[0].user_id}&id=${groupId}`;
-      userDeleteButton.innerText = "X";
-      userInfo.appendChild(userDeleteButton);
+    //   let userDeleteButton = document.createElement("a");
+    //   userDeleteButton.classList.add("user_delete_button");
+    //   userDeleteButton.href = `../controllers/deleteuserfromgroup.php?delid=${user[0].user_id}&id=${groupId}`;
+    //   userDeleteButton.innerText = "X";
+    //   userInfo.appendChild(userDeleteButton);
     
-    }
+    // }
 
-    if (isAdmin) {
-      let addUserButton = createButton("add_user", "add_user", "Add User", null);
-      extraInteractions.appendChild(addUserButton);
+    // if (isAdmin) {
+    //   let addUserButton = createButton("add_user", "add_user", "Add User", null);
+    //   extraInteractions.appendChild(addUserButton);
 
-      let deleteGroup = createButton("delete_group", "delete_group", "Delete Group", `../controllers/deletegroup.php?id=${groupId}`);
-      extraInteractions.appendChild(deleteGroup);
-    }
-    else {
-      let leaveGroup = createButton("leave_group", "leave_group", "Leave Group", `../controllers/deleteuserfromgroup.php?delid=${userId}&id=${groupId}`);
-      extraInteractions.appendChild(leaveGroup);
-    }
+    //   let deleteGroup = createButton("delete_group", "delete_group", "Delete Group", `../controllers/deletegroup.php?id=${groupId}`);
+    //   extraInteractions.appendChild(deleteGroup);
+    // }
+    // else {
+    //   let leaveGroup = createButton("leave_group", "leave_group", "Leave Group", `../controllers/deleteuserfromgroup.php?delid=${userId}&id=${groupId}`);
+    //   extraInteractions.appendChild(leaveGroup);
+    // }
 
   }
 }

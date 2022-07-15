@@ -62,8 +62,16 @@ if (mysqli_num_rows($result) != 1) {
                             <img id="PassEye2" width="25px" src="../assets/images/closed.png" alt="" onclick="changePassType2()" class="eye" >
                         </div>
                     </div>
+
+                    <?php
+                    if($_GET['id'] == 1){
+                        ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo "Passwords is not some!"; ?>
+                        </div> 
+                            <?php } ?>
                     
-                           <input value="Reset" type="submit" name="reset" id="exampleInputSubmit" class="submit-btn mb-3" style="margin:0 auto;">
+                           <button type="submit" id="exampleInputSubmit" class="submit-btn mb-3" style="margin:0 auto;">Reset</button>
                     
                 </form>
             </div>

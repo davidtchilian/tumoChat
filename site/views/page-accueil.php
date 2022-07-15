@@ -48,12 +48,12 @@
                 let notif_buttons = document.createElement("div");
                 let notif_accept_btn = document.createElement("a");
                 let notif_decline_btn = document.createElement("a");
-                notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&gID=" + element.notification_group_id ;
-                notif_accept_btn.innerHTML = "Accept";
-                notif_accept_btn.classList.add("notif_accept_btn");
-                notif_decline_btn.href = "../controllers/notificationdecision.php?gID=" + element.notification_group_id;
-                notif_decline_btn.innerHTML = "decline";
-                notif_decline_btn.classList.add("notif_decline_btn");
+                notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&notifId=" + element.notification_id + "&gID=" + element.notification_group_id ;
+                notif_accept_btn.innerHTML = "✅";
+                notif_accept_btn.classList.add("notif_decesion_btn");
+                notif_decline_btn.href = "../controllers/notificationdecision.php?notifId="+ element.notification_id +"&gID=" + element.notification_group_id;
+                notif_decline_btn.innerHTML = "❌";
+                notif_decline_btn.classList.add("notif_decesion_btn");
                 notif_content.innerHTML = element.notification_content;
                 notif_content.classList.add("notif_content_div");
                 notif_buttons.classList.add("notif_buttons");

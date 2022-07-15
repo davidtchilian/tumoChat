@@ -46,6 +46,15 @@
             </div>
         </div>
     </div>
+    <!-- Ստուգում ենք, որ փասվորդը չլինի gmail, որովհետև էդ դեպքում չի կարելի փոխել փասվորդը:-->
+    <?php
+        $sql = "SELECT user_password FROM USERS WHERE user_email = ";
+        if($sql == 'gmail'){
+            mysqli_close($conn);
+            header('Location: ../views/forgetpwd.php?id=1');
+            exit();
+        }
+    ?>
 </body>
 
 </html>
