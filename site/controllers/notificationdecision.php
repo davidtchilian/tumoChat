@@ -15,9 +15,9 @@
 
     }
 
-    $sql = "DELETE FROM NOTIFICATIONS WHERE notification_receiver_id = $user_id AND notification_id = $notifId";
+    $delete = "DELETE FROM NOTIFICATIONS WHERE notification_receiver_id = $user_id AND notification_id = $notifId";
 
-    mysqli_query($conn,$sql);
+    mysqli_query($conn,$delete);
     mysqli_close();
 
     }
