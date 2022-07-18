@@ -20,7 +20,7 @@ sticketrButton.onclick = function() {
   stickerModal.style.display = "block";
 }
 
-stickerClose.onclick = onClose;
+// stickerClose.onclick = onClose;
 
 window.onclick = function(event) {
   if (event.target == stickerModal) {
@@ -184,6 +184,8 @@ const txt = document.getElementById("text")
 const form = document.getElementById("form")
 const button = document.getElementById("send")
 const messageSenderId = document.getElementById("jsUserId").value
+const groupId = document.getElementById("groupId").value
+
 
 
 
@@ -247,8 +249,11 @@ function myFunction(event) {
      }  
    
    }
+
   
  }
+
+
 
  
 
@@ -266,24 +271,49 @@ function myFunction(event) {
 // })
 
 
-
+let y 
 document.getElementById("bodyHTML").addEventListener("click", function(event) {
   if (event.target != edit){
   let id = button.id
   
+ 
   document.getElementById(id).addEventListener("click", function(event) {
     const message_cont = txt.value
   
    
 
-    var params = "user_id="+messageSenderId+"&"+"message_id="+x+"&"+"message_content="+message_cont
+    var params = "user_id="+5+"&"+"message_id="+73+"&"+"message_content="+"hello"
     if(message_cont != ""){
-      var xmlhttp = new XMLHttpRequest();
-      let rq = "../controllers/update.php"
-      xmlhttp.open("POST", rq, true);
-      xmlhttp.send(params);
+      $.ajax(
+        {
+           type: 'post',
+           url:  "../controllers/update.php",
+           data: { 
+             "user_id" : messageSenderId,
+             "group_id" : groupId,
+             "message_id": x,
+             "message_content": message_cont
+            
+           },
+           success: function (response) {
+             console.log("Success !!");
+             document.getElementById(x).innerText = message_cont
+            //  var xmlhttp = new XMLHttpRequest();
+            //  xmlhttp.open(this.type, this.url ,true);
+            //  xmlhttp.send(this.data);
+            //  console.log(this.type)
+           console.log(response)
+             
+           
+           },
+           error: function () {x
+             console.log("Error !!");
+           }
+        }
         
-      console.log(params);
+             
+     );
+     
     
       txt.value = ""
       button.id = "send"

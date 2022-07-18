@@ -294,7 +294,7 @@
                 <div class="container-fluid">
                     <form class="d-flex" role="search" action="../controllers/sendmessage.php" method="post" id="form" >
                         <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
-                        <input type="hidden" name="group_id" value="<?php echo $groupId; ?>">
+                        <input type="hidden" name="group_id" value="<?php echo $groupId; ?>" id = "groupId">
                         <input type="hidden" name = "message_id" value="1";  id="message_id">
                         <input type="hidden" id = "jsUserId" value="<?= $userId?>">
                         <input name="message_content" class="form-control me-2" type="text" id="text" placeholder="Enter your message here" autofocus />
@@ -324,8 +324,10 @@
     </div>
     </nav>
     </div>
-    <script type="text/javascript" src="../scripts/page-chat.js"></script>
+    <script src="../scripts/jquery.js"></script>
+    <script type="text/javascript" src="../scripts/comm_chat_page.js"></script>
     <script type="text/javascript"  src="../scripts/sticker.js"></script>
+  
     <?php
     // if($groupType==2){
     ?>
