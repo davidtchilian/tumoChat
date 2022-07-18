@@ -184,6 +184,11 @@ const txt = document.getElementById("text")
 const form = document.getElementById("form")
 const button = document.getElementById("send")
 const messageSenderId = document.getElementById("jsUserId").value
+const br = document.getElementById("br")
+
+
+
+
 
 
 
@@ -191,11 +196,15 @@ const messageSenderId = document.getElementById("jsUserId").value
  
 
 function deleteMessage(event){  
-  // var x = event.target.name;  
+  var x = event.target.name;
+
   // const url =  "../controllers/delete.php?id="+x
   // form.action = url
-  // var y = document.getElementById("delete3")
+  // var y = document.getElementById("delete" + x)
   // console.log(y)
+ 
+
+
 
 }
 
@@ -206,8 +215,11 @@ function show(event){
   let dropdownDiv = document.getElementsByClassName("dropdown")
   for (let i = 0; i < dropdownDiv.length; i++) {
     dropdownDiv[i].style.display = "none"
+   
     
   }
+
+
 
 
   var y = event.target.id
@@ -229,13 +241,13 @@ function myFunction(event) {
 
   const messageCont = document.getElementById(x)
 
-  document.getElementById("submit").addEventListener("click", function(event){
-    event.preventDefault()
+  // document.getElementById("submit").addEventListener("click", function(event){
+  //   event.preventDefault()
   
-  })
+  // })
   txt.value = messageCont.innerText
-  //  const url =  "../controllers/update.php?id="+x
-  //  form.action = url
+   const url =  "../controllers/update.php?id="+x
+   form.action = url
    
    var y = document.getElementById("editId" + x)
  
@@ -245,10 +257,18 @@ function myFunction(event) {
        dropdownDiv[i].style.display = "none"
        
      }  
+    
    
    }
-  
+  console.log(messageCont.innerText)
+  const messageId = document.getElementById("message_id")
+  messageId.value = x
+ 
+   
+ 
  }
+ 
+ console.log(12)
 
  
 
@@ -267,31 +287,32 @@ function myFunction(event) {
 
 
 
-document.getElementById("bodyHTML").addEventListener("click", function(event) {
-  if (event.target != edit){
-  let id = button.id
+// document.getElementById("bodyHTML").addEventListener("click", function(event) {
+//   if (event.target != edit){
+//   let id = button.id
   
-  document.getElementById(id).addEventListener("click", function(event) {
-    const message_cont = txt.value
+//   document.getElementById(id).addEventListener("click", function(event) {
+//     const message_cont = txt.value
+    
   
    
 
-    var params = "user_id="+messageSenderId+"&"+"message_id="+x+"&"+"message_content="+message_cont
-    if(message_cont != ""){
-      var xmlhttp = new XMLHttpRequest();
-      let rq = "../controllers/update.php"
-      xmlhttp.open("POST", rq, true);
-      xmlhttp.send(params);
+//     var params = "user_id="+messageSenderId+"&"+"message_id="+x+"&"+"message_content="+message_cont
+//     if(message_cont != ""){
+//       var xmlhttp = new XMLHttpRequest();
+//       let rq = "../controllers/update.php"
+//       xmlhttp.open("GET", "../controllers/update.php?="+messageSenderId,false);
+//       xmlhttp.send(params);
+     
         
-      console.log(params);
+      
     
-      txt.value = ""
-      button.id = "send"
-    }
-    
-    
+//       // txt.value = ""
+//       button.id = "send"
+//     }
+  
 
-  })
+//   })
 
-  }
-})
+//   }
+// })
