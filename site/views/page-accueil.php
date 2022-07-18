@@ -10,15 +10,21 @@
   $sql = "SELECT DISTINCT group_id, group_type, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE group_type = 2 AND isInGroup_user_id = ".$user_id ;
   $result = mysqli_query($conn, $sql);
 
-  $sql2 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
-  $result2 = mysqli_query($conn, $sql2);
-  if ($result2->num_rows > 0) {
-    if($row1 = mysqli_fetch_assoc($result2)) {
+    $sql2 ="SELECT COUNT(notification_id) as nb FROM NOTIFICATIONS WHERE notification_receiver_id = $user_id";
+    $result2 = mysqli_query($conn, $sql2);
+    if($row2 = mysqli_fetch_assoc($result2)){
+      $notif_count = $row2['nb'];
+    }
+  $sql3 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
+  $result3 = mysqli_query($conn, $sql3);
+  if ($result3->num_rows > 0) {
+    if($row1 = mysqli_fetch_assoc($result3)) {
         $usricon = $row1['user_icon'];
     }
 } else {
     // echo "0 results";
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +65,6 @@
                 notif_content.appendChild(notif_content_text);
                 notif_content.classList.add("notif_content_div");
                 notif_buttons.classList.add("notif_buttons");
-                
                 notif_buttons.appendChild(notif_accept_btn);
                 notif_buttons.appendChild(notif_decline_btn);
                 notif_content.appendChild(notif_buttons);
@@ -71,8 +76,8 @@
               let modalInfo = document.getElementById("infoModal");
                 notif_close_btn.id = "closeButton";
                 notif_close_btn.className = "close btn modal_interaction";
-                notif_close_btn.onclick = function(){
-                  modalInfo.style.display = "none";
+                notif_close_btn.onclick = function(){ 
+                  window.location.reload(true);
                 }
                 notif_close_btn.innerHTML = "Close";
                 modal.appendChild(notif_close_btn); 
@@ -123,6 +128,10 @@
             <li class="nav-item">
               <a class="nav-link active" href="community.php" style="color :white">Community</a>
             </li>
+            <?php if($notif_count != 0)
+            {?>
+            <div class="notifs_nb"><p id="notifs_count"><?php echo $notif_count; ?></p></div>
+            <?php } ?>
             <div id="infoModal" class="modal_user">
                     <div id="modal-content" class="modal-content">
                       <h3>Notifications</h3>
