@@ -10,6 +10,9 @@
   $sql = "SELECT DISTINCT group_id, group_type, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE group_type = 2 AND isInGroup_user_id = ".$user_id ;
   $result = mysqli_query($conn, $sql);
 
+
+  
+
   $sql2 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
   $result2 = mysqli_query($conn, $sql2);
   if ($result2->num_rows > 0) {
@@ -175,7 +178,14 @@
                 <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
                     <div class="card mt-5">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item group-name"><?php echo $group["group_name"]; ?></li>
+                            <li class="list-group-item group-name">
+                              <div>
+                                <span><?php echo $group["group_name"]; ?></span>
+                                <img src="../assets/images/usercount.png" style="width: 28px; float:right;">
+                                <span><?php echo "";?></span>
+                              </div>
+                              
+                            </li>
                             <li class="list-group-item">
                                 <?php
                             $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['group_id']);

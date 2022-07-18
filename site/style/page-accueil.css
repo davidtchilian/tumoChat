@@ -3,7 +3,7 @@
   height: 100%;
 }
 h1, h3{
-  font-weight: 700 !important;
+  font-weight: 600 !important;
 }
 .Titre {
   margin: 2rem;
@@ -144,7 +144,7 @@ h1, h3{
   justify-content: center;
 }
 
-@media screen and (max-width: 991px){
+/* @media screen and (max-width: 991px){
   .CommImg{
     width: 6.5vw !important;
     
@@ -157,22 +157,23 @@ h1, h3{
   .list-title{
     font-size: 2.2vw !important;
   }
-}
+} */
 
 .list-group-item-margin{
   margin: 0.8vw 0;
 }
 
 .list-bottom{
-  height:13vw;
+  color: #787878;
+  height:5rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.list-title{
+/* .list-title{
   font-size: 1.2vw;
-}
+} */
 
 .notif_content_div{
   display: flex;

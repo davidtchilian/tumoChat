@@ -101,15 +101,15 @@
                 <div class="col-lg-4 col-sm-12 group-chats mb-5">
                   <div style='width:100%; display: flex; justify-content: center;'>
                   <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
-                    <img class="CommImg" style="width:4vw" src="../assets/comm_icons/<?php echo $group["group_icon"];?>.png" alt=""></a>
+                    <img class="CommImg" style="width:75px" src="../assets/comm_icons/<?php echo $group["group_icon"];?>.png" alt=""></a>
                   </div>
                   <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
                     <div class="card">
                       <ul class="list-group list-group-flush" style="list-style-type: none;">
                         <li class="list-group-item group-name" style="font-size: 0.8vw"><h3 class="list-group-item-margin list-title"><?php echo $group["group_name"]; ?></h3></li>
-                        <li class="list-group-item list-bottom list-group-item-margin" style="font-size: 0.7vw">
+                        <li class="list-group-item list-bottom list-group-item-margin" style="font-size: calc(7px + 0.3vw)">
                           <?php
-                            echo  $group["group_bio"];
+                            echo  substr($group["group_bio"], 0, 200) . "...";
                           ?>
                         </li>
                       </ul>
