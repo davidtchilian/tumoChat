@@ -1,6 +1,10 @@
 <?php
 session_start();
-require_once '../models/db.php';
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ./login.php?id=4');
+    exit();
+}
+require_once('../models/db.php');
 $usrid = $_SESSION['user_id'];
 
 
@@ -11,9 +15,11 @@ if ($result->num_rows > 0) {
     if($row1 = mysqli_fetch_assoc($result)) {
         $usrmail = $row1['user_email'];
         $usricon = $row1['user_icon'];
+        
     }
-} else {
-    // echo "0 results";
+}else{
+    header('Location: ./login.php?id=4');
+    exit();
 }
 ?>
 <!doctype html>

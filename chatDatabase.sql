@@ -12,6 +12,11 @@ CREATE TABLE typeGroupChat(
     typeName TEXT
 );
 
+CREATE TABLE typeNotification(
+    typeNotification_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    typeName TEXT
+);
+
 CREATE TABLE GROUPCHAT(
     group_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     group_name TEXT,
@@ -47,9 +52,11 @@ CREATE TABLE NOTIFICATIONS(
     notification_receiver_id INT,
     notification_group_id INT,
     notification_content TEXT,
+    notification_type_id INT,
     FOREIGN KEY (notification_sender_id) REFERENCES USERS (user_id),
     FOREIGN KEY (notification_receiver_id) REFERENCES USERS (user_id),
-    FOREIGN KEY (notification_group_id) REFERENCES GROUPCHAT (group_id)
+    FOREIGN KEY (notification_group_id) REFERENCES GROUPCHAT (group_id),
+    FOREIGN KEY (notification_type_id) REFERENCES typeNotification (typeNotification_id)
 );
 
 CREATE TABLE RESET_PWD(
@@ -57,6 +64,29 @@ CREATE TABLE RESET_PWD(
     reset_pwd_hash TEXT,
     reset_pwd_user_id INT,
     reset_pwd_date DATETIME
+);
+
+
+CREATE TABLE Statistics_Types(
+    statistic_type_id INT AUTO_INCREMENT,
+    statistic_type TEXT,
+    PRIMARY KEY (statistic_type_id)
+);
+
+CREATE TABLE Statistics_Main(
+    statistic_user_id INT,
+    statistic_type_id INT,
+    statistic_count INT,
+    FOREIGN KEY (statistic_user_id) REFERENCES USERS (user_id),
+    FOREIGN KEY (statistic_type_id) REFERENCES Statistics_Types (statistic_type_id)
+);
+
+CREATE TABLE friends(
+    user_id_1 INT,
+    user_id_2 INT,
+    FOREIGN KEY (user_id_1) REFERENCES USERS (user_id),
+    FOREIGN KEY (user_id_2) REFERENCES USERS (user_id),
+    PRIMARY KEY (user_id_1, user_id_2)
 );
 -- CREATE TABLE COMMUNITY(
 --     community_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,

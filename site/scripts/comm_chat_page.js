@@ -23,15 +23,13 @@ sticketrButton.onclick = function() {
 stickerClose.onclick = onClose;
 
 window.onclick = function(event) {
-  console.log("ad")
-  // if (event.target == stickerModal) {
-  //   onClose();
-  // }
+  if (event.target == stickerModal) {
+    onClose();
+  }
 }
 
 function onClose() {
   stickerModal.style.display = "none";
-  usersInfo.innerHTML = "";
   extraInteractions.innerHTML = "";
   window.location.replace(removeParam("modal", window.location.href));
 }
@@ -40,7 +38,7 @@ function onClose() {
 function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
   groupName.innerText = "Loading...";
   const Http = new XMLHttpRequest();
-  const url=`../controllers/getgroupinfo.php?id=${groupId}`;
+  const url=`../controllers/getcomminfo.php?id=${groupId}`;
   Http.open("GET", url);
   Http.send();
   Http.onreadystatechange = (e) => {
@@ -49,7 +47,7 @@ function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
     }
     let output = Http.responseText;
     let jsonObject = null;
-
+    console.log(JSON.parse(output))
     try {
       jsonObject = JSON.parse(output);
     } catch (e) {
@@ -57,57 +55,59 @@ function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
       return;
     }
 
-    let groupInfo = jsonObject[0][0];
-    let groupUsersInfo = jsonObject[1];
+    
+
+    let groupInfo = jsonObject[0];
     groupName.innerText = groupInfo.group_name;
 
     if (groupInfo.group_bio) {
-      let groupBio = document.createElement("p");
+      let groupBio = document.getElementById("groupBio");
       groupBio.classList.add("group_bio");
       groupBio.innerText = groupInfo.group_bio;
       groupInfoDiv.appendChild(groupBio);
     }
-  
-    for (let user of groupUsersInfo) {
 
-      let userInfo = document.createElement("div");
-      let userEmail = document.createElement("p");
-      userEmail.classList.add("user-email");
-      userEmail.innerText = user[0].user_email;
-      userInfo.classList.add("user_info_page")
-      userInfo.appendChild(userEmail);
-      usersInfo.appendChild(userInfo);
+
+    // for (let user of groupUsersInfo) {
+
+    //   let userInfo = document.createElement("div");
+    //   let userEmail = document.createElement("p");
+    //   userEmail.classList.add("user-email");
+    //   userEmail.innerText = user[0].user_email;
+    //   userInfo.classList.add("user_info_page")
+    //   userInfo.appendChild(userEmail);
+    //   usersInfo.appendChild(userInfo);
  
-      if (!isAdmin) {
-        continue;
-      }
+    //   if (!isAdmin) {
+    //     continue;
+    //   }
 
-      if (user[0].user_id == groupAdminId) {
-        let adminSpan = document.createElement('span');
-        adminSpan.innerText = "⚡";
-        userInfo.appendChild(adminSpan);
-        continue;
-      }
+    //   if (user[0].user_id == groupAdminId) {
+    //     let adminSpan = document.createElement('span');
+    //     adminSpan.innerText = "⚡";
+    //     userInfo.appendChild(adminSpan);
+    //     continue;
+    //   }
 
-      let userDeleteButton = document.createElement("a");
-      userDeleteButton.classList.add("user_delete_button");
-      userDeleteButton.href = `../controllers/deleteuserfromgroup.php?delid=${user[0].user_id}&id=${groupId}`;
-      userDeleteButton.innerText = "X";
-      userInfo.appendChild(userDeleteButton);
+    //   let userDeleteButton = document.createElement("a");
+    //   userDeleteButton.classList.add("user_delete_button");
+    //   userDeleteButton.href = `../controllers/deleteuserfromgroup.php?delid=${user[0].user_id}&id=${groupId}`;
+    //   userDeleteButton.innerText = "X";
+    //   userInfo.appendChild(userDeleteButton);
     
-    }
+    // }
 
-    if (isAdmin) {
-      let addUserButton = createButton("add_user", "add_user", "Add User", null);
-      extraInteractions.appendChild(addUserButton);
+    // if (isAdmin) {
+    //   let addUserButton = createButton("add_user", "add_user", "Add User", null);
+    //   extraInteractions.appendChild(addUserButton);
 
-      let deleteGroup = createButton("delete_group", "delete_group", "Delete Group", `../controllers/deletegroup.php?id=${groupId}`);
-      extraInteractions.appendChild(deleteGroup);
-    }
-    else {
-      let leaveGroup = createButton("leave_group", "leave_group", "Leave Group", `../controllers/deleteuserfromgroup.php?delid=${userId}&id=${groupId}`);
-      extraInteractions.appendChild(leaveGroup);
-    }
+    //   let deleteGroup = createButton("delete_group", "delete_group", "Delete Group", `../controllers/deletegroup.php?id=${groupId}`);
+    //   extraInteractions.appendChild(deleteGroup);
+    // }
+    // else {
+    //   let leaveGroup = createButton("leave_group", "leave_group", "Leave Group", `../controllers/deleteuserfromgroup.php?delid=${userId}&id=${groupId}`);
+    //   extraInteractions.appendChild(leaveGroup);
+    // }
 
   }
 }
@@ -184,11 +184,6 @@ const txt = document.getElementById("text")
 const form = document.getElementById("form")
 const button = document.getElementById("send")
 const messageSenderId = document.getElementById("jsUserId").value
-const br = document.getElementById("br")
-
-
-
-
 
 
 
@@ -196,15 +191,11 @@ const br = document.getElementById("br")
  
 
 function deleteMessage(event){  
-  var x = event.target.name;
-
+  // var x = event.target.name;  
   // const url =  "../controllers/delete.php?id="+x
   // form.action = url
-  // var y = document.getElementById("delete" + x)
+  // var y = document.getElementById("delete3")
   // console.log(y)
- 
-
-
 
 }
 
@@ -215,11 +206,8 @@ function show(event){
   let dropdownDiv = document.getElementsByClassName("dropdown")
   for (let i = 0; i < dropdownDiv.length; i++) {
     dropdownDiv[i].style.display = "none"
-   
     
   }
-
-
 
 
   var y = event.target.id
@@ -241,13 +229,13 @@ function myFunction(event) {
 
   const messageCont = document.getElementById(x)
 
-  // document.getElementById("submit").addEventListener("click", function(event){
-  //   event.preventDefault()
+  document.getElementById("submit").addEventListener("click", function(event){
+    event.preventDefault()
   
-  // })
+  })
   txt.value = messageCont.innerText
-   const url =  "../controllers/update.php?id="+x
-   form.action = url
+  //  const url =  "../controllers/update.php?id="+x
+  //  form.action = url
    
    var y = document.getElementById("editId" + x)
  
@@ -257,18 +245,10 @@ function myFunction(event) {
        dropdownDiv[i].style.display = "none"
        
      }  
-    
    
    }
-  console.log(messageCont.innerText)
-  const messageId = document.getElementById("message_id")
-  messageId.value = x
- 
-   
- 
+  
  }
- 
- console.log(12)
 
  
 
@@ -287,32 +267,31 @@ function myFunction(event) {
 
 
 
-// document.getElementById("bodyHTML").addEventListener("click", function(event) {
-//   if (event.target != edit){
-//   let id = button.id
+document.getElementById("bodyHTML").addEventListener("click", function(event) {
+  if (event.target != edit){
+  let id = button.id
   
-//   document.getElementById(id).addEventListener("click", function(event) {
-//     const message_cont = txt.value
-    
+  document.getElementById(id).addEventListener("click", function(event) {
+    const message_cont = txt.value
   
    
 
-//     var params = "user_id="+messageSenderId+"&"+"message_id="+x+"&"+"message_content="+message_cont
-//     if(message_cont != ""){
-//       var xmlhttp = new XMLHttpRequest();
-//       let rq = "../controllers/update.php"
-//       xmlhttp.open("GET", "../controllers/update.php?="+messageSenderId,false);
-//       xmlhttp.send(params);
-     
+    var params = "user_id="+messageSenderId+"&"+"message_id="+x+"&"+"message_content="+message_cont
+    if(message_cont != ""){
+      var xmlhttp = new XMLHttpRequest();
+      let rq = "../controllers/update.php"
+      xmlhttp.open("POST", rq, true);
+      xmlhttp.send(params);
         
-      
+      console.log(params);
     
-//       // txt.value = ""
-//       button.id = "send"
-//     }
-  
+      txt.value = ""
+      button.id = "send"
+    }
+    
+    
 
-//   })
+  })
 
-//   }
-// })
+  }
+})
