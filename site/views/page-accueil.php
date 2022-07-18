@@ -151,7 +151,6 @@
                             style="width : 20px; height: 30px; margin-top : 3px" />
                     </button>
                 </form>
-                <a href="../views/friends.php" class="friends-btn">My Friends</a>
                 <a href="../controllers/logout.php" class="signout-btn">Sign out</a>
             </div>
     </div>
