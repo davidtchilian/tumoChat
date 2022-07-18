@@ -4,6 +4,7 @@ INSERT INTO typeGroupChat (typeName) VALUES
 
 
 INSERT INTO GROUPCHAT (group_name,group_bio, group_icon, group_type) VALUES
+('TUMO', 'The TUMO Center for Creative Technologies is a free-of-charge educational program that puts teens in charge of their own learning. Our learning program is made up of self-learning activities, workshops and project labs that revolve around 14 learning targets.', 0 ,1),
 ('Programming', 'In the programming workshop students learn how to control variables, create and manipulate functions and everything in between that’s needed for the wonderful world of code. ', 11 ,1),
 ('Web Development', 'By learning HTML & CSS to PHP & MySQL and, finally, CMS, students acquire fundamental industry skills. However the primary goal is not to teach students how to follow instructions but present students with the tools to facilitate problem-solving so that they can achieve independence and think beyond the browser window.', 13,1),
 ('Robotics', 'The TUMO robotics workshop isn’t just about learning about the newest tech in the field. Students learn visual programming, creative and analytical thinking, problem-solving through teamwork, and hands-on work building and programming robots that can complete a set of tasks determined by the students themselves.', 12,1),
