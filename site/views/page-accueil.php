@@ -10,7 +10,6 @@
   $sql = "SELECT DISTINCT group_id, group_type, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE group_type = 2 AND isInGroup_user_id = ".$user_id ;
   $result = mysqli_query($conn, $sql);
 
-<<<<<<< HEAD
     $sql2 ="SELECT COUNT(notification_id) as nb FROM NOTIFICATIONS WHERE notification_receiver_id = $user_id";
     $result2 = mysqli_query($conn, $sql2);
     if($row2 = mysqli_fetch_assoc($result2)){
@@ -20,15 +19,6 @@
   $result3 = mysqli_query($conn, $sql3);
   if ($result3->num_rows > 0) {
     if($row1 = mysqli_fetch_assoc($result3)) {
-=======
-
-  
-
-  $sql2 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
-  $result2 = mysqli_query($conn, $sql2);
-  if ($result2->num_rows > 0) {
-    if($row1 = mysqli_fetch_assoc($result2)) {
->>>>>>> 915a92b9e1b7f2926002c5834b134adefc729805
         $usricon = $row1['user_icon'];
     }
 } else {
