@@ -186,7 +186,7 @@ const button = document.getElementById("send")
 const messageSenderId = document.getElementById("jsUserId").value
 const groupId = document.getElementById("groupId").value
 
-
+var x
 
 
 
@@ -205,6 +205,8 @@ function deleteMessage(event){
 
 
 function show(event){
+  x = event.target.id
+  console.log(x)
   let dropdownDiv = document.getElementsByClassName("dropdown")
   for (let i = 0; i < dropdownDiv.length; i++) {
     dropdownDiv[i].style.display = "none"
@@ -223,7 +225,7 @@ function show(event){
 
 //update
 
-var x 
+
 function myFunction(event) {
   button.id = "submit"
 
@@ -275,6 +277,8 @@ let y
 document.getElementById("bodyHTML").addEventListener("click", function(event) {
   if (event.target != edit){
   let id = button.id
+
+  
   
  
   document.getElementById(id).addEventListener("click", function(event) {
@@ -325,3 +329,77 @@ document.getElementById("bodyHTML").addEventListener("click", function(event) {
 
   }
 })
+
+
+function deleteMessages(event){
+  $.ajax(
+    {
+       type: 'post',
+       url:  "../controllers/delete.php",
+       data: { 
+      
+         "message_id": x,
+    
+        
+       },
+       success: function (response) {
+         console.log("Success !!");
+        
+        //  var xmlhttp = new XMLHttpRequest();
+        //  xmlhttp.open(this.type, this.url ,true);
+        //  xmlhttp.send(this.data);
+        //  console.log(this.type)
+       console.log(response)
+        const element = document.getElementById(x)
+        element.style.display = "none"
+       
+       },
+       error: function () {x
+         console.log("Error !!");
+       }
+    }
+    
+   
+ );
+
+ let dropdownDiv = document.getElementsByClassName("dropdown")
+    for (let i = 0; i < dropdownDiv.length; i++) {
+      dropdownDiv[i].style.display = "none"
+      
+    }
+
+}
+
+function send(event){
+  var id = event.target
+  
+  $.ajax(
+    {
+       type: 'post',
+       url:  "../controllers/sendmessage.php",
+       data: { 
+         "group_id" : groupId,
+         "message_content": txt.value
+        
+       },
+       success: function (response) {
+         console.log("Success !!");
+        //  var xmlhttp = new XMLHttpRequest();
+        //  xmlhttp.open(this.type, this.url ,true);
+        //  xmlhttp.send(this.data);
+        //  console.log(this.type)
+       console.log(response)
+         
+       
+       },
+       error: function () {x
+         console.log("Error !!");
+       }
+    }
+    
+         
+ );
+ txt.value = ""
+ console.log(true)
+ 
+}

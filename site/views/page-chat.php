@@ -237,7 +237,7 @@
                     <div class="dropdown-content" id="dropdown-content">
                         <a  onclick="myFunction(event)" id=<?= "editId".$message['message_id']?>
                             name="<?= $message['message_id']?>">Edit</a>
-                        <a href="../controllers/delete.php?id=<?=$message['message_id']?>&groupId=<?=$groupId?>" onclick="deleteMessage(event)" id="<?= "delete".$message['message_id']?>" >Delete</a>
+                        <a onclick="deleteMessages(event)" id="<?= "delete".$message['message_id']?>" >Delete</a>
                     </div>
 
                 </div>

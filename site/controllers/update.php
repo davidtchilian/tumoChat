@@ -35,7 +35,7 @@ if(mysqli_num_rows($result) == 1 && $message_sender_id == $userId){
 
        mysqli_close($conn);
      
-       echo "smth2222";
+ 
       
   //  header('Location: ../views/page-chat.php?id='.$groupId); exit();
   

@@ -18,9 +18,8 @@ if ($messagecontent != "" && !ctype_space($messagecontent)) {
     mysqli_query($conn, $sql);
     mysqli_close($conn);
 
-}else{
-    echo 1;
 }
+
 
 
 header("Location: ../views/page-chat.php?id=".$groupId);
