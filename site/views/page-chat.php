@@ -24,6 +24,7 @@
  
   $sql = "SELECT * FROM message WHERE message_group_id='$groupId'";
   $messages = mysqli_query($conn, $sql);
+  $messageId = mysqli_fetch_assoc($messages);
 
   $sql = "SELECT group_name, group_type, group_icon FROM groupchat WHERE group_id='$groupId'";
   $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
@@ -136,8 +137,7 @@
     <link rel="stylesheet" href="../style/page-chat.css" />
 
 </head>
-
-<body>
+<body id = "bodyHTML">
     <div class="fixed-top">
         <nav class="navbar navbar-expand-lg" style="background-color : #6c4b93; padding: 1rem 0;">
            
@@ -235,9 +235,9 @@
                     id="<?= "dropdown".$message['message_id']?>">
 
                     <div class="dropdown-content" id="dropdown-content">
-                        <a href="#" onclick="myFunction(event)" id=<?= "editId".$message['message_id']?>
+                        <a  onclick="myFunction(event)" id=<?= "editId".$message['message_id']?>
                             name="<?= $message['message_id']?>">Edit</a>
-                        <a href="#" onclick="deleteMessage(event)" id="<?= "delete".$message['message_id']?>">Delete</a>
+                        <a href="../controllers/delete.php?id=<?=$message['message_id']?>&groupId=<?=$groupId?>" onclick="deleteMessage(event)" id="<?= "delete".$message['message_id']?>" >Delete</a>
                     </div>
 
                 </div>
@@ -282,25 +282,23 @@
         }
     }
     ?>
-        <br>
+        <br id ="br">
     </div>
 
     <div class="fixed-bottom">
-        <nav class="navbar navbar-expand-lg" style="background-color:#6c4b93">
+        <nav class="navbar navbar-expand-lg" style="background-color:#6c4b93" id = "navbarId">
             <div class="container">
                 <a onClick="sticker()" id="stickerButton" class="sticker_btn nav-link" style="display: inline-block">
                     <img src="../assets/images/stickerr.png" alt="sticker" style="width :40px" style="height : 40px" />
                 </a>
                 <div class="container-fluid">
-                    <form class="d-flex" role="search" action="../controllers/sendmessage.php" method="post" id="form">
+                    <form class="d-flex" role="search" action="../controllers/sendmessage.php" method="post" id="form" >
                         <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
                         <input type="hidden" name="group_id" value="<?php echo $groupId; ?>">
-                        <input type="hidden" name="message_id" value="<?= 56?>">
-                        <input type="hidden" id="jsUserId" value="<?= $userId?>">
-                        <input name="message_content" class="form-control me-2" type="text" id="text"
-                            placeholder="Enter your message here" autofocus />
-
-                        <button class="btn search" type="submit" value="Message">
+                        <input type="hidden" name = "message_id" value="1";  id="message_id">
+                        <input type="hidden" id = "jsUserId" value="<?= $userId?>">
+                        <input name="message_content" class="form-control me-2" type="text" id="text" placeholder="Enter your message here" autofocus />
+                        <button class="btn search" type="submit" value="Message" id = "send"  >
                             <a href="page-chat.php?id=<?php echo $groupId;?>"></a>
                             <img src="../assets/images/avion_papier_nour_1.png" alt="envoye" style="width :40px"
                                 style="height : 40px" />
@@ -326,17 +324,19 @@
     </div>
     </nav>
     </div>
+    <script type="text/javascript" src="../scripts/page-chat.js"></script>
+    <script type="text/javascript"  src="../scripts/sticker.js"></script>
     <?php
-    if($groupType==2){
+    // if($groupType==2){
     ?>
-    <script src="../scripts/page-chat.js"></script>
-    <?php } ?>
+    <!-- <script src="../scripts/page-chat.js"></script> -->
+    <?php //} ?>
     <?php
-    if($groupType==1){
+    // if($groupType==1){
     ?>
-    <script src="../scripts/comm_chat_page.js"></script>
-    <?php } ?>
-    <script src="../scripts/sticker.js"></script>
+    <!-- <script src="../scripts/comm_chat_page.js"></script> -->
+    <?php //} ?>
+    <!-- <script src="../scripts/sticker.js"></script> -->
     <script>
     const params = new URLSearchParams(window.location.search);
     if (params.getAll('modal')[0] == 1) {
