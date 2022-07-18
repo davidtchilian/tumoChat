@@ -11,6 +11,10 @@ if ($messagecontent != "" && !ctype_space($messagecontent)) {
     $userId = $_SESSION["user_id"];
 
     require_once('../models/db.php');
+    include("updatestatisticsinfo.php");
+
+    addStatistic($userId, 2, $conn);
+
 
     $replaced_message = str_replace("'", "\'", $messagecontent); // ' -> \'
 
@@ -19,10 +23,7 @@ if ($messagecontent != "" && !ctype_space($messagecontent)) {
     mysqli_query($conn, $sql);
     mysqli_close($conn);
 
-}else{
-    echo 1;
 }
-
 
 header("Location: ../views/page-chat.php?id=".$groupId);
 exit();
