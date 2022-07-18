@@ -267,31 +267,31 @@ function myFunction(event) {
 
 
 
-document.getElementById("bodyHTML").addEventListener("click", function(event) {
-  if (event.target != edit){
-  let id = button.id
+// document.getElementById("bodyHTML").addEventListener("click", function(event) {
+//   if (event.target != edit){
+//   let id = button.id
   
-  document.getElementById(id).addEventListener("click", function(event) {
-    const message_cont = txt.value
+//   document.getElementById(id).addEventListener("click", function(event) {
+//     const message_cont = txt.value
   
    
 
-    var params = "user_id="+messageSenderId+"&"+"message_id="+x+"&"+"message_content="+message_cont
-    if(message_cont != ""){
-      var xmlhttp = new XMLHttpRequest();
-      let rq = "../controllers/update.php"
-      xmlhttp.open("POST", rq, true);
-      xmlhttp.send(params);
+//     var params = "user_id="+messageSenderId+"&"+"message_id="+x+"&"+"message_content="+message_cont
+//     if(message_cont != ""){
+//       var xmlhttp = new XMLHttpRequest();
+//       let rq = "../controllers/update.php"
+//       xmlhttp.open("POST", rq, true);
+//       xmlhttp.send(params);
         
-      console.log(params);
+//       console.log(params);
     
-      txt.value = ""
-      button.id = "send"
-    }
+//       txt.value = ""
+//       button.id = "send"
+//     }
     
     
 
-  })
+//   })
 
-  }
-})
+//   }
+// })

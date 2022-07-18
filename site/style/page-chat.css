@@ -1,17 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
 
-html,
 body {
   height: 100%;
 }
 
 p {
   margin-top: 1em;
-}
-
-body {
-  background-image: url("../assets/images/super_fond_violet.jpg");
 }
 
 .messageEnvoye {
@@ -62,37 +57,17 @@ body {
 
 /* The Modal (background) */
 .modal_user {
-  display: none;
-  /* Hidden by default */
-  position: fixed;
-  /* Stay in place */
-  z-index: 1;
-  /* Sit on top */
-  padding-top: 100px;
-  /* Location of the box */
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
-  width: 100%;
-  /* Full width */
-  height: 100%;
-  /* Full height */
-  overflow: auto;
-  /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0);
-  /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4);
-  /* Black w/ opacity */
-}
-
-.modal_sticker {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  right: 0;
-  left: 0;
-  padding-bottom: 100px;
-  max-width: 40%;
-  width: 100%;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
@@ -101,33 +76,12 @@ body {
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
-  background-color: #664C8F;
+  background-color: #664c8f;
   margin: auto;
   padding: 10px;
   width: 40%;
   border-radius: var(--bs-navbar-toggler-border-radius);
 }
-
-.modal_sticker-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: center;
-  background-color: #664C8F;
-  margin-left: 50%;
-  border-radius: var(--bs-navbar-toggler-border-radius);
-  margin-bottom: 120px;
-}
-
-/* @media  (min-width:1000px){
-  .modal_sticker-content {
-    padding-bottom: 22px;
-  }}
-
-  @media  (min-width:991px){
-    .modal_sticker-content {
-      padding-bottom: 0px;
-    }} */
 
 .group_name {
   font-weight: bold;
@@ -139,7 +93,7 @@ body {
   font-style: italic;
 }
 
-.modal-content>* {
+.modal-content > * {
   margin-top: 5px;
 }
 
@@ -158,7 +112,7 @@ body {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: #4F3774;
+  background-color: #4f3774;
   text-align: center;
   border-radius: var(--bs-navbar-toggler-border-radius);
 }
@@ -167,7 +121,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #4F3774;
+  background-color: #4f3774;
   text-align: center;
   padding: 15px;
   border-radius: var(--bs-navbar-toggler-border-radius);
@@ -187,7 +141,7 @@ body {
 #usersInfo li {
   padding: 5px;
   background-color: white;
-  font-family: 'PT Sans', sans-serif;
+  font-family: "PT Sans", sans-serif;
   color: black;
   width: 100%;
   margin-bottom: 2px;
@@ -206,7 +160,7 @@ body {
   float: right;
   font-size: 15px;
   font-weight: bold;
-  background-color: #664C8F;
+  background-color: #664c8f;
   transition: 0.1s transform ease-out;
 }
 
@@ -229,7 +183,6 @@ body {
   cursor: pointer;
 }
 
-
 .user_info_page {
   display: flex;
   flex-direction: row;
@@ -250,7 +203,7 @@ body {
 }
 
 .user_delete_button {
-  font-family: 'PT Sans', sans-serif;
+  font-family: "PT Sans", sans-serif;
   text-decoration: none;
   width: 20px;
   height: 20px;
@@ -268,31 +221,17 @@ body {
 .add_user {
   margin-left: 5px;
 }
-
-.comm_icon{
-  width: 55px;
-  background-color: #fff;
-  border-radius: 50%;
+#smska {
+  width: 800px;
+  margin-right: 10px;
 }
-
-.start-container{
-  width:20%;
+#foot-bl {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  justify-content: center;
 }
-
-.navbar-nav{
-  margin-left: 54px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.container{
-  width: 100%;
-}
-
-.navbar{
-  width: 100%;
+pre {
+  font-size: 16px;
+  font-family: Arial;
+  font-weight: 400;
+ 
 }
