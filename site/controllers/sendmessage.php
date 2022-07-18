@@ -2,7 +2,6 @@
 
 session_start();
 $messagecontent = strip_tags(htmlspecialchars($_POST['message_content']));
-
 $groupId = $_POST["group_id"];
 
 

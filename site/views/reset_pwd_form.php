@@ -63,21 +63,26 @@ if (mysqli_num_rows($result) != 1) {
                         </div>
                     </div>
 
-                    <?php
-                    if($_GET['id'] == 1){
-                        ?>
-                        <div class="alert alert-danger" role="alert">
-                            <?php echo "Passwords is not some!"; ?>
-                        </div> 
-                            <?php } ?>
-                    
-                           <button type="submit" id="exampleInputSubmit" class="submit-btn mb-3" style="margin:0 auto;">Reset</button>
-                    
-                </form>
+                            <div class="alert alert-danger" role="alert" id="errormessage">
+                            
+                            </div> 
+                        
+                        
+                               <button type="submit" id="exampleInputSubmit" class="submit-btn mb-3" style="margin:0 auto;">Reset</button>
+                        
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
     <script>
+            var new_p = document.getElementById("new-pass").value;
+            var confirm_p = document.getElementById("confirm-pass").value;
+            var error_m = document.getElementById("errormessage");
+    
+            if (new_p == confirm_p) {
+                error_m.innerHTML = "Password is not the same!";
+            }
+
         function changePassType(){
             let x = document.getElementById("exampleInputPassword1");
             let img = document.getElementById("PassEye");
