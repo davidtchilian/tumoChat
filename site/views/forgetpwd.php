@@ -35,6 +35,13 @@
                         <input type="email" class="form-control responsive-input" id="exampleInputEmail1" aria-describedby="emailHelp" name="user_email" required>
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
+                    <?php
+                    if($_GET['id'] == 1){
+                            ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo "You must change your gmail password!"; ?>
+                        </div> 
+                        <?php }?>
                     <input type="submit" name="Forget" id="exampleInputSubmit" class="submit-btn mb-3" style="margin:0 auto;">
                     <div class="col-12" style="color: rgb(83, 100, 113);">
                         <span> Not yet a member? </span> 
@@ -46,16 +53,7 @@
             </div>
         </div>
     </div>
-    <!-- Ստուգում ենք, որ փասվորդը չլինի gmail, որովհետև էդ դեպքում չի կարելի փոխել փասվորդը:-->
-    <?php
-        $user_name = $_POST["user_name"];
-        $sql = "SELECT user_password FROM USERS WHERE user_email = $user_name";
-        if($sql == 'gmail'){
-            mysqli_close($conn);
-            header('Location: ../views/forgetpwd.php?id=1');
-            exit();
-        }
-    ?>
+    
 </body>
 
 </html>
