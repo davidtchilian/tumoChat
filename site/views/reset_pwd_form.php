@@ -63,7 +63,7 @@ if (mysqli_num_rows($result) != 1) {
                         </div>
                     </div>
 
-                            <div class="alert alert-danger" role="alert" id="errormessage">
+                          
                             
                             </div> 
                         
