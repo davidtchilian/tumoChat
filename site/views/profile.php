@@ -12,6 +12,8 @@ if (!isset($_GET['id'])) {
 }
 require_once('../models/db.php');
 
+include("../controllers/updatestatisticsinfo.php");
+
 if ($notme = $guestid != $usrid) {
     $id = $guestid;
 }else {
@@ -101,7 +103,7 @@ $friends = json_decode($friends);
 
                                 ?>
 
-                                <li class="<?php echo $str[0]; ?>">
+                                <li class="<?php echo $str; ?>">
                                     <a onclick="changetheme(0)" href="#">
                                         <span class="icon">
                                             <ion-icon name="sunny-outline"></ion-icon>
@@ -146,7 +148,7 @@ $friends = json_decode($friends);
                 <div class="card centered-card" style = "  width: 400px; height: 300px;  ">
                     <div class="card-body">
                         <?php  echo "<img src='../assets/icons/$usricon.png' class='card-img-top' alt='profile_' style='height: 100px; width: 100px; margin-bottom:10px'>" ?>
-                        <h3><span class="badge bg-secondary"><?php echo explode("@",$usrmail)[0];?></span></h5>
+                        <h3><span class="badge bg-secondary"><?php echo explode("@",$usrmail);?></span></h5>
                         <h5 class="card-subtitle mb-2 text-muted"><?php echo $usrmail;?></h4>
                         <p class="card-text" > 
                             <?php 
@@ -156,6 +158,28 @@ $friends = json_decode($friends);
                         </p>
                         <a  href="editProfile.php" class="card-link" style="font-size: 20px; color: gray;">Edit Profile</a>
                     </div>
+                </div>
+
+                <div id = "badges_div">
+                    <?php
+                        require_once('../models/db.php');
+                        $badges_info = GetBadgesInfo($conn);
+                        $user_statistics = get_user_statistics($usrid);
+                        for ($i = 0 ; $i < count($badges_info) ; $i++){
+                            $badge_id = $badges_info[$i]["badge_id"];
+                            $badge_name = $badges_info[$i]["badge_name"];
+                            $badge_count = $badges_info[$i]["badge_requirement_count"];
+
+                            echo $badge_id . " : " . $badge_name . " : " . $badge_count;
+                        }
+                        var_dump($user_statistics);
+                        for ($i = 0 ; $i < count($user_statistics) ; $i++){
+                            $statistic_type_id = $badges_info[$i]["badge_name"];
+                            $badge_count = $badges_info[$i]["badge_requirement_count"];
+
+                            echo $badge_id . " : " . $badge_name . " : " . $badge_count;
+                        }
+                    ?>
                 </div>
             </div>
         </div>
@@ -202,7 +226,7 @@ $friends = json_decode($friends);
                     <div class="card centered-card" style = "  width: 400px; height: 300px;  ">
                         <div class="card-body">
                             <?php echo "<img src='../assets/icons/$friendIcon.png' class='card-img-top' alt='profile_' style='height: 100px; width: 100px; margin-bottom:10px'>" ?>
-                            <h3><span class="badge bg-secondary"><?php echo explode("@",$friendMail)[0];?></span></h5>
+                            <h3><span class="badge bg-secondary"><?php echo explode("@",$friendMail);?></span></h5>
                             <h5 class="card-subtitle mb-2 text-muted"><?php echo $friendMail;?></h4>
                             <p class="card-text" > 
                                 <?php 

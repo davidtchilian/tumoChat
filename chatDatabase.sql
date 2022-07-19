@@ -81,6 +81,15 @@ CREATE TABLE Statistics_Main(
     FOREIGN KEY (statistic_type_id) REFERENCES Statistics_Types (statistic_type_id)
 );
 
+CREATE TABLE Badges(
+    badge_id INT,
+    badge_name TEXT,
+    badge_requirement_count INT,
+
+    PRIMARY KEY (badge_id),
+    FOREIGN KEY (badge_id) REFERENCES Statistics_Main (statistic_type_id)
+);
+
 CREATE TABLE friends(
     user_id_1 INT,
     user_id_2 INT,
