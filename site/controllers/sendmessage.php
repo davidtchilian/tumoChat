@@ -3,13 +3,17 @@
 session_start();
 $messagecontent = strip_tags(htmlspecialchars($_POST['message_content']));
 $groupId = $_POST["group_id"];
-
+var_dump($_POST);
 
 if ($messagecontent != "" && !ctype_space($messagecontent)) {
     
     $userId = $_SESSION["user_id"];
 
     require_once('../models/db.php');
+    include("updatestatisticsinfo.php");
+
+    addStatistic($userId, 2, $conn);
+
 
     $replaced_message = str_replace("'", "\'", $messagecontent); // ' -> \'
 
@@ -20,8 +24,6 @@ if ($messagecontent != "" && !ctype_space($messagecontent)) {
 
 }
 
-
-
-header("Location: ../views/page-chat.php?id=".$groupId);
-exit();
+// header("Location: ../views/page-chat.php?id=".$groupId);
+// exit();
 ?>

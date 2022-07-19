@@ -4,7 +4,8 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ./login.php?id=4');
     exit();
 }
-require_once '../models/db.php';    
+require_once '../models/db.php';   
+$me =$_SESSION['user_id'];
 $bio= $_POST['grpbio'];
 $name = $_POST['grpname'];
 ?>
@@ -55,7 +56,7 @@ $name = $_POST['grpname'];
                 <select name='select[]'class="chosen" multiple="true" style="width:400px;">
                     <?php
                     $users = array();
-                    $sql = "SELECT user_email, user_id FROM USERS";
+                    $sql = "SELECT user_email, user_id FROM USERS WHERE user_id != $me";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {

@@ -10,15 +10,31 @@
   $sql = "SELECT DISTINCT group_id, group_type, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE group_type = 2 AND isInGroup_user_id = ".$user_id ;
   $result = mysqli_query($conn, $sql);
 
+<<<<<<< HEAD
+    $sql2 ="SELECT COUNT(notification_id) as nb FROM NOTIFICATIONS WHERE notification_receiver_id = $user_id";
+    $result2 = mysqli_query($conn, $sql2);
+    if($row2 = mysqli_fetch_assoc($result2)){
+      $notif_count = $row2['nb'];
+    }
+  $sql3 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
+  $result3 = mysqli_query($conn, $sql3);
+  if ($result3->num_rows > 0) {
+    if($row1 = mysqli_fetch_assoc($result3)) {
+=======
+
+  
+
   $sql2 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
   $result2 = mysqli_query($conn, $sql2);
   if ($result2->num_rows > 0) {
     if($row1 = mysqli_fetch_assoc($result2)) {
+>>>>>>> 915a92b9e1b7f2926002c5834b134adefc729805
         $usricon = $row1['user_icon'];
     }
 } else {
     // echo "0 results";
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,6 +61,7 @@
                 let modal = document.getElementById("modal-content");
                 data.forEach(element => {
                 let notif_content = document.createElement("div");
+                let notif_content_text = document.createElement("p");
                 let notif_buttons = document.createElement("div");
                 let notif_accept_btn = document.createElement("a");
                 let notif_decline_btn = document.createElement("a");
@@ -54,22 +71,23 @@
                 notif_decline_btn.href = "../controllers/notificationdecision.php?notifId="+ element.notification_id +"&gID=" + element.notification_group_id;
                 notif_decline_btn.innerHTML = "❌";
                 notif_decline_btn.classList.add("notif_decesion_btn");
-                notif_content.innerHTML = element.notification_content;
+                notif_content_text.innerHTML = element.notification_content;
+                notif_content.appendChild(notif_content_text);
                 notif_content.classList.add("notif_content_div");
                 notif_buttons.classList.add("notif_buttons");
-                
                 notif_buttons.appendChild(notif_accept_btn);
                 notif_buttons.appendChild(notif_decline_btn);
-                modal.appendChild(notif_content);
                 notif_content.appendChild(notif_buttons);
+                modal.appendChild(notif_content);
+                
               }
               )
               let notif_close_btn = document.createElement("button");
               let modalInfo = document.getElementById("infoModal");
                 notif_close_btn.id = "closeButton";
                 notif_close_btn.className = "close btn modal_interaction";
-                notif_close_btn.onclick = function(){
-                  modalInfo.style.display = "none";
+                notif_close_btn.onclick = function(){ 
+                  window.location.reload(true);
                 }
                 notif_close_btn.innerHTML = "Close";
                 modal.appendChild(notif_close_btn); 
@@ -120,29 +138,16 @@
             <li class="nav-item">
               <a class="nav-link active" href="community.php" style="color :white">Community</a>
             </li>
+            <?php if($notif_count != 0)
+            {?>
+            <div class="notifs_nb"><p id="notifs_count"><?php echo $notif_count; ?></p></div>
+            <?php } ?>
             <div id="infoModal" class="modal_user">
                     <div id="modal-content" class="modal-content">
-                      <h3>Notifications<h3>
-                      <!-- <div class="notifInfo_div">
-                        <p id="notifInfo"></p>
+                      <h3>Notifications</h3>
+                      <div id="notifs_block_div">
+
                       </div>
-                        <div class="notif_group_div">
-                            <p id="notification_group"></p>
-                        </div>
-                        <div class="Notif_sender_div">
-                            <p id="notif_sender_info"></p>
-                        </div>
-                        <div class="notif_content_div">
-                            <p id="notification_content"></p>
-                        </div>
-                            <div id = "modal_buttons" class="userinfo_buttons">
-                                <div id="modal-extra-interactions"></div>
-                                <div id="modal-default-interactions">
-                                    
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <button id="closeButton" class="close btn modal_interaction">Close</button> -->
                     </div>
                 </div>
                 </ul>
@@ -175,7 +180,14 @@
                 <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
                     <div class="card mt-5">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item group-name"><?php echo $group["group_name"]; ?></li>
+                            <li class="list-group-item group-name">
+                              <div>
+                                <span><?php echo $group["group_name"]; ?></span>
+                                <img src="../assets/images/usercount.png" style="width: 28px; float:right;">
+                                <span><?php echo "";?></span>
+                              </div>
+                              
+                            </li>
                             <li class="list-group-item">
                                 <?php
                             $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['group_id']);

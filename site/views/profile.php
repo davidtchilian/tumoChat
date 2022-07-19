@@ -54,9 +54,9 @@ if ($result->num_rows > 0) {
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg light-nav" style="background: #F8F9FA;">
+<nav class="navbar navbar-expand-lg light-nav" >
         <div class="container mt-5">
-            <div class="container-fluid mt-5z">
+            <div class="container-fluid mt-5">
                 <a href="page-accueil.php"
           ><img
             src="../assets/images/flèche_retour3.png"

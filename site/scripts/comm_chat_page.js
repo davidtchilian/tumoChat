@@ -182,31 +182,28 @@ function removeParam(key, sourceURL) {
 const edit = document.getElementById("editId")
 const txt = document.getElementById("text")
 const form = document.getElementById("form")
-const button = document.getElementById("send")
+let button = document.getElementById("send")
 const messageSenderId = document.getElementById("jsUserId").value
 const groupId = document.getElementById("groupId").value
 
+
+document.getElementById("send").addEventListener("click", function(event){
+  event.preventDefault()
+
+})
+
 var x
+console.log(document.getElementById("text"))
 
 
 
  
-
-function deleteMessage(event){  
-  // var x = event.target.name;  
-  // const url =  "../controllers/delete.php?id="+x
-  // form.action = url
-  // var y = document.getElementById("delete3")
-  // console.log(y)
-
-}
 
 
 
 
 function show(event){
   x = event.target.id
-  console.log(x)
   let dropdownDiv = document.getElementsByClassName("dropdown")
   for (let i = 0; i < dropdownDiv.length; i++) {
     dropdownDiv[i].style.display = "none"
@@ -217,6 +214,7 @@ function show(event){
   var y = event.target.id
   let id = "dropdown" + y
 
+  
   const dropdown = document.getElementById(id)
   dropdown.style.display = "inline-block"
   dropdown.style.position = "absolute"
@@ -227,13 +225,13 @@ function show(event){
 
 
 function myFunction(event) {
-  button.id = "submit"
+
 
   x = event.target.name
 
   const messageCont = document.getElementById(x)
 
-  document.getElementById("submit").addEventListener("click", function(event){
+  document.getElementById("send").addEventListener("click", function(event){
     event.preventDefault()
   
   })
@@ -251,8 +249,8 @@ function myFunction(event) {
      }  
    
    }
-
-  
+  button.setAttribute("onclick", "updateMessages(event)")
+  console.log(button)
  }
 
 
@@ -274,14 +272,10 @@ function myFunction(event) {
 
 
 let y 
-document.getElementById("bodyHTML").addEventListener("click", function(event) {
-  if (event.target != edit){
-  let id = button.id
+
 
   
-  
- 
-  document.getElementById(id).addEventListener("click", function(event) {
+  function updateMessages(event){
     const message_cont = txt.value
   
    
@@ -313,22 +307,16 @@ document.getElementById("bodyHTML").addEventListener("click", function(event) {
            error: function () {x
              console.log("Error !!");
            }
-        }
-        
-             
+          }        
      );
      
-    
       txt.value = ""
       button.id = "send"
     }
-    
-    
-
-  })
-
+    button.setAttribute("onclick", "send(event)")
   }
-})
+
+
 
 
 function deleteMessages(event){
@@ -370,36 +358,40 @@ function deleteMessages(event){
 
 }
 
-function send(event){
+function sendMessage(event){
   var id = event.target
+
   
-  $.ajax(
-    {
-       type: 'post',
-       url:  "../controllers/sendmessage.php",
-       data: { 
-         "group_id" : groupId,
-         "message_content": txt.value
-        
-       },
-       success: function (response) {
-         console.log("Success !!");
-        //  var xmlhttp = new XMLHttpRequest();
-        //  xmlhttp.open(this.type, this.url ,true);
-        //  xmlhttp.send(this.data);
-        //  console.log(this.type)
-       console.log(response)
-         
-       
-       },
-       error: function () {x
-         console.log("Error !!");
-       }
-    }
-    
-         
- );
- txt.value = ""
- console.log(true)
- 
+          $.ajax(
+            {
+              type: 'post',
+              url:  "../controllers/sendmessage.php",
+              data: { 
+                "group_id" : groupId,
+                "message_content": txt.value,
+                "message_id" : x
+                
+              },
+              success: function (response) {
+                console.log("Success !!");
+                //  var xmlhttp = new XMLHttpRequest();
+                //  xmlhttp.open(this.type, this.url ,true);
+                //  xmlhttp.send(this.data);
+                //  console.log(this.type)
+              console.log(response)
+                
+              
+              },
+              error: function () {x
+                console.log("Error !!");
+              }
+            });
+
+        txt.value = ""
+      
+
 }
+
+
+const firstMessage = document.getElementById(93)
+console.log(firstMessage)
