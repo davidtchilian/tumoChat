@@ -4,12 +4,23 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ./login.php?id=4');
     exit();
 }
-require_once('../models/db.php');
 $usrid = $_SESSION['user_id'];
+if (!isset($_GET['id'])) {
+    $guestid = $usrid;
+}else {
+    $guestid = $_GET['id'];
+}
+require_once('../models/db.php');
+
+if ($notme = $guestid != $usrid) {
+    $id = $guestid;
+}else {
+    $id = $usrid;
+}
+
+$sql = "SELECT user_email, user_icon FROM USERS WHERE user_id = $id";
 
 
-$sql = "SELECT user_email, user_icon FROM USERS WHERE user_id = $usrid";
-   
 $result = mysqli_query($conn,$sql);
 if ($result->num_rows > 0) {
     if($row1 = mysqli_fetch_assoc($result)) {
@@ -21,6 +32,8 @@ if ($result->num_rows > 0) {
     header('Location: ./login.php?id=4');
     exit();
 }
+
+echo $ids ;
 
 $friends = file_get_contents($domain_name."/controllers/getfriends.php?user_id=$usrid");
 $friends = json_decode($friends);
@@ -147,13 +160,28 @@ $friends = json_decode($friends);
             </div>
         </div>
     </div>
+    <?php
+    // function follow(){
+    //     $id
+    // }
+    ?>
+
+    <?php  
+    if ($notme) {
+        ?>
+        <button onclick="follow()">Follow</button>
+        <?php
+        
+    }else {
+        
+     ?>
     <div class="div-titre" style="margin-top: 6rem; text-align: center;">
             <h1 class="Titre">Friends</h1>
     </div>
     <div class="container friends-container">
         <?php
         if (empty($friends)) { ?>
-            <h3>You don't have any friends.</h3>
+            <h3>You dont have any friends.</h3>
         <?php }
         foreach ($friends as $friend) {
             $friendId = intval($friend);
@@ -191,6 +219,7 @@ $friends = json_decode($friends);
         }
         ?>    
     </div>
+    <?php } ?>
     <script>
         const list = document.querySelectorAll('.list');
         function activeLink() {

@@ -24,6 +24,10 @@
   if($row2 = mysqli_fetch_assoc($result2)){
     $notif_count = $row2['nb'];
   }
+
+  $flames=file_get_contents("../controllers/getdate.php");
+  var_dump($flames);
+
   $sql3 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
   $result3 = mysqli_query($conn, $sql3);
   if ($result3->num_rows > 0) {
@@ -34,6 +38,10 @@
     // echo "0 results";
 }
 
+// $insert="INSERT INTO `NOTIFICATIONS`(`notification_sender_id`, `notification_receiver_id`, `notification_group_id`, `notification_content`, `notification_type_id`) VALUES (2,1,16, 'just testing notifs count',1)";
+// for($i=0;$i<150;$i++){
+//   mysqli_query($conn,$insert);
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,8 +65,10 @@
             data: "",
             dataType: 'json', //data format      
             success: function (data) {
+              
                 let modal = document.getElementById("modal-content");
                 data.forEach(element => {
+                console.log(element)
                 let notif_content = document.createElement("div");
                 let notif_content_text = document.createElement("p");
                 let notif_buttons = document.createElement("div");
@@ -93,6 +103,16 @@
             }
         });
     });
+    $(function (){
+        $.ajax({
+            url: '../controllers/getdate.php',       
+            data: "",
+            dataType: 'json', //data format      
+            success: function (data) {
+              console.log(data)
+            }
+          });
+        });
 </script>
     <style>
     body {
@@ -140,7 +160,7 @@
             </li>
             <?php if($notif_count != 0)
             {?>
-            <div class="notifs_nb"><p><?php echo $notif_count; ?></p></div>
+            <div class="notifs_nb"> <p <?php if($notif_count>100) {  echo "style='font-size:8px;'" ?> > <?php echo "99+";} else{echo $notif_count;}?></p></div>
             <?php } ?>
             <div id="infoModal" class="modal_user">
                     <div id="modal-content" class="modal-content">
@@ -180,13 +200,13 @@
                     <div class="card mt-5">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item group-name">
-                              <div id="top">
+                              <div>
+                                <p><?php if ($flames >= 5) {
+                                  echo "⭐";
+                                } ?></p>
                                 <span><?php echo $value["group_name"]; ?></span>
-                                <div>
-                                  <img src="../assets/images/usercount.png" style="width: 28px; float:right;">
-                                  <span><?php echo $rowG['COUNT(*)'];?></span>
-                              </div>
-                                
+                                <img src="../assets/images/usercount.png" style="width: 28px; float:right;">
+                                <span><?php echo "";?></span>
                               </div>
                               
                             </li>

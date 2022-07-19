@@ -1,0 +1,8 @@
+badge for friends:
+    1 friend = bronze friendly
+    5 friend = 
+
+    10 = more friendly
+    20 = much more friendly
+    30 = very friendly
+    40 = friendlyV

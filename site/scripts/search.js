@@ -25,7 +25,6 @@ function find(){
         return elements.includes(input.value);
     })
     for (i = 0; i < groups.length; i++) {
-        console.log(namesArr[i]);
         if (anun.includes(String(namesArr[i]).toLowerCase())) {
             groups[i].setAttribute("style", "display: block;");
         }else{
