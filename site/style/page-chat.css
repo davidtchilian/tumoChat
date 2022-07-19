@@ -79,8 +79,15 @@ p {
   background-color: #664c8f;
   margin: auto;
   padding: 10px;
-  width: 40%;
+  width: 30%;
   border-radius: var(--bs-navbar-toggler-border-radius);
+  position: absolute;
+    /* right: 100px; */
+    bottom: 6%;
+    left: 21%;
+    z-index: 10040;
+    overflow: auto;
+    overflow-y: auto;
 }
 
 .group_name {
