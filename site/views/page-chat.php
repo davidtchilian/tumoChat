@@ -302,6 +302,9 @@
                         </div>
                         <div>
                             <p><?php echo"stickers"?></p>
+                            <a href="../assets/stickers/stickerexample.png"></a>
+                            <img src="../assets/stickers/stickerexample.png" style="width :100px; margin-right : 80%;">
+
                         </div>
                     </div>
                 </div>
