@@ -18,15 +18,24 @@
   }
 
   require('../models/db.php');
- 
+
+  
+
   $sql = "SELECT * FROM message WHERE message_group_id='$groupId'";
   $messages = mysqli_query($conn, $sql);
   $messageId = mysqli_fetch_assoc($messages);
 
-  $sql = "SELECT group_name, group_type, group_icon FROM groupchat WHERE group_id='$groupId'";
-  $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
-  $groupType = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_type"];
-  $groupIcon = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_icon"];
+  $sql = "SELECT group_name, group_type, group_icon FROM groupchat WHERE group_id = $groupId";
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_assoc($result);
+  $groupName = $row["group_name"];
+  $groupType = $row['group_type'];
+  $groupIcon = $row['group_icon'];
+  
+  $getTypeSql = "SELECT typeName FROM typeGroupChat WHERE typeGroupChat_id = $groupType";
+  $groupTypeName = mysqli_fetch_assoc(mysqli_query($conn, $getTypeSql))['typeName'];
+
+
 //   $message = mysqli_fetch_assoc($messages);
   if($groupType==2){
   $group_users = file_get_contents($domain_name."/controllers/getgroupusers.php?id=".$groupId);
@@ -136,9 +145,9 @@
 </head>
 <body id = "bodyHTML">
     <div class="fixed-top">
-        <nav class="navbar navbar-expand-lg" style="background-color : #6c4b93">
+        <nav class="navbar navbar-expand-lg" style="background-color : #6c4b93;">
             <?php
-        if($groupType==1){
+        if($groupTypeName=="private"){
         ?>
             <a href="page-accueil.php"><img src="../assets/images/flèche_retour3.png" alt="Retour"
                     style="width : 35px; height: 35px; margin-left: 10px" /></a>
@@ -154,13 +163,13 @@
             <div class="container">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <?php
-                if($groupType==1){ ?>
+                if($groupTypeName=="public"){ ?>
                     <li>
-                        <img style="width: 12px;" src="../images/comm_icons/<?php echo $groupIcon; ?>.png" alt="">
+                        <img class="comm_icon" style="margin: 6px 0" src="../assets/comm_icons/<?php echo $groupIcon; ?>.png" alt="">
                     </li>
                     <?php } ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color : white"><?php echo $groupName; ?></a>
+                        <a class="nav-link" href="#" style="color : white; margin-left: 14px"><?php echo $groupName; ?></a>
                     </li>
                 </ul>
                 <div class="d-flex">
@@ -175,18 +184,33 @@
 
                 <div id="infoModal" class="modal_user">
                     <div class="modal-content">
+                        <?php if($groupTypeName=="public"){ ?>
+                        <div>
+                            <button id="closeButton" class="close btn modal_interaction"><img
+                                    src="../assets/images/cllose.png" alt="sticker" style="width :40px"
+                                    style="height : 40px" />
+                            </button>
+                        </div>
+                        <div class="groupinfo_div" id="groupinfo-container">
+                            <p id="groupInfo" style= "font-size: 2rem" class="group_name"></p>
+                            <img class="comm_icon" style="margin: 1rem; width: 70px;" src="../assets/comm_icons/<?php echo $groupIcon; ?>.png" alt="">
+                            <div id="groupBio"></div>
+                        </div>
+                        <?php }else{ ?>
                         <div class="groupinfo_div" id="groupinfo-container">
                             <p id="groupInfo" class="group_name"></p>
                         </div>
                         <div class="usersinfo_div">
                             <div id="usersInfo"></div>
                             <div id="modal_buttons" class="userinfo_buttons">
-                                <div id="modal-extra-interactions"></div>
+                                <div id="modal-extra-interactions">
+                                </div>
                                 <div id="modal-default-interactions">
                                     <button id="closeButton" class="close btn modal_interaction">Close</button>
                                 </div>
                             </div>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
 
@@ -245,7 +269,7 @@
             <?php
                 }
                 else{?>
-            <div class="col-1"><img src="../assets/comm_icons/10.png" class="user_icon"></div>
+            <div class="col-1"><img src="../assets/comm_icons/100.png" class="user_icon"></div>
             <div class="col-7">
                 <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
                     <?php 
@@ -291,6 +315,7 @@
                 </div>
                 <div id="stickerModal" class="modal_user">
                     <div class="modal-content ">
+                        
                         <div id="modal-extra-interactions"></div>
                         <div id="modal-default-interactions">
                             <button id="stickerCloseButton" class="close btn modal_interaction"><img
@@ -307,19 +332,18 @@
     </div>
     </nav>
     </div>
-    <script type="text/javascript" src="../scripts/page-chat.js"></script>
     <script type="text/javascript"  src="../scripts/sticker.js"></script>
     <?php
-    // if($groupType==2){
+    if($groupType==2){
     ?>
-    <!-- <script src="../scripts/page-chat.js"></script> -->
-    <?php //} ?>
+    <script src="../scripts/page-chat.js"></script>
+    <?php } ?>
     <?php
-    // if($groupType==1){
+    if($groupType==1){
     ?>
-    <!-- <script src="../scripts/comm_chat_page.js"></script> -->
-    <?php //} ?>
-    <!-- <script src="../scripts/sticker.js"></script> -->
+    <script src="../scripts/comm_chat_page.js"></script>
+    <?php } ?>
+    <script src="../scripts/sticker.js"></script>
     <script>
     const params = new URLSearchParams(window.location.search);
     if (params.getAll('modal')[0] == 1) {
