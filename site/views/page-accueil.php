@@ -11,7 +11,7 @@
   $result = mysqli_query($conn, $sql);
 
     $sql2 ="SELECT COUNT(notification_id) as nb FROM NOTIFICATIONS WHERE notification_receiver_id = $user_id";
-    $result2 = mysqli_query($conn, $sql2);
+    $result2 = mysqli_query($conn, $sql2);   
     if($row2 = mysqli_fetch_assoc($result2)){
       $notif_count = $row2['nb'];
     }

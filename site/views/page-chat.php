@@ -21,7 +21,6 @@
  
   $sql = "SELECT * FROM message WHERE message_group_id='$groupId'";
   $messages = mysqli_query($conn, $sql);
-  $messageId = mysqli_fetch_assoc($messages);
 
   $sql = "SELECT group_name, group_type, group_icon FROM groupchat WHERE group_id='$groupId'";
   $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
@@ -196,14 +195,15 @@
     <div class="container mt-5" style="min-height : 100vh;" style="position : relative">
         <br><br><br><br>
         <?php
-    while ($message = mysqli_fetch_assoc($messages)) {
+        while($message = mysqli_fetch_assoc($messages)) {
+        
         $icon = file_get_contents($domain_name."/controllers/getusericon.php?id=".$message["message_sender_id"]);
         $user_email = file_get_contents($domain_name."/controllers/getuseremail.php?id=".$message["message_sender_id"]);
         $user_name = explode("@", $user_email)[0];
         if ($message['message_sender_id'] == $userId) {
         ?>
         <div class="row" id="messages">
-            <div class="col-4"></div>
+        <div class="col-4"></div>
             <div class="col-7">
                 <button class="btn btn-primary messageEnvoye mt-2" onclick="show(event)"
                     style="float : right; color: black;" id="<?= $message['message_id']?>">
