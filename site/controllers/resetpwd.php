@@ -9,15 +9,15 @@ $password_hash = md5($new_pwd);
 $new_pwd_confirm = $_POST["confirm_pass"];
 if ($new_pwd == $new_pwd_confirm) {
     $delete = "DELETE FROM RESET_PWD WHERE reset_pwd_user_id = $user_id;";
-mysqli_query($conn, $delete);
+    mysqli_query($conn, $delete);
 
-$sql = "UPDATE USERS SET user_password = '$password_hash' WHERE user_id = $user_id;";
-mysqli_query($conn, $sql);
+    $sql = "UPDATE USERS SET user_password = '$password_hash' WHERE user_id = $user_id;";
+    mysqli_query($conn, $sql);
 
     
-mysqli_close($conn);
-header('Location: ../views/logIn.php?id=5');
-exit();
+    mysqli_close($conn);
+    header('Location: ../views/logIn.php?id=5');
+    exit();
 }
 header('Location: ../views/logIn.php?id=4');
 exit();
