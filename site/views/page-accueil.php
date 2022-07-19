@@ -7,10 +7,12 @@
   $user_id = $_SESSION['user_id'];
   $theme = $_SESSION['user_theme'];
   require_once("../models/db.php");
+  $flames=file_get_contents("../controllers/getdate.php");
+  var_dump($flames);
   $sql = "SELECT DISTINCT group_id, group_type, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE group_type = 2 AND isInGroup_user_id = ".$user_id ;
   $result = mysqli_query($conn, $sql);
 
-    $sql2 ="SELECT COUNT(notification_id) as nb FROM NOTIFICATIONS WHERE notification_receiver_id = $user_id";
+    $sql2 ="SELECT COUNT(notification_id) as nb FROM NOTIFICATIONS WHERE notification_receiver_id = $user_id LIMIT 99";
     $result2 = mysqli_query($conn, $sql2);   
     if($row2 = mysqli_fetch_assoc($result2)){
       $notif_count = $row2['nb'];
@@ -25,6 +27,10 @@
     // echo "0 results";
 }
 
+// $insert="INSERT INTO `NOTIFICATIONS`(`notification_sender_id`, `notification_receiver_id`, `notification_group_id`, `notification_content`, `notification_type_id`) VALUES (2,1,16, 'just testing notifs count',1)";
+// for($i=0;$i<150;$i++){
+//   mysqli_query($conn,$insert);
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,8 +54,10 @@
             data: "",
             dataType: 'json', //data format      
             success: function (data) {
+              
                 let modal = document.getElementById("modal-content");
                 data.forEach(element => {
+                console.log(element)
                 let notif_content = document.createElement("div");
                 let notif_content_text = document.createElement("p");
                 let notif_buttons = document.createElement("div");
@@ -84,6 +92,16 @@
             }
         });
     });
+    $(function (){
+        $.ajax({
+            url: '../controllers/getdate.php',       
+            data: "",
+            dataType: 'json', //data format      
+            success: function (data) {
+              console.log(data)
+            }
+          });
+        });
 </script>
     <style>
     body {
@@ -130,7 +148,7 @@
             </li>
             <?php if($notif_count != 0)
             {?>
-            <div class="notifs_nb"><p><?php echo $notif_count; ?></p></div>
+            <div class="notifs_nb"> <p <?php if($notif_count>100) {  echo "style='font-size:8px;'" ?> > <?php echo "99+";} else{echo $notif_count;}?></p></div>
             <?php } ?>
             <div id="infoModal" class="modal_user">
                     <div id="modal-content" class="modal-content">
@@ -171,6 +189,9 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item group-name">
                               <div>
+                                <p><?php if ($flames >= 5) {
+                                  echo "⭐";
+                                } ?></p>
                                 <span><?php echo $group["group_name"]; ?></span>
                                 <img src="../assets/images/usercount.png" style="width: 28px; float:right;">
                                 <span><?php echo "";?></span>

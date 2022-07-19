@@ -1,6 +1,6 @@
 <?php
 $groupid = $_GET["id"];
-$user_id = 6;
+$user_id = 2;
 require_once("../models/db.php");
 $sql = "
 SELECT DISTINCT Date(message_date) AS date
@@ -17,17 +17,30 @@ while($row = mysqli_fetch_assoc($res)){
 	$dates[] = $row['date'];
 }
 
-var_dump($dates);
-var_dump(date("dd-mm-yy") - 1);
-if ($dates[0] == strtotime(date().'-'.$i.' day')) {
+// var_dump(date("d-m-y"));
+if ($dates[0] == date('Y-m-d')) {
+	// echo (date("d")-1);
 	$flames = 1;
 	for ($i=1; $i < count($dates); $i++) { 
-		if ($dates[$i] == date() - $i) {
-			$flames = $flames + 1;
+		if ($dates[$i] == date('Y-m-d', strtotime("-".$i." days"))) {
+			//if ($dates[$i] == (date("d")-$i)) {
+			$flames += 1;
+		}
+		else{
+			return 0;
 		}
 	}
-	echo "flames =".strval($flames);
+	if ($flames >= 5) {
+		$arr = array("char" => "⭐");
+		echo json_encode($arr);
+		
+	}
+	// echo "flames =".strval($flames);
 }else{
 	return "flames = 0";
 }
+
+
 ?>
+
+

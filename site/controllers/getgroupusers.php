@@ -1,4 +1,5 @@
 <?php
+    header("Access-Control-Allow-Origin: *");
     $users = array();
     $group_id = $_GET["id"];
     require_once("../models/db.php");
