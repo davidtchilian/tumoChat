@@ -215,9 +215,10 @@ h1, h3{
   height: 20px;
 }
 
-#notifs_count{
+.notifs_nb p{
   color: white;
   text-align: center;
+  line-height: 20px;
 }
 /* 
 .group-name{

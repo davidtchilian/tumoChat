@@ -130,7 +130,7 @@
             </li>
             <?php if($notif_count != 0)
             {?>
-            <div class="notifs_nb"><p id="notifs_count"><?php echo $notif_count; ?></p></div>
+            <div class="notifs_nb"><p><?php echo $notif_count; ?></p></div>
             <?php } ?>
             <div id="infoModal" class="modal_user">
                     <div id="modal-content" class="modal-content">
