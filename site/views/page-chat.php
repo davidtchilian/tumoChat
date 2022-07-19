@@ -130,10 +130,10 @@
     ?>body {
         background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
     }
- 
     </style>
 </head>
-<body id = "bodyHTML">
+
+<body id="bodyHTML">
     <div class="fixed-top">
         <nav class="navbar navbar-expand-lg" style="background-color : #6c4b93">
             <?php
@@ -152,7 +152,7 @@
         ?>
             <div class="container">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <?php
+                    <?php
                 if($groupType==1){ ?>
                     <li>
                         <img style="width: 12px;" src="../images/comm_icons/<?php echo $groupIcon; ?>.png" alt="">
@@ -211,13 +211,14 @@
                     // echo "<p class='user_email'>".$user_name."</p>";
                     echo "<pre >"."<span class='message_content_span'>".$message['message_content']."</span>"."</pre>"; ?>
                 </button>
-                <div style= "" class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;"
+                <div style="" class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;"
                     id="<?= "dropdown".$message['message_id']?>">
 
                     <div class="dropdown-content" id="dropdown-content">
-                        <a  onclick="myFunction(event)" id=<?= "editId".$message['message_id']?>
+                        <a onclick="myFunction(event)" id=<?= "editId".$message['message_id']?>
                             name="<?= $message['message_id']?>">Edit</a>
-                        <a href="../controllers/delete.php?id=<?=$message['message_id']?>&groupId=<?=$groupId?>" onclick="deleteMessage(event)" id="<?= "delete".$message['message_id']?>" >Delete</a>
+                        <a href="../controllers/delete.php?id=<?=$message['message_id']?>&groupId=<?=$groupId?>"
+                            onclick="deleteMessage(event)" id="<?= "delete".$message['message_id']?>">Delete</a>
                     </div>
 
                 </div>
@@ -262,26 +263,27 @@
         }
     }
     ?>
-        <br id ="br">
+        <br id="br">
     </div>
 
     <div class="fixed-bottom">
-        <nav class="navbar navbar-expand-lg" style="background-color:#6c4b93" id = "navbarId">
+        <nav class="navbar navbar-expand-lg" style="background-color:#6c4b93" id="navbarId">
             <div class="container">
                 <a onClick="sticker()" id="stickerButton" class="sticker_btn nav-link" style="display: inline-block">
                     <img src="../assets/images/stickerr.png" alt="sticker" style="width :40px" style="height : 40px" />
                 </a>
 
                 <div class="container-fluid">
-                    <form class="d-flex" role="search" action="../controllers/sendmessage.php" method="post" id="form" >
+                    <form class="d-flex" role="search" action="../controllers/sendmessage.php" method="post" id="form">
                         <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
                         <input type="hidden" name="group_id" value="<?php echo $groupId; ?>">
-                        <input type="hidden" name = "message_id" value="1";  id="message_id">
-                        <input type="hidden" id = "jsUserId" value="<?= $userId?>">
+                        <input type="hidden" name="message_id" value="1" ; id="message_id">
+                        <input type="hidden" id="jsUserId" value="<?= $userId?>">
                         <div class="form-group">
-                            <textarea name="message_content" id="smska" style="resize: none" class="form-control" id="text" rows="1"   placeholder="Enter your message here" autofocus></textarea>
+                            <textarea name="message_content" id="smska" style="resize: none" class="form-control"
+                                id="text" rows="1" placeholder="Enter your message here" autofocus></textarea>
                         </div>
-                        <button class="btn search" type="submit" value="Message" id = "send"  >
+                        <button class="btn search" type="submit" value="Message" id="send">
                             <a href="page-chat.php?id=<?php echo $groupId;?>"></a>
                             <img src="../assets/images/avion_papier_nour_1.png" alt="envoye" style="width :40px"
                                 style="height : 40px" />
@@ -300,6 +302,9 @@
                         </div>
                         <div>
                             <p><?php echo"stickers"?></p>
+                            <a href="../assets/stickers/stickerexample.png"></a>
+                            <img src="../assets/stickers/stickerexample.png" style="width :100px; margin-right : 80%;">
+
                         </div>
                     </div>
                 </div>
@@ -308,7 +313,7 @@
     </nav>
     </div>
     <script type="text/javascript" src="../scripts/page-chat.js"></script>
-    <script type="text/javascript"  src="../scripts/sticker.js"></script>
+    <script type="text/javascript" src="../scripts/sticker.js"></script>
     <?php
     // if($groupType==2){
     ?>
