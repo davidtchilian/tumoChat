@@ -147,8 +147,14 @@ $friends = json_decode($friends);
             </div>
         </div>
     </div>
+    <div class="div-titre" style="margin-top: 6rem; text-align: center;">
+            <h1 class="Titre">Friends</h1>
+    </div>
     <div class="container friends-container">
         <?php
+        if (empty($friends)) { ?>
+            <h3>You don't have any friends.</h3>
+        <?php }
         foreach ($friends as $friend) {
             $friendId = intval($friend);
             $sql = "SELECT user_email, user_icon FROM USERS WHERE user_id = $friendId";
@@ -177,7 +183,6 @@ $friends = json_decode($friends);
                                 ?> 
                             </p>
                             <a href="user-profile.php?id=<?php echo $friendId; ?>" class="card-link" style="font-size: 20px; color: gray;">View Profile</a>
-                            <a href="#" class="card-link" style="font-size: 20px; color: gray;">Remove Friend</a>
                         </div>
                     </div>
                 </div>
