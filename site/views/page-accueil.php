@@ -7,6 +7,8 @@
   $user_id = $_SESSION['user_id'];
   $theme = $_SESSION['user_theme'];
   require_once("../models/db.php");
+  $flames=file_get_contents("../controllers/getdate.php");
+  var_dump($flames);
   $sql = "SELECT DISTINCT group_id, group_type, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE group_type = 2 AND isInGroup_user_id = ".$user_id ;
   $result = mysqli_query($conn, $sql);
 
@@ -48,8 +50,10 @@
             data: "",
             dataType: 'json', //data format      
             success: function (data) {
+              
                 let modal = document.getElementById("modal-content");
                 data.forEach(element => {
+                console.log(element)
                 let notif_content = document.createElement("div");
                 let notif_content_text = document.createElement("p");
                 let notif_buttons = document.createElement("div");
@@ -84,6 +88,16 @@
             }
         });
     });
+    $(function (){
+        $.ajax({
+            url: '../controllers/getdate.php',       
+            data: "",
+            dataType: 'json', //data format      
+            success: function (data) {
+              console.log(data)
+            }
+          });
+        });
 </script>
     <style>
     body {
@@ -171,6 +185,9 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item group-name">
                               <div>
+                                <p><?php if ($flames >= 5) {
+                                  echo "⭐";
+                                } ?></p>
                                 <span><?php echo $group["group_name"]; ?></span>
                                 <img src="../assets/images/usercount.png" style="width: 28px; float:right;">
                                 <span><?php echo "";?></span>

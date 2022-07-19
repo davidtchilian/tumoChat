@@ -21,7 +21,6 @@
  
   $sql = "SELECT * FROM message WHERE message_group_id='$groupId'";
   $messages = mysqli_query($conn, $sql);
-  $messageId = mysqli_fetch_assoc($messages);
 
   $sql = "SELECT group_name, group_type, group_icon FROM groupchat WHERE group_id='$groupId'";
   $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
@@ -31,14 +30,12 @@
   if($groupType==2){
   $group_users = file_get_contents($domain_name."/controllers/getgroupusers.php?id=".$groupId);
   $group_users = json_decode($group_users);
+    $isingroup = false;
+    for ($i=0; $i < count($group_users) && !$isingroup; $i++) { 
+        $isingroup = $group_users[$i] == $userId;
+    }
 
-  for ($i=0; $i < count($group_users); $i++) { 
-      if($group_users[$i] == $userId){
-        $isingroup = true;
-      }
-  }
-
-  if($isingroup == false){
+  if(!$isingroup){
       header("Location: page-accueil.php");
   }
   }
