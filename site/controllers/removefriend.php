@@ -12,6 +12,6 @@
   $sql = "DELETE FROM friends WHERE user_id_1=$userId AND user_id_2=$deleteId OR user_id_2=$userId AND user_id_1=$deleteId";
   mysqli_query($conn, $sql);
   mysqli_close($conn);
-  header('Location: ../views/user-profile.php?id='.$deleteId);
+  header('Location: ../views/profile.php?id='.$deleteId);
 
 ?>
