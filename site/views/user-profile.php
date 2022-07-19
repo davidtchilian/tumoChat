@@ -59,7 +59,7 @@
     <nav class="navbar navbar-expand-lg light-nav">
       <div class="container mt-5">
         <div class="container-fluid mt-5">
-          <a href="page-accueil.php"><img src="../assets/images/flèche_retour3.png" alt="Retour" style="width : 35px; height: 35px; margin-left: 10px" /></a>
+          <a href="profile.php"><img src="../assets/images/flèche_retour3.png" alt="Retour" style="width : 35px; height: 35px; margin-left: 10px" /></a>
           <button class="navbar-toggler" type="button" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           </button>
         </div>
@@ -86,8 +86,9 @@
                       if (in_array(strval($userId), $friends)) { ?>
                         <div class="user-profile-friend-status">
                           <p>Friends</p>
-                          <img src="../assets/images/friend.png" alt="Friends"></div>
-                        <a href="editProfile.php" class="user-profile-status friends-deactive">Remove Friend</a>
+                          <img src="../assets/images/friend.png" alt="Friends">
+                        </div>
+                        <a href="../controllers/removefriend.php?user_id=<?php echo $userId; ?>&delete_id=<?php echo $profileUserId; ?>" class="user-profile-status friends-deactive">Remove Friend</a>
                         <?php
                       }
                       else { ?>
