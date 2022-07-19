@@ -180,6 +180,28 @@
                                 ?>
                     </div>
                 </div>
+
+                <div id = "badges_div">
+                    <?php
+                        require_once('../models/db.php');
+                        $badges_info = GetBadgesInfo($conn);
+                        $user_statistics = get_user_statistics($usrid);
+                        for ($i = 0 ; $i < count($badges_info) ; $i++){
+                            $badge_id = $badges_info[$i]["badge_id"];
+                            $badge_name = $badges_info[$i]["badge_name"];
+                            $badge_count = $badges_info[$i]["badge_requirement_count"];
+
+                            echo $badge_id . " : " . $badge_name . " : " . $badge_count;
+                        }
+                        var_dump($user_statistics);
+                        for ($i = 0 ; $i < count($user_statistics) ; $i++){
+                            $statistic_type_id = $badges_info[$i]["badge_name"];
+                            $badge_count = $badges_info[$i]["badge_requirement_count"];
+
+                            echo $badge_id . " : " . $badge_name . " : " . $badge_count;
+                        }
+                    ?>
+                </div>
             </div>
         </div>
     </div>

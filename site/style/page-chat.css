@@ -97,7 +97,9 @@ p {
 }
 
 .group_bio {
+  color: #fff;
   font-style: italic;
+  padding: 1rem;
 }
 
 .modal-content > * {
@@ -241,4 +243,41 @@ pre {
   font-family: Arial;
   font-weight: 400;
  
+}
+.comm_icon{
+  width: 55px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+.start-container{
+  width:20%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navbar-nav{
+  margin-left: 54px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.container{
+  width: 100%;
+}
+
+.navbar{
+  width: 100%;
+}
+
+@media (max-width: 850px){
+  .modal-content{
+    width: 85% !important;
+  }
+}
+
+.navbar-expand-lg {
+  flex-wrap: nowrap !important;
+  justify-content: flex-start !important;
 }
