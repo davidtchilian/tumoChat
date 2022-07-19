@@ -16,7 +16,6 @@ window.onload = () => {
 }
 
 sticketrButton.onclick = function() {
-  console.log("Click")
   stickerModal.style.display = "block";
 }
 
@@ -267,10 +266,6 @@ function myFunction(event) {
    
  
  }
- 
- console.log(12)
-
- 
 
 
 // document.getElementById("submit").addEventListener("click", function(event){
