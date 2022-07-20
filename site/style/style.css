@@ -555,9 +555,9 @@ body {
   margin-right: 2px;
 }
 
-.user-profile-friend-status img {
+/* .user-profile-friend-status img {
   -webkit-filter: invert(89%) sepia(6%) hue-rotate(185deg);
-}
+} */
 
 .user-profile-friend-status p {
   margin: 1px 4px 0 0;
@@ -594,4 +594,13 @@ body {
 
 .friends-deactive:hover {
   color: #ff3434;
+}
+
+.friends-cancel{
+  border: 1px solid #4E4F50;
+  background-color: #4E4F50;
+}
+
+.friends-cancel:hover {
+  color: #4E4F50;
 }

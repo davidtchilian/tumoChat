@@ -81,15 +81,16 @@ p {
   padding: 10px;
   width: 30%;
   border-radius: var(--bs-navbar-toggler-border-radius);
-  position: absolute;
-    /* right: 100px; */
-    bottom: 6%;
-    left: 21%;
-    z-index: 10040;
-    overflow: auto;
-    overflow-y: auto;
+  
 }
-
+.modal-content-sticker {
+  position: absolute;
+  bottom: 6%;
+  left: 21%;
+  z-index: 10040;
+  overflow: auto;
+  overflow-y: auto;
+}
 .group_name {
   font-weight: bold;
   font-size: 20px;
@@ -281,3 +282,4 @@ pre {
   flex-wrap: nowrap !important;
   justify-content: flex-start !important;
 }
+

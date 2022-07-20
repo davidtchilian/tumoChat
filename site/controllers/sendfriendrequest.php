@@ -1,12 +1,13 @@
 <?php
 
-  $userId = $_GET['user_id'];
+  session_start();
+  $userId = $_SESSION['user_id'];
   $receiverId = $_GET['receiver_id'];
 
   require_once('../models/db.php');
 
-  $sql = "SELECT user_email FROM USERS WHERE user_id=$user_id";
-  $userName = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+  $sql = "SELECT user_email FROM USERS WHERE user_id=$userId";
+  $userName = mysqli_fetch_assoc(mysqli_query($conn, $sql))['user_email'];
 
   $friendRequestContent = "$userName sent you friend request.";
 
