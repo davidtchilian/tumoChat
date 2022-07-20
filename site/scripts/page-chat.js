@@ -19,7 +19,7 @@ sticketrButton.onclick = function () {
   stickerModal.style.display = "block";
 }
 
-// stickerClose.onclick = onClose;
+stickerClose.onclick = onClose;
 
 window.onclick = function (event) {
   console.log("ad")

@@ -368,17 +368,6 @@
     <script src="../scripts/jquery.js">
     </script>
     <script type="text/javascript" src="../scripts/sticker.js"></script>
-    <?php
-    if($groupType==2){
-    ?>
-    <script src="../scripts/page-chat.js"></script>
-    <?php } ?>
-    <?php
-    if($groupType==1){
-    ?>
-    <script src="../scripts/comm_chat_page.js"></script>
-    <?php } ?>
-    <script src="../scripts/sticker.js"></script>
     <script>
     const params = new URLSearchParams(window.location.search);
     if (params.getAll('modal')[0] == 1) {
@@ -391,7 +380,7 @@
     <div id="div23">
         <h1>assa</h1>
     </div>
-    <script type="text/javascript" src="../scripts/comm_chat_page.js" refer></script>
+    <script type="text/javascript" src="../scripts/chat.js" refer></script>
 
 </body>
 
