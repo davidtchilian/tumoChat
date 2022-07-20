@@ -11,7 +11,8 @@ if ($result->num_rows > 0) {
 	}
 	// var_dump($groupids);
 } else{
-	echo "chka";
+	echo "[]";
+	exit();
 }
 
 // mysqli_close();
@@ -37,8 +38,6 @@ foreach($groupids as $id){
 	while($row = mysqli_fetch_assoc($res)){
 		$dates[] = $row['date'];
 	}
-	echo "dates";
-	var_dump($dates);
 	if ($dates[0] == date('Y-m-d')) {
 		
 		$flames = 1;
@@ -63,12 +62,8 @@ foreach($groupids as $id){
 	$streaks[]=array($id['isInGroup_group_id'],$flames);
 	
 }
+echo json_encode($streaks);
 
-echo "<br>";
-	echo "<br>";
-	echo "<pre>";
-	var_dump($streaks);
-	echo "</pre>";
 
 ?>
 
