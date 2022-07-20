@@ -21,13 +21,13 @@
  
   $sql = "SELECT * FROM message WHERE message_group_id='$groupId'";
   $messages = mysqli_query($conn, $sql);
-  $messageId = mysqli_fetch_assoc($messages);
+ 
 
   $sql = "SELECT group_name, group_type, group_icon FROM groupchat WHERE group_id='$groupId'";
   $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
   $groupType = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_type"];
   $groupIcon = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_icon"];
-  $message = mysqli_fetch_assoc($messages);
+//   $message = mysqli_fetch_assoc($messages);
   if($groupType==2){
   $group_users = file_get_contents($domain_name."/controllers/getgroupusers.php?id=".$groupId);
   $group_users = json_decode($group_users);
@@ -193,31 +193,31 @@
             </div>
         </nav>
     </div>
-    <div class="container mt-5" style="min-height : 100vh;" style="position : relative">
+    <div id="cont0" class="container mt-5" style="min-height : 100vh;" style="position : relative">
         <br><br><br><br>
         <?php
-    foreach ($message as $value) {
-        $icon = file_get_contents($domain_name."/controllers/getusericon.php?id=".$value["message_sender_id"]);
-        $user_email = file_get_contents($domain_name."/controllers/getuseremail.php?id=".$value["message_sender_id"]);
+  while($message = mysqli_fetch_assoc($messages)) {
+        $icon = file_get_contents($domain_name."/controllers/getusericon.php?id=".$message["message_sender_id"]);
+        $user_email = file_get_contents($domain_name."/controllers/getuseremail.php?id=".$message["message_sender_id"]);
         $user_name = explode("@", $user_email)[0];
-        if ($value['message_sender_id'] == $userId) {
+        if ($message['message_sender_id'] == $userId) {
         ?>
         <div class="row" id="messages">
             <div class="col-4"></div>
             <div class="col-7">
                 <button class="btn btn-primary messageEnvoye mt-2" onclick="show(event)"
-                    style="float : right; color: black;" id="<?= $value['message_id']?>">
+                    style="float : right; color: black;" id="<?= $message['message_id']?>">
                     <?php 
                     // echo "<p class='user_email'>".$user_name."</p>";
-                    echo "<pre >"."<span class='message_content_span'>".$value['message_content']."</span>"."</pre>"; ?>
+                    echo "<pre >"."<span class='message_content_span'>".$message['message_content']."</span>"."</pre>"; ?>
                 </button>
-                <div style= "margin-left:900px;" class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;"
-                    id="<?= "dropdown".$value['message_id']?>">
+                <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;"
+                    id="<?= "dropdown".$message['message_id']?>">
 
                     <div class="dropdown-content" id="dropdown-content">
-                        <a  onclick="myFunction(event)" id=<?= "editId".$value['message_id']?>
-                            name="<?= $value['message_id']?>">Edit</a>
-                        <a onclick="deleteMessages(event)" id="<?= "delete".$value['message_id']?>" >Delete</a>
+                        <a  onclick="myFunction(event)" id=<?= "editId".$message['message_id']?>
+                            name="<?= $message['message_id']?>">Edit</a>
+                        <a onclick="deleteMessages(event)" id="<?= "delete".$message['message_id']?>" >Delete</a>
                     </div>
 
                 </div>
@@ -226,7 +226,7 @@
         <?php }
         else { 
             for ($i=0; $i < count($group_users); $i++) { 
-                if($group_users[$i] == $value["message_sender_id"]){
+                if($group_users[$i] == $message["message_sender_id"]){
                     $isingroup_message = true;
                 }
             }
@@ -239,7 +239,7 @@
                 <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
                     <?php 
                             echo "<p class='user_email'>".$user_name."</p>";
-                            echo  $value['message_content'] ?>
+                            echo  $message['message_content'] ?>
                 </button>
             </div>
             <?php
@@ -250,7 +250,7 @@
                 <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
                     <?php 
                             echo "<p class='delated_user'>Delated user</p>";
-                            echo $value['message_content'] ?>
+                            echo $message['message_content'] ?>
                 </button>
             </div>
             <?php
@@ -262,7 +262,7 @@
         }
     }
     ?>
-        <br id ="br">
+    
     </div>
 
     <div class="fixed-bottom">
@@ -276,7 +276,7 @@
                     <form class="d-flex" role="search"  method="post" id="form" >
                         <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
                         <input type="hidden" name="group_id" value="<?php echo $groupId; ?>" id = "groupId">
-                        <input type="hidden" name = "message_id" value="1";  id="message_id">
+                        <input type="hidden" name = "message_id" value="<?= $message['message_id']?>"  id="message_id">
                         <input type="hidden" id = "jsUserId" value="<?= $userId?>">
                         <div class="form-group">
                             <textarea name="message_content"  style="resize: none" class="form-control" id="text" rows="1"   placeholder="Enter your message here" autofocus></textarea>

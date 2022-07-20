@@ -21,6 +21,10 @@ if ($result->num_rows > 0) {
     header('Location: ./login.php?id=4');
     exit();
 }
+
+$friends = file_get_contents($domain_name."/controllers/getfriends.php?user_id=$usrid");
+$friends = json_decode($friends);
+
 ?>
 <!doctype html>
 <html lang="fr">
@@ -142,6 +146,50 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
         </div>
+    </div>
+    <div class="div-titre" style="margin-top: 6rem; text-align: center;">
+            <h1 class="Titre">Friends</h1>
+    </div>
+    <div class="container friends-container">
+        <?php
+        if (empty($friends)) { ?>
+            <h3>You don't have any friends.</h3>
+        <?php }
+        foreach ($friends as $friend) {
+            $friendId = intval($friend);
+            $sql = "SELECT user_email, user_icon FROM USERS WHERE user_id = $friendId";
+            $result = mysqli_query($conn,$sql);
+            if ($result -> num_rows > 0) {
+                if($row1 = mysqli_fetch_assoc($result)) {
+                    $friendMail = $row1['user_email'];
+                    $friendIcon = $row1['user_icon'];
+                }
+            }
+            else {
+                continue;
+            }
+        ?>
+            <div class="row">
+                <div style ="margin-top: 20px; ">
+                    <div class="card centered-card" style = "  width: 400px; height: 300px;  ">
+                        <div class="card-body">
+                            <?php echo "<img src='../assets/icons/$friendIcon.png' class='card-img-top' alt='profile_' style='height: 100px; width: 100px; margin-bottom:10px'>" ?>
+                            <h3><span class="badge bg-secondary"><?php echo explode("@",$friendMail)[0];?></span></h5>
+                            <h5 class="card-subtitle mb-2 text-muted"><?php echo $friendMail;?></h4>
+                            <p class="card-text" > 
+                                <?php 
+                                    $bio = file_get_contents($domain_name."/controllers/getbio.php?id=".$usrid);
+                                    echo $bio;
+                                ?> 
+                            </p>
+                            <a href="user-profile.php?id=<?php echo $friendId; ?>" class="card-link" style="font-size: 20px; color: gray;">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php
+        }
+        ?>    
     </div>
     <script>
         const list = document.querySelectorAll('.list');

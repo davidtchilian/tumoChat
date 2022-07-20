@@ -3,6 +3,23 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once("../models/db.php");
+
+$user_name = $_POST["user_email"];
+$sql = "SELECT user_password FROM USERS WHERE user_email = '$user_name'";
+$query = mysqli_query($conn, $sql);
+if (mysqli_num_rows($query) == 1) {
+  $row = mysqli_fetch_assoc($query);
+  $upwd = $row['user_password'];
+  if($upwd == 'gmail'){
+    mysqli_close($conn);
+    header('Location: ../views/forgetpwd.php?id=1');
+    exit();
+}
+}
+        
+
+
+
 $to = $_POST['user_email'];
 $sql = "SELECT user_id FROM USERS WHERE user_email = '$to'";
 $result = mysqli_query($conn, $sql);
