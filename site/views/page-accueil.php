@@ -33,13 +33,8 @@
     $notif_count = $row2['nb'];
   }
 
-<<<<<<< HEAD
- 
-  
-=======
   $flames=file_get_contents("../controllers/getdate.php");
 
->>>>>>> fb357e8c1bab7d551e8c85f8848146d99a1d3f34
 
   $sql3 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
   $result3 = mysqli_query($conn, $sql3);
@@ -96,10 +91,10 @@
                 notif_decline_btn.classList.add("notif_decesion_btn");
                 }
                 else if(element.typeName = "FriendRequest"){
-                notif_accept_btn.href = "../controllers/frienddecision.php?dec=1&notifId=" + element.notification_id + "&Sender=" + element.notification_sender_id;
+                notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&notifId=" + element.notification_id + "&Sender=" + element.notification_sender_id;
                 notif_accept_btn.innerHTML = "✅";
                 notif_accept_btn.classList.add("notif_decesion_btn");
-                notif_decline_btn.href = "../controllers/frienddecision.php?notifId="+ element.notification_id + "&Sender=" + element.notification_sender_id;
+                notif_decline_btn.href = "../controllers/notificationdecision.php?notifId="+ element.notification_id + "&Sender=" + element.notification_sender_id;
                 notif_decline_btn.innerHTML = "❌";
                 notif_decline_btn.classList.add("notif_decesion_btn");
                 }
