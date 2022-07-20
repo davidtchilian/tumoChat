@@ -33,8 +33,13 @@
     $notif_count = $row2['nb'];
   }
 
+<<<<<<< HEAD
+ 
+  
+=======
   $flames=file_get_contents("../controllers/getdate.php");
 
+>>>>>>> fb357e8c1bab7d551e8c85f8848146d99a1d3f34
 
   $sql3 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
   $result3 = mysqli_query($conn, $sql3);
@@ -122,15 +127,26 @@
         });
     });
     $(function (){
+      // $.ajax({
+	    //     type: "GET", //we are using GET method to get data from server side
+	    //     url: 'basic.php', // get the route value
+	    //     success: function (response) {//once the request successfully process to the server side it will return result here
+	    //         console.log(response)
+	    //     }
+	    // });
         $.ajax({
+            type: "GET",
             url: '../controllers/getdate.php',       
             data: "",
             dataType: 'json', //data format      
             success: function (data) {
               console.log(data)
             }
+            
+         
+    });
           });
-        });
+        
 </script>
     <style>
     body {
