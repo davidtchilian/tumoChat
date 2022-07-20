@@ -33,13 +33,8 @@
     $notif_count = $row2['nb'];
   }
 
-<<<<<<< HEAD
- 
-  
-=======
   $flames=file_get_contents("../controllers/getdate.php");
 
->>>>>>> fb357e8c1bab7d551e8c85f8848146d99a1d3f34
 
   $sql3 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
   $result3 = mysqli_query($conn, $sql3);
