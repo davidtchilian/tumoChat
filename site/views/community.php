@@ -8,7 +8,6 @@
   require_once("../models/db.php");
   $sql = "SELECT DISTINCT group_id, group_type, group_name, group_icon, group_bio FROM GROUPCHAT WHERE group_type = 1";
   $result = mysqli_query($conn, $sql);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

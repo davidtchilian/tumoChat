@@ -81,15 +81,16 @@ p {
   padding: 10px;
   width: 30%;
   border-radius: var(--bs-navbar-toggler-border-radius);
-  position: absolute;
-    /* right: 100px; */
-    bottom: 6%;
-    left: 21%;
-    z-index: 10040;
-    overflow: auto;
-    overflow-y: auto;
+  
 }
-
+.modal-content-sticker {
+  position: absolute;
+  bottom: 6%;
+  left: 21%;
+  z-index: 10040;
+  overflow: auto;
+  overflow-y: auto;
+}
 .group_name {
   font-weight: bold;
   font-size: 20px;
@@ -97,7 +98,9 @@ p {
 }
 
 .group_bio {
+  color: #fff;
   font-style: italic;
+  padding: 1rem;
 }
 
 .modal-content > * {
@@ -242,3 +245,41 @@ pre {
   font-weight: 400;
  
 }
+.comm_icon{
+  width: 55px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+.start-container{
+  width:20%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navbar-nav{
+  margin-left: 54px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.container{
+  width: 100%;
+}
+
+.navbar{
+  width: 100%;
+}
+
+@media (max-width: 850px){
+  .modal-content{
+    width: 85% !important;
+  }
+}
+
+.navbar-expand-lg {
+  flex-wrap: nowrap !important;
+  justify-content: flex-start !important;
+}
+

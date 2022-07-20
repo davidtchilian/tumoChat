@@ -15,14 +15,13 @@ window.onload = () => {
   }, document.body.scrollHeight);
 }
 
-sticketrButton.onclick = function() {
-  console.log("Click")
+sticketrButton.onclick = function () {
   stickerModal.style.display = "block";
 }
 
 // stickerClose.onclick = onClose;
 
-window.onclick = function(event) {
+window.onclick = function (event) {
   console.log("ad")
   // if (event.target == stickerModal) {
   //   onClose();
@@ -40,11 +39,11 @@ function onClose() {
 function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
   groupName.innerText = "Loading...";
   const Http = new XMLHttpRequest();
-  const url=`../controllers/getgroupinfo.php?id=${groupId}`;
+  const url = `../controllers/getgroupinfo.php?id=${groupId}`;
   Http.open("GET", url);
   Http.send();
   Http.onreadystatechange = (e) => {
-    if(Http.readyState !== XMLHttpRequest.DONE) {
+    if (Http.readyState !== XMLHttpRequest.DONE) {
       return;
     }
     let output = Http.responseText;
@@ -67,7 +66,7 @@ function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
       groupBio.innerText = groupInfo.group_bio;
       groupInfoDiv.appendChild(groupBio);
     }
-  
+
     for (let user of groupUsersInfo) {
 
       let userInfo = document.createElement("div");
@@ -77,7 +76,7 @@ function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
       userInfo.classList.add("user_info_page")
       userInfo.appendChild(userEmail);
       usersInfo.appendChild(userInfo);
- 
+
       if (!isAdmin) {
         continue;
       }
@@ -94,7 +93,7 @@ function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
       userDeleteButton.href = `../controllers/deleteuserfromgroup.php?delid=${user[0].user_id}&id=${groupId}`;
       userDeleteButton.innerText = "X";
       userInfo.appendChild(userDeleteButton);
-    
+
     }
 
     if (isAdmin) {
@@ -150,18 +149,18 @@ function createButton(className, id, innerText, href) {
 
 function removeParam(key, sourceURL) {
   var rtn = sourceURL.split("?")[0],
-      param,
-      params_arr = [],
-      queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
+    param,
+    params_arr = [],
+    queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
   if (queryString !== "") {
-      params_arr = queryString.split("&");
-      for (var i = params_arr.length - 1; i >= 0; i -= 1) {
-          param = params_arr[i].split("=")[0];
-          if (param === key) {
-              params_arr.splice(i, 1);
-          }
+    params_arr = queryString.split("&");
+    for (var i = params_arr.length - 1; i >= 0; i -= 1) {
+      param = params_arr[i].split("=")[0];
+      if (param === key) {
+        params_arr.splice(i, 1);
       }
-      if (params_arr.length) rtn = rtn + "?" + params_arr.join("&");
+    }
+    if (params_arr.length) rtn = rtn + "?" + params_arr.join("&");
   }
   return rtn;
 }
@@ -193,16 +192,16 @@ const br = document.getElementById("br")
 
 
 
- 
 
-function deleteMessage(event){  
+
+function deleteMessage(event) {
   var x = event.target.name;
 
   // const url =  "../controllers/delete.php?id="+x
   // form.action = url
   // var y = document.getElementById("delete" + x)
   // console.log(y)
- 
+
 
 
 
@@ -211,12 +210,12 @@ function deleteMessage(event){
 
 
 
-function show(event){
+function show(event) {
   let dropdownDiv = document.getElementsByClassName("dropdown")
   for (let i = 0; i < dropdownDiv.length; i++) {
     dropdownDiv[i].style.display = "none"
-   
-    
+
+
   }
 
 
@@ -233,7 +232,7 @@ function show(event){
 
 //update
 
-var x 
+var x
 function myFunction(event) {
   button.id = "submit"
 
@@ -243,34 +242,30 @@ function myFunction(event) {
 
   // document.getElementById("submit").addEventListener("click", function(event){
   //   event.preventDefault()
-  
+
   // })
   txt.value = messageCont.innerText
-   const url =  "../controllers/update.php?id="+x
-   form.action = url
-   
-   var y = document.getElementById("editId" + x)
- 
-   if(event.target == y){
-     let dropdownDiv = document.getElementsByClassName("dropdown")
-     for (let i = 0; i < dropdownDiv.length; i++) {
-       dropdownDiv[i].style.display = "none"
-       
-     }  
-    
-   
-   }
+  const url = "../controllers/update.php?id=" + x
+  form.action = url
+
+  var y = document.getElementById("editId" + x)
+
+  if (event.target == y) {
+    let dropdownDiv = document.getElementsByClassName("dropdown")
+    for (let i = 0; i < dropdownDiv.length; i++) {
+      dropdownDiv[i].style.display = "none"
+
+    }
+
+
+  }
   console.log(messageCont.innerText)
   const messageId = document.getElementById("message_id")
   messageId.value = x
- 
-   
- 
- }
- 
- console.log(12)
 
- 
+
+
+}
 
 
 // document.getElementById("submit").addEventListener("click", function(event){
@@ -290,12 +285,12 @@ function myFunction(event) {
 // document.getElementById("bodyHTML").addEventListener("click", function(event) {
 //   if (event.target != edit){
 //   let id = button.id
-  
+
 //   document.getElementById(id).addEventListener("click", function(event) {
 //     const message_cont = txt.value
-    
-  
-   
+
+
+
 
 //     var params = "user_id="+messageSenderId+"&"+"message_id="+x+"&"+"message_content="+message_cont
 //     if(message_cont != ""){
@@ -303,16 +298,48 @@ function myFunction(event) {
 //       let rq = "../controllers/update.php"
 //       xmlhttp.open("GET", "../controllers/update.php?="+messageSenderId,false);
 //       xmlhttp.send(params);
-     
-        
-      
-    
+
+
+
+
 //       // txt.value = ""
 //       button.id = "send"
 //     }
-  
+
 
 //   })
 
 //   }
 // })
+
+
+function post(path, params, method = 'post') {
+
+  // The rest of this code assumes you are not using a library.
+  // It can be made less verbose if you use one.
+  const form = document.createElement('form');
+  form.method = method;
+  form.action = path;
+
+  for (const key in params) {
+    if (params.hasOwnProperty(key)) {
+      const hiddenField = document.createElement('input');
+      hiddenField.type = 'hidden';
+      hiddenField.name = key;
+      hiddenField.value = params[key];
+
+      form.appendChild(hiddenField);
+    }
+  }
+
+  document.body.appendChild(form);
+  form.submit();
+}
+
+function sendSticker(stickerId, groupId) {
+  stickerId = stickerId.replace(" ", "");
+  post("../controllers/sendmessage.php", {
+    message_content: `STICKER_${stickerId}`,
+    group_id: groupId
+  });
+}

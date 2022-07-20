@@ -7,14 +7,35 @@
   $user_id = $_SESSION['user_id'];
   $theme = $_SESSION['user_theme'];
   require_once("../models/db.php");
-  $sql = "SELECT DISTINCT group_id, group_type, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE group_type = 2 AND isInGroup_user_id = ".$user_id ;
+  $sql = "SELECT DISTINCT group_id as gID, group_type, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE group_type = 2 AND isInGroup_user_id = " . $user_id;
   $result = mysqli_query($conn, $sql);
 
-    $sql2 ="SELECT COUNT(notification_id) as nb FROM NOTIFICATIONS WHERE notification_receiver_id = $user_id";
-    $result2 = mysqli_query($conn, $sql2);
-    if($row2 = mysqli_fetch_assoc($result2)){
-      $notif_count = $row2['nb'];
-    }
+  $sqlGroup = "SELECT DISTINCT isInGroup_group_id, COUNT(*) FROM isInGroup GROUP BY isInGroup_group_id";
+  $resultG = mysqli_query($conn, $sqlGroup);
+  $rowG = mysqli_fetch_assoc($resultG);
+  
+//   $gIDs = array();
+//   $gUSERs = array();
+//   while ( $usrow = mysqli_fetch_assoc($resultG) )
+// {
+//   $gIDs[] = $usrow['isInGroup_group_id'];
+//   $gUSERs[] = $usrow['COUNT(*)'];
+// } 
+
+  $groupsArray = array();
+  while($groupsRow = mysqli_fetch_assoc($result)) {
+    $groupsArray[] = $groupsRow;
+  }
+
+  $sql2 ="SELECT COUNT(notification_id) as nb FROM NOTIFICATIONS WHERE notification_receiver_id = $user_id";
+  $result2 = mysqli_query($conn, $sql2);
+  if($row2 = mysqli_fetch_assoc($result2)){
+    $notif_count = $row2['nb'];
+  }
+
+  $flames=file_get_contents("../controllers/getdate.php");
+
+
   $sql3 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
   $result3 = mysqli_query($conn, $sql3);
   if ($result3->num_rows > 0) {
@@ -25,6 +46,10 @@
     // echo "0 results";
 }
 
+// $insert="INSERT INTO `NOTIFICATIONS`(`notification_sender_id`, `notification_receiver_id`, `notification_group_id`, `notification_content`, `notification_type_id`) VALUES (2,1,16, 'just testing notifs count',1)";
+// for($i=0;$i<150;$i++){
+//   mysqli_query($conn,$insert);
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,19 +73,31 @@
             data: "",
             dataType: 'json', //data format      
             success: function (data) {
+              
                 let modal = document.getElementById("modal-content");
                 data.forEach(element => {
+                console.log(element)
                 let notif_content = document.createElement("div");
                 let notif_content_text = document.createElement("p");
                 let notif_buttons = document.createElement("div");
                 let notif_accept_btn = document.createElement("a");
                 let notif_decline_btn = document.createElement("a");
+                if(element.typeName = "GroupInvite"){
                 notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&notifId=" + element.notification_id + "&gID=" + element.notification_group_id ;
                 notif_accept_btn.innerHTML = "✅";
                 notif_accept_btn.classList.add("notif_decesion_btn");
                 notif_decline_btn.href = "../controllers/notificationdecision.php?notifId="+ element.notification_id +"&gID=" + element.notification_group_id;
                 notif_decline_btn.innerHTML = "❌";
                 notif_decline_btn.classList.add("notif_decesion_btn");
+                }
+                else if(element.typeName = "FriendRequest"){
+                notif_accept_btn.href = "../controllers/frienddecision.php?dec=1&notifId=" + element.notification_id + "&Sender=" + element.notification_sender_id;
+                notif_accept_btn.innerHTML = "✅";
+                notif_accept_btn.classList.add("notif_decesion_btn");
+                notif_decline_btn.href = "../controllers/frienddecision.php?notifId="+ element.notification_id + "&Sender=" + element.notification_sender_id;
+                notif_decline_btn.innerHTML = "❌";
+                notif_decline_btn.classList.add("notif_decesion_btn");
+                }
                 notif_content_text.innerHTML = element.notification_content;
                 notif_content.appendChild(notif_content_text);
                 notif_content.classList.add("notif_content_div");
@@ -84,6 +121,16 @@
             }
         });
     });
+    $(function (){
+        $.ajax({
+            url: '../controllers/getdate.php',       
+            data: "",
+            dataType: 'json', //data format      
+            success: function (data) {
+              console.log(data)
+            }
+          });
+        });
 </script>
     <style>
     body {
@@ -130,7 +177,7 @@
             </li>
             <?php if($notif_count != 0)
             {?>
-            <div class="notifs_nb"><p><?php echo $notif_count; ?></p></div>
+            <div class="notifs_nb"> <p <?php if($notif_count>100) {  echo "style='font-size:8px;'" ?> > <?php echo "99+";} else{echo $notif_count;}?></p></div>
             <?php } ?>
             <div id="infoModal" class="modal_user">
                     <div id="modal-content" class="modal-content">
@@ -163,16 +210,41 @@
         </div>
         <div class="row">
             <?php
-              while($group = mysqli_fetch_assoc($result)){
+            $allGroupIDs = array();
+            foreach ($groupsArray as $group){
+              $allGroupIDs[] = $group["gID"];
+            }
+            $groupCount = array();
+
+            while ($usrow = mysqli_fetch_assoc($resultG))
+                {
+                  for ($i=0; $i < count($allGroupIDs); $i++) { 
+                    if($usrow['isInGroup_group_id']==$allGroupIDs[$i]){
+                      $groupCount[$i] = $usrow['COUNT(*)'];
+                    }
+                  }
+                  
+                }
+                $index = 0;
+              foreach ($groupsArray as $group){
                 ?>
             <div class="col-lg-4 col-sm-12 group-chats">
-                <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
+                <a href="page-chat.php?id=<?php echo $group["gID"]; ?>" style="text-decoration :none">
                     <div class="card mt-5">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item group-name">
                               <div>
-                                <span><?php echo $group["group_name"]; ?></span>
-                                <img src="../assets/images/usercount.png" style="width: 28px; float:right;">
+                                <p><?php if ($flames >= 5) {
+                                  echo "⭐";
+                                } ?></p>
+                                <span><?php
+                                echo $group["group_name"]; 
+                                ?></span>
+                                <div>
+                                  <?php echo $groupCount[$index]; ?>
+                                  <img src="../assets/images/usercount.png" style="width: 28px; float:right;">
+                              </div>
+                                
                                 <span><?php echo "";?></span>
                               </div>
                               
@@ -192,6 +264,7 @@
                 </a>
             </div>
             <?php
+            $index++;
               }
               ?>
         </div>
