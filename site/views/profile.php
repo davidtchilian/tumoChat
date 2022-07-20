@@ -186,18 +186,35 @@
                 <div id = "badges_div">
                     <?php
                         include("../controllers/updatestatisticsinfo.php");
+
                         $badges_info = getBadgesInfo($conn);
-                        foreach($badges_info as $badge) {
-                            $badge_id = $badge["badge_id"];
-                            $badge_name = $badge["badge_name"];
-                            $badge_count = $badge["badge_requirement_count"];
-                            echo $badge_id . " : " . $badge_name . " : " . $badge_count;
+                        $all_badges_info = array();
+                        while ($badge = mysqli_fetch_assoc($badges_info)) {
+                            $badge_info = array();
+                            // $badge_id = $badge["badge_id"];
+                            // $badge_name = $badge["badge_name"];
+                            // $badge_count = $badge["badge_requirement_count"];  
+                            array_push($badge_info,$badge);
+                            array_push($all_badges_info,$badge_info);
                         }
                         $user_statistics = getUserStatistics($guestId, $conn);
-                        foreach ($user_statistics as $stats){
-                            $statistic_type_id = $stats["badge_name"];
-                            $badge_count = $stats["badge_requirement_count"];
-                            echo $statistic_type_id . " : " . $badge_count;
+                        while ($stats = mysqli_fetch_assoc($user_statistics)) {
+                            $individual_id = $stats["statistic_user_id"];
+                            $statistic_type_id = $stats["statistic_type_id"];
+                            $badge_requirement = $stats["statistic_count"];
+
+                            foreach($all_badges_info as $individual_badge){
+                                if ($individual_badge[0]["badge_id"] !== $statistic_type_id){ continue; };
+
+                                if ($badge_requirement >= $individual_badge[0]["badge_requirement_count"]){
+                                    ?>
+                                    <div class="div">
+                                        <?php echo $individual_id . " " . $statistic_type_id . " " . $badge_requirement ; ?>
+                                    </div>
+                                    <?php
+                                }
+                            }
+
                         }
                     ?>
                 </div>

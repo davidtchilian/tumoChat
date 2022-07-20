@@ -7,6 +7,10 @@
   $isingroup = false;
   $isingroup_message = false;
 
+    $dir    = '../assets/stickers/';
+    $files = array_values(array_diff(scandir($dir), array('..', '.')));
+    
+
   if (!isset($userId)) {
     header("Location: login.php");
     return;
@@ -56,6 +60,11 @@
   $isAdmin = $userId == $groupAdminId;
   
   mysqli_close($conn);
+
+  function startsWith($string, $startString) {
+    $len = strlen($startString);
+    return (substr($string, 0, $len) === $startString);
+  }
 
 ?>
 
@@ -234,7 +243,16 @@
                     style="float : right; color: black;" id="<?= $message['message_id']?>">
                     <?php 
                     // echo "<p class='user_email'>".$user_name."</p>";
-                    echo "<pre >"."<span class='message_content_span'>".$message['message_content']."</span>"."</pre>"; ?>
+                      $stickerSplit = explode("_", $message['message_content']);
+                      if ($stickerSplit[0]== "STICKER") {
+                        $stickerId = $stickerSplit[1];
+                        echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 100px'>"; 
+                      }
+                      
+                      else {  
+                        echo "<pre >"."<span class='message_content_span'>".$message['message_content']."</span>"."</pre>"; 
+                    }?>
+
                 </button>
                 <div style="" class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;"
                     id="<?= "dropdown".$message['message_id']?>">
@@ -265,7 +283,8 @@
                 <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
                     <?php 
                             echo "<p class='user_email'>".$user_name."</p>";
-                            echo  $message['message_content'] ?>
+                                echo  $message['message_content']; 
+                    ?>
                 </button>
             </div>
             <?php
@@ -328,12 +347,18 @@
                         </div>
                         <div>
                             <p><?php echo"Stickers"?></p>
-                            <a href="">
-
-                                <img src="../assets/stickers/stickerexample.png"
-                                    style="width :100px; margin-right : 80%;">
-                            </a>
-
+                            <?php
+                    for ($i = 0;$i < count($files);$i++) {
+                        $result =  $dir . $files[$i]."\n";
+                        $number = explode(".",$files[$i])[0];
+                        $sticker = "<button onClick='sendSticker('$number','$groupId')' ><img src='$result' class='card-img-top'
+                                alt='profile_' style='height: 70px; width: 70px'></button>";
+                            ?>
+                            <a onClick="sendSticker(' <?php echo $number ?>','<?php echo $groupId; ?>')"><img
+                                    src="<?php echo $result ?>" class='card-img-top' alt='profile_'
+                                    style='height: 70px; width: 70px'></a>
+                            <?php
+                            }?>
                         </div>
                     </div>
                 </div>
@@ -341,7 +366,7 @@
     </div>
     </nav>
     </div>
-    <script type="text/javascript" src="../scripts/sticker.js"></script>
+    <script type=" text/javascript" src="../scripts/sticker.js"></script>
     <?php
     if($groupType==2){
     ?>
@@ -356,7 +381,8 @@
     <script>
     const params = new URLSearchParams(window.location.search);
     if (params.getAll('modal')[0] == 1) {
-        getGroupIdInfo('<?php echo $userId; ?>', '<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>',
+        getGroupIdInfo('<?php echo $userId; ?>', '<?php echo $groupId; ?>',
+            '<?php echo $isAdmin; ?>',
             '<?php echo $groupAdminId; ?>');
         modal.style.display = "block";
     }
