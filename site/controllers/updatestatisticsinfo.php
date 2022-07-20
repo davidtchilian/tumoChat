@@ -15,25 +15,23 @@
     
     }
 
-    function GetBadgesInfo($conn){
+    function getBadgesInfo($conn){
         $sql = "SELECT * FROM Badges";
         $result = mysqli_query($conn, $sql);
         $info = array();
-        if ($result -> num_rows > 0) {
-            array_push($info,mysqli_fetch_assoc($result));
+        while ($badge -> mysqli_fetch_assoc($result)) {
+            array_push($info, $badge);
         }
-
         return $info;
     }
 
-    function get_user_statistics($userid){
+    function get_user_statistics($userid,$conn){
         $sql = "SELECT * FROM Statistics_Main WHERE statistic_user_id=$userId";
         $result = mysqli_query($conn, $sql);
         $info = array();
-        if ($result -> num_rows > 0) {
-            array_push($info,mysqli_fetch_assoc($result));
+        while ($stat -> mysqli_fetch_assoc($result)) {
+            array_push($info, $stat);
         }
-
         return $info;
     }
 
