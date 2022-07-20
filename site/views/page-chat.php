@@ -147,10 +147,10 @@
     ?>body {
         background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
     }
- 
     </style>
 </head>
-<body id = "bodyHTML">
+
+<body id="bodyHTML">
     <div class="fixed-top">
         <nav class="navbar navbar-expand-lg" style="background-color : #6c4b93;">
             <?php
@@ -258,9 +258,9 @@
                     id="<?= "dropdown".$message['message_id']?>">
 
                     <div class="dropdown-content" id="dropdown-content">
-                        <a  onclick="myFunction(event)" id=<?= "editId".$message['message_id']?>
+                        <a onclick="myFunction(event)" id=<?= "editId".$message['message_id']?>
                             name="<?= $message['message_id']?>">Edit</a>
-                        <a onclick="deleteMessages(event)" id="<?= "delete".$message['message_id']?>" >Delete</a>
+                        <a onclick="deleteMessages(event)" id="<?= "delete".$message['message_id']?>">Delete</a>
                     </div>
 
                 </div>
@@ -306,26 +306,27 @@
         }
     }
     ?>
-    
+
     </div>
 
     <div class="fixed-bottom">
-        <nav class="navbar navbar-expand-lg" style="background-color:#6c4b93" id = "navbarId">
+        <nav class="navbar navbar-expand-lg" style="background-color:#6c4b93" id="navbarId">
             <div class="container">
                 <a onClick="sticker()" id="stickerButton" class="sticker_btn nav-link" style="display: inline-block">
                     <img src="../assets/images/stickerr.png" alt="sticker" style="width :40px" style="height : 40px" />
                 </a>
 
                 <div class="container-fluid">
-                    <form class="d-flex" role="search"  method="post" id="form" >
+                    <form class="d-flex" role="search" method="post" id="form">
                         <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
-                        <input type="hidden" name="group_id" value="<?php echo $groupId; ?>" id = "groupId">
-                        <input type="hidden" name = "message_id" value="<?= $message['message_id']?>"  id="message_id">
-                        <input type="hidden" id = "jsUserId" value="<?= $userId?>">
+                        <input type="hidden" name="group_id" value="<?php echo $groupId; ?>" id="groupId">
+                        <input type="hidden" name="message_id" value="<?= $message['message_id']?>" id="message_id">
+                        <input type="hidden" id="jsUserId" value="<?= $userId?>">
                         <div class="form-group">
-                            <textarea name="message_content"  style="resize: none" class="form-control" id="text" rows="1"   placeholder="Enter your message here" autofocus></textarea>
+                            <textarea name="message_content" style="resize: none" class="form-control" id="text"
+                                rows="1" placeholder="Enter your message here" autofocus></textarea>
                         </div>
-                        <button class="btn search" type="submit" value="Message" id = "send" onClick="sendMessage(event)">
+                        <button class="btn search" type="submit" value="Message" id="send" onClick="sendMessage(event)">
                             <!-- <a href="page-chat.php?id=<//?php echo $groupId;?>"></a> -->
                             <img src="../assets/images/avion_papier_nour_1.png" alt="envoye" style="width :40px"
                                 style="height : 40px" />
@@ -364,13 +365,9 @@
     </div>
     </nav>
     </div>
-<<<<<<< HEAD
-    <script src="../scripts/jquery.js"></script>
-    <script type="text/javascript"  src="../scripts/sticker.js"></script>
-  
-=======
-    <script type=" text/javascript" src="../scripts/sticker.js"></script>
->>>>>>> 4d51838393b3924e10e4a3d6c7e5024e48b240e6
+    <script src="../scripts/jquery.js">
+    </script>
+    <script type="text/javascript" src="../scripts/sticker.js"></script>
     <?php
     if($groupType==2){
     ?>
@@ -391,7 +388,9 @@
         modal.style.display = "block";
     }
     </script>
-    <div id = "div23"><h1>assa</h1></div>
+    <div id="div23">
+        <h1>assa</h1>
+    </div>
     <script type="text/javascript" src="../scripts/comm_chat_page.js" refer></script>
 
 </body>
