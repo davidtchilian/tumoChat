@@ -91,10 +91,10 @@
                 notif_decline_btn.classList.add("notif_decesion_btn");
                 }
                 else if(element.typeName = "FriendRequest"){
-                notif_accept_btn.href = "../controllers/frienddecision.php?dec=1&notifId=" + element.notification_id + "&Sender=" + element.notification_sender_id;
+                notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&notifId=" + element.notification_id + "&Sender=" + element.notification_sender_id;
                 notif_accept_btn.innerHTML = "✅";
                 notif_accept_btn.classList.add("notif_decesion_btn");
-                notif_decline_btn.href = "../controllers/frienddecision.php?notifId="+ element.notification_id + "&Sender=" + element.notification_sender_id;
+                notif_decline_btn.href = "../controllers/notificationdecision.php?notifId="+ element.notification_id + "&Sender=" + element.notification_sender_id;
                 notif_decline_btn.innerHTML = "❌";
                 notif_decline_btn.classList.add("notif_decesion_btn");
                 }
