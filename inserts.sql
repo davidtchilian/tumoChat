@@ -22,7 +22,8 @@ Students learn and put into practice the skills needed to succeed as a motion ar
 ('Writing', 'It all begins with the written word… no, no, really. Games, movies, comic books, music, and even graphic design often rely on the written word to convey an idea or message. Regardless of the platform, the foundation is the same.', 14,1);
  
 INSERT INTO typeNotification(typeName) VALUES
-('GroupInvite');
+('GroupInvite'),
+('FriendRequest');
 
 INSERT INTO Statistics_Types (statistic_type) VALUES ('LoginCount');
 INSERT INTO Statistics_Types (statistic_type) VALUES ('MessageCount');

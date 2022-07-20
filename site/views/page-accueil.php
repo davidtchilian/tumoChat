@@ -7,7 +7,7 @@
   $user_id = $_SESSION['user_id'];
   $theme = $_SESSION['user_theme'];
   require_once("../models/db.php");
-  $sql = "SELECT DISTINCT group_id as gID, group_type, group_name,COUNT(isInGroup_user_id) FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE group_type = 2 AND isInGroup_user_id = " . $user_id ;
+  $sql = "SELECT DISTINCT group_id as gID, group_type, group_name,  FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE group_type = 2 AND isInGroup_user_id = " . $user_id ;
   $result = mysqli_query($conn, $sql);
 
   $sqlGroup = "SELECT DISTINCT isInGroup_group_id, COUNT(*) FROM isInGroup WHERE isInGroup_user_id = " . $user_id . "GROUP BY isInGroup_group_id";
@@ -74,12 +74,22 @@
                 let notif_buttons = document.createElement("div");
                 let notif_accept_btn = document.createElement("a");
                 let notif_decline_btn = document.createElement("a");
+                if(element.typeName = "GroupInvite"){
                 notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&notifId=" + element.notification_id + "&gID=" + element.notification_group_id ;
                 notif_accept_btn.innerHTML = "✅";
                 notif_accept_btn.classList.add("notif_decesion_btn");
                 notif_decline_btn.href = "../controllers/notificationdecision.php?notifId="+ element.notification_id +"&gID=" + element.notification_group_id;
                 notif_decline_btn.innerHTML = "❌";
                 notif_decline_btn.classList.add("notif_decesion_btn");
+                }
+                else if(element.typeName = "FriendRequest"){
+                notif_accept_btn.href = "../controllers/frienddecision.php?dec=1&notifId=" + element.notification_id + "&Sender=" + element.notification_sender_id;
+                notif_accept_btn.innerHTML = "✅";
+                notif_accept_btn.classList.add("notif_decesion_btn");
+                notif_decline_btn.href = "../controllers/frienddecision.php?notifId="+ element.notification_id + "&Sender=" + element.notification_sender_id;
+                notif_decline_btn.innerHTML = "❌";
+                notif_decline_btn.classList.add("notif_decesion_btn");
+                }
                 notif_content_text.innerHTML = element.notification_content;
                 notif_content.appendChild(notif_content_text);
                 notif_content.classList.add("notif_content_div");
