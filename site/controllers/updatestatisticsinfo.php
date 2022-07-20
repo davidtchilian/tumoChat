@@ -18,13 +18,13 @@
     function getBadgesInfo($conn){
         $sql = "SELECT * FROM Badges";
         $result = mysqli_query($conn, $sql);
-        return mysqli_fetch_assoc($result);
+        return $result;
     }
 
     function getUserStatistics($userId, $conn){
         $sql = "SELECT * FROM Statistics_Main WHERE statistic_user_id=$userId";
         $result = mysqli_query($conn, $sql);
-        return mysqli_fetch_assoc($result);
+        return $result;
     }
 
 ?>

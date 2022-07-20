@@ -10,6 +10,7 @@ error_reporting(E_ALL);
   $groupId = $_POST["group_id"];
   $userId = $_POST["user_id"];
 
+  var_dump($_POST);
  
   
  
@@ -25,13 +26,18 @@ if(mysqli_num_rows($result) == 1 && $message_sender_id == $userId){
 
     $sql = "UPDATE `MESSAGE` SET `message_content`='$message_conntent' WHERE `message_id` = $message_id";
     mysqli_query($conn, $sql);
-    header('Location: ../views/page-chat.php?id='.$groupId); exit();  
-    echo "hello";
+    // header('Location: ../views/page-chat.php?id='.$groupId); exit();  
+    echo $message_conntent;
 
   }else {
-  
+   
+    echo $message_sender_id;
+
        mysqli_close($conn);
-   header('Location: ../views/page-chat.php?id='.$groupId); exit();
+     
+ 
+      
+  //  header('Location: ../views/page-chat.php?id='.$groupId); exit();
   
    
  }

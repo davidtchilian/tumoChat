@@ -555,9 +555,9 @@ body {
   margin-right: 2px;
 }
 
-.user-profile-friend-status img {
+/* .user-profile-friend-status img {
   -webkit-filter: invert(89%) sepia(6%) hue-rotate(185deg);
-}
+} */
 
 .user-profile-friend-status p {
   margin: 1px 4px 0 0;
