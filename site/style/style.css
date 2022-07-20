@@ -595,3 +595,12 @@ body {
 .friends-deactive:hover {
   color: #ff3434;
 }
+
+.friends-cancel{
+  border: 1px solid #4E4F50;
+  background-color: #4E4F50;
+}
+
+.friends-cancel:hover {
+  color: #4E4F50;
+}
