@@ -7,13 +7,13 @@
   $user_id = $_SESSION['user_id'];
   $theme = $_SESSION['user_theme'];
   require_once("../models/db.php");
-  $sql = "SELECT DISTINCT group_id as gID, group_type, group_name,  FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE group_type = 2 AND isInGroup_user_id = " . $user_id ;
+  $sql = "SELECT DISTINCT group_id as gID, group_type, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE group_type = 2 AND isInGroup_user_id = " . $user_id;
   $result = mysqli_query($conn, $sql);
 
-  $sqlGroup = "SELECT DISTINCT isInGroup_group_id, COUNT(*) FROM isInGroup WHERE isInGroup_user_id = " . $user_id . "GROUP BY isInGroup_group_id";
+  $sqlGroup = "SELECT DISTINCT isInGroup_group_id, COUNT(*) FROM isInGroup GROUP BY isInGroup_group_id";
   $resultG = mysqli_query($conn, $sqlGroup);
   $rowG = mysqli_fetch_assoc($resultG);
-
+  // var_dump($rowG);
   $groupsArray = array();
   while($groupsRow = mysqli_fetch_assoc($result)) {
     $groupsArray[] = $groupsRow;
@@ -26,7 +26,7 @@
   }
 
   $flames=file_get_contents("../controllers/getdate.php");
-  var_dump($flames);
+
 
   $sql3 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
   $result3 = mysqli_query($conn, $sql3);
@@ -132,7 +132,7 @@
 </head>
 
 <body>
-  <?php var_dump($rowG); ?>
+  <?php var_dump(); ?>
     <div class="fixed-top">
       <nav class="navbar navbar-expand-lg" style="background-color: #6c4b93">
         <div class="container">
@@ -203,10 +203,10 @@
         </div>
         <div class="row">
             <?php
-              foreach ($groupsArray as $key => $value){
+              foreach ($groupsArray as $group){
                 ?>
             <div class="col-lg-4 col-sm-12 group-chats">
-                <a href="page-chat.php?id=<?php echo $value["gID"]; ?>" style="text-decoration :none">
+                <a href="page-chat.php?id=<?php echo $group["gID"]; ?>" style="text-decoration :none">
                     <div class="card mt-5">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item group-name">
@@ -214,7 +214,7 @@
                                 <p><?php if ($flames >= 5) {
                                   echo "⭐";
                                 } ?></p>
-                                <span><?php echo $value["group_name"]; ?></span>
+                                <span><?php echo $group["group_name"]; ?></span>
                                 <img src="../assets/images/usercount.png" style="width: 28px; float:right;">
                                 <span><?php echo "";?></span>
                               </div>
