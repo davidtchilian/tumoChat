@@ -5,7 +5,7 @@
     $notifId = $_GET['notifId'];
     $decesion = $_GET['dec'];
     $groupId = $_GET['gID'];
-    $senderId = $_GET['sender'];
+    $senderId = $_GET['Sender'];
 
     if($decesion == 1){
         if(isset($groupId)){
