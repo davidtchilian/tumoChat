@@ -13,7 +13,15 @@
   $sqlGroup = "SELECT DISTINCT isInGroup_group_id, COUNT(*) FROM isInGroup GROUP BY isInGroup_group_id";
   $resultG = mysqli_query($conn, $sqlGroup);
   $rowG = mysqli_fetch_assoc($resultG);
-  // var_dump($rowG);
+  
+//   $gIDs = array();
+//   $gUSERs = array();
+//   while ( $usrow = mysqli_fetch_assoc($resultG) )
+// {
+//   $gIDs[] = $usrow['isInGroup_group_id'];
+//   $gUSERs[] = $usrow['COUNT(*)'];
+// } 
+
   $groupsArray = array();
   while($groupsRow = mysqli_fetch_assoc($result)) {
     $groupsArray[] = $groupsRow;
@@ -83,10 +91,10 @@
                 notif_decline_btn.classList.add("notif_decesion_btn");
                 }
                 else if(element.typeName = "FriendRequest"){
-                notif_accept_btn.href = "../controllers/frienddecision.php?dec=1&notifId=" + element.notification_id + "&Sender=" + element.notification_sender_id;
+                notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&notifId=" + element.notification_id + "&Sender=" + element.notification_sender_id;
                 notif_accept_btn.innerHTML = "✅";
                 notif_accept_btn.classList.add("notif_decesion_btn");
-                notif_decline_btn.href = "../controllers/frienddecision.php?notifId="+ element.notification_id + "&Sender=" + element.notification_sender_id;
+                notif_decline_btn.href = "../controllers/notificationdecision.php?notifId="+ element.notification_id + "&Sender=" + element.notification_sender_id;
                 notif_decline_btn.innerHTML = "❌";
                 notif_decline_btn.classList.add("notif_decesion_btn");
                 }
@@ -114,15 +122,26 @@
         });
     });
     $(function (){
+      // $.ajax({
+	    //     type: "GET", //we are using GET method to get data from server side
+	    //     url: 'basic.php', // get the route value
+	    //     success: function (response) {//once the request successfully process to the server side it will return result here
+	    //         console.log(response)
+	    //     }
+	    // });
         $.ajax({
+            type: "GET",
             url: '../controllers/getdate.php',       
             data: "",
             dataType: 'json', //data format      
             success: function (data) {
               console.log(data)
             }
+            
+         
+    });
           });
-        });
+        
 </script>
     <style>
     body {
@@ -132,7 +151,6 @@
 </head>
 
 <body>
-  <?php var_dump(); ?>
     <div class="fixed-top">
       <nav class="navbar navbar-expand-lg" style="background-color: #6c4b93">
         <div class="container">
@@ -203,6 +221,22 @@
         </div>
         <div class="row">
             <?php
+            $allGroupIDs = array();
+            foreach ($groupsArray as $group){
+              $allGroupIDs[] = $group["gID"];
+            }
+            $groupCount = array();
+
+            while ($usrow = mysqli_fetch_assoc($resultG))
+                {
+                  for ($i=0; $i < count($allGroupIDs); $i++) { 
+                    if($usrow['isInGroup_group_id']==$allGroupIDs[$i]){
+                      $groupCount[$i] = $usrow['COUNT(*)'];
+                    }
+                  }
+                  
+                }
+                $index = 0;
               foreach ($groupsArray as $group){
                 ?>
             <div class="col-lg-4 col-sm-12 group-chats">
@@ -214,8 +248,14 @@
                                 <p><?php if ($flames >= 5) {
                                   echo "⭐";
                                 } ?></p>
-                                <span><?php echo $group["group_name"]; ?></span>
-                                <img src="../assets/images/usercount.png" style="width: 28px; float:right;">
+                                <span><?php
+                                echo $group["group_name"]; 
+                                ?></span>
+                                <div>
+                                  <?php echo $groupCount[$index]; ?>
+                                  <img src="../assets/images/usercount.png" style="width: 28px; float:right;">
+                              </div>
+                                
                                 <span><?php echo "";?></span>
                               </div>
                               
@@ -235,6 +275,7 @@
                 </a>
             </div>
             <?php
+            $index++;
               }
               ?>
         </div>

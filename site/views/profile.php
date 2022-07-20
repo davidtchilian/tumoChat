@@ -15,7 +15,7 @@
         $isGuest = false;
         $guestId = $userId;
     }
-    
+
     $isGuest = $guestId != $userId;
 
     require('../models/db.php');
@@ -177,11 +177,19 @@
                                             class="user-profile-status friends-deactive">Remove Friend</a>
                                         <?php
                                         }
-                                        else { ?>
-                                        <a href="../controllers/sendfriendrequest.php?receiver_id=<?php echo $guestId ?>" class="user-profile-status friends-active">Add Friend</a>
-                                        <?php
-                                        }
-                                        ?>
+                                        else { 
+                                            $sql = "SELECT notification_id FROM notifications WHERE notification_sender_id=$userId AND notification_receiver_id=$guestId AND notification_type_id=2";
+                                            $result = mysqli_query($conn, $sql);
+                                            $isRequested = $result->num_rows > 0;
+                                            if ($isRequested) { ?>
+                                                <a href="../controllers/removefriendrequest.php?requested_user_id=<?php echo $guestId ?>" class="user-profile-status friends-cancel">Cancel Request</a>
+                                            <?php }
+                                            else { ?>
+                                                <a href="../controllers/sendfriendrequest.php?receiver_id=<?php echo $guestId ?>" class="user-profile-status friends-active">Add Friend</a>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
                                     </div>
                                     <?php
                                 } else { 
@@ -280,6 +288,7 @@
         ?>
     </div>
     <?php } ?>
+    <button ><a href="../controllers/delete_acc.php"> Delete Accaunt</a></button>
     <script>
         const list = document.querySelectorAll('.list');
 
