@@ -19,6 +19,8 @@
     $isGuest = $guestId != $userId;
 
     require('../models/db.php');
+    include("../controllers/updatestatisticsinfo.php");
+
     $sql = "SELECT user_email, user_icon FROM USERS WHERE user_id=$guestId";
     $result = mysqli_query($conn, $sql);
 
@@ -144,7 +146,15 @@
                         <h3><span class="badge bg-secondary"><?php echo explode("@",$usrmail)[0];?></span></h5>
                             <h5 class="card-subtitle mb-2 text-muted">
                                 <?php echo $usrmail;?>
-                                </h4>
+                                </h5>
+                                <div class="achievments">
+                                <?php
+                                    foreach (getUserbadges($conn, $guestId) as $badge) {
+                                        echo "<img title='".$badge[1]."' src='../assets/badge/".$badge[0].".png' style='margin: 0 5px 0 5px;'>";
+                                    }
+                                ?>
+
+                                </div>
                                 <p class="card-text">
                                 <?php 
                                     $bio = file_get_contents($domain_name."/controllers/getbio.php?id=".$guestId);
@@ -185,37 +195,33 @@
 
                 <div id = "badges_div">
                     <?php
-                        include("../controllers/updatestatisticsinfo.php");
+                        // include("../controllers/updatestatisticsinfo.php");
+                        // $badges_info = getBadgesInfo($conn);
+                        // $all_badges_info = array();
+                        // while ($badge = mysqli_fetch_assoc($badges_info)) {
+                        //     $badge_info = array();
+                        //     array_push($badge_info,$badge);
+                        //     array_push($all_badges_info,$badge_info);
+                        // }
+                        // $user_statistics = getUserStatistics($guestId, $conn);
+                        // while ($stats = mysqli_fetch_assoc($user_statistics)) {
+                        //     $individual_id = $stats["statistic_user_id"];
+                        //     $statistic_type_id = $stats["statistic_type_id"];
+                        //     $badge_requirement = $stats["statistic_count"];
 
-                        $badges_info = getBadgesInfo($conn);
-                        $all_badges_info = array();
-                        while ($badge = mysqli_fetch_assoc($badges_info)) {
-                            $badge_info = array();
-                            // $badge_id = $badge["badge_id"];
-                            // $badge_name = $badge["badge_name"];
-                            // $badge_count = $badge["badge_requirement_count"];  
-                            array_push($badge_info,$badge);
-                            array_push($all_badges_info,$badge_info);
-                        }
-                        $user_statistics = getUserStatistics($guestId, $conn);
-                        while ($stats = mysqli_fetch_assoc($user_statistics)) {
-                            $individual_id = $stats["statistic_user_id"];
-                            $statistic_type_id = $stats["statistic_type_id"];
-                            $badge_requirement = $stats["statistic_count"];
+                        //     foreach($all_badges_info as $individual_badge){
+                        //         if ($individual_badge[0]["badge_id"] !== $statistic_type_id){ continue; };
 
-                            foreach($all_badges_info as $individual_badge){
-                                if ($individual_badge[0]["badge_id"] !== $statistic_type_id){ continue; };
+                        //         if ($badge_requirement >= $individual_badge[0]["badge_requirement_count"]){
+                        //             ?>
+                        <!-- //             <div class="div">
+                       //                 <?php echo $individual_id . " " . $statistic_type_id . " " . $badge_requirement ; ?> -->
+                        <!-- //             </div> -->
+                    <?php
+                        //         }
+                        //     }
 
-                                if ($badge_requirement >= $individual_badge[0]["badge_requirement_count"]){
-                                    ?>
-                                    <div class="div">
-                                        <?php echo $individual_id . " " . $statistic_type_id . " " . $badge_requirement ; ?>
-                                    </div>
-                                    <?php
-                                }
-                            }
-
-                        }
+                        // }
                     ?>
                 </div>
 
@@ -255,7 +261,9 @@
                         <h3><span class="badge bg-secondary"><?php echo explode("@",$friendMail)[0];?></span></h5>
                             <h5 class="card-subtitle mb-2 text-muted">
                                 <?php echo $friendMail;?>
-                                </h4>
+                                </h5>
+                                <div class="div"></div>
+
                                 <p class="card-text">
                                     <?php 
                                     $bio = file_get_contents($domain_name."/controllers/getbio.php?id=".$friendId);
