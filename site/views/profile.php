@@ -272,7 +272,7 @@
         ?>
     </div>
     <?php } ?>
-    <button href="../controllers/delete_acc.php"> Delete Accaunt</button>
+    <button ><a href="../controllers/delete_acc.php"> Delete Accaunt</a></button>
     <script>
         const list = document.querySelectorAll('.list');
 
