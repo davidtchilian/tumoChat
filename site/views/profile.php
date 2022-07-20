@@ -16,7 +16,7 @@
         $guestId = $userId;
     }
 
-    require_once('../models/db.php');
+    require('../models/db.php');
     $sql = "SELECT user_email, user_icon FROM USERS WHERE user_id=$guestId";
     $result = mysqli_query($conn, $sql);
 
@@ -35,8 +35,6 @@
         $friends = file_get_contents($domain_name."/controllers/getfriends.php?user_id=$userId");
         $friends = json_decode($friends);
     }
-
-    include("../controllers/updatestatisticsinfo.php");
 
 ?>
 <!doctype html>
@@ -185,25 +183,23 @@
 
                 <div id = "badges_div">
                     <?php
-                        require_once('../models/db.php');
-                        $badges_info = GetBadgesInfo($conn);
-                        $user_statistics = get_user_statistics($usrid);
-                        for ($i = 0 ; $i < count($badges_info) ; $i++){
-                            $badge_id = $badges_info[$i]["badge_id"];
-                            $badge_name = $badges_info[$i]["badge_name"];
-                            $badge_count = $badges_info[$i]["badge_requirement_count"];
-
+                        include("../controllers/updatestatisticsinfo.php");
+                        $badges_info = getBadgesInfo($conn);
+                        foreach($badges_info as $badge) {
+                            $badge_id = $badge["badge_id"];
+                            $badge_name = $badge["badge_name"];
+                            $badge_count = $badge["badge_requirement_count"];
                             echo $badge_id . " : " . $badge_name . " : " . $badge_count;
                         }
-                        var_dump($user_statistics);
-                        for ($i = 0 ; $i < count($user_statistics) ; $i++){
-                            $statistic_type_id = $badges_info[$i]["badge_name"];
-                            $badge_count = $badges_info[$i]["badge_requirement_count"];
-
-                            echo $badge_id . " : " . $badge_name . " : " . $badge_count;
+                        $user_statistics = getUserStatistics($guestId, $conn);
+                        foreach ($user_statistics as $stats){
+                            $statistic_type_id = $stats["badge_name"];
+                            $badge_count = $stats["badge_requirement_count"];
+                            echo $statistic_type_id . " : " . $badge_count;
                         }
                     ?>
                 </div>
+
             </div>
         </div>
     </div>
