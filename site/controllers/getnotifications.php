@@ -4,8 +4,8 @@
     session_start();
     $usrid = $_SESSION['user_id'];
 
-    $sql = "SELECT notification_id, notification_sender_id, notification_group_id, notification_content, notification_type_id
-    FROM NOTIFICATIONS WHERE notification_receiver_id = $usrid";
+    $sql = "SELECT notification_id, notification_sender_id, notification_group_id, notification_content, typeName
+    FROM NOTIFICATIONS JOIN typeNotification ON notification_type_id = typeNotification_id WHERE notification_receiver_id = $usrid";
     $notifs = array();
 
     $result = mysqli_query($conn,$sql);

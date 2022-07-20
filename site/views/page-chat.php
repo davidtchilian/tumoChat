@@ -159,14 +159,16 @@
         ?>
             <div class="container">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <?php
+                    <?php
                 if($groupTypeName=="public"){ ?>
                     <li>
-                        <img class="comm_icon" style="margin: 6px 0" src="../assets/comm_icons/<?php echo $groupIcon; ?>.png" alt="">
+                        <img class="comm_icon" style="margin: 6px 0"
+                            src="../assets/comm_icons/<?php echo $groupIcon; ?>.png" alt="">
                     </li>
                     <?php } ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color : white; margin-left: 14px"><?php echo $groupName; ?></a>
+                        <a class="nav-link" href="#"
+                            style="color : white; margin-left: 14px"><?php echo $groupName; ?></a>
                     </li>
                 </ul>
                 <div class="d-flex">
@@ -189,8 +191,9 @@
                             </button>
                         </div>
                         <div class="groupinfo_div" id="groupinfo-container">
-                            <p id="groupInfo" style= "font-size: 2rem" class="group_name"></p>
-                            <img class="comm_icon" style="margin: 1rem; width: 70px;" src="../assets/comm_icons/<?php echo $groupIcon; ?>.png" alt="">
+                            <p id="groupInfo" style="font-size: 2rem" class="group_name"></p>
+                            <img class="comm_icon" style="margin: 1rem; width: 70px;"
+                                src="../assets/comm_icons/<?php echo $groupIcon; ?>.png" alt="">
                             <div id="groupBio"></div>
                         </div>
                         <?php }else{ ?>
@@ -225,7 +228,7 @@
         if ($message['message_sender_id'] == $userId) {
         ?>
         <div class="row" id="messages">
-        <div class="col-4"></div>
+            <div class="col-4"></div>
             <div class="col-7">
                 <button class="btn btn-primary messageEnvoye mt-2" onclick="show(event)"
                     style="float : right; color: black;" id="<?= $message['message_id']?>">
@@ -314,8 +317,8 @@
 
                 </div>
                 <div id="stickerModal" class="modal_user">
-                    <div class="modal-content ">
-                        
+                    <div class="modal-content modal-content-sticker ">
+
                         <div id="modal-extra-interactions"></div>
                         <div id="modal-default-interactions">
                             <button id="stickerCloseButton" class="close btn modal_interaction"><img
@@ -324,9 +327,12 @@
                             </button>
                         </div>
                         <div>
-                            <p><?php echo"stickers"?></p>
-                            <a href="../assets/stickers/stickerexample.png"></a>
-                            <img src="../assets/stickers/stickerexample.png" style="width :100px; margin-right : 80%;">
+                            <p><?php echo"Stickers"?></p>
+                            <a href="">
+
+                                <img src="../assets/stickers/stickerexample.png"
+                                    style="width :100px; margin-right : 80%;">
+                            </a>
 
                         </div>
                     </div>
@@ -335,7 +341,7 @@
     </div>
     </nav>
     </div>
-    <script type="text/javascript"  src="../scripts/sticker.js"></script>
+    <script type="text/javascript" src="../scripts/sticker.js"></script>
     <?php
     if($groupType==2){
     ?>

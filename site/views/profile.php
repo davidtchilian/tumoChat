@@ -15,6 +15,8 @@
         $isGuest = false;
         $guestId = $userId;
     }
+    
+    $isGuest = $guestId != $userId;
 
     require('../models/db.php');
     $sql = "SELECT user_email, user_icon FROM USERS WHERE user_id=$guestId";
@@ -166,7 +168,7 @@
                                         <?php
                                         }
                                         else { ?>
-                                        <a href="../controllers/sendfriendrequest.php?user_id<?php echo $userId; ?>&receiver_id=<?php echo $guestId ?>" class="user-profile-status friends-active">Add Friend</a>
+                                        <a href="../controllers/sendfriendrequest.php?receiver_id=<?php echo $guestId ?>" class="user-profile-status friends-active">Add Friend</a>
                                         <?php
                                         }
                                         ?>
