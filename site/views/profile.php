@@ -36,6 +36,8 @@
         $friends = json_decode($friends);
     }
 
+    include("../controllers/updatestatisticsinfo.php");
+
 ?>
 <!doctype html>
 <html lang="fr">
