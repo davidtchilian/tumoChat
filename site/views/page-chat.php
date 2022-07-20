@@ -244,7 +244,7 @@
                     <?php 
                     // echo "<p class='user_email'>".$user_name."</p>";
                       $stickerSplit = explode("_", $message['message_content']);
-                      if ($stickerSplit[0]== "STICKER") {
+                      if ($stickerSplit[0] == "STICKER") {
                         $stickerId = $stickerSplit[1];
                         echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 100px'>"; 
                       }

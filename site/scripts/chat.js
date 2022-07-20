@@ -430,7 +430,16 @@ if(txt.value != ""){
                 const pre = document.createElement("pre")
                 const span = document.createElement("span")
                 span.setAttribute("class", "message_content_span")
-                span.innerText = txt.value
+                if (txt.value.startsWith("STICKER_")) {
+                  let sticker = document.createElement("img");
+                  sticker.src = `../assets/stickers/${txt.value.split("_")[1]}.png`;
+                  sticker.style.width = "100px";
+                  sticker.style.height = "100px";
+                  span.appendChild(sticker);
+                }
+                else {
+                  span.innerText = txt.value;
+                }
                 pre.appendChild(span)
                 button2.appendChild(pre)
                 div.appendChild(button2)
@@ -487,3 +496,8 @@ if(txt.value != ""){
 
 }
 
+function sendSticker(stickerId) {
+  stickerId = stickerId.replace(" ", "");
+  txt.value = `STICKER_${stickerId}`;
+  sendMessage(null);
+}
