@@ -1,5 +1,6 @@
 <?php 
-session_start();
+ session_start();
+    $userId = $_SESSION['user_id'];
 if (!isset($_SESSION['user_id'])) {
     header('Location: ./login.php?id=4');
     exit();
@@ -8,6 +9,16 @@ require_once '../models/db.php';
 $dir    = '../assets/icons/';
 $files = array_values(array_diff(scandir($dir), array('..', '.')));
 
+
+$sql = "SELECT user_bio FROM USERS WHERE user_id=$userId";
+$result = mysqli_query($conn, $sql);
+
+if ($result -> num_rows > 0) {
+        if($row = mysqli_fetch_assoc($result)) {
+            $usrbio = $row['user_bio'];
+            
+        }
+    }
 
 
 ?>
@@ -56,7 +67,8 @@ $files = array_values(array_diff(scandir($dir), array('..', '.')));
                 <div class="card centered-card" style="  width: 400px; height: 300px;  ">
                     <a href="profile.php" class="btn-close"></a>
                     <form action="../controllers/updatebio.php" method="POST">
-                        <textarea name="bio" class="form-control" style="height: 170px"></textarea>
+                        <textarea name="bio" class="form-control"
+                            style="height: 170px"><?php echo $usrbio; ?></textarea>
                         <!-- <input type="submit" value="Save" style="w">   -->
                         <input type="submit" class="btn btn-outline-success" value='Save'
                             style="margin-top:25px;"></input>

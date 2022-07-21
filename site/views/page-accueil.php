@@ -82,21 +82,18 @@
                 let notif_buttons = document.createElement("div");
                 let notif_accept_btn = document.createElement("a");
                 let notif_decline_btn = document.createElement("a");
-                if(element.typeName = "GroupInvite"){
+                notif_accept_btn.innerHTML = "✅";
+                notif_accept_btn.classList.add("notif_decesion_btn");
+                notif_decline_btn.innerHTML = "❌";
+                notif_decline_btn.classList.add("notif_decesion_btn");
+                console.log(element.typeName)
+                if(element.typeName == "GroupInvite"){
                 notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&notifId=" + element.notification_id + "&gID=" + element.notification_group_id ;
-                notif_accept_btn.innerHTML = "✅";
-                notif_accept_btn.classList.add("notif_decesion_btn");
                 notif_decline_btn.href = "../controllers/notificationdecision.php?notifId="+ element.notification_id +"&gID=" + element.notification_group_id;
-                notif_decline_btn.innerHTML = "❌";
-                notif_decline_btn.classList.add("notif_decesion_btn");
                 }
-                else if(element.typeName = "FriendRequest"){
-                notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&notifId=" + element.notification_id + "&Sender=" + element.notification_sender_id;
-                notif_accept_btn.innerHTML = "✅";
-                notif_accept_btn.classList.add("notif_decesion_btn");
-                notif_decline_btn.href = "../controllers/notificationdecision.php?notifId="+ element.notification_id + "&Sender=" + element.notification_sender_id;
-                notif_decline_btn.innerHTML = "❌";
-                notif_decline_btn.classList.add("notif_decesion_btn");
+                else if(element.typeName == "FriendRequest"){
+                notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&notifId=" + element.notification_id + "&sender=" + element.notification_sender_id;
+                notif_decline_btn.href = "../controllers/notificationdecision.php?notifId="+ element.notification_id + "&sender=" + element.notification_sender_id;
                 }
                 notif_content_text.innerHTML = element.notification_content;
                 notif_content.appendChild(notif_content_text);
@@ -210,7 +207,7 @@
             </li>
             <?php if($notif_count != 0)
             {?>
-            <div class="notifs_nb"> <p <?php if($notif_count>100) {  echo "style='font-size:8px;'" ?> > <?php echo "99+";} else{echo $notif_count;}?></p></div>
+            <div class="notifs_nb"> <?php if($notif_count > 100) {  echo "<p class='notif_limit'>" ?>  <?php echo "99+ </p>";} else{echo "<p class='notif_basic'>".$notif_count."</p>";}?></div>
             <?php } ?>
             <div id="infoModal" class="modal_user">
                     <div id="modal-content" class="modal-content">
@@ -267,11 +264,12 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item group-name">
                               <div>
-                                <span id="stars_<?php echo $group["gID"]; ?>"></span>
+                                <span class ="streaks" id="stars_<?php echo $group["gID"]; ?>"></span>
+
                               <div class = "groupHeader">
                                 <span class="groupChatName"><?php
-                                if(strlen($group["group_name"])>30){
-                                  echo '<p style = "margin-bottom:0">' . substr($group["group_name"], 0, 30) . "..." . "</p>";
+                                if(strlen($group["group_name"])>27){
+                                  echo '<p style = "margin-bottom:0">' . substr($group["group_name"], 0, 27) . "..." . "</p>";
                                 }else{
                                   echo '<p style = "margin-bottom:0">' . $group["group_name"] . "</p>";
                                 }; 
