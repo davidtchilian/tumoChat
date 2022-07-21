@@ -139,6 +139,15 @@
 
         
     </div>
+    <form class="d-flex searchform" style="margin: auto 0 !important" role="search">
+
+                    <input style="width: 500px !important;" class="form-control me-2 srch-input" type="search" placeholder="Search user"
+                        aria-label="Search" />
+                    <button class="btn search">
+                        <img src="../assets/images/loupe.png" alt="Rechercher"
+                            style="width : 20px; height: 30px; margin-top : 3px" />
+                    </button>
+                </form>
     <div class="container">
         <div class="row">
             <div style="margin-top: 20px; ">

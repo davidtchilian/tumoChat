@@ -137,9 +137,14 @@
               }
 
               else if (data[i][1] >= 42 && data[i][1] < 126) {
+                document.getElementById(idname).innerHTML = data[i][1]+"✨";
+              }
+
+              else if (data[i][1] >= 126 && data[i][1] < 182) {
                 document.getElementById(idname).innerHTML = data[i][1]+"🌠";
               }
-              else if (data[i][1] >= 126 && data[i][1] < 182) {
+
+              else if (data[i][1] >= 182 ) {
                 document.getElementById(idname).innerHTML = data[i][1]+"🌌";
               }
 
@@ -218,6 +223,7 @@
                             style="width : 20px; height: 30px; margin-top : 3px" />
                     </button>
                 </form>
+                
                 <a href="../controllers/logout.php" class="signout-btn">Sign out</a>
             </div>
     </div>
@@ -258,8 +264,8 @@
 
                               <div class = "groupHeader">
                                 <span class="groupChatName"><?php
-                                if(strlen($group["group_name"])>27){
-                                  echo '<p style = "margin-bottom:0">' . substr($group["group_name"], 0, 27) . "..." . "</p>";
+                                if(strlen($group["group_name"])>20){
+                                  echo '<p style = "margin-bottom:0">' . substr($group["group_name"], 0, 20) . "..." . "</p>";
                                 }else{
                                   echo '<p style = "margin-bottom:0">' . $group["group_name"] . "</p>";
                                 }; 
