@@ -30,27 +30,3 @@ INSERT INTO typeNotification(typeName) VALUES
 
 INSERT INTO Statistics_Types (statistic_type) VALUES ('LoginCount');
 INSERT INTO Statistics_Types (statistic_type) VALUES ('MessageCount');
-
-
--- INSERT INTO isInGroup(isInGroup_user_id, isInGroup_group_id) VALUES 
--- (1, 1),
--- (1, 2),
--- (1, 3),
--- (1, 4),
--- (1, 5),
--- (1, 6),
--- (1, 7),
--- (1, 8),
--- (1, 9),
--- (1, 10),
--- (1, 11),
--- (1, 12),
--- (1, 13),
--- (1, 14);
-
--- INSERT INTO MESSAGE (message_content,message_sender_id,message_group_id,message_date)
--- VALUES 
--- ('1Barev', 1, 1, NOW()),
--- ('2Barev Davit', 2, 1, NOW()),
--- ('3Barev dzez', 3, 1, NOW());
-
