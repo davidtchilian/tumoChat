@@ -17,6 +17,11 @@ CREATE TABLE typeNotification(
     typeName TEXT
 );
 
+CREATE TABLE typeMessage(
+    typeMessage_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    typeName TEXT
+);
+
 CREATE TABLE GROUPCHAT(
     group_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     group_name TEXT,
@@ -33,9 +38,11 @@ CREATE TABLE MESSAGE(
     message_content TEXT,
     message_sender_id INT,
     message_group_id INT,
+    message_type_id INT,
     message_date DATETIME,
     FOREIGN KEY (message_sender_id) REFERENCES USERS (user_id),
-    FOREIGN KEY (message_group_id) REFERENCES GROUPCHAT (group_id)
+    FOREIGN KEY (message_group_id) REFERENCES GROUPCHAT (group_id),
+    FOREIGN KEY (message_type_id) REFERENCES typeMessage (typeMessage_id)
 );
 
 CREATE TABLE isInGroup(

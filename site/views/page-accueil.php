@@ -254,11 +254,12 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item group-name">
                               <div>
-                                <span id="stars_<?php echo $group["gID"]; ?>"></span>
+                                <span class ="streaks" id="stars_<?php echo $group["gID"]; ?>"></span>
+
                               <div class = "groupHeader">
                                 <span class="groupChatName"><?php
-                                if(strlen($group["group_name"])>30){
-                                  echo '<p style = "margin-bottom:0">' . substr($group["group_name"], 0, 30) . "..." . "</p>";
+                                if(strlen($group["group_name"])>27){
+                                  echo '<p style = "margin-bottom:0">' . substr($group["group_name"], 0, 27) . "..." . "</p>";
                                 }else{
                                   echo '<p style = "margin-bottom:0">' . $group["group_name"] . "</p>";
                                 }; 

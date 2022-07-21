@@ -1,9 +1,4 @@
-/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
-} */
+
 a{
   padding:0 12px;
 }
@@ -54,8 +49,6 @@ body ::after {
   width: 330px;
   height: 70px;
   background: #fff;
-  /* position: relative; */
-  /* display: flex; */
   justify-content: center;
   align-items: center;
   border-radius: 10px;
