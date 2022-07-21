@@ -12,7 +12,6 @@
 
   $sqlGroup = "SELECT DISTINCT isInGroup_group_id, COUNT(*) FROM isInGroup GROUP BY isInGroup_group_id";
   $resultG = mysqli_query($conn, $sqlGroup);
-  
 //   $gIDs = array();
 //   $gUSERs = array();
 //   while ( $usrow = mysqli_fetch_assoc($resultG) )
@@ -271,7 +270,11 @@
                                 <span id="stars_<?php echo $group["gID"]; ?>"></span>
                               <div class = "groupHeader">
                                 <span class="groupChatName"><?php
-                                echo $group["group_name"]; 
+                                if(strlen($group["group_name"])>30){
+                                  echo '<p style = "margin-bottom:0">' . substr($group["group_name"], 0, 30) . "..." . "</p>";
+                                }else{
+                                  echo '<p style = "margin-bottom:0">' . $group["group_name"] . "</p>";
+                                }; 
                                 ?></span>
                                 <div class = "userCount">
                                   <span><?php echo $groupCount[$index]; ?></span>
