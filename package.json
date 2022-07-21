@@ -1,0 +1,24 @@
+{
+  "name": "tumochat",
+  "version": "1.0.0",
+  "description": "TODO: add description",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd app && nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fredidas/tumoChat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fredidas/tumoChat/issues"
+  },
+  "homepage": "https://github.com/fredidas/tumoChat#readme",
+  "dependencies": {
+    "nodemon": "^2.0.19",
+    "websocket": "^1.0.34"
+  }
+}
