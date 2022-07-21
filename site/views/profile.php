@@ -42,7 +42,7 @@
 
 ?>
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -71,72 +71,74 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg light-nav">
-        <div class="container mt-5">
-            <div class="container-fluid mt-5">
-                <a href="<?php echo $isGuest ? "profile.php" : "page-accueil.php" ?>"><img src="../assets/images/flèche_retour3.png" alt="Retour"style="width : 35px; height: 35px; margin-left: 10px" /></a>
-                <button class="navbar-toggler" type="button" data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                </button>
-                <?php
-                if (!$isGuest) {
-                ?>
-                <div class="navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <div class="navigation modes">
-                            <ul>
-                                <?php
-                                    $str = array();
-                                    for ($i=0; $i < 4; $i++) {
-                                        if ((int)$theme == $i) {
-                                            $str[] = "list active";
-                                        }else {
-                                           $str[] = "list";
-                                        }
+    <div class="navigation-bar-themes">
+        <div class="navbar-container">
+            <a href="<?php echo $isGuest ? "profile.php" : "page-accueil.php" ?>"><img src="../assets/images/flèche_retour3.png" alt="Retour"style="width : 35px; height: 35px; margin-left: 10px" /></a>
+
+            <!-- <button class="navbar-toggler" type="button" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            </button> -->
+
+            <?php
+            if (!$isGuest) {
+            ?>
+
+            <div id="navbarSupportedContent">
+                <ul class=""> <!--navbar-nav me-auto mb-2 mb-lg -->
+                    <div class="navigation modes">
+                        <ul>
+                            <?php
+                                $str = array();
+                                for ($i=0; $i < 4; $i++) {
+                                    if ((int)$theme == $i) {
+                                        $str[] = "list active";
+                                    }else {
+                                        $str[] = "list";
                                     }
-                                ?>
-                                <li class="<?php echo $str[0]; ?>">
-                                    <a onclick="changetheme(0)" href="#">
-                                        <span class="icon">
-                                            <ion-icon name="sunny-outline"></ion-icon>
-                                        </span>
-                                        <span class="text"> Light </span>
-                                    </a>
-                                </li>
-                                <li class="<?php echo $str[1]; ?>">
-                                    <a onclick="changetheme(1)" href="#">
-                                        <span class="icon">
-                                            <ion-icon name="moon-outline"></ion-icon>
-                                        </span>
-                                        <span class="text"> Dark </span>
-                                    </a>
-                                </li>
-                                <li class="<?php echo $str[2]; ?>">
-                                    <a onclick="changetheme(2)" href="#">
-                                        <span class="icon">
-                                            <ion-icon name="radio-button-off-outline"></ion-icon>
-                                        </span>
-                                        <span class="text"> Beige </span>
-                                    </a>
-                                </li>
-                                <li class="<?php echo $str[3]; ?>">
-                                    <a onclick="changetheme(3)" href="#">
-                                        <span class="icon">
-                                            <ion-icon name="radio-button-on-outline"></ion-icon>
-                                        </span>
-                                        <span class="text"> Violet </span>
-                                    </a>
-                                </li>
-                                <div class="indicator"></div>
-                            </ul>
-                        </div>
-                </div>
-                <?php
-                }
-                ?>
+                                }
+                            ?>
+                            <li class="<?php echo $str[0]; ?>">
+                                <a onclick="changetheme(0)" href="#">
+                                    <span class="icon">
+                                        <ion-icon name="sunny-outline"></ion-icon>
+                                    </span>
+                                    <span class="text"> Light </span>
+                                </a>
+                            </li>
+                            <li class="<?php echo $str[1]; ?>">
+                                <a onclick="changetheme(1)" href="#">
+                                    <span class="icon">
+                                        <ion-icon name="moon-outline"></ion-icon>
+                                    </span>
+                                    <span class="text"> Dark </span>
+                                </a>
+                            </li>
+                            <li class="<?php echo $str[2]; ?>">
+                                <a onclick="changetheme(2)" href="#">
+                                    <span class="icon">
+                                        <ion-icon name="radio-button-off-outline"></ion-icon>
+                                    </span>
+                                    <span class="text"> Beige </span>
+                                </a>
+                            </li>
+                            <li class="<?php echo $str[3]; ?>">
+                                <a onclick="changetheme(3)" href="#">
+                                    <span class="icon">
+                                        <ion-icon name="radio-button-on-outline"></ion-icon>
+                                    </span>
+                                    <span class="text"> Violet </span>
+                                </a>
+                            </li>
+                            <div class="indicator"></div>
+                        </ul>
+                    </div>
             </div>
+            <?php
+            }
+            ?>
+
         </div>
-    </nav>
+    </div>
     <div class="container">
         <div class="row">
             <div style="margin-top: 20px; ">
@@ -194,45 +196,15 @@
                                     <?php
                                 } else { 
                                 ?>
-                                    <a href="editProfile.php" class="card-link" style="font-size: 20px; color: gray;">Edit Profile</a>
-                                    
+                                    <a href="editProfile.php" class="card-link" style="font-size: 20px; color: gray;">Edit Profile</a><br>
+                                    <button type="button" class="btn btn-outline-secondary"><a href="../controllers/delete_acc.php" class="delete_acc"> Delete Account</a></button>
                                 <?php 
                                 }
                                 ?>
                     </div>
                 </div>
 
-                <div id = "badges_div">
-                    <?php
-                        // include("../controllers/updatestatisticsinfo.php");
-                        // $badges_info = getBadgesInfo($conn);
-                        // $all_badges_info = array();
-                        // while ($badge = mysqli_fetch_assoc($badges_info)) {
-                        //     $badge_info = array();
-                        //     array_push($badge_info,$badge);
-                        //     array_push($all_badges_info,$badge_info);
-                        // }
-                        // $user_statistics = getUserStatistics($guestId, $conn);
-                        // while ($stats = mysqli_fetch_assoc($user_statistics)) {
-                        //     $individual_id = $stats["statistic_user_id"];
-                        //     $statistic_type_id = $stats["statistic_type_id"];
-                        //     $badge_requirement = $stats["statistic_count"];
-
-                        //     foreach($all_badges_info as $individual_badge){
-                        //         if ($individual_badge[0]["badge_id"] !== $statistic_type_id){ continue; };
-
-                        //         if ($badge_requirement >= $individual_badge[0]["badge_requirement_count"]){
-                        //             ?>
-                        <!-- //             <div class="div">
-                       //                 <?php echo $individual_id . " " . $statistic_type_id . " " . $badge_requirement ; ?> -->
-                        <!-- //             </div> -->
-                    <?php
-                        //         }
-                        //     }
-
-                        // }
-                    ?>
-                </div>
+               
 
             </div>
         </div>
@@ -271,8 +243,13 @@
                             <h5 class="card-subtitle mb-2 text-muted">
                                 <?php echo $friendMail;?>
                                 </h5>
-                                <div class="div"></div>
-
+                                <div class="achievments">
+                                    <?php
+                                        foreach (getUserbadges($conn, $friendId) as $badge) {
+                                            echo "<img title='".$badge[1]."' src='../assets/badge/".$badge[0].".png' style='margin: 0 5px 0 5px;'>";
+                                        }
+                                    ?>
+                                </div>
                                 <p class="card-text">
                                     <?php 
                                     $bio = file_get_contents($domain_name."/controllers/getbio.php?id=".$friendId);
@@ -280,6 +257,7 @@
                                 ?>
                                 </p>
                                 <a href="profile.php?id=<?php echo $friendId; ?>" class="card-link" style="font-size: 20px; color: gray;">View Profile</a>
+                                
                     </div>
                 </div>
             </div>
@@ -289,7 +267,7 @@
         ?>
     </div>
     <?php } ?>
-    <button ><a href="../controllers/delete_acc.php"> Delete Account</a></button>
+    
     <script>
         const list = document.querySelectorAll('.list');
 

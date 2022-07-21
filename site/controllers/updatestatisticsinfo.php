@@ -49,7 +49,7 @@
                     $badgeInfo = array();
                     array_push($badgeInfo, $individual_badge[0]["badge_id"]);
                     array_push($badgeInfo, $individual_badge[0]["badge_name"]);
-                    array_push($owned_badges[0], $badgeInfo);
+                    array_push($owned_badges, $badgeInfo);
                 }
             }
             
