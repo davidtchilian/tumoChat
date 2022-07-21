@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd app && nodemon app.js"
+    "start": "cd site && nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,11 @@
   },
   "homepage": "https://github.com/fredidas/tumoChat#readme",
   "dependencies": {
+    "express": "^4.18.1",
     "nodemon": "^2.0.19",
-    "websocket": "^1.0.34"
+    "php-express": "^0.0.3",
+    "socket.io": "^4.5.1",
+    "websocket": "^1.0.34",
+    "xmlhttprequest": "^1.8.0"
   }
 }
