@@ -269,9 +269,6 @@
                               <div>
                                 <span id="stars_<?php echo $group["gID"]; ?>"></span>
                                 <span>
-                              <?php if ($flames >= 5) { ?>
-                                  <div class = "classHeaderFlame"> <?php echo "⭐"; ?> </div>
-                               <?php } ?>
                               <div class = "groupHeader">
                                 <span class="groupChatName"><?php
                                 echo $group["group_name"]; 
