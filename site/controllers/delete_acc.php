@@ -9,22 +9,16 @@ if (!isset($userId)) {
 
 require('../models/db.php');
 $sql = "DELETE FROM friends WHERE user_id_1 = $userId OR user_id_2 = $userId";
-echo $sql;
 mysqli_query($conn, $sql);
 $sql = "DELETE FROM NOTIFICATIONS WHERE notification_receiver_id = $userId OR notification_sender_id = $userId";
-echo $sql;
 mysqli_query($conn, $sql);
 $sql = "DELETE FROM isInGroup WHERE isInGroup_user_id = $userId";
-echo $sql;
 mysqli_query($conn, $sql);
 $sql = "DELETE FROM MESSAGE WHERE message_sender_id = $userId";
-echo $sql;
 mysqli_query($conn, $sql);
 $sql = "DELETE FROM GROUPCHAT WHERE group_admin_id = $userId";
-echo $sql;
 mysqli_query($conn, $sql);
 $sql = "DELETE FROM USERS WHERE user_id = $userId";
-echo $sql;
 mysqli_query($conn, $sql);
 
 $conn->close();
