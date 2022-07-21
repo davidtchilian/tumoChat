@@ -267,7 +267,7 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item group-name">
                               <div>
-                                <span id="stars_<?php echo $group["gID"]; ?>"></span>
+                                <span class ="streaks" id="stars_<?php echo $group["gID"]; ?>"></span>
 
                               <div class = "groupHeader">
                                 <span class="groupChatName"><?php
