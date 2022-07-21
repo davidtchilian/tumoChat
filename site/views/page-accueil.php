@@ -266,17 +266,14 @@
                     <div class="card mt-5">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item group-name">
-<<<<<<< HEAD
                               <div>
                                 <span id="stars_<?php echo $group["gID"]; ?>"></span>
-                                <span><?php
-=======
+                                <span>
                               <?php if ($flames >= 5) { ?>
                                   <div class = "classHeaderFlame"> <?php echo "⭐"; ?> </div>
                                <?php } ?>
                               <div class = "groupHeader">
                                 <span class="groupChatName"><?php
->>>>>>> 46c9478b9b1560727a9a4caf0f057a6a1a99fe11
                                 echo $group["group_name"]; 
                                 ?></span>
                                 <div class = "userCount">
