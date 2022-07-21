@@ -4,6 +4,15 @@
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
 }
+.delete_acc{
+  text-decoration: none;
+  color: #4E4F50;
+  
+  
+}
+.delete_acc:hover{
+  color: #4E4F50;
+}
 a{
   padding:0 12px;
 }
