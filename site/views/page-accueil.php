@@ -12,8 +12,6 @@
 
   $sqlGroup = "SELECT DISTINCT isInGroup_group_id, COUNT(*) FROM isInGroup GROUP BY isInGroup_group_id";
   $resultG = mysqli_query($conn, $sqlGroup);
-  $rowG = mysqli_fetch_assoc($resultG);
-  
 //   $gIDs = array();
 //   $gUSERs = array();
 //   while ( $usrow = mysqli_fetch_assoc($resultG) )
@@ -26,6 +24,8 @@
   while($groupsRow = mysqli_fetch_assoc($result)) {
     $groupsArray[] = $groupsRow;
   }
+
+  var_dump($resultG);
 
   $sql2 ="SELECT COUNT(notification_id) as nb FROM NOTIFICATIONS WHERE notification_receiver_id = $user_id";
   $result2 = mysqli_query($conn, $sql2);
@@ -132,7 +132,29 @@
             data: "",
             dataType: 'json', //data format      
             success: function (data) {
-              console.log(data)
+            console.log(data)
+            for (let i = 0; i < data.length; i++) {
+              var idname = "stars_" + data[i][0];
+              if (data[i][1] >= 3 && data[i][1] < 7) {
+                document.getElementById(idname).innerHTML = data[i][1]+"⭐";
+              }
+              else if (data[i][1] >= 7 && data[i][1] < 21) {
+                document.getElementById(idname).innerHTML = data[i][1]+"🌟";
+
+              }
+              else if (data[i][1] >= 21 && data[i][1] < 42) {
+                document.getElementById(idname).innerHTML = data[i][1]+"💫";
+              }
+
+              else if (data[i][1] >= 42 && data[i][1] < 126) {
+                document.getElementById(idname).innerHTML = data[i][1]+"🌠";
+              }
+              else if (data[i][1] >= 126 && data[i][1] < 182) {
+                document.getElementById(idname).innerHTML = data[i][1]+"🌌";
+              }
+
+
+            }
             }
             
          
@@ -241,12 +263,15 @@
                     <div class="card mt-5">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item group-name">
-                              <?php if ($flames >= 5) { ?>
-                                  <div class = "classHeaderFlame"> <?php echo "⭐"; ?> </div>
-                               <?php } ?>
+                              <div>
+                                <span id="stars_<?php echo $group["gID"]; ?>"></span>
                               <div class = "groupHeader">
                                 <span class="groupChatName"><?php
-                                echo $group["group_name"]; 
+                                if(strlen($group["group_name"])>30){
+                                  echo '<p style = "margin-bottom:0">' . substr($group["group_name"], 0, 30) . "..." . "</p>";
+                                }else{
+                                  echo '<p style = "margin-bottom:0">' . $group["group_name"] . "</p>";
+                                }; 
                                 ?></span>
                                 <div class = "userCount">
                                   <span><?php echo $groupCount[$index]; ?></span>
@@ -256,14 +281,34 @@
                               </div>
                               
                             </li>
-                            <li class="list-group-item">
+                            <li class="list-group-item" style = "min-height: 65px !important; display: flex; flex-direction: column; justify-content: center; align-items: center">
                                 <?php
                             $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['gID']);
                             $message = json_decode($messages);
-
-                            echo $message[0];
-                            echo "<br>";
-                            echo $message[1];
+                            if($message[0]=="" && $message[1]==""){ ?>
+                              <span style = "color:#787878">No Messages yet!</span>
+                            <?php }else{
+                              if($message[0]==""){
+                                if(strlen($message[1])>40){
+                                  echo '<p style = "margin-bottom:0">' . substr($message[1], 0, 40) . "..." . "</p>";
+                                }else{
+                                  echo '<p style = "margin-bottom:0">' . $message[1]. "</p>";
+                                }
+                            }else{
+                              if(strlen($message[0])>40){
+                                echo '<p style = "margin-bottom:0">' . substr($message[0], 0, 40) . "..." . "</p>";
+                              }else{
+                                echo '<p style = "margin-bottom:0">' . $message[0] . "</p>";
+                              }
+                              if(strlen($message[1])>40){
+                                echo '<p style = "margin-bottom:0">' . substr($message[1], 0, 40) . "..." . "</p>";
+                              }else{
+                                echo '<p style = "margin-bottom:0">' . $message[1] . "</p>";
+                              }
+                              
+                            }
+                            }
+                            
                           ?>
                             </li>
                         </ul>

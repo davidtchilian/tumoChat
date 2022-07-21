@@ -345,7 +345,6 @@
                             </button>
                         </div>
                         <div>
-                            <p><?php echo"Stickers"?></p>
                             <?php
                     for ($i = 0;$i < count($files);$i++) {
                         $result =  $dir . $files[$i]."\n";
