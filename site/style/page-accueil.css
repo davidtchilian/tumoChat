@@ -94,6 +94,9 @@ h1, h3{
   .d-flex {
     margin-bottom: 16px;
   }
+  .notifs_nb{
+    transform: translate(86px,-78px) !important;
+  }
 }
 
 
@@ -215,11 +218,17 @@ h1, h3{
   height: 16px;
 }
 
-.notifs_nb p{
+.notif_basic{
   color: white;
   text-align: center;
   line-height: 16px;
   font-size: 10px;
+}
+.notif_limit{
+  color: white;
+  text-align: center;
+  line-height: 16px;
+  font-size: 8px;
 }
 /* 
 .group-name{
