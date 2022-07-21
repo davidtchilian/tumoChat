@@ -197,6 +197,7 @@
                                 } else { 
                                 ?>
                                     <a href="editProfile.php" class="card-link" style="font-size: 20px; color: gray;">Edit Profile</a>
+                                    
                                 <?php 
                                 }
                                 ?>

@@ -105,7 +105,7 @@
                   <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
                     <div class="card">
                       <ul class="list-group list-group-flush" style="list-style-type: none;">
-                        <li class="list-group-item group-name" style="font-size: 0.8vw"><h3 class="list-group-item-margin list-title"><?php echo $group["group_name"]; ?></h3></li>
+                        <li class="list-group-item group-name" style="font-size: 0.8vw; display: flex; flex-direction: column; justify-content: center; align-items: center"><h3 class="list-group-item-margin list-title" style="margin-bottom: 0"><?php echo $group["group_name"]; ?></h3></li>
                         <li class="list-group-item list-bottom list-group-item-margin" style="font-size: calc(7px + 0.3vw)">
                           <?php
                             echo  substr($group["group_bio"], 0, 200) . "...";
