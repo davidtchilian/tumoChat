@@ -263,13 +263,18 @@
                                 <?php
                             $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['gID']);
                             $message = json_decode($messages);
-                            if($message[0]==""){
+                            if($message[0]=="" && $message[1]==""){ ?>
+                              <span style = "color:#787878">No Messages yet!</span>
+                            <?php }else{
+                              if($message[0]==""){
                               echo "<span>" . $message[1] . "<span>";
                             }else{
                               echo '<p style = "margin-bottom:1px; width: 100%">' . $message[0] . "</p>";
                               echo '<p style = "margin-bottom:0">' . $message[1] . "</p>";
 
                             }
+                            }
+                            
                           ?>
                             </li>
                         </ul>
