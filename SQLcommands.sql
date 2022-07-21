@@ -44,6 +44,10 @@ VALUES ('$groupname', '$groupbio', $adminid);
 INSERT INTO isInGroup (isInGroup_user_id, isInGroup_group_id)
 VALUES ($u, $groupid);
 
+INSERT INTO Badges (badge_id,badge_name,badge_requirement_count) 
+VALUES (1,"You Looged in 10 Times!",10);
+
+
 -- deleteGroup.php
 DELETE FROM MESSAGE WHERE message_group_id = $groupid;
 DELETE FROM isInGroup WHERE isInGroup_group_id = $groupid;

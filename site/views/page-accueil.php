@@ -7,14 +7,28 @@
   $user_id = $_SESSION['user_id'];
   $theme = $_SESSION['user_theme'];
   require_once("../models/db.php");
-  $sql = "SELECT DISTINCT group_id, group_type, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE group_type = 2 AND isInGroup_user_id = ".$user_id ;
+  $sql = "SELECT DISTINCT group_id as gID, group_type, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE group_type = 2 AND isInGroup_user_id = " . $user_id;
   $result = mysqli_query($conn, $sql);
 
-    $sql2 ="SELECT COUNT(notification_id) as nb FROM NOTIFICATIONS WHERE notification_receiver_id = $user_id";
-    $result2 = mysqli_query($conn, $sql2);
-    if($row2 = mysqli_fetch_assoc($result2)){
-      $notif_count = $row2['nb'];
-    }
+  $sqlGroup = "SELECT DISTINCT isInGroup_group_id, COUNT(*) FROM isInGroup GROUP BY isInGroup_group_id";
+  $resultG = mysqli_query($conn, $sqlGroup);
+
+
+  $groupsArray = array();
+  while($groupsRow = mysqli_fetch_assoc($result)) {
+    $groupsArray[] = $groupsRow;
+  }
+
+
+  $sql2 ="SELECT COUNT(notification_id) as nb FROM NOTIFICATIONS WHERE notification_receiver_id = $user_id";
+  $result2 = mysqli_query($conn, $sql2);
+  if($row2 = mysqli_fetch_assoc($result2)){
+    $notif_count = $row2['nb'];
+  }
+
+  $flames=file_get_contents("../controllers/getdate.php");
+
+
   $sql3 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
   $result3 = mysqli_query($conn, $sql3);
   if ($result3->num_rows > 0) {
@@ -24,6 +38,7 @@
 } else {
     // echo "0 results";
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -48,19 +63,28 @@
             data: "",
             dataType: 'json', //data format      
             success: function (data) {
+              
                 let modal = document.getElementById("modal-content");
                 data.forEach(element => {
+                console.log(element)
                 let notif_content = document.createElement("div");
                 let notif_content_text = document.createElement("p");
                 let notif_buttons = document.createElement("div");
                 let notif_accept_btn = document.createElement("a");
                 let notif_decline_btn = document.createElement("a");
-                notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&notifId=" + element.notification_id + "&gID=" + element.notification_group_id ;
                 notif_accept_btn.innerHTML = "✅";
                 notif_accept_btn.classList.add("notif_decesion_btn");
-                notif_decline_btn.href = "../controllers/notificationdecision.php?notifId="+ element.notification_id +"&gID=" + element.notification_group_id;
                 notif_decline_btn.innerHTML = "❌";
                 notif_decline_btn.classList.add("notif_decesion_btn");
+                console.log(element.typeName)
+                if(element.typeName == "GroupInvite"){
+                notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&notifId=" + element.notification_id + "&gID=" + element.notification_group_id ;
+                notif_decline_btn.href = "../controllers/notificationdecision.php?notifId="+ element.notification_id +"&gID=" + element.notification_group_id;
+                }
+                else if(element.typeName == "FriendRequest"){
+                notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&notifId=" + element.notification_id + "&sender=" + element.notification_sender_id;
+                notif_decline_btn.href = "../controllers/notificationdecision.php?notifId="+ element.notification_id + "&sender=" + element.notification_sender_id;
+                }
                 notif_content_text.innerHTML = element.notification_content;
                 notif_content.appendChild(notif_content_text);
                 notif_content.classList.add("notif_content_div");
@@ -84,6 +108,49 @@
             }
         });
     });
+    $(function (){
+      // $.ajax({
+	    //     type: "GET", //we are using GET method to get data from server side
+	    //     url: 'basic.php', // get the route value
+	    //     success: function (response) {//once the request successfully process to the server side it will return result here
+	    //         console.log(response)
+	    //     }
+	    // });
+        $.ajax({
+            type: "GET",
+            url: '../controllers/getdate.php',       
+            data: "",
+            dataType: 'json', //data format      
+            success: function (data) {
+            console.log(data)
+            for (let i = 0; i < data.length; i++) {
+              var idname = "stars_" + data[i][0];
+              if (data[i][1] >= 3 && data[i][1] < 7) {
+                document.getElementById(idname).innerHTML = data[i][1]+"⭐";
+              }
+              else if (data[i][1] >= 7 && data[i][1] < 21) {
+                document.getElementById(idname).innerHTML = data[i][1]+"🌟";
+
+              }
+              else if (data[i][1] >= 21 && data[i][1] < 42) {
+                document.getElementById(idname).innerHTML = data[i][1]+"💫";
+              }
+
+              else if (data[i][1] >= 42 && data[i][1] < 126) {
+                document.getElementById(idname).innerHTML = data[i][1]+"🌠";
+              }
+              else if (data[i][1] >= 126 && data[i][1] < 182) {
+                document.getElementById(idname).innerHTML = data[i][1]+"🌌";
+              }
+
+
+            }
+            }
+            
+         
+    });
+          });
+        
 </script>
     <style>
     body {
@@ -130,7 +197,7 @@
             </li>
             <?php if($notif_count != 0)
             {?>
-            <div class="notifs_nb"><p><?php echo $notif_count; ?></p></div>
+            <div class="notifs_nb"> <?php if($notif_count > 100) {  echo "<p class='notif_limit'>" ?>  <?php echo "99+ </p>";} else{echo "<p class='notif_basic'>".$notif_count."</p>";}?></div>
             <?php } ?>
             <div id="infoModal" class="modal_user">
                     <div id="modal-content" class="modal-content">
@@ -163,28 +230,76 @@
         </div>
         <div class="row">
             <?php
-              while($group = mysqli_fetch_assoc($result)){
+            $allGroupIDs = array();
+            foreach ($groupsArray as $group){
+              $allGroupIDs[] = $group["gID"];
+            }
+            $groupCount = array();
+
+            while ($usrow = mysqli_fetch_assoc($resultG))
+                {
+                  for ($i=0; $i < count($allGroupIDs); $i++) { 
+                    if($usrow['isInGroup_group_id']==$allGroupIDs[$i]){
+                      $groupCount[$i] = $usrow['COUNT(*)'];
+                    }
+                  }
+                  
+                }
+                $index = 0;
+              foreach ($groupsArray as $group){
                 ?>
             <div class="col-lg-4 col-sm-12 group-chats">
-                <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
+                <a href="page-chat.php?id=<?php echo $group["gID"]; ?>" style="text-decoration :none">
                     <div class="card mt-5">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item group-name">
                               <div>
-                                <span><?php echo $group["group_name"]; ?></span>
-                                <img src="../assets/images/usercount.png" style="width: 28px; float:right;">
-                                <span><?php echo "";?></span>
+                                <span class ="streaks" id="stars_<?php echo $group["gID"]; ?>"></span>
+
+                              <div class = "groupHeader">
+                                <span class="groupChatName"><?php
+                                if(strlen($group["group_name"])>27){
+                                  echo '<p style = "margin-bottom:0">' . substr($group["group_name"], 0, 27) . "..." . "</p>";
+                                }else{
+                                  echo '<p style = "margin-bottom:0">' . $group["group_name"] . "</p>";
+                                }; 
+                                ?></span>
+                                <div class = "userCount">
+                                  <span><?php echo $groupCount[$index]; ?></span>
+                                  
+                                  <img src="../assets/images/usercount.png" style="width: 28px; float:right;">
+                              </div>
                               </div>
                               
                             </li>
-                            <li class="list-group-item">
+                            <li class="list-group-item" style = "min-height: 65px !important; display: flex; flex-direction: column; justify-content: center; align-items: center">
                                 <?php
-                            $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['group_id']);
+                            $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['gID']);
                             $message = json_decode($messages);
-
-                            echo $message[0];
-                            echo "<br>";
-                            echo $message[1];
+                            if($message[0]=="" && $message[1]==""){ ?>
+                              <span style = "color:#787878">No Messages yet!</span>
+                            <?php }else{
+                              if($message[0]==""){
+                                if(strlen($message[1])>40){
+                                  echo '<p style = "margin-bottom:0">' . substr($message[1], 0, 40) . "..." . "</p>";
+                                }else{
+                                  echo '<p style = "margin-bottom:0">' . $message[1]. "</p>";
+                                }
+                            }else{
+                              if(strlen($message[0])>40){
+                                echo '<p style = "margin-bottom:0">' . substr($message[0], 0, 40) . "..." . "</p>";
+                              }else{
+                                echo '<p style = "margin-bottom:0">' . $message[0] . "</p>";
+                              }
+                              if(strlen($message[1])>40){
+                                echo '<p style = "margin-bottom:0">' . substr($message[1], 0, 40) . "..." . "</p>";
+                              }else{
+                                echo '<p style = "margin-bottom:0">' . $message[1] . "</p>";
+                              }
+                              
+                            }
+                            }
+                            
                           ?>
                             </li>
                         </ul>
@@ -192,6 +307,7 @@
                 </a>
             </div>
             <?php
+            $index++;
               }
               ?>
         </div>

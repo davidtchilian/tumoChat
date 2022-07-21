@@ -2,6 +2,9 @@ INSERT INTO typeGroupChat (typeName) VALUES
 ('public'),
 ('private');
 
+INSERT INTO typeMessage (typeMessage_id) VALUES
+('text'),
+('sticker'); 
 
 INSERT INTO GROUPCHAT (group_name,group_bio, group_icon, group_type) VALUES
 ('TUMO', 'The TUMO Center for Creative Technologies is a free-of-charge educational program that puts teens in charge of their own learning. Our learning program is made up of self-learning activities, workshops and project labs that revolve around 14 learning targets.', 0 ,1),
@@ -22,7 +25,8 @@ Students learn and put into practice the skills needed to succeed as a motion ar
 ('Writing', 'It all begins with the written word… no, no, really. Games, movies, comic books, music, and even graphic design often rely on the written word to convey an idea or message. Regardless of the platform, the foundation is the same.', 14,1);
  
 INSERT INTO typeNotification(typeName) VALUES
-('GroupInvite');
+('GroupInvite'),
+('FriendRequest');
 
 INSERT INTO Statistics_Types (statistic_type) VALUES ('LoginCount');
 INSERT INTO Statistics_Types (statistic_type) VALUES ('MessageCount');

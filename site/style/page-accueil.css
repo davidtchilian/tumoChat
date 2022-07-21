@@ -94,6 +94,9 @@ h1, h3{
   .d-flex {
     margin-bottom: 16px;
   }
+  .notifs_nb{
+    transform: translate(86px,-78px) !important;
+  }
 }
 
 
@@ -162,12 +165,13 @@ h1, h3{
 } */
 
 .list-group-item-margin{
-  margin: 0.8vw 0;
+  padding: 0.8vw 0;
 }
 
 .list-bottom{
   color: #787878;
-  height:5rem;
+  height: 6rem !important;
+  padding: 0 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -215,13 +219,67 @@ h1, h3{
   height: 16px;
 }
 
-.notifs_nb p{
+.notif_basic{
   color: white;
   text-align: center;
   line-height: 16px;
   font-size: 10px;
 }
+.notif_limit{
+  color: white;
+  text-align: center;
+  line-height: 16px;
+  font-size: 8px;
+}
 /* 
 .group-name{
   margin-top: 1vw;
 } */
+
+#top {
+  height: 100%; 
+}
+
+#right {
+  position:absolute;
+  left: 50%;
+  right: 0;
+  height: 100%;
+  background: #f00;
+  z-index: 0;
+}
+
+#right_content {
+  position: absolute;
+  left: 150px; /* half the width of #main */
+}
+
+#main {
+  position: relative;
+  margin: 0 auto;
+  width: 300px;
+  height: 100%;
+  background: #00f; 
+  z-index: 1;    
+}
+
+.groupHeader{
+  margin: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.userCount{
+  position: absolute;
+  right:1rem;
+}
+
+.groupChatName{
+  float: center;
+}
+
+.streaks{
+  position: absolute;
+  left:1rem;
+}
+

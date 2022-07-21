@@ -8,6 +8,10 @@
   $isingroup = false;
   $isingroup_message = false;
 
+    $dir    = '../assets/stickers/';
+    $files = array_values(array_diff(scandir($dir), array('..', '.')));
+    
+
   if (!isset($userId)) {
     header("Location: login.php");
     return;
@@ -19,6 +23,9 @@
   }
 
   require('../models/db.php');
+
+  
+
   $limit = 23;
  
   $sql = "SELECT q.* FROM 
@@ -27,26 +34,31 @@
    WHERE message_group_id=$groupId
    ORDER BY `message_id` DESC LIMIT $limit) 
   q ORDER BY q.`message_id` ASC";
-  $messages = mysqli_query($conn, $sql);
 
+  $messages = mysqli_query($conn, $sql);
  
 
-  $sql = "SELECT group_name, group_type, group_icon FROM groupchat WHERE group_id='$groupId'";
-  $groupName = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_name"];
-  $groupType = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_type"];
-  $groupIcon = mysqli_fetch_assoc(mysqli_query($conn, $sql))["group_icon"];
+  $sql = "SELECT group_name, group_type, group_icon FROM groupchat WHERE group_id = $groupId";
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_assoc($result);
+  $groupName = $row["group_name"];
+  $groupType = $row['group_type'];
+  $groupIcon = $row['group_icon'];
+  
+  $getTypeSql = "SELECT typeName FROM typeGroupChat WHERE typeGroupChat_id = $groupType";
+  $groupTypeName = mysqli_fetch_assoc(mysqli_query($conn, $getTypeSql))['typeName'];
+
+
 //   $message = mysqli_fetch_assoc($messages);
   if($groupType==2){
   $group_users = file_get_contents($domain_name."/controllers/getgroupusers.php?id=".$groupId);
   $group_users = json_decode($group_users);
+    $isingroup = false;
+    for ($i=0; $i < count($group_users) && !$isingroup; $i++) { 
+        $isingroup = $group_users[$i] == $userId;
+    }
 
-  for ($i=0; $i < count($group_users); $i++) { 
-      if($group_users[$i] == $userId){
-        $isingroup = true;
-      }
-  }
-
-  if($isingroup == false){
+  if(!$isingroup){
       header("Location: page-accueil.php");
   }
   }
@@ -58,6 +70,11 @@
   $isAdmin = $userId == $groupAdminId;
   
   mysqli_close($conn);
+
+  function startsWith($string, $startString) {
+    $len = strlen($startString);
+    return (substr($string, 0, $len) === $startString);
+  }
 
 ?>
 
@@ -144,9 +161,9 @@
 </head>
 <body id = "bodyHTML">
     <div class="fixed-top">
-        <nav class="navbar navbar-expand-lg" style="background-color : #6c4b93">
+        <nav class="navbar navbar-expand-lg" style="background-color : #6c4b93;">
             <?php
-        if($groupType==1){
+        if($groupTypeName=="private"){
         ?>
             <a href="page-accueil.php"><img src="../assets/images/flèche_retour3.png" alt="Retour"
                     style="width : 35px; height: 35px; margin-left: 10px" /></a>
@@ -161,14 +178,16 @@
         ?>
             <div class="container">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <?php
-                if($groupType==1){ ?>
+                    <?php
+                if($groupTypeName=="public"){ ?>
                     <li>
-                        <img style="width: 12px;" src="../images/comm_icons/<?php echo $groupIcon; ?>.png" alt="">
+                        <img class="comm_icon" style="margin: 6px 0"
+                            src="../assets/comm_icons/<?php echo $groupIcon; ?>.png" alt="">
                     </li>
                     <?php } ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color : white"><?php echo $groupName; ?></a>
+                        <a class="nav-link" href="#"
+                            style="color : white; margin-left: 14px"><?php echo $groupName; ?></a>
                     </li>
                 </ul>
                 <div class="d-flex">
@@ -183,18 +202,34 @@
 
                 <div id="infoModal" class="modal_user">
                     <div class="modal-content">
+                        <?php if($groupTypeName=="public"){ ?>
+                        <div>
+                            <button id="closeButton" class="close btn modal_interaction"><img
+                                    src="../assets/images/cllose.png" alt="sticker" style="width :40px"
+                                    style="height : 40px" />
+                            </button>
+                        </div>
+                        <div class="groupinfo_div" id="groupinfo-container">
+                            <p id="groupInfo" style="font-size: 2rem" class="group_name"></p>
+                            <img class="comm_icon" style="margin: 1rem; width: 70px;"
+                                src="../assets/comm_icons/<?php echo $groupIcon; ?>.png" alt="">
+                            <div id="groupBio"></div>
+                        </div>
+                        <?php }else{ ?>
                         <div class="groupinfo_div" id="groupinfo-container">
                             <p id="groupInfo" class="group_name"></p>
                         </div>
                         <div class="usersinfo_div">
                             <div id="usersInfo"></div>
                             <div id="modal_buttons" class="userinfo_buttons">
-                                <div id="modal-extra-interactions"></div>
+                                <div id="modal-extra-interactions">
+                                </div>
                                 <div id="modal-default-interactions">
                                     <button id="closeButton" class="close btn modal_interaction">Close</button>
                                 </div>
                             </div>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
 
@@ -205,8 +240,7 @@
         <br><br><br><br>
 
         <?php
-  while($message = mysqli_fetch_assoc($messages)) {
-
+  while($message = mysqli_fetch_assoc($messages)){
         $icon = file_get_contents($domain_name."/controllers/getusericon.php?id=".$message["message_sender_id"]);
         $user_email = file_get_contents($domain_name."/controllers/getuseremail.php?id=".$message["message_sender_id"]);
         $user_name = explode("@", $user_email)[0];
@@ -219,7 +253,17 @@
                     style="float : right; color: black;" id="<?= $message['message_id']?>">
                     <?php 
                     // echo "<p class='user_email'>".$user_name."</p>";
-                    echo "<pre >"."<span class='message_content_span' onclick='show(event)' id=".$message['message_id'].">".$message['message_content']."</span>"."</pre>"; ?>
+                      $stickerSplit = explode("_", $message['message_content']);
+                      if ($stickerSplit[0] == "STICKER") {
+                        $stickerId = $stickerSplit[1];
+                        echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 100px'>"; 
+                      }
+                      
+                      else {  
+                        echo "<pre >"."<span class='message_content_span' onclick='show(event)' id=".$message['message_id'].">".$message['message_content']."</span>"."</pre>"; ?>
+
+                      
+
                 </button>
                 <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;"
                     id="<?= "dropdown".$message['message_id']?>">
@@ -227,14 +271,14 @@
                     <div class="dropdown-content" id="dropdown-content">
                         <a  onclick="myFunction(event)" id=<?= "editId".$message['message_id']?>
                             name="<?= $message['message_id']?>">Edit</a>
-                        <a onclick="deleteMessages(event)" id="<?= "delete".$message['message_id']?>" >Delete</a>
+                        <a onclick="deleteMessages(event)" id="<?= "delete".$message['message_id']?>">Delete</a>
                     </div>
 
                 </div>
             </div>
         </div>
         <?php }
-        else { 
+        }else{ 
             for ($i=0; $i < count($group_users); $i++) { 
                 if($group_users[$i] == $message["message_sender_id"]){
                     $isingroup_message = true;
@@ -255,7 +299,7 @@
             <?php
                 }
                 else{?>
-            <div class="col-1"><img src="../assets/comm_icons/10.png" class="user_icon"></div>
+            <div class="col-1"><img src="../assets/comm_icons/100.png" class="user_icon"></div>
             <div class="col-7">
                 <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
                     <?php 
@@ -270,7 +314,7 @@
         </div>
         <?php 
         }
-    }
+  }
     ?>
     
     </div>
@@ -289,17 +333,17 @@
                     <img src="../assets/images/stickerr.png" alt="sticker" style="width :40px" style="height : 40px" />
                 </a>
 
-                <div class="container-fluid" >
-                    <form class="d-flex" role="search"  method="post" id="form" >
+                <div class="container-fluid">
+                    <form class="d-flex" role="search" method="post" id="form">
                         <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
-                        <input type="hidden" name="group_id" value="<?php echo $groupId; ?>" id = "groupId">
-                        <input type="hidden" name = "message_id" value="<?= $message['message_id']?>"  id="message_id">
-                        <input type="hidden" id = "jsUserId" value="<?= $userId?>">
-                        <input type="hidden" id = "limitId" value="<?= $limit?>">"
-                        <div class="form-group">
-                            <textarea name="message_content"  style="resize: none;" class="form-control " id="text" rows="1"   placeholder="Enter your message here" autofocus></textarea>
+                        <input type="hidden" name="group_id" value="<?php echo $groupId; ?>" id="groupId">
+                        <input type="hidden" name="message_id" value="<?= $message['message_id']?>" id="message_id">
+                        <input type="hidden" id="jsUserId" value="<?= $userId?>">
+                        <div class="form-group" style="width: 75%;">
+                            <textarea name="message_content" style="resize: none" class="form-control" id="text"
+                                rows="1" placeholder="Enter your message here" autofocus></textarea>
                         </div>
-                        <button class="btn search" type="submit" value="Message" id = "send" onClick="sendMessage(event)">
+                        <button class="btn search" type="submit" value="Message" id="send" onClick="sendMessage(event)">
                             <!-- <a href="page-chat.php?id=<//?php echo $groupId;?>"></a> -->
                             <img src="../assets/images/avion_papier_nour_1.png" alt="envoye" style="width :40px"
                                 style="height : 40px" />
@@ -308,7 +352,8 @@
 
                 </div>
                 <div id="stickerModal" class="modal_user">
-                    <div class="modal-content ">
+                    <div class="modal-content modal-content-sticker ">
+
                         <div id="modal-extra-interactions"></div>
                         <div id="modal-default-interactions">
                             <button id="stickerCloseButton" class="close btn modal_interaction"><img
@@ -317,7 +362,18 @@
                             </button>
                         </div>
                         <div>
-                            <p><?php echo"stickers"?></p>
+                            <?php
+                    for ($i = 0;$i < count($files);$i++) {
+                        $result =  $dir . $files[$i]."\n";
+                        $number = explode(".",$files[$i])[0];
+                        $sticker = "<button onClick='sendSticker('$number','$groupId')' ><img src='$result' class='card-img-top'
+                                alt='profile_' style='height: 70px; width: 70px'></button>";
+                            ?>
+                            <a onClick="sendSticker(' <?php echo $number ?>','<?php echo $groupId; ?>')"><img
+                                    src="<?php echo $result ?>" class='card-img-top' alt='profile_'
+                                    style='height: 70px; width: 70px'></a>
+                            <?php
+                            }?>
                         </div>
                     </div>
                 </div>
@@ -325,30 +381,20 @@
     </div>
     </nav>
     </div>
-    
-    <script src="../scripts/jquery.js"></script>
-    <script type="text/javascript"  src="../scripts/sticker.js"></script>
-  
-    <?php
-    // if($groupType==2){
-    ?>
-    <!-- <script src="../scripts/page-chat.js"></script> -->
-    <?php //} ?>
-    <?php
-    // if($groupType==1){
-    ?>
-    <!-- <script src="../scripts/comm_chat_page.js"></script> -->
-    <?php //} ?>
-    <!-- <script src="../scripts/sticker.js"></script> -->
+    <script src="../scripts/jquery.js">
+    </script>
+    <script type="text/javascript" src="../scripts/sticker.js"></script>
     <script>
     const params = new URLSearchParams(window.location.search);
     if (params.getAll('modal')[0] == 1) {
-        getGroupIdInfo('<?php echo $userId; ?>', '<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>',
+        getGroupIdInfo('<?php echo $userId; ?>', '<?php echo $groupId; ?>',
+            '<?php echo $isAdmin; ?>',
             '<?php echo $groupAdminId; ?>');
         modal.style.display = "block";
     }
     </script>
-    <script type="text/javascript" src="../scripts/comm_chat_page.js" refer></script>
+  
+    <script type="text/javascript" src="../scripts/chat.js" refer></script>
 
 </body>
 

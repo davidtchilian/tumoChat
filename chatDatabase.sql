@@ -17,6 +17,11 @@ CREATE TABLE typeNotification(
     typeName TEXT
 );
 
+CREATE TABLE typeMessage(
+    typeMessage_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    typeName TEXT
+);
+
 CREATE TABLE GROUPCHAT(
     group_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     group_name TEXT,
@@ -33,9 +38,11 @@ CREATE TABLE MESSAGE(
     message_content TEXT,
     message_sender_id INT,
     message_group_id INT,
+    message_type_id INT,
     message_date DATETIME,
     FOREIGN KEY (message_sender_id) REFERENCES USERS (user_id),
-    FOREIGN KEY (message_group_id) REFERENCES GROUPCHAT (group_id)
+    FOREIGN KEY (message_group_id) REFERENCES GROUPCHAT (group_id),
+    FOREIGN KEY (message_type_id) REFERENCES typeMessage (typeMessage_id)
 );
 
 CREATE TABLE isInGroup(
@@ -79,6 +86,15 @@ CREATE TABLE Statistics_Main(
     statistic_count INT,
     FOREIGN KEY (statistic_user_id) REFERENCES USERS (user_id),
     FOREIGN KEY (statistic_type_id) REFERENCES Statistics_Types (statistic_type_id)
+);
+
+CREATE TABLE Badges(
+    badge_id INT,
+    badge_name TEXT,
+    badge_requirement_count INT,
+
+    PRIMARY KEY (badge_id),
+    FOREIGN KEY (badge_id) REFERENCES Statistics_Main (statistic_type_id)
 );
 
 CREATE TABLE friends(

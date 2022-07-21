@@ -20,7 +20,9 @@ sticketrButton.onclick = function() {
   stickerModal.style.display = "block";
 }
 
-// stickerClose.onclick = onClose;
+stickerClose.onclick = () => {
+  onClose();
+}
 
 window.onclick = function(event) {
   if (event.target == stickerModal) {
@@ -30,6 +32,7 @@ window.onclick = function(event) {
 
 function onClose() {
   stickerModal.style.display = "none";
+  usersInfo.innerHTML = "";
   extraInteractions.innerHTML = "";
   window.location.replace(removeParam("modal", window.location.href));
 }
@@ -38,16 +41,16 @@ function onClose() {
 function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
   groupName.innerText = "Loading...";
   const Http = new XMLHttpRequest();
-  const url=`../controllers/getcomminfo.php?id=${groupId}`;
+  const url = `../controllers/getgroupinfo.php?id=${groupId}`;
   Http.open("GET", url);
   Http.send();
   Http.onreadystatechange = (e) => {
-    if(Http.readyState !== XMLHttpRequest.DONE) {
+    if (Http.readyState !== XMLHttpRequest.DONE) {
       return;
     }
     let output = Http.responseText;
     let jsonObject = null;
-    console.log(JSON.parse(output))
+
     try {
       jsonObject = JSON.parse(output);
     } catch (e) {
@@ -55,17 +58,60 @@ function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
       return;
     }
 
-    
-
-    let groupInfo = jsonObject[0];
+    let groupInfo = jsonObject[0][0];
+    let groupUsersInfo = jsonObject[1];
     groupName.innerText = groupInfo.group_name;
 
     if (groupInfo.group_bio) {
-      let groupBio = document.getElementById("groupBio");
+      let groupBio = document.createElement("p");
       groupBio.classList.add("group_bio");
       groupBio.innerText = groupInfo.group_bio;
       groupInfoDiv.appendChild(groupBio);
     }
+
+    for (let user of groupUsersInfo) {
+
+      let userInfo = document.createElement("div");
+      let userEmail = document.createElement("p");
+      userEmail.classList.add("user-email");
+      userEmail.innerText = user[0].user_email;
+      userInfo.classList.add("user_info_page")
+      userInfo.appendChild(userEmail);
+      usersInfo.appendChild(userInfo);
+
+      if (!isAdmin) {
+        continue;
+      }
+
+      if (user[0].user_id == groupAdminId) {
+        let adminSpan = document.createElement('span');
+        adminSpan.innerText = "⚡";
+        userInfo.appendChild(adminSpan);
+        continue;
+      }
+
+      let userDeleteButton = document.createElement("a");
+      userDeleteButton.classList.add("user_delete_button");
+      userDeleteButton.href = `../controllers/deleteuserfromgroup.php?delid=${user[0].user_id}&id=${groupId}`;
+      userDeleteButton.innerText = "X";
+      userInfo.appendChild(userDeleteButton);
+
+    }
+
+    if (isAdmin) {
+      let addUserButton = createButton("add_user", "add_user", "Add User", null);
+      extraInteractions.appendChild(addUserButton);
+
+      let deleteGroup = createButton("delete_group", "delete_group", "Delete Group", `../controllers/deletegroup.php?id=${groupId}`);
+      extraInteractions.appendChild(deleteGroup);
+    }
+    else {
+      let leaveGroup = createButton("leave_group", "leave_group", "Leave Group", `../controllers/deleteuserfromgroup.php?delid=${userId}&id=${groupId}`);
+      extraInteractions.appendChild(leaveGroup);
+    }
+
+  }
+}
 
 
     // for (let user of groupUsersInfo) {
@@ -109,8 +155,8 @@ function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
     //   extraInteractions.appendChild(leaveGroup);
     // }
 
-  }
-}
+  
+
 
 function createButton(className, id, innerText, href) {
   let button = document.createElement("a");
@@ -350,7 +396,6 @@ function deleteMessages(event){
 
 }
 var id
-var messageCount 
 function sendMessage(event){
 if(txt.value != ""){
           $.ajax(
@@ -384,8 +429,17 @@ if(txt.value != ""){
                 const pre = document.createElement("pre")
                 const span = document.createElement("span")
                 span.setAttribute("class", "message_content_span")
-                span.setAttribute("id",  id)
-                span.innerText = txt.value
+                if (txt.value.startsWith("STICKER_")) {
+                  let sticker = document.createElement("img");
+                  sticker.src = `../assets/stickers/${txt.value.split("_")[1]}.png`;
+                  sticker.style.width = "100px";
+                  sticker.style.height = "100px";
+                  span.appendChild(sticker);
+                }
+                else {
+                  span.setAttribute("id",  id)
+                  span.innerText = txt.value;
+                }
                 pre.appendChild(span)
                 button2.appendChild(pre)
                 div.appendChild(button2)
@@ -416,7 +470,7 @@ if(txt.value != ""){
                
                 cont.scrollIntoView({behavior: "smooth"})
                 
-                messageCount += 1
+             
                 txt.value = ""
                
               },
@@ -429,42 +483,11 @@ if(txt.value != ""){
           } 
         
 
-}
-
-
-
-// const limit = document.getElementById("limitId")
-// console.log(limit.value)
-
-// if(window.scrollY == 0 && messageCount == limit.value){
-//   $.ajax(
-//     {
-//        type: 'post',
-//        url:  "../controllers/delete.php",
-//        data: { 
       
-//          "limitCount": limit.value + 50,
-    
-        
-//        },
-//        success: function (response) {
-//          console.log("Success !!");
-        
-//         //  var xmlhttp = new XMLHttpRequest();
-//         //  xmlhttp.open(this.type, this.url ,true);
-//         //  xmlhttp.send(this.data);
-//         //  console.log(this.type)
-//        console.log(response)
-//         const element = document.getElementById(x)
-//         element.style.display = "none"
-       
-//        },
-//        error: function () {x
-//          console.log("Error !!");
-//        }
-//     }
-    
-   
-//  );
+          } 
 
-// }
+function sendSticker(stickerId) {
+  stickerId = stickerId.replace(" ", "");
+  txt.value = `STICKER_${stickerId}`;
+  sendMessage(null);
+}

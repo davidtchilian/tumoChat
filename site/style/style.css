@@ -1,15 +1,13 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
-}
+
 a{
   padding:0 12px;
 }
 html, body{
   height: 100% !important;
   width: 100% !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 .eye{
   width:25px;
@@ -48,19 +46,18 @@ body ::after {
 }
 
 .navigation {
-  width: 330px;
-  height: 70px;
+  padding:  0.5vh 1vw;
+  /* height: 70px; */
   background: #fff;
-  position: relative;
-  display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  border: 2px solid #6c757d;
 }
 
 .navigation ul {
   display: flex;
-  width: 350px;
+  justify-content: center;
 }
 
 .navigation ul li {
@@ -88,12 +85,17 @@ body ::after {
   line-height: 75px;
   font-size: 1.5em;
   text-align: center;
-  transition: 0.5s;
+  transition: 0.4s;
   color: var(--clr);
 }
 
 .navigation ul li.active a .icon {
-  transform: translateY(-40px);
+  transform: translateY(-10px);
+}
+
+.navigation ul li.active {
+  background-color: #d9d9d9;
+  border-radius: 10px;
 }
 
 .navigation ul li a .text {
@@ -120,7 +122,6 @@ body ::after {
   border-radius: 50%;
   border: 4px solid #F8F9FA;
   transition: 0.5s;
-
 }
 
 .indicator::before {
@@ -303,7 +304,7 @@ body ::after {
 /* ---------------------------------------------------------------------------------------------------------------------------------- */
 
 .modes {
-  transform: translate(100%, -55%);
+  /* transform: translate(100%, -55%); */
 }
 
 .zinzolin {
@@ -555,9 +556,9 @@ body {
   margin-right: 2px;
 }
 
-.user-profile-friend-status img {
+/* .user-profile-friend-status img {
   -webkit-filter: invert(89%) sepia(6%) hue-rotate(185deg);
-}
+} */
 
 .user-profile-friend-status p {
   margin: 1px 4px 0 0;
@@ -594,4 +595,46 @@ body {
 
 .friends-deactive:hover {
   color: #ff3434;
+}
+
+.friends-cancel{
+  border: 1px solid #4E4F50;
+  background-color: #4E4F50;
+}
+
+.friends-cancel:hover {
+  color: #4E4F50;
+}
+
+.navigation-bar-themes {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 20vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.navbar-container{
+  width: 100%;
+  height: 100% ;
+  padding: 30px ;
+  display: flex ;
+  justify-content: center ;
+  align-items: center ;
+}
+
+.add-friend-button {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #6c757d;
+  border-radius: 0.375rem;
+  padding: 10px;
+}
+
+ul {
+  padding-inline-start: 0px;
 }
