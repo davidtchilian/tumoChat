@@ -195,6 +195,7 @@
                                 } else { 
                                 ?>
                                     <a href="editProfile.php" class="card-link" style="font-size: 20px; color: gray;">Edit Profile</a>
+                                    
                                 <?php 
                                 }
                                 ?>
@@ -288,7 +289,7 @@
         ?>
     </div>
     <?php } ?>
-    <button ><a href="../controllers/delete_acc.php"> Delete Accaunt</a></button>
+    <button ><a href="../controllers/delete_acc.php"> Delete Account</a></button>
     <script>
         const list = document.querySelectorAll('.list');
 
