@@ -322,7 +322,7 @@
                         <input type="hidden" name="group_id" value="<?php echo $groupId; ?>" id="groupId">
                         <input type="hidden" name="message_id" value="<?= $message['message_id']?>" id="message_id">
                         <input type="hidden" id="jsUserId" value="<?= $userId?>">
-                        <div class="form-group">
+                        <div class="form-group" style="width: 75%;">
                             <textarea name="message_content" style="resize: none" class="form-control" id="text"
                                 rows="1" placeholder="Enter your message here" autofocus></textarea>
                         </div>
