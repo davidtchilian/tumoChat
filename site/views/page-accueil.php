@@ -259,14 +259,17 @@
                               </div>
                               
                             </li>
-                            <li class="list-group-item">
+                            <li class="list-group-item" style = "min-height: 65px !important; display: flex; flex-direction: column; justify-content: center; align-items: center">
                                 <?php
                             $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['gID']);
                             $message = json_decode($messages);
+                            if($message[0]==""){
+                              echo "<span>" . $message[1] . "<span>";
+                            }else{
+                              echo '<p style = "margin-bottom:1px; width: 100%">' . $message[0] . "</p>";
+                              echo '<p style = "margin-bottom:0">' . $message[1] . "</p>";
 
-                            echo $message[0];
-                            echo "<br>";
-                            echo $message[1];
+                            }
                           ?>
                             </li>
                         </ul>
