@@ -12,20 +12,13 @@
 
   $sqlGroup = "SELECT DISTINCT isInGroup_group_id, COUNT(*) FROM isInGroup GROUP BY isInGroup_group_id";
   $resultG = mysqli_query($conn, $sqlGroup);
-//   $gIDs = array();
-//   $gUSERs = array();
-//   while ( $usrow = mysqli_fetch_assoc($resultG) )
-// {
-//   $gIDs[] = $usrow['isInGroup_group_id'];
-//   $gUSERs[] = $usrow['COUNT(*)'];
-// } 
+
 
   $groupsArray = array();
   while($groupsRow = mysqli_fetch_assoc($result)) {
     $groupsArray[] = $groupsRow;
   }
 
-  var_dump($resultG);
 
   $sql2 ="SELECT COUNT(notification_id) as nb FROM NOTIFICATIONS WHERE notification_receiver_id = $user_id";
   $result2 = mysqli_query($conn, $sql2);
@@ -46,10 +39,7 @@
     // echo "0 results";
 }
 
-// $insert="INSERT INTO `NOTIFICATIONS`(`notification_sender_id`, `notification_receiver_id`, `notification_group_id`, `notification_content`, `notification_type_id`) VALUES (2,1,16, 'just testing notifs count',1)";
-// for($i=0;$i<150;$i++){
-//   mysqli_query($conn,$insert);
-// }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

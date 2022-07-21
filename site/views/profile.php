@@ -73,71 +73,71 @@
 <body>
     <div class="navigation-bar-themes">
         <div class="navbar-container">
-            <a href="<?php echo $isGuest ? "profile.php" : "page-accueil.php" ?>"><img src="../assets/images/flèche_retour3.png" alt="Retour"style="width : 35px; height: 35px; margin-left: 10px" /></a>
-
-            <!-- <button class="navbar-toggler" type="button" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            </button> -->
-
-            <?php
-            if (!$isGuest) {
-            ?>
-
-            <div id="navbarSupportedContent">
-                <ul class=""> <!--navbar-nav me-auto mb-2 mb-lg -->
-                    <div class="navigation modes">
-                        <ul>
-                            <?php
-                                $str = array();
-                                for ($i=0; $i < 4; $i++) {
-                                    if ((int)$theme == $i) {
-                                        $str[] = "list active";
-                                    }else {
-                                        $str[] = "list";
-                                    }
-                                }
-                            ?>
-                            <li class="<?php echo $str[0]; ?>">
-                                <a onclick="changetheme(0)" href="#">
-                                    <span class="icon">
-                                        <ion-icon name="sunny-outline"></ion-icon>
-                                    </span>
-                                    <span class="text"> Light </span>
-                                </a>
-                            </li>
-                            <li class="<?php echo $str[1]; ?>">
-                                <a onclick="changetheme(1)" href="#">
-                                    <span class="icon">
-                                        <ion-icon name="moon-outline"></ion-icon>
-                                    </span>
-                                    <span class="text"> Dark </span>
-                                </a>
-                            </li>
-                            <li class="<?php echo $str[2]; ?>">
-                                <a onclick="changetheme(2)" href="#">
-                                    <span class="icon">
-                                        <ion-icon name="radio-button-off-outline"></ion-icon>
-                                    </span>
-                                    <span class="text"> Beige </span>
-                                </a>
-                            </li>
-                            <li class="<?php echo $str[3]; ?>">
-                                <a onclick="changetheme(3)" href="#">
-                                    <span class="icon">
-                                        <ion-icon name="radio-button-on-outline"></ion-icon>
-                                    </span>
-                                    <span class="text"> Violet </span>
-                                </a>
-                            </li>
-                            <div class="indicator"></div>
-                        </ul>
-                    </div>
-            </div>
-            <?php
-            }
-            ?>
-
+            <a href="<?php echo $isGuest ? "profile.php" : "page-accueil.php" ?>"><img src="../assets/images/flèche_retour3.png" alt="Retour" style="width : 35px; height: 35px;" /></a>
         </div>
+        
+        <?php
+            if (!$isGuest) {
+        ?>
+        <div class="navbar-container">
+            <ul class=""> <!--navbar-nav me-auto mb-2 mb-lg -->
+                <div class="navigation modes">
+                    <ul>
+                        <?php
+                            $str = array();
+                            for ($i=0; $i < 4; $i++) {
+                                if ((int)$theme == $i) {
+                                    $str[] = "list active";
+                                }else {
+                                    $str[] = "list";
+                                }
+                            }
+                        ?>
+                        <li class="<?php echo $str[0]; ?>">
+                            <a onclick="changetheme(0)" href="#">
+                                <span class="icon">
+                                    <ion-icon name="sunny-outline"></ion-icon>
+                                </span>
+                                <span class="text"> Light </span>
+                            </a>
+                        </li>
+                        <li class="<?php echo $str[1]; ?>">
+                            <a onclick="changetheme(1)" href="#">
+                                <span class="icon">
+                                    <ion-icon name="moon-outline"></ion-icon>
+                                </span>
+                                <span class="text"> Dark </span>
+                            </a>
+                        </li>
+                        <li class="<?php echo $str[2]; ?>">
+                            <a onclick="changetheme(2)" href="#">
+                                <span class="icon">
+                                    <ion-icon name="radio-button-off-outline"></ion-icon>
+                                </span>
+                                <span class="text"> Beige </span>
+                            </a>
+                        </li>
+                        <li class="<?php echo $str[3]; ?>">
+                            <a onclick="changetheme(3)" href="#">
+                                <span class="icon">
+                                    <ion-icon name="radio-button-on-outline"></ion-icon>
+                                </span>
+                                <span class="text"> Violet </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </ul>    
+        </div>
+        <div class="navbar-container">
+            <a href="addfriend.php" class="add-friend-button">Add Friend</a>
+        </div>    
+        <?php
+            }
+        ?>
+
+
+        
     </div>
     <form class="d-flex searchform" style="margin: auto 0 !important" role="search">
 
