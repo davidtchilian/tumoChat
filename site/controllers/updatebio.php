@@ -6,7 +6,8 @@
 
 
     $usrbio = $_POST['bio'];
-$str = htmlspecialchars($usrbio);
+    $str = strip_tags(htmlspecialchars($usrbio)); // ' -> ''
+    $str = str_replace("'", "''", $str);
     $usrid = $_SESSION['user_id'];
 
     $sql = "UPDATE users SET user_bio = '$str' WHERE user_id = $usrid";
