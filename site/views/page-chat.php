@@ -1,5 +1,6 @@
 <?php
 
+  $messageCount;  
   $groupId = $_GET['id'];
 
   session_start();
@@ -25,7 +26,15 @@
 
   
 
-  $sql = "SELECT * FROM message WHERE message_group_id='$groupId'";
+  $limit = 23;
+ 
+  $sql = "SELECT q.* FROM 
+  (SELECT * 
+   FROM message 
+   WHERE message_group_id=$groupId
+   ORDER BY `message_id` DESC LIMIT $limit) 
+  q ORDER BY q.`message_id` ASC";
+
   $messages = mysqli_query($conn, $sql);
  
 
@@ -147,10 +156,10 @@
     ?>body {
         background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
     }
+ 
     </style>
 </head>
-
-<body id="bodyHTML">
+<body id = "bodyHTML">
     <div class="fixed-top">
         <nav class="navbar navbar-expand-lg" style="background-color : #6c4b93;">
             <?php
@@ -229,8 +238,9 @@
     </div>
     <div id="cont0" class="container mt-5" style="min-height : 100vh;" style="position : relative">
         <br><br><br><br>
+
         <?php
-  while($message = mysqli_fetch_assoc($messages)) {
+  while($message = mysqli_fetch_assoc($messages)){
         $icon = file_get_contents($domain_name."/controllers/getusericon.php?id=".$message["message_sender_id"]);
         $user_email = file_get_contents($domain_name."/controllers/getuseremail.php?id=".$message["message_sender_id"]);
         $user_name = explode("@", $user_email)[0];
@@ -250,15 +260,16 @@
                       }
                       
                       else {  
-                        echo "<pre >"."<span class='message_content_span'>".$message['message_content']."</span>"."</pre>"; 
-                    }?>
+                        echo "<pre >"."<span class='message_content_span' onclick='show(event)' id=".$message['message_id'].">".$message['message_content']."</span>"."</pre>"; ?>
+
+                      
 
                 </button>
                 <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;"
                     id="<?= "dropdown".$message['message_id']?>">
 
                     <div class="dropdown-content" id="dropdown-content">
-                        <a onclick="myFunction(event)" id=<?= "editId".$message['message_id']?>
+                        <a  onclick="myFunction(event)" id=<?= "editId".$message['message_id']?>
                             name="<?= $message['message_id']?>">Edit</a>
                         <a onclick="deleteMessages(event)" id="<?= "delete".$message['message_id']?>">Delete</a>
                     </div>
@@ -267,7 +278,7 @@
             </div>
         </div>
         <?php }
-        else { 
+        }else{ 
             for ($i=0; $i < count($group_users); $i++) { 
                 if($group_users[$i] == $message["message_sender_id"]){
                     $isingroup_message = true;
@@ -282,8 +293,7 @@
                 <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
                     <?php 
                             echo "<p class='user_email'>".$user_name."</p>";
-                                echo  $message['message_content']; 
-                    ?>
+                            echo  $message['message_content'] ?>
                 </button>
             </div>
             <?php
@@ -304,13 +314,20 @@
         </div>
         <?php 
         }
-    }
+  }
     ?>
-
+    
     </div>
+    <!-- <form >
+        <input type="hidden" id = "scrollBottom>
+    </form> -->
+    <br>
+    <br>
+    <br>
+    <br>
 
-    <div class="fixed-bottom">
-        <nav class="navbar navbar-expand-lg" style="background-color:#6c4b93" id="navbarId">
+    <div class="fixed-bottom" style="position:fixed">
+        <nav class="navbar navbar-expand-lg" style="background-color:#6c4b93" id = "navbarId">
             <div class="container">
                 <a onClick="sticker()" id="stickerButton" class="sticker_btn nav-link" style="display: inline-block">
                     <img src="../assets/images/stickerr.png" alt="sticker" style="width :40px" style="height : 40px" />
@@ -376,9 +393,7 @@
         modal.style.display = "block";
     }
     </script>
-    <div id="div23">
-        <h1>assa</h1>
-    </div>
+  
     <script type="text/javascript" src="../scripts/chat.js" refer></script>
 
 </body>

@@ -249,14 +249,13 @@ function show(event){
     dropdownDiv[i].style.display = "none"
     
   }
-
-
   var y = event.target.id
   let id = "dropdown" + y
 
   
   const dropdown = document.getElementById(id)
-  dropdown.style.display = "inline-block"
+ 
+  dropdown.style.display = "block"
   dropdown.style.position = "absolute"
 }
 
@@ -438,6 +437,7 @@ if(txt.value != ""){
                   span.appendChild(sticker);
                 }
                 else {
+                  span.setAttribute("id",  id)
                   span.innerText = txt.value;
                 }
                 pre.appendChild(span)
@@ -468,33 +468,23 @@ if(txt.value != ""){
                 div1.appendChild(a1)
                 cont0.appendChild(cont)
                
-              
-                console.log(cont)
-    
+                cont.scrollIntoView({behavior: "smooth"})
+                
+             
                 txt.value = ""
+               
               },
               error: function () {x
                 console.log("Error !!");
               }
+              
+             
             });
-
-    
-            // const div = document.createElement("div")
-            // div.setAttribute("class", "col-7")
-           
-            // const button2 = document.createElement("button")
-            // button2.setAttribute("class", "btn btn-primary messageEnvoye mt-2")
-            // button2.setAttribute("onclick", "show(event)")
-            // button2.setAttribute("style", "float : right; color: black;")
-            // button2.setAttribute("id", id)
-      
-            // div.appendChild(button2)
-            // console.log(id)
+          } 
+        
 
       
           } 
-
-}
 
 function sendSticker(stickerId) {
   stickerId = stickerId.replace(" ", "");
