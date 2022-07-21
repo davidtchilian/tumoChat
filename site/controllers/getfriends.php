@@ -2,8 +2,7 @@
     
     require_once("../models/db.php");
 
-    session_start();
-    $userId = $_SESSION['user_id'];
+    $userId = $_GET['user_id'];
 
     $friendsList = array();
 

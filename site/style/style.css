@@ -526,3 +526,72 @@ body {
 .g_id_signin {
   margin-bottom: 10px;
 }
+
+.friends-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.friends-container .row {
+  margin: 0;
+}
+
+.profile-interactions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-profile-friend-status {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background-color: #4E4F50;
+  color: #E4E6EA;
+  font-weight: bold;
+  border-radius: 10px;
+  margin-right: 2px;
+}
+
+.user-profile-friend-status img {
+  -webkit-filter: invert(89%) sepia(6%) hue-rotate(185deg);
+}
+
+.user-profile-friend-status p {
+  margin: 1px 4px 0 0;
+}
+
+.user-profile-status {
+  display: inline-block;
+  padding: 8px;
+  color: #ffffff;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 2px;
+  transition: background-color 0.2s;
+}
+
+.user-profile-status:hover {
+  background-color: #ffffff;
+}
+
+.friends-active {
+  border: 1px solid #23d300;
+  background-color: #23d300;
+}
+
+.friends-active:hover {
+  color: #23d300;
+}
+
+.friends-deactive{
+  border: 1px solid #ff3434;
+  background-color: #ff3434;
+}
+
+.friends-deactive:hover {
+  color: #ff3434;
+}

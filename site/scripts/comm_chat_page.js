@@ -185,7 +185,9 @@ const form = document.getElementById("form")
 let button = document.getElementById("send")
 const messageSenderId = document.getElementById("jsUserId").value
 const groupId = document.getElementById("groupId").value
-
+const messageId = document.getElementById("message_id")
+const cont0 = document.getElementById("cont0")
+console.log(messageId)
 
 document.getElementById("send").addEventListener("click", function(event){
   event.preventDefault()
@@ -193,14 +195,6 @@ document.getElementById("send").addEventListener("click", function(event){
 })
 
 var x
-console.log(document.getElementById("text"))
-
-
-
- 
-
-
-
 
 function show(event){
   x = event.target.id
@@ -209,14 +203,13 @@ function show(event){
     dropdownDiv[i].style.display = "none"
     
   }
-
-
   var y = event.target.id
   let id = "dropdown" + y
 
   
   const dropdown = document.getElementById(id)
-  dropdown.style.display = "inline-block"
+ 
+  dropdown.style.display = "block"
   dropdown.style.position = "absolute"
 }
 
@@ -250,7 +243,6 @@ function myFunction(event) {
    
    }
   button.setAttribute("onclick", "updateMessages(event)")
-  console.log(button)
  }
 
 
@@ -313,7 +305,7 @@ let y
       txt.value = ""
       button.id = "send"
     }
-    button.setAttribute("onclick", "send(event)")
+    button.setAttribute("onclick", "sendMessage(event)")
   }
 
 
@@ -357,11 +349,10 @@ function deleteMessages(event){
     }
 
 }
-
+var id
+var messageCount 
 function sendMessage(event){
-  var id = event.target
-
-  
+if(txt.value != ""){
           $.ajax(
             {
               type: 'post',
@@ -373,25 +364,107 @@ function sendMessage(event){
                 
               },
               success: function (response) {
-                console.log("Success !!");
-                //  var xmlhttp = new XMLHttpRequest();
-                //  xmlhttp.open(this.type, this.url ,true);
-                //  xmlhttp.send(this.data);
-                //  console.log(this.type)
-              console.log(response)
+                id = response
+                const cont = document.createElement("div")
+                cont.setAttribute("class", "row") 
+                cont.setAttribute("id", "messages") 
+                const div3 = document.createElement("div")
+                div3.setAttribute("class", "col-4")
+                const div = document.createElement("div")
+                div.setAttribute("class", "col-7")
+                cont.appendChild(div3)
+                cont.appendChild(div)
                 
-              
+               
+                const button2 = document.createElement("button")
+                button2.setAttribute("class", "btn btn-primary messageEnvoye mt-2")
+                button2.setAttribute("onclick", "show(event)")
+                button2.setAttribute("style", "float : right; color: black;")
+                button2.setAttribute("id", id)
+                const pre = document.createElement("pre")
+                const span = document.createElement("span")
+                span.setAttribute("class", "message_content_span")
+                span.setAttribute("id",  id)
+                span.innerText = txt.value
+                pre.appendChild(span)
+                button2.appendChild(pre)
+                div.appendChild(button2)
+                const div0 = document.createElement("div")
+                div0.setAttribute("class","dropdown")
+                div0.setAttribute("style", "width:30px; margin-left:900px; margin-top:-30px;")
+                div0.setAttribute("id", "dropdown"+id)
+                
+                const div1 = document.createElement("div")
+                div1.setAttribute("class", "dropdown-content")
+                div1.setAttribute("id", "dropdown-content")
+                const a0 = document.createElement("a")
+                a0.setAttribute("onclick", "myFunction(event)")
+                a0.setAttribute("id", "editId"+id)
+                a0.setAttribute("name", id)
+                a0.innerText = "Edit"
+                div1.appendChild(a0)
+                div0.appendChild(div1)
+                div.appendChild(div0)
+
+                const a1 = document.createElement("a")
+                a1.setAttribute("onclick", "deleteMessages(event)")
+                a1.setAttribute("id", "delete"+id)
+                a1.setAttribute("name", id)
+                a1.innerText = "Delete"
+                div1.appendChild(a1)
+                cont0.appendChild(cont)
+               
+                cont.scrollIntoView({behavior: "smooth"})
+                
+                messageCount += 1
+                txt.value = ""
+               
               },
               error: function () {x
                 console.log("Error !!");
               }
+              
+             
             });
-
-        txt.value = ""
-      
+          } 
+        
 
 }
 
 
-const firstMessage = document.getElementById(93)
-console.log(firstMessage)
+
+// const limit = document.getElementById("limitId")
+// console.log(limit.value)
+
+// if(window.scrollY == 0 && messageCount == limit.value){
+//   $.ajax(
+//     {
+//        type: 'post',
+//        url:  "../controllers/delete.php",
+//        data: { 
+      
+//          "limitCount": limit.value + 50,
+    
+        
+//        },
+//        success: function (response) {
+//          console.log("Success !!");
+        
+//         //  var xmlhttp = new XMLHttpRequest();
+//         //  xmlhttp.open(this.type, this.url ,true);
+//         //  xmlhttp.send(this.data);
+//         //  console.log(this.type)
+//        console.log(response)
+//         const element = document.getElementById(x)
+//         element.style.display = "none"
+       
+//        },
+//        error: function () {x
+//          console.log("Error !!");
+//        }
+//     }
+    
+   
+//  );
+
+// }
