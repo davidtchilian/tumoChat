@@ -98,6 +98,10 @@ body ::after {
   border-radius: 10px;
 }
 
+.navigation ul .active a .text {
+  opacity: 1;
+}
+
 .navigation ul li a .text {
   position: absolute;
   color: var(--clr);
