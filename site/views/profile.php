@@ -196,8 +196,8 @@
                                     <?php
                                 } else { 
                                 ?>
-                                    <a href="editProfile.php" class="card-link" style="font-size: 20px; color: gray;">Edit Profile</a>
-                                    
+                                    <a href="editProfile.php" class="card-link" style="font-size: 20px; color: gray;">Edit Profile</a><br>
+                                    <button type="button" class="btn btn-outline-secondary"><a href="../controllers/delete_acc.php" class="delete_acc"> Delete Account</a></button>
                                 <?php 
                                 }
                                 ?>
@@ -257,6 +257,7 @@
                                 ?>
                                 </p>
                                 <a href="profile.php?id=<?php echo $friendId; ?>" class="card-link" style="font-size: 20px; color: gray;">View Profile</a>
+                                
                     </div>
                 </div>
             </div>
@@ -266,7 +267,7 @@
         ?>
     </div>
     <?php } ?>
-    <button ><a href="../controllers/delete_acc.php"> Delete Account</a></button>
+    
     <script>
         const list = document.querySelectorAll('.list');
 

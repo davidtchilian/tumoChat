@@ -2,6 +2,9 @@ INSERT INTO typeGroupChat (typeName) VALUES
 ('public'),
 ('private');
 
+INSERT INTO typeMessage (typeMessage_id) VALUES
+('text'),
+('sticker'); 
 
 INSERT INTO GROUPCHAT (group_name,group_bio, group_icon, group_type) VALUES
 ('TUMO', 'The TUMO Center for Creative Technologies is a free-of-charge educational program that puts teens in charge of their own learning. Our learning program is made up of self-learning activities, workshops and project labs that revolve around 14 learning targets.', 0 ,1),
