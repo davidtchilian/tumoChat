@@ -135,7 +135,29 @@
             data: "",
             dataType: 'json', //data format      
             success: function (data) {
-              console.log(data)
+            console.log(data)
+            for (let i = 0; i < data.length; i++) {
+              var idname = "stars_" + data[i][0];
+              if (data[i][1] >= 3 && data[i][1] < 7) {
+                document.getElementById(idname).innerHTML = "⭐";
+              }
+              else if (data[i][1] >= 7 && data[i][1] < 21) {
+                document.getElementById(idname).innerHTML = "🌟";
+
+              }
+              else if (data[i][1] >= 21 && data[i][1] < 42) {
+                document.getElementById(idname).innerHTML = "💫";
+              }
+
+              else if (data[i][1] >= 42 && data[i][1] < 126) {
+                document.getElementById(idname).innerHTML = "🌠";
+              }
+              else if (data[i][1] >= 126 && data[i][1] < 182) {
+                document.getElementById(idname).innerHTML = "🌌";
+              }
+
+
+            }
             }
             
          
@@ -245,9 +267,7 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item group-name">
                               <div>
-                                <p><?php if ($flames >= 5) {
-                                  echo "⭐";
-                                } ?></p>
+                                <span id="stars_<?php echo $group["gID"]; ?>"></span>
                                 <span><?php
                                 echo $group["group_name"]; 
                                 ?></span>
