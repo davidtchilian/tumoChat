@@ -244,25 +244,24 @@
                     <div class="card mt-5">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item group-name">
-                              <div>
-                                <p><?php if ($flames >= 5) {
-                                  echo "⭐";
-                                } ?></p>
-                                <span><?php
+                              <?php if ($flames >= 5) { ?>
+                                  <div class = "classHeaderFlame"> <?php echo "⭐"; ?> </div>
+                               <?php } ?>
+                              <div class = "groupHeader">
+                                <span class="groupChatName"><?php
                                 echo $group["group_name"]; 
                                 ?></span>
-                                <div>
-                                  <?php echo $groupCount[$index]; ?>
+                                <div class = "userCount">
+                                  <span><?php echo $groupCount[$index]; ?></span>
+                                  
                                   <img src="../assets/images/usercount.png" style="width: 28px; float:right;">
                               </div>
-                                
-                                <span><?php echo "";?></span>
                               </div>
                               
                             </li>
                             <li class="list-group-item">
                                 <?php
-                            $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['group_id']);
+                            $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['gID']);
                             $message = json_decode($messages);
 
                             echo $message[0];
