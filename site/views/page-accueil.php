@@ -140,21 +140,21 @@
             for (let i = 0; i < data.length; i++) {
               var idname = "stars_" + data[i][0];
               if (data[i][1] >= 3 && data[i][1] < 7) {
-                document.getElementById(idname).innerHTML = "⭐";
+                document.getElementById(idname).innerHTML = data[i][1]+"⭐";
               }
               else if (data[i][1] >= 7 && data[i][1] < 21) {
-                document.getElementById(idname).innerHTML = "🌟";
+                document.getElementById(idname).innerHTML = data[i][1]+"🌟";
 
               }
               else if (data[i][1] >= 21 && data[i][1] < 42) {
-                document.getElementById(idname).innerHTML = "💫";
+                document.getElementById(idname).innerHTML = data[i][1]+"💫";
               }
 
               else if (data[i][1] >= 42 && data[i][1] < 126) {
-                document.getElementById(idname).innerHTML = "🌠";
+                document.getElementById(idname).innerHTML = data[i][1]+"🌠";
               }
               else if (data[i][1] >= 126 && data[i][1] < 182) {
-                document.getElementById(idname).innerHTML = "🌌";
+                document.getElementById(idname).innerHTML = data[i][1]+"🌌";
               }
 
 
