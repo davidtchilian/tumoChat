@@ -268,7 +268,9 @@
                             <li class="list-group-item group-name">
                               <div>
                                 <span id="stars_<?php echo $group["gID"]; ?>"></span>
-                                <span><?php
+
+                              <div class = "groupHeader">
+                                <span class="groupChatName"><?php
                                 echo $group["group_name"]; 
                                 ?></span>
                                 <div class = "userCount">
@@ -287,11 +289,23 @@
                               <span style = "color:#787878">No Messages yet!</span>
                             <?php }else{
                               if($message[0]==""){
-                              echo "<span>" . $message[1] . "<span>";
+                                if(strlen($message[1])>40){
+                                  echo '<p style = "margin-bottom:0">' . substr($message[1], 0, 40) . "..." . "</p>";
+                                }else{
+                                  echo '<p style = "margin-bottom:0">' . $message[1]. "</p>";
+                                }
                             }else{
-                              echo '<p style = "margin-bottom:1px; width: 100%">' . $message[0] . "</p>";
-                              echo '<p style = "margin-bottom:0">' . $message[1] . "</p>";
-
+                              if(strlen($message[0])>40){
+                                echo '<p style = "margin-bottom:0">' . substr($message[0], 0, 40) . "..." . "</p>";
+                              }else{
+                                echo '<p style = "margin-bottom:0">' . $message[0] . "</p>";
+                              }
+                              if(strlen($message[1])>40){
+                                echo '<p style = "margin-bottom:0">' . substr($message[1], 0, 40) . "..." . "</p>";
+                              }else{
+                                echo '<p style = "margin-bottom:0">' . $message[1] . "</p>";
+                              }
+                              
                             }
                             }
                             
