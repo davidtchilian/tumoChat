@@ -12,7 +12,6 @@
 
   $sqlGroup = "SELECT DISTINCT isInGroup_group_id, COUNT(*) FROM isInGroup GROUP BY isInGroup_group_id";
   $resultG = mysqli_query($conn, $sqlGroup);
-  $rowG = mysqli_fetch_assoc($resultG);
   
 //   $gIDs = array();
 //   $gUSERs = array();
@@ -26,6 +25,8 @@
   while($groupsRow = mysqli_fetch_assoc($result)) {
     $groupsArray[] = $groupsRow;
   }
+
+  var_dump($resultG);
 
   $sql2 ="SELECT COUNT(notification_id) as nb FROM NOTIFICATIONS WHERE notification_receiver_id = $user_id";
   $result2 = mysqli_query($conn, $sql2);
@@ -268,7 +269,6 @@
                             <li class="list-group-item group-name">
                               <div>
                                 <span id="stars_<?php echo $group["gID"]; ?>"></span>
-                                <span>
                               <div class = "groupHeader">
                                 <span class="groupChatName"><?php
                                 echo $group["group_name"]; 
