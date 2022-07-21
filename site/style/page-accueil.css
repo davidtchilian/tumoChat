@@ -162,12 +162,13 @@ h1, h3{
 } */
 
 .list-group-item-margin{
-  margin: 0.8vw 0;
+  padding: 0.8vw 0;
 }
 
 .list-bottom{
   color: #787878;
-  height:5rem;
+  height: 6rem !important;
+  padding: 0 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -251,4 +252,24 @@ h1, h3{
   height: 100%;
   background: #00f; 
   z-index: 1;    
+}
+
+.groupHeader{
+  margin: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.userCount{
+  position: absolute;
+  right:1rem;
+}
+
+.groupChatName{
+  float: center;
+}
+
+.classHeaderFlame{
+  position: absolute;
+  left:1rem;
 }

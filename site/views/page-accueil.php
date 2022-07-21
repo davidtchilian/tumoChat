@@ -266,28 +266,43 @@
                     <div class="card mt-5">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item group-name">
+<<<<<<< HEAD
                               <div>
                                 <span id="stars_<?php echo $group["gID"]; ?>"></span>
                                 <span><?php
+=======
+                              <?php if ($flames >= 5) { ?>
+                                  <div class = "classHeaderFlame"> <?php echo "⭐"; ?> </div>
+                               <?php } ?>
+                              <div class = "groupHeader">
+                                <span class="groupChatName"><?php
+>>>>>>> 46c9478b9b1560727a9a4caf0f057a6a1a99fe11
                                 echo $group["group_name"]; 
                                 ?></span>
-                                <div>
-                                  <?php echo $groupCount[$index]; ?>
+                                <div class = "userCount">
+                                  <span><?php echo $groupCount[$index]; ?></span>
+                                  
                                   <img src="../assets/images/usercount.png" style="width: 28px; float:right;">
                               </div>
-                                
-                                <span><?php echo "";?></span>
                               </div>
                               
                             </li>
-                            <li class="list-group-item">
+                            <li class="list-group-item" style = "min-height: 65px !important; display: flex; flex-direction: column; justify-content: center; align-items: center">
                                 <?php
-                            $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['group_id']);
+                            $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['gID']);
                             $message = json_decode($messages);
+                            if($message[0]=="" && $message[1]==""){ ?>
+                              <span style = "color:#787878">No Messages yet!</span>
+                            <?php }else{
+                              if($message[0]==""){
+                              echo "<span>" . $message[1] . "<span>";
+                            }else{
+                              echo '<p style = "margin-bottom:1px; width: 100%">' . $message[0] . "</p>";
+                              echo '<p style = "margin-bottom:0">' . $message[1] . "</p>";
 
-                            echo $message[0];
-                            echo "<br>";
-                            echo $message[1];
+                            }
+                            }
+                            
                           ?>
                             </li>
                         </ul>
