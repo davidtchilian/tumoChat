@@ -10,6 +10,14 @@
     $temp = $messages[0];
     $messages[0] = $messages[1];
     $messages[1] = $temp;
+
+    // Sticker sort
+    for ($i = 0; $i <= 1; $i++) {
+        if (explode("_", $messages[$i])[0] == "STICKER") {
+            $messages[$i] = "Sent sticker";
+        }
+    }
+
     echo json_encode($messages);
     mysqli_close($conn);
 ?>
