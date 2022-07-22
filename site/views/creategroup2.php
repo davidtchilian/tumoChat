@@ -68,17 +68,17 @@ $name = $_POST['grpname'];
                             }
                     }
                         foreach($users as $i){
-                            echo "<option value='$i[0]'>". explode("@",$i[1])[0] ."</option >";
+                            echo "<option value='$i[0]'>". explode("@",$i[1])[0] ."</option>";
                         }
                     ?>
-    
+                </select>
             </div>
             <a href="../controllers/creategroup.php" class="btn btn-primary mt-3 "
                 style="background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119);">Return</a>
                 <input type="hidden" value="<?php echo $bio;  ?>" name="groupbio">
                 <input type="hidden" value="<?php echo $name;  ?>" name="groupname">
                 
-            <button type="submit" class="btn btn-primary mt-3"
+                <button type="submit" class="btn btn-primary mt-3"
                 style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Create</button>
         </form>
     </div>

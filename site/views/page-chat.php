@@ -225,7 +225,9 @@ function startsWith($string, $startString)
                 <div id="addModal" class="modal_user">
                     <div class="modal-content">
                         <div class="modal-add-users">
+                        <form action="../controllers/adduser.php" method="POST">
                         <label for="exampleFormControlTextarea1" class="form-label; float: left;">Name of Persons</label>
+                        <div class="center clear">
                             <div id="promoNode"></div>
                             
                             <select name='select[]' class="chosen" multiple="true" style="width:400px;">
@@ -247,7 +249,11 @@ function startsWith($string, $startString)
                                 }
                                 ?>
                             </select>
+                            <button type="submit" class="btn btn-primary mt-3"
+                style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Create</button>
                         </div>
+                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -397,7 +403,7 @@ function startsWith($string, $startString)
             modal.style.display = "block";
         }
     </script>
-
+    <script src="../scripts/chosen.jquery.js"></script>
     <script type="text/javascript" src="../scripts/chat.js" refer></script>
 
 </body>
