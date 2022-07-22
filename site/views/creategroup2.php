@@ -56,7 +56,6 @@ $name = $_POST['grpname'];
                 <select name='select[]'class="chosen" multiple="true" style="width:400px;">
                     <?php
                     $users = array();
-                    // **CHJNJEEEEEEL** FOR ADD USER IN GC SELECT USERS.user_email, USERS.user_id FROM USERS JOIN friends ON ((friends.user_id_1 = 1 AND USERS.user_id = friends.user_id_2) OR (friends.user_id_2 = 1 AND USERS.user_id = friends.user_id_1)) WHERE USERS.user_id!=1
                     $sql = "SELECT user_email, user_id FROM USERS WHERE user_id != $me";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
