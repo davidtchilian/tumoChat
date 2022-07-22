@@ -1,6 +1,6 @@
 <?php
-
     session_start();
+
     $userId = $_SESSION['user_id'];
 
     if (!isset($userId)) {
@@ -8,17 +8,19 @@
         exit();
     }
 
-    $guestId = $_GET['id'];
     $isGuest = true;
 
-    if (!isset($guestId)) {
+    if (!isset($_GET['id'])) {
         $isGuest = false;
         $guestId = $userId;
+    }else {
+        $guestId = $_GET['id'];
     }
 
     $isGuest = $guestId != $userId;
 
-    require('../models/db.php');
+    require_once('../models/db.php');
+    require_once('../models/functions.php');
     include("../controllers/updatestatisticsinfo.php");
 
     $sql = "SELECT user_email, user_icon FROM USERS WHERE user_id=$guestId";
@@ -36,8 +38,8 @@
     }
 
     if (!$isGuest) {
-        $friends = file_get_contents($domain_name."/controllers/getfriends.php?user_id=$userId");
-        $friends = json_decode($friends);
+        $url = $domain_name."/models/functions.php?user_id=$userId";
+        $friends = getfriends($userId, $conn);
     }
 
 ?>
@@ -80,7 +82,7 @@
             if (!$isGuest) {
         ?>
         <div class="navbar-container">
-            <ul class=""> <!--navbar-nav me-auto mb-2 mb-lg -->
+            <ul class="">
                 <div class="navigation modes">
                     <ul>
                         <?php
@@ -128,9 +130,6 @@
                     </ul>
                 </div>
             </ul>    
-        </div>
-        <div class="navbar-container">
-            <a href="addfriend.php" class="add-friend-button">Add Friend</a>
         </div>    
         <?php
             }
@@ -138,80 +137,134 @@
 
 
         
-    </div>
+    </div><p class="card-text">
+<?php 
+    $info = getUserInfo($userId, $conn);
+    echo $info['user_bio'];
+?>
+</p>
+<?php  
+if ($isGuest) { 
+?>
+    <div class="profile-interactions">
+        <?php
+        // $friends = file_get_contents($domain_name."/controllers/getfriends.php?user_id=$guestId");
+        // $friends = json_decode($friends);
+        if (in_array(strval($userId), $friends)) { ?>
+        <div class="user-profile-friend-status">
+            <p>Friends</p>
+            <img src="../assets/images/friend.png" alt="Friends">
+        </div>
+        <a href="../controllers/removefriend.php?user_id=<?php echo $userId; ?>&delete_id=<?php echo $guestId; ?>"
+            class="user-profile-status friends-deactive">Remove Friend</a>
+        <?php
+        }
+        else { 
+            $sql = "SELECT notification_id FROM notifications WHERE notification_sender_id=$userId AND notification_receiver_id=$guestId AND notification_type_id=2";
+            $result = mysqli_query($conn, $sql);
+            $isRequested = $result->num_rows > 0;
+            if ($isRequested) { ?>
+                <a href="../controllers/removefriendrequest.php?requested_user_id=<?php echo $guestId ?>" class="user-profile-status friends-cancel">Cancel Request</a>
+            <?php }
+            else { ?>
+                <a href="../controllers/sendfriendrequest.php?receiver_id=<?php echo $guestId ?>" class="user-profile-status friends-active">Add Friend</a>
+    <?php
+        } }
+
+        $users = array();
+        $sql = "SELECT user_email, user_id FROM USERS WHERE user_id != $me AND user_email LIKE '%$txt%'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $temp = array();
+                array_push($temp, $row["user_id"]);
+                array_push($temp, $row["user_email"]);
+                $users[] = $temp;
+                    }
+            }
+                foreach($users as $i){
+                    echo "<option value='$i[0]'>". explode("@",$i[1])[0] ."</option >";
+                }
+            ?>
+
+    <?php  if (!$isGuest) { ?>
     <form class="d-flex searchform" style="margin: auto 0 !important" role="search">
+        <select name="userslist">
+            <option value=""></option>
+        </select>
+                    
+        <button class="btn search">
+            <img src="../assets/images/loupe.png" alt="Rechercher"
+            style="width : 20px; height: 30px; margin-top : 3px" />
+        </button>
+    </form>
+                <?php } ?>
 
-                    <input style="width: 500px !important;" class="form-control me-2 srch-input" type="search" placeholder="Search user"
-                        aria-label="Search" />
-                    <button class="btn search">
-                        <img src="../assets/images/loupe.png" alt="Rechercher"
-                            style="width : 20px; height: 30px; margin-top : 3px" />
-                    </button>
-                </form>
-    <div class="container">
-        <div class="row">
-            <div style="margin-top: 20px; ">
-                <div class="card centered-card" style="  width: 400px; height: 300px;  ">
-                    <div class="card-body">
-                        <?php  echo "<img src='../assets/icons/$usricon.png' class='card-img-top' alt='profile_' style='height: 100px; width: 100px; margin-bottom:10px'>" ?>
-                        <h3><span class="badge bg-secondary"><?php echo explode("@",$usrmail)[0];?></span></h5>
-                            <h5 class="card-subtitle mb-2 text-muted">
-                                <?php echo $usrmail;?>
-                                </h5>
-                                <div class="achievments">
-                                <?php
-                                    foreach (getUserbadges($conn, $guestId) as $badge) {
-                                        echo "<img title='".$badge[1]."' src='../assets/badge/".$badge[0].".png' style='margin: 0 5px 0 5px;'>";
-                                    }
-                                ?>
-
-                                </div>
-                                <p class="card-text">
-                                <?php 
-                                    $bio = file_get_contents($domain_name."/controllers/getbio.php?id=".$guestId);
-                                    echo $bio;
-                                ?>
-                                </p>
-                                <?php  
-                                if ($isGuest) { 
-                                ?>
-                                    <div class="profile-interactions">
-                                        <?php
-                                        $friends = file_get_contents($domain_name."/controllers/getfriends.php?user_id=$guestId");
-                                        $friends = json_decode($friends);
-                                        if (in_array(strval($userId), $friends)) { ?>
-                                        <div class="user-profile-friend-status">
-                                            <p>Friends</p>
-                                            <img src="../assets/images/friend.png" alt="Friends">
-                                        </div>
-                                        <a href="../controllers/removefriend.php?user_id=<?php echo $userId; ?>&delete_id=<?php echo $guestId; ?>"
-                                            class="user-profile-status friends-deactive">Remove Friend</a>
-                                        <?php
-                                        }
-                                        else { 
-                                            $sql = "SELECT notification_id FROM notifications WHERE notification_sender_id=$userId AND notification_receiver_id=$guestId AND notification_type_id=2";
-                                            $result = mysqli_query($conn, $sql);
-                                            $isRequested = $result->num_rows > 0;
-                                            if ($isRequested) { ?>
-                                                <a href="../controllers/removefriendrequest.php?requested_user_id=<?php echo $guestId ?>" class="user-profile-status friends-cancel">Cancel Request</a>
-                                            <?php }
-                                            else { ?>
-                                                <a href="../controllers/sendfriendrequest.php?receiver_id=<?php echo $guestId ?>" class="user-profile-status friends-active">Add Friend</a>
+                <div class="container">
+                    <div class="row">
+                        <div style="margin-top: 20px; ">
+                            <div class="card centered-card" style=" width: 400px; ">
+                                <div class="card-body">
+                                    <?php  echo "<img src='../assets/icons/$usricon.png' class='card-img-top' alt='profile_' style='height: 100px; width: 100px; margin-bottom:10px'>" ?>
+                                    <h3><span class="badge bg-secondary"><?php echo explode("@",$usrmail)[0];?></span></h5>
+                                        <h5 class="card-subtitle mb-2 text-muted">
+                                            <?php echo $usrmail;?>
+                                            </h5>
+                                            <div class="achievments">
                                             <?php
+                                                foreach (getUserbadges($conn, $guestId) as $badge) {
+                                                    echo "<img title='".$badge[1]."' src='../assets/badge/".$badge[0].".png' style='margin: 0 5px 0 5px;'>";
                                                 }
+                                            ?>
+
+                                            </div>
+                                            <p class="card-text">
+                                            <?php 
+                                                $bio = file_get_contents($domain_name."/controllers/getbio.php?id=".$guestId);
+                                                echo $bio;
+                                            ?>
+                                            </p>
+                                            <?php  
+                                            if ($isGuest) { 
+                                            ?>
+                                                <div class="profile-interactions">
+                                                    <?php
+                                                    $friends = file_get_contents($domain_name."/controllers/getfriends.php?user_id=$guestId");
+                                                    $friends = json_decode($friends);
+                                                    if (in_array(strval($userId), $friends)) { ?>
+                                                    <div class="user-profile-friend-status">
+                                                        <p>Friends</p>
+                                                        <img src="../assets/images/friend.png" alt="Friends">
+                                                    </div>
+                                                    <a href="../controllers/removefriend.php?user_id=<?php echo $userId; ?>&delete_id=<?php echo $guestId; ?>"
+                                                        class="user-profile-status friends-deactive">Remove Friend</a>
+                                                    <?php
+                                                    }
+                                                    else { 
+                                                        $sql = "SELECT notification_id FROM notifications WHERE notification_sender_id=$userId AND notification_receiver_id=$guestId AND notification_type_id=2";
+                                                        $result = mysqli_query($conn, $sql);
+                                                        $isRequested = $result->num_rows > 0;
+                                                        if ($isRequested) { ?>
+                                                            <a href="../controllers/removefriendrequest.php?requested_user_id=<?php echo $guestId ?>" class="user-profile-status friends-cancel">Cancel Request</a>
+                                                        <?php }
+                                                        else { ?>
+                                                            <a href="../controllers/sendfriendrequest.php?receiver_id=<?php echo $guestId ?>" class="user-profile-status friends-active">Add Friend</a>
+                                                        <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                </div>
+                                                <?php
+                                            } else { 
+                                            ?>
+                                                <a href="editProfile.php" class="card-link" style="font-size: 20px; color: gray;">Edit Profile</a><br>
+                                                <a href="../controllers/delete_acc.php" class="delete_acc"> 
+                                                <button type="button" class="btn btn-outline-secondary">Delete Account</button></a>
+                                            <?php 
                                             }
                                             ?>
-                                    </div>
-                                    <?php
-                                } else { 
-                                ?>
-                                    <a href="editProfile.php" class="card-link" style="font-size: 20px; color: gray;">Edit Profile</a><br>
-                                    <button type="button" class="btn btn-outline-secondary"><a href="../controllers/delete_acc.php" class="delete_acc"> Delete Account</a></button>
-                                <?php 
-                                }
-                                ?>
+                                </div>
                     </div>
-                </div>
 
                
 
@@ -228,7 +281,7 @@
         <?php
         if (empty($friends)) { ?>
         <h3>You dont have any friends.</h3>
-        <?php }
+        <?php } else{
         foreach ($friends as $friend) {
             $friendId = intval($friend);
             $sql = "SELECT user_email, user_icon FROM USERS WHERE user_id = $friendId";
@@ -237,12 +290,11 @@
                 if($row = mysqli_fetch_assoc($result)) {
                     $friendMail = $row['user_email'];
                     $friendIcon = $row['user_icon'];
-                }
+            
             }
-            else {
-                continue;
             }
-        ?>
+}} ?>
+    
         <div class="row">
             <div style="margin-top: 20px; ">
                 <div class="card centered-card" style="  width: 400px; height: 300px;  ">
@@ -261,8 +313,8 @@
                                 </div>
                                 <p class="card-text">
                                     <?php 
-                                    $bio = file_get_contents($domain_name."/controllers/getbio.php?id=".$friendId);
-                                    echo $bio;
+                                    // $bio = file_get_contents($domain_name."/controllers/getbio.php?id=".$friendId);
+                                    // echo $bio;
                                 ?>
                                 </p>
                                 <a href="profile.php?id=<?php echo $friendId; ?>" class="card-link" style="font-size: 20px; color: gray;">View Profile</a>
@@ -290,5 +342,8 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
+<?php 
+mysqli_close($conn);
+?>
 </body>
 </html>

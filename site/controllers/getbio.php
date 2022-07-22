@@ -11,4 +11,5 @@ $result = mysqli_query($conn, $sql);
 
 echo mysqli_fetch_assoc($result)['user_bio'];
 
+
 ?>
