@@ -618,16 +618,16 @@ body {
   height: 20vh;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: left;
   align-items: center;
 }
 
 .navbar-container{
-  width: 100%;
+  width: 37.5%;
   height: 100% ;
   padding: 30px ;
   display: flex ;
-  justify-content: center ;
+  justify-content: left ;
   align-items: center ;
 }
 
