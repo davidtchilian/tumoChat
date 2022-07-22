@@ -56,7 +56,6 @@ $name = $_POST['grpname'];
                 <select name='select[]'class="chosen" multiple="true" style="width:400px;">
                     <?php
                     $users = array();
-                    // **CHJNJEEEEEEL** FOR ADD USER IN GC SELECT USERS.user_email, USERS.user_id FROM USERS JOIN friends ON ((friends.user_id_1 = 1 AND USERS.user_id = friends.user_id_2) OR (friends.user_id_2 = 1 AND USERS.user_id = friends.user_id_1)) WHERE USERS.user_id!=1
                     $sql = "SELECT user_email, user_id FROM USERS WHERE user_id != $me";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
@@ -68,17 +67,17 @@ $name = $_POST['grpname'];
                             }
                     }
                         foreach($users as $i){
-                            echo "<option value='$i[0]'>". explode("@",$i[1])[0] ."</option >";
+                            echo "<option value='$i[0]'>". explode("@",$i[1])[0] ."</option>";
                         }
                     ?>
-    
+                </select>
             </div>
             <a href="../controllers/creategroup.php" class="btn btn-primary mt-3 "
                 style="background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119);">Return</a>
                 <input type="hidden" value="<?php echo $bio;  ?>" name="groupbio">
                 <input type="hidden" value="<?php echo $name;  ?>" name="groupname">
                 
-            <button type="submit" class="btn btn-primary mt-3"
+                <button type="submit" class="btn btn-primary mt-3"
                 style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Create</button>
         </form>
     </div>

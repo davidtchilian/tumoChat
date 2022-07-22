@@ -1,4 +1,5 @@
 var stickerModal = document.getElementById("infoModal");
+
 var sticketrButton = document.getElementById("infoButton");
 var stickerClose = document.getElementById("closeButton");
 var groupName = document.getElementById("groupInfo");
@@ -19,13 +20,14 @@ sticketrButton.onclick = function () {
   stickerModal.style.display = "block";
 }
 
+
+
 stickerClose.onclick = onClose;
 
 window.onclick = function (event) {
-  console.log("ad")
-  // if (event.target == stickerModal) {
-  //   onClose();
-  // }
+  stickerModal.style.display = "none";
+  usersInfo.innerHTML = "";
+  extraInteractions.innerHTML = "";
 }
 
 function onClose() {
@@ -97,7 +99,8 @@ function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
     }
 
     if (isAdmin) {
-      let addUserButton = createButton("add_user", "add_user", "Add User", null);
+      let addUserButton = createButton("add_user", "add_user", "Add User", "#");
+    
       extraInteractions.appendChild(addUserButton);
 
       let deleteGroup = createButton("delete_group", "delete_group", "Delete Group", `../controllers/deletegroup.php?id=${groupId}`);
