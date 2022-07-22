@@ -1,6 +1,6 @@
 <?php
-
     session_start();
+
     $userId = $_SESSION['user_id'];
 
     if (!isset($userId)) {
@@ -8,17 +8,19 @@
         exit();
     }
 
-    $guestId = $_GET['id'];
     $isGuest = true;
 
-    if (!isset($guestId)) {
+    if (!isset($_GET['id'])) {
         $isGuest = false;
         $guestId = $userId;
+    }else {
+        $guestId = $_GET['id'];
     }
 
     $isGuest = $guestId != $userId;
 
-    require('../models/db.php');
+    require_once('../models/db.php');
+    require_once('../models/functions.php');
     include("../controllers/updatestatisticsinfo.php");
 
     $sql = "SELECT user_email, user_icon FROM USERS WHERE user_id=$guestId";
@@ -36,8 +38,8 @@
     }
 
     if (!$isGuest) {
-        $friends = file_get_contents($domain_name."/controllers/getfriends.php?user_id=$userId");
-        $friends = json_decode($friends);
+        $url = $domain_name."/models/functions.php?user_id=$userId";
+        $friends = getfriends($userId, $conn);
     }
 
 ?>
@@ -168,8 +170,8 @@
                                 </div>
                                 <p class="card-text">
                                 <?php 
-                                    $bio = file_get_contents($domain_name."/controllers/getbio.php?id=".$guestId);
-                                    echo $bio;
+                                    $info = getUserInfo($userId, $conn);
+                                    echo $info['user_bio'];
                                 ?>
                                 </p>
                                 <?php  
@@ -177,8 +179,8 @@
                                 ?>
                                     <div class="profile-interactions">
                                         <?php
-                                        $friends = file_get_contents($domain_name."/controllers/getfriends.php?user_id=$guestId");
-                                        $friends = json_decode($friends);
+                                        // $friends = file_get_contents($domain_name."/controllers/getfriends.php?user_id=$guestId");
+                                        // $friends = json_decode($friends);
                                         if (in_array(strval($userId), $friends)) { ?>
                                         <div class="user-profile-friend-status">
                                             <p>Friends</p>
@@ -228,7 +230,7 @@
         <?php
         if (empty($friends)) { ?>
         <h3>You dont have any friends.</h3>
-        <?php }
+        <?php } else{
         foreach ($friends as $friend) {
             $friendId = intval($friend);
             $sql = "SELECT user_email, user_icon FROM USERS WHERE user_id = $friendId";
@@ -237,12 +239,13 @@
                 if($row = mysqli_fetch_assoc($result)) {
                     $friendMail = $row['user_email'];
                     $friendIcon = $row['user_icon'];
-                }
+            
             }
-            else {
-                continue;
             }
-        ?>
+            else {?>
+              
+              <?php } } ?>
+    
         <div class="row">
             <div style="margin-top: 20px; ">
                 <div class="card centered-card" style="  width: 400px; height: 300px;  ">
@@ -261,8 +264,8 @@
                                 </div>
                                 <p class="card-text">
                                     <?php 
-                                    $bio = file_get_contents($domain_name."/controllers/getbio.php?id=".$friendId);
-                                    echo $bio;
+                                    // $bio = file_get_contents($domain_name."/controllers/getbio.php?id=".$friendId);
+                                    // echo $bio;
                                 ?>
                                 </p>
                                 <a href="profile.php?id=<?php echo $friendId; ?>" class="card-link" style="font-size: 20px; color: gray;">View Profile</a>
@@ -292,3 +295,6 @@
 
 </body>
 </html>
+<?php 
+mysqli_close($conn);
+?>
