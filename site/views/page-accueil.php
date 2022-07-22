@@ -51,8 +51,8 @@
     <title>TUYU | Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
-    <link rel="stylesheet" href="../style/page-accueil.css" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="../style/page-accueil.css" />
     <script src="../scripts/jquery.js"></script>
     <script type="text/javascript">
 
@@ -253,16 +253,23 @@
                 }
                 $index = 0;
               foreach ($groupsArray as $group){
+                if ($groupCount[$index]<3) {
+                  $textcolor = "dm";
+                  $cardcolor = "text-white bg-dark";
+                }else {
+                  $textcolor = "dm1";
+                  $cardcolor = "";
+                }
                 ?>
             <div class="col-lg-4 col-sm-12 group-chats">
                 <a href="page-chat.php?id=<?php echo $group["gID"]; ?>" style="text-decoration :none">
-                    <div class="card mt-5">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item group-name">
+                    <div class=" card mb-3 <?= $cardcolor ?>">
+                        <ul class=" list-group-flush ">  <!--list-group-->
+                            <li class=  "list-group-item group-name">
                               <div>
                                 <span class ="streaks" id="stars_<?php echo $group["gID"]; ?>"></span>
 
-                              <div class = "groupHeader">
+                              <div class = " <?= $textcolor ?> groupHeader">
                                 <span class="groupChatName"><?php
                                 if(strlen($group["group_name"])>20){
                                   echo '<p style = "margin-bottom:0">' . substr($group["group_name"], 0, 20) . "..." . "</p>";
@@ -278,12 +285,12 @@
                               </div>
                               
                             </li>
-                            <li class="list-group-item" style = "min-height: 65px !important; display: flex; flex-direction: column; justify-content: center; align-items: center">
+                            <li class="<?= $textcolor ?> list-group-item" style = "min-height: 65px !important; display: flex; flex-direction: column; justify-content: center; align-items: center">
                                 <?php
                             $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['gID']);
                             $message = json_decode($messages);
                             if($message[0]=="" && $message[1]==""){ ?>
-                              <span style = "color:#787878">No Messages yet!</span>
+                              <span class = "<?= $textcolor ?> ">No Messages yet!</span>
                             <?php }else{
                               if($message[0]==""){
                                 if(strlen($message[1])>40){
