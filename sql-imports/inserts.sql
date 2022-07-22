@@ -2,7 +2,7 @@ INSERT INTO typeGroupChat (typeName) VALUES
 ('public'),
 ('private');
 
-INSERT INTO typeMessage (typeMessage_id) VALUES
+INSERT INTO typeMessage (typeName) VALUES
 ('text'),
 ('sticker'); 
 
