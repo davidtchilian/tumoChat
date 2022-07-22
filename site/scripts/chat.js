@@ -1,4 +1,5 @@
 var stickerModal = document.getElementById("infoModal");
+var addUserModal = document.getElementById("addModal");
 var sticketrButton = document.getElementById("infoButton");
 var stickerClose = document.getElementById("closeButton");
 var groupName = document.getElementById("groupInfo");
@@ -99,7 +100,11 @@ function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
     }
 
     if (isAdmin) {
-      let addUserButton = createButton("add_user", "add_user", "Add User", null);
+      let addUserButton = createButton("add_user", "add_user", "Add User", "#");
+      addUserButton.onclick = function() {
+        stickerModal.style.display = "none";
+        addUserModal.style.display = "block";
+      };
       extraInteractions.appendChild(addUserButton);
 
       let deleteGroup = createButton("delete_group", "delete_group", "Delete Group", `../controllers/deletegroup.php?id=${groupId}`);
