@@ -8,8 +8,6 @@ if (!isset($_SESSION['user_id'])) {
 require_once '../models/db.php';
 $dir    = '../assets/icons/';
 $files = array_values(array_diff(scandir($dir), array('..', '.')));
-
-
 $sql = "SELECT user_bio FROM USERS WHERE user_id=$userId";
 $result = mysqli_query($conn, $sql);
 
@@ -64,15 +62,21 @@ if ($result -> num_rows > 0) {
                 ?>
             </div>
             <div class="col-4" style="margin: 20px auto;">
-                <div class="card centered-card" style="  width: 400px; height: 300px;  ">
+                <div class="card centered-card" style="  width: 400px; ">
                     <a href="profile.php" class="btn-close"></a>
                     <form action="../controllers/updatebio.php" method="POST">
                         <textarea name="bio" class="form-control"
                             style="height: 170px"><?php echo $usrbio; ?></textarea>
-                        <!-- <input type="submit" value="Save" style="w">   -->
                         <input type="submit" class="btn btn-outline-success" value='Save'
-                            style="margin-top:25px;"></input>
+                            style="margin-top:25px;">   
                     </form>
+                    <?php 
+                        if($_GET['id'] == 1){
+                            ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo "Your bio must be less than 50 character."; ?>
+                        </div> 
+                        <?php }?>
                 </div>
             </div>
         </div>

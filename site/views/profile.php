@@ -151,7 +151,7 @@
     <div class="container">
         <div class="row">
             <div style="margin-top: 20px; ">
-                <div class="card centered-card" style="  width: 400px; height: 300px;  ">
+                <div class="card centered-card" style=" width: 400px; ">
                     <div class="card-body">
                         <?php  echo "<img src='../assets/icons/$usricon.png' class='card-img-top' alt='profile_' style='height: 100px; width: 100px; margin-bottom:10px'>" ?>
                         <h3><span class="badge bg-secondary"><?php echo explode("@",$usrmail)[0];?></span></h5>
@@ -206,7 +206,8 @@
                                 } else { 
                                 ?>
                                     <a href="editProfile.php" class="card-link" style="font-size: 20px; color: gray;">Edit Profile</a><br>
-                                    <button type="button" class="btn btn-outline-secondary"><a href="../controllers/delete_acc.php" class="delete_acc"> Delete Account</a></button>
+                                    <a href="../controllers/delete_acc.php" class="delete_acc"> 
+                                    <button type="button" class="btn btn-outline-secondary">Delete Account</button></a>
                                 <?php 
                                 }
                                 ?>
