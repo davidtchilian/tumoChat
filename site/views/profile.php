@@ -230,13 +230,12 @@
                     $friendMail = $friend['user_email'];
                     $friendIcon = $friend['user_icon'];
         ?>
-        <div class="friend-row">
-            <?php echo "<img src='../assets/icons/$friendIcon.png' class='card-img-top' alt='profile_' style='height: 100px; width: 100px;'>" ?>
+        <a class="friend-row" href="profile.php?id=<?php echo $friendId; ?>">
+            <img src='../assets/icons/<?php echo $friendIcon; ?>.png' class='card-img-top' alt='profile_' style='height: 75px; width: 75px;'>
             <h3>
                 <span class="badge bg-secondary"><?php echo explode("@",$friendMail)[0];?></span>
             </h3>
-            <a href="profile.php?id=<?php echo $friendId; ?>" class="view-profile-friend">View Profile</a>
-        </div>
+        </a>
         <?php
                 }
             }
