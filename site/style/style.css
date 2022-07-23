@@ -50,7 +50,7 @@ body ::after {
 }
 
 .navigation {
-  padding:  0.5vh 1vw;
+  padding: 4px;
   /* height: 70px; */
   background: #fff;
   justify-content: center;
@@ -91,6 +91,10 @@ body ::after {
   text-align: center;
   transition: 0.4s;
   color: var(--clr);
+}
+
+.navigation ul li.list {
+  cursor: pointer;
 }
 
 .navigation ul li.active a .icon {
@@ -622,12 +626,18 @@ body {
   align-items: center;
 }
 
+@media only screen and (max-width: 840px) {
+  .navigation-bar-themes {
+    flex-direction: column;
+  }
+}
+
 .navbar-container{
   width: 37.5%;
   height: 100% ;
   padding: 30px ;
   display: flex ;
-  justify-content: left ;
+  justify-content: center ;
   align-items: center ;
 }
 
@@ -641,4 +651,23 @@ body {
 
 ul {
   padding-inline-start: 0px;
+}
+
+.user-search-select {
+  margin-right: 10px;
+}
+
+.btn-search {
+  background-color: #6c4b93;
+  border: 1px solid #ced4da; 
+}
+
+.btn-search:hover {
+  background-color: #633894;
+  border: 1px solid #ced4da !important; 
+}
+
+.btn-search:focus {
+  background-color: #491d7a;
+  border: 1px solid #ced4da !important; 
 }

@@ -62,7 +62,7 @@
                 <li class="nav-item">
                   <a class="nav-link active" href="home.php" style="color :white">Home</a>
                 </li>
-            <a href="#" onClick="notification()" id="infoButton" class="notifications_btn nav-link" style="color : white">Notifications</a>
+            <a onClick="notification()" id="infoButton" class="notifications_btn nav-link" style="color : white">Notifications</a>
             <div id="infoModal" class="modal_user">
                     <div class="modal-content">
                       
