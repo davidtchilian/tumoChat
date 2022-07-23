@@ -136,7 +136,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div style="margin-top: 20px; ">
+            
                 <div class="card centered-card" style=" width: 400px; ">
                     <div class="card-body">
                         <?php 
@@ -206,7 +206,6 @@
                         ?>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
     <?php  
@@ -224,45 +223,23 @@
             } else{
                 foreach ($friends as $friend) {
                     $friendId = intval($friend);
-                    $sql = "SELECT user_email, user_icon FROM USERS WHERE user_id = $friendId";
-                    $result = mysqli_query($conn,$sql);
-                    if ($result -> num_rows > 0) {
-                        if($row = mysqli_fetch_assoc($result)) {
-                            $friendMail = $row['user_email'];
-                            $friendIcon = $row['user_icon'];
-                            ?>
-                                <div class="row">
-                                    <div style="margin-top: 20px; ">
-                                        <div class="card centered-card" style="  width: 400px; height: 300px;  ">
-                                            <div class="card-body">
-                                                <?php echo "<img src='../assets/icons/$friendIcon.png' class='card-img-top' alt='profile_' style='height: 100px; width: 100px; margin-bottom:10px'>" ?>
-                                                <h3><span class="badge bg-secondary"><?php echo explode("@",$friendMail)[0];?></span></h5>
-                                                    <h5 class="card-subtitle mb-2 text-muted">
-                                                        <?php echo $friendMail;?>
-                                                        </h5>
-                                                        <div class="achievments">
-                                                            <?php
-                                                                foreach (getUserBadges($conn, $friendId) as $badge) {
-                                                                    echo "<img title='".$badge[1]."' src='../assets/badge/".$badge[0].".png' style='margin: 0 5px 0 5px;'>";
-                                                                }
-                                                            ?>
-                                                        </div>
-                                                        <p class="card-text">
-                                                            <?php 
-                                                            // $bio = file_get_contents($domain_name."/controllers/getbio.php?id=".$friendId);
-                                                            // echo $bio;
-                                                        ?>
-                                                        </p>
-                                                        <a href="profile.php?id=<?php echo $friendId; ?>" class="card-link" style="font-size: 20px; color: gray;">View Profile</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php
-                        }
+                    $friend = getUserInfo($conn, $friendId);
+                    if ($friend == null) {
+                        continue;
                     }
+                    $friendMail = $friend['user_email'];
+                    $friendIcon = $friend['user_icon'];
+        ?>
+        <div class="friend-row">
+            <?php echo "<img src='../assets/icons/$friendIcon.png' class='card-img-top' alt='profile_' style='height: 100px; width: 100px;'>" ?>
+            <h3>
+                <span class="badge bg-secondary"><?php echo explode("@",$friendMail)[0];?></span>
+            </h3>
+            <a href="profile.php?id=<?php echo $friendId; ?>" class="view-profile-friend">View Profile</a>
+        </div>
+        <?php
                 }
-            } 
+            }
         }
         ?>
     </div>
