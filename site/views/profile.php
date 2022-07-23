@@ -75,7 +75,7 @@
 <body>
     <div class="navigation-bar-themes">
         <div class="navbar-container">
-            <a href="<?php echo $isGuest ? "profile.php" : "page-accueil.php" ?>"><img src="../assets/images/flèche_retour3.png" alt="Retour" style="width : 35px; height: 35px;" /></a>
+            <a href="<?php echo $isGuest ? "profile.php" : "home.php" ?>"><img src="../assets/images/flèche_retour3.png" alt="Retour" style="width : 35px; height: 35px;" /></a>
         </div>
         
         <?php

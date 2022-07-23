@@ -9,7 +9,7 @@
     $sql = "UPDATE USERS SET user_icon = $usricon WHERE user_id = $usrid";
 
     $result = $conn->query($sql); 
-     $conn->close();
+    mysqli_close($conn);
     header("Location: ../views/profile.php");
 
     

@@ -21,7 +21,7 @@ mysqli_query($conn, $sql);
 $sql = "DELETE FROM USERS WHERE user_id = $userId";
 mysqli_query($conn, $sql);
 
-$conn->close();
+mysqli_close($conn);
 header("Location:../views/logIn.php?id=6");
 exit();
 

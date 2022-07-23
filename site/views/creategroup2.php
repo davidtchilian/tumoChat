@@ -42,12 +42,13 @@ $name = $_POST['grpname'];
         <h5 class="card-title">Creating Groups</h5>
         <form action= "../controllers/creationgroup.php" method="post">
                 <?php
-                if ($_GET['err'] == '1') {
-                    echo "<div class='alert alert-danger' role='alert'>
-                    You must select at least one member!
-                    </div>";
+                if(isset($_GET['err'])){
+                    if ($_GET['err'] == '1') {
+                        echo "<div class='alert alert-danger' role='alert'>
+                        You must select at least one member!
+                        </div>";
+                    }
                 }
-                
                 ?>
             <label for="exampleFormControlTextarea1" class="form-label; float: left;">Name of Persons</label>
             <div class="center clear">

@@ -59,10 +59,10 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 
+                <li class="nav-item">
+                  <a class="nav-link active" href="home.php" style="color :white">Home</a>
+                </li>
             <a href="#" onClick="notification()" id="infoButton" class="notifications_btn nav-link" style="color : white">Notifications</a>
-            <li class="nav-item">
-              <a class="nav-link active" href="page-accueil.php" style="color :white">Home</a>
-            </li>
             <div id="infoModal" class="modal_user">
                     <div class="modal-content">
                       

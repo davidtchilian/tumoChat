@@ -289,10 +289,10 @@
                                 <?php
                             $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['gID']);
                             $message = json_decode($messages);
-                            if($message[0]=="" && $message[1]==""){ ?>
+                            if(!isset($message[0]) && !isset($message[1])){ ?>
                               <span class = "<?= $textcolor ?> ">No Messages yet!</span>
                             <?php }else{
-                              if($message[0]==""){
+                              if(!isset($message[0])){
                                 if(strlen($message[1])>40){
                                   echo '<p style = "margin-bottom:0">' . substr($message[1], 0, 40) . "..." . "</p>";
                                 }else{
@@ -327,6 +327,7 @@
     </div>
     <script src="../scripts/search.js"></script>
     <script src="../scripts/notifications.js"></script>
+
     
   </body>
 </html>

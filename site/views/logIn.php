@@ -54,7 +54,7 @@
                         Log In
                     </a> -->
 
-                    <?php if($_GET['id'] != NULL) {
+                    <?php if(isset($_GET['id'])) {
                         if($_GET['id'] == 0){
                             ?>
                         <div class="alert alert-success" role="alert">
@@ -91,15 +91,13 @@
                                 <?php echo "You changed Your password successfully!"; ?>
                             </div> 
                                 <?php }
-                    } ?> 
-                        <?php 
-                        if($_GET['id'] == 6){
-                            ?>
-                            <div class="alert alert-success" role="alert">
-                                <?php echo "You deleted your account successfully!"; ?>
-                            </div> 
-                                <?php }
-                    ?>   
+                                if($_GET['id'] == 6){
+                                    ?>
+                                    <div class="alert alert-success" role="alert">
+                                        <?php echo "You deleted your account successfully!"; ?>
+                                    </div> 
+                                        <?php }
+                    } ?>
                     <div class="login-buttons">
                         <input type="submit" name="Login" id="exampleInputSubmit" class="submit-btn mb-3" href="page-accueil.html" style="margin:0 auto;">
                         <p>━ OR ━</p>

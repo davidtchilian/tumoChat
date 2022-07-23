@@ -16,5 +16,5 @@ $deleteNotifs= "DELETE FROM NOTIFICATIONS WHERE notification_group_id = $groupid
 mysqli_query($conn,$deleteNotifs);
 
 mysqli_close($conn);
-header("Location: ../views/page-accueil.php")
+header("Location: ../views/home.php")
 ?>

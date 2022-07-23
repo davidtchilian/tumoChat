@@ -5,4 +5,5 @@
     $userEmail = mysqli_query($conn, $sql);
     $user_email = mysqli_fetch_assoc($userEmail)["user_email"];
     echo $user_email;
+    mysqli_close($conn);
 ?>

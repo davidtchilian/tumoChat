@@ -28,7 +28,7 @@ else if($password == $confirmPassword){
 
     if ($password == "gmail") {
         $sql = "INSERT INTO USERS(user_email,user_password,user_bio,user_theme,user_icon) VALUES ('$email', 'gmail', '', 0, 0);";
-        $conn->query($sql);
+        mysqli_query($conn,$sql);
         header("Location: ../views/logIn.php?id=0");
     }
     else if(strlen($password) < 8){
@@ -45,7 +45,7 @@ else if($password == $confirmPassword){
         $sql = "
         INSERT INTO USERS(user_email,user_password,user_bio,user_theme,user_icon)
         VALUES ('$email', '$password_hash', '', 0, 0);";
-        $conn->query($sql);
+        mysqli_query($conn,$sql);
         header("Location: ../views/logIn.php?id=0");
         }
     }

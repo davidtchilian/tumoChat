@@ -12,17 +12,17 @@ if($result->num_rows > 0){
         $sender = $row["message_sender_id"];
     }
     else {
-        mysqli_close();
+        mysqli_close($conn);
         die();
     }
 }
 else{
-    mysqli_close();
+    mysqli_close($conn);
     die();
 }
 if($sender == $userid){
     $sql = "DELETE FROM MESSAGE WHERE message_id = $messageid";
     $result = mysqli_query($conn,$sql);
-    mysqli_close();
+    mysqli_close($conn);
 }
 ?>

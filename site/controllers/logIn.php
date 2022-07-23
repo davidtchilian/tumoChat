@@ -20,12 +20,12 @@ if($result->num_rows == 1) {
         $_SESSION['user_theme'] = $row["user_theme"];
         addStatistic($row["user_id"], 1, $conn);
 
-        header("Location: ../views/page-accueil.php");
+        header("Location: ../views/home.php");
     }
   } 
   else {  
     header("Location: ../views/logIn.php?id=1");
   }
 
-$conn->close();
+mysqli_close($conn);
 ?>

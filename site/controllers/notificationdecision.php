@@ -24,7 +24,7 @@
     }
     mysqli_close($conn);
 
-    header("Location: ../views/page-accueil.php");
+    header("Location: ../views/home.php");
    
     
 ?>

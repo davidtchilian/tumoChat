@@ -6,7 +6,7 @@
 
         $sql = "DELETE FROM isINGROUP WHERE user_id = $userid AND group_id = $groupid";
         $result = mysqli_query($conn,$sql);
-        mysqli_close();
+        mysqli_close($conn);
         
 
 ?>

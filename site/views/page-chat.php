@@ -18,7 +18,7 @@ if (!isset($userId)) {
 }
 
 if (!isset($groupId)) {
-    header("Location: page-accueil.php");
+    header("Location: home.php");
     return;
 }
 
@@ -59,7 +59,7 @@ if ($groupType == 2) {
     }
 
     if (!$isingroup) {
-        header("Location: page-accueil.php");
+        header("Location: home.php");
     }
 }
 
@@ -69,7 +69,6 @@ $sql1 = "SELECT group_admin_id FROM groupchat WHERE group_id=$groupId";
 $groupAdminId = mysqli_fetch_assoc(mysqli_query($conn, $sql1))['group_admin_id'];
 $isAdmin = $userId == $groupAdminId;
 
-mysqli_close($conn);
 
 function startsWith($string, $startString)
 {
@@ -88,6 +87,7 @@ function startsWith($string, $startString)
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../style/page-chat.css" />
+    <link rel="stylesheet" href="../style/chosen.css" />
     <title><?php echo $groupName . " - TUYU"; ?></title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100&display=swap');
@@ -104,8 +104,6 @@ function startsWith($string, $startString)
         .dropdown {
             position: relative;
             display: none;
-
-
         }
 
         .dropdown-content {
@@ -165,7 +163,7 @@ function startsWith($string, $startString)
             <?php
             if ($groupTypeName == "private") {
             ?>
-                <a href="page-accueil.php"><img src="../assets/images/flèche_retour3.png" alt="Retour" style="width : 35px; height: 35px; margin-left: 10px" /></a>
+                <a href="home.php"><img src="../assets/images/flèche_retour3.png" alt="Retour" style="width : 35px; height: 35px; margin-left: 10px" /></a>
             <?php
             } else {
             ?>
@@ -225,32 +223,31 @@ function startsWith($string, $startString)
                 <div id="addModal" class="modal_user">
                     <div class="modal-content">
                         <div class="modal-add-users">
-                        <form action="../controllers/adduser.php" method="POST">
+                        <form action="../controllers/adduser.php?group_id=<?= $groupId?>" method="POST">
                         <label for="exampleFormControlTextarea1" class="form-label; float: left;">Name of Persons</label>
                         <div class="center clear">
                             <div id="promoNode"></div>
-                            
-                            <select name='select[]' class="chosen" multiple="true" style="width:400px;">
+                            <select name='select' class="chosen" multiple="true" style="width:400px;">
                                 <?php
                                 $users = array();
                                 // **CHJNJEEEEEEL** FOR ADD USER IN GC SELECT USERS.user_email, USERS.user_id FROM USERS JOIN friends ON ((friends.user_id_1 = 1 AND USERS.user_id = friends.user_id_2) OR (friends.user_id_2 = 1 AND USERS.user_id = friends.user_id_1)) WHERE USERS.user_id!=1
-                                $sql = "SELECT user_email, user_id FROM USERS WHERE user_id != $me";
-                                $result = $conn->query($sql);
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
+                                $sql = "SELECT USERS.user_email, USERS.user_id FROM USERS JOIN friends ON ((friends.user_id_1 = 1 AND USERS.user_id = friends.user_id_2) OR (friends.user_id_2 = 1 AND USERS.user_id = friends.user_id_1)) WHERE USERS.user_id!=$userId";
+                                $result = mysqli_query($conn,$sql);
+                                if(mysqli_num_rows($result) > 0){
+                                    while($row = $result->fetch_assoc()){
                                         $temp = array();
                                         array_push($temp, $row["user_id"]);
                                         array_push($temp, $row["user_email"]);
                                         $users[] = $temp;
                                     }
                                 }
-                                foreach ($users as $i) {
+                                foreach($users as $i){
                                     echo "<option value='$i[0]'>" . explode("@", $i[1])[0] . "</option >";
                                 }
                                 ?>
                             </select>
                             <button type="submit" class="btn btn-primary mt-3"
-                style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Create</button>
+                style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">ADD</button>
                         </div>
                         </div>
                         </form>
@@ -405,7 +402,11 @@ function startsWith($string, $startString)
     </script>
     <script src="../scripts/chosen.jquery.js"></script>
     <script type="text/javascript" src="../scripts/chat.js" refer></script>
-
+    <script>
+        jQuery(document).ready(function () {
+            jQuery(".chosen").data("placeholder", "Select persons you want to add...").chosen();
+        });
+    </script>
 </body>
 
 </html>

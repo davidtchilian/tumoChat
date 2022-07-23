@@ -25,18 +25,20 @@ function getfriends($userId, $conn){
     $sql = "SELECT DISTINCT * FROM friends WHERE user_id_1=$userId";
     $friends = mysqli_query($conn, $sql);
 
-    while ($friend = mysqli_fetch_assoc($friends)['user_id_2']) {
+    if(mysqli_num_rows($friends) > 0){
+    while($friend = mysqli_fetch_assoc($friends)['user_id_2']){
         array_push($friendsList, $friend);
     }
 
     $sql = "SELECT DISTINCT * FROM friends WHERE user_id_2=$userId";
     $friends = mysqli_query($conn, $sql);
 
-    while ($friend = mysqli_fetch_assoc($friends)['user_id_1']) {
+    while($friend = mysqli_fetch_assoc($friends)['user_id_1']){
         array_push($friendsList, $friend);
     }
 
     return array_unique($friendsList);
+    }
  
 
 }
