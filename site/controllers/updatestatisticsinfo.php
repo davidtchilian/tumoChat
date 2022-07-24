@@ -27,7 +27,7 @@
         return $result;
     }
 
-    function getUserbadges($conn, $userId){
+    function getUserBadges($conn, $userId){
         $badges_info = getBadgesInfo($conn);
         $all_badges_info = array();
         $owned_badges = array();

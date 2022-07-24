@@ -183,7 +183,7 @@ function startsWith($string, $startString)
                         </li>
                     <?php } ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color : white; margin-left: 14px"><?php echo $groupName; ?></a>
+                        <a class="nav-link" style="color : white; margin-left: 14px"><?php echo $groupName; ?></a>
                     </li>
                 </ul>
                 <div class="d-flex">
