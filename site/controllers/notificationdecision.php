@@ -25,6 +25,6 @@
     mysqli_close($conn);
 
     header("Location: ../views/home.php");
-   
+    exit();
     
 ?>

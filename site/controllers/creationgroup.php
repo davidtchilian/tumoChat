@@ -48,14 +48,14 @@ $insert="INSERT INTO isInGroup(isInGroup_user_id, isInGroup_group_id) VALUES('$u
 
 mysqli_query($conn,$insert);
 
-foreach ($select as $key => $receiver) {
+foreach($select as $key => $receiver) {
   $notif = "INSERT INTO NOTIFICATIONS(notification_sender_id,notification_receiver_id,notification_group_id,notification_content,notification_type_id) VALUES($user_id, $receiver, $groupid, '$notifContent', 1)";
   mysqli_query($conn,$notif);
 }
 header('Location: ../views/home.php');
 exit();
 
-// header("Location: ../views/page-home.php");
+// header("Location: ../views/page-accueil.php");
 
     
 ?>

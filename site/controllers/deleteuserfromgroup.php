@@ -7,5 +7,5 @@ $sql = "DELETE FROM isINGROUP WHERE isingroup_user_id = $deletingid AND isInGrou
 $result = mysqli_query($conn,$sql);
 mysqli_close($conn);
 header("Location: ../views/page-chat.php?id=".$groupid."&modal=1");
-
+exit();
 ?>

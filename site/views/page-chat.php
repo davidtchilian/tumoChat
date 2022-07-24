@@ -110,10 +110,12 @@ function startsWith($string, $startString)
             display: block;
             position: absolute;
             background-color: #f9f9f9;
+            border-radius: .375rem;
             min-width: 160px;
             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             z-index: 1;
-            margin-left: -160px;
+            /* margin-left: -160px; */
+            transform: translateX(24rem);
             width: 200px;
             margin-top: 70px;
         }
@@ -126,7 +128,8 @@ function startsWith($string, $startString)
         }
 
         .dropdown-content a:hover {
-            background-color: #f1f1f1
+            background-color: #f1f1f1;
+            border-radius: .375rem;
         }
 
 
@@ -211,6 +214,7 @@ function startsWith($string, $startString)
                                 <div id="usersInfo"></div>
                                 <div id="modal_buttons" class="userinfo_buttons">
                                     <div id="modal-extra-interactions">
+
                                     </div>
                                     <div id="modal-default-interactions">
                                         <button id="closeButton" class="close btn modal_interaction">Close</button>
@@ -231,7 +235,7 @@ function startsWith($string, $startString)
                                 <?php
                                 $users = array();
                                 // **CHJNJEEEEEEL** FOR ADD USER IN GC SELECT USERS.user_email, USERS.user_id FROM USERS JOIN friends ON ((friends.user_id_1 = 1 AND USERS.user_id = friends.user_id_2) OR (friends.user_id_2 = 1 AND USERS.user_id = friends.user_id_1)) WHERE USERS.user_id!=1
-                                $sql = "SELECT USERS.user_email, USERS.user_id FROM USERS JOIN friends ON ((friends.user_id_1 = 1 AND USERS.user_id = friends.user_id_2) OR (friends.user_id_2 = 1 AND USERS.user_id = friends.user_id_1)) WHERE USERS.user_id!=$userId";
+                                $sql = "SELECT USERS.user_email, USERS.user_id FROM USERS JOIN friends ON ((friends.user_id_1 = $userId AND USERS.user_id = friends.user_id_2) OR (friends.user_id_2 = $userId AND USERS.user_id = friends.user_id_1)) WHERE USERS.user_id!=$userId";
                                 $result = mysqli_query($conn,$sql);
                                 if(mysqli_num_rows($result) > 0){
                                     while($row = $result->fetch_assoc()){
@@ -246,8 +250,9 @@ function startsWith($string, $startString)
                                 }
                                 ?>
                             </select>
+                            <input type="hidden" name="groupname" value="<?=$groupName?>">
                             <button type="submit" class="btn btn-primary mt-3"
-                style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">ADD</button>
+                style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Add</button>
                         </div>
                         </div>
                         </form>
@@ -260,7 +265,7 @@ function startsWith($string, $startString)
     </nav>
     </div>
     <div id="cont0" class="container mt-5" style="min-height : 100vh;" style="position : relative">
-        <br><br><br><br>
+        <br><br>
 
         <?php
         while ($message = mysqli_fetch_assoc($messages)) {
@@ -283,7 +288,7 @@ function startsWith($string, $startString)
                                 echo "<pre >" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>";
                             ?>
                         </button>
-                        <div class="dropdown" style="width:30px; margin-left:900px; margin-top:-30px;" id="<?= "dropdown" . $message['message_id'] ?>">
+                        <div class="dropdown" style="width:30px; margin-top:-30px;" id="<?= "dropdown" . $message['message_id'] ?>">
 
                             <div class="dropdown-content" id="dropdown-content">
                                 <a onclick="myFunction(event)" id=<?= "editId" . $message['message_id'] ?> name="<?= $message['message_id'] ?>">Edit</a>

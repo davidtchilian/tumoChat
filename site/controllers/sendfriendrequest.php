@@ -16,5 +16,5 @@
   mysqli_close($conn);
 
   header("Location: ../views/profile.php?id=".$receiverId);
-
+  exit();
 ?>

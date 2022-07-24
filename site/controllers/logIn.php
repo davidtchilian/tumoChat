@@ -21,10 +21,12 @@ if($result->num_rows == 1) {
         addStatistic($row["user_id"], 1, $conn);
 
         header("Location: ../views/home.php");
+        exit();
     }
   } 
   else {  
     header("Location: ../views/logIn.php?id=1");
+    exit();
   }
 
 mysqli_close($conn);

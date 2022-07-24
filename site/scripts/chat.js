@@ -255,7 +255,7 @@ function show(event){
     
   }
   var y = event.target.id
-  let id = "dropdown" + y
+  let id = "dropdown" + x
 
   
   const dropdown = document.getElementById(id)
@@ -433,7 +433,9 @@ if(txt.value != ""){
                 button2.setAttribute("id", id)
                 const pre = document.createElement("pre")
                 const span = document.createElement("span")
+                pre.setAttribute("onclick", "show(event)")
                 span.setAttribute("class", "message_content_span")
+                span.setAttribute("onclick", "show(event)")
                 if (txt.value.startsWith("STICKER_")) {
                   let sticker = document.createElement("img");
                   sticker.src = `../assets/stickers/${txt.value.split("_")[1]}.png`;

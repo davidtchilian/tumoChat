@@ -11,7 +11,7 @@
     $result = $conn->query($sql); 
     mysqli_close($conn);
     header("Location: ../views/profile.php");
-
+    exit();
     
 
     
