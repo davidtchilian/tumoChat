@@ -56,12 +56,13 @@
     }
 
     function getGroupUsersId($conn,$groupId){
+        $users = array();
         $sql = "SELECT DISTINCT user_id
         FROM USERS INNER JOIN isInGroup ON isInGroup.isInGroup_user_id = USERS.user_id
-        WHERE isInGroup_group_id = $group_id";
+        WHERE isInGroup_group_id = $groupId";
         $result = mysqli_query($conn, $sql);
         while($user = mysqli_fetch_assoc($result)){
-            $users[] = $user["user_id"];
+            $users[] = $user['user_id'];
         }
         return $users;
     }
