@@ -117,14 +117,8 @@
 
             ?>
             <form class="d-flex searchform" style="margin: auto 0 !important" role="search">
-                <select name="id" class="form-select user-search-select" aria-label="Default select example">
-                    <option value="<?php echo $userId; ?>" selected>Search User</option>
-                    <?php
-                        foreach ($users as $user) {
-                            echo "<option value='$user[0]'>" . explode("@", $user[1])[0] . "</option>";
-                        }
-                    ?>
-                </select>  
+            <input type="text" id="fname" name="fname" onkeyup="showHint(this.value)">
+                <div id="txtHint"></div> 
                 <button class="btn search btn-search">
                     <img src="../assets/images/loupe.png" alt="Rechercher" style="width : 21px; height: 30px; margin-top : 3px" />
                 </button>
@@ -230,12 +224,20 @@
                     $friendMail = $friend['user_email'];
                     $friendIcon = $friend['user_icon'];
         ?>
-        <a class="friend-row" href="profile.php?id=<?php echo $friendId; ?>">
-            <img src='../assets/icons/<?php echo $friendIcon; ?>.png' class='card-img-top' alt='profile_' style='height: 75px; width: 75px;'>
-            <h3>
-                <span class="badge bg-secondary"><?php echo explode("@",$friendMail)[0];?></span>
-            </h3>
-        </a>
+        <div class="friend-row">
+            <div class="friend-acc">
+                <a  href="profile.php?id=<?php echo $friendId; ?>">
+                    <img src='../assets/icons/<?php echo $friendIcon; ?>.png' class='card-img-top' alt='profile_' style='height: 75px; width: 75px; margin-right: 10px;'>
+                    <h3>
+                        <span class="badge bg-secondary"><?php echo explode("@",$friendMail)[0];?></span>
+                    </h3>
+                </a>
+            </div>
+            <div>
+                <button type="button" class="btn btn-outline-dark">Direct</button>
+            </div>
+        </div>
+
         <?php
                 }
             }
@@ -252,6 +254,25 @@
     </script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        function showHint(str) {
+        if (str.length == 0) {
+            document.getElementById("txtHint").innerHTML = "";
+            return;
+        } else {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtHint").innerHTML = this.responseText;
+            }
+            };
+            xmlhttp.open("GET", "../controllers/livesearch.php?q=" + str, false);
+            xmlhttp.send();
+        }
+        }
+    </script>
+
     <?php 
         mysqli_close($conn);
     ?>

@@ -119,49 +119,6 @@ function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
 }
 
 
-    // for (let user of groupUsersInfo) {
-
-    //   let userInfo = document.createElement("div");
-    //   let userEmail = document.createElement("p");
-    //   userEmail.classList.add("user-email");
-    //   userEmail.innerText = user[0].user_email;
-    //   userInfo.classList.add("user_info_page")
-    //   userInfo.appendChild(userEmail);
-    //   usersInfo.appendChild(userInfo);
- 
-    //   if (!isAdmin) {
-    //     continue;
-    //   }
-
-    //   if (user[0].user_id == groupAdminId) {
-    //     let adminSpan = document.createElement('span');
-    //     adminSpan.innerText = "⚡";
-    //     userInfo.appendChild(adminSpan);
-    //     continue;
-    //   }
-
-    //   let userDeleteButton = document.createElement("a");
-    //   userDeleteButton.classList.add("user_delete_button");
-    //   userDeleteButton.href = `../controllers/deleteuserfromgroup.php?delid=${user[0].user_id}&id=${groupId}`;
-    //   userDeleteButton.innerText = "X";
-    //   userInfo.appendChild(userDeleteButton);
-    
-    // }
-
-    // if (isAdmin) {
-    //   let addUserButton = createButton("add_user", "add_user", "Add User", null);
-    //   extraInteractions.appendChild(addUserButton);
-
-    //   let deleteGroup = createButton("delete_group", "delete_group", "Delete Group", `../controllers/deletegroup.php?id=${groupId}`);
-    //   extraInteractions.appendChild(deleteGroup);
-    // }
-    // else {
-    //   let leaveGroup = createButton("leave_group", "leave_group", "Leave Group", `../controllers/deleteuserfromgroup.php?delid=${userId}&id=${groupId}`);
-    //   extraInteractions.appendChild(leaveGroup);
-    // }
-
-  
-
 
 function createButton(className, id, innerText, href) {
   let button = document.createElement("a");
@@ -173,30 +130,6 @@ function createButton(className, id, innerText, href) {
   button.innerText = innerText;
   return button;
 }
-
-
-// function myFunction(event) { 
-//   var x = event.target;
-//   console.log(x.innerText);
-//   console.log(x.name);
-//   console.log(x)
-//   if(x != edit){
-//     txt.value = x.innerText
-//     console.log(true)
-//   }
-// }
-
-// function update(){
-//   // form.action = ".../controllers/update.php"
-//   txt.innerText = "<?= $message?>"
-//   console.log(1)
-// }
-
-
-
-
-
-
 
 
 function removeParam(key, sourceURL) {
@@ -218,18 +151,6 @@ function removeParam(key, sourceURL) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 const edit = document.getElementById("editId")
 const txt = document.getElementById("text")
 const form = document.getElementById("form")
@@ -238,7 +159,7 @@ const messageSenderId = document.getElementById("jsUserId").value
 const groupId = document.getElementById("groupId").value
 const messageId = document.getElementById("message_id")
 const cont0 = document.getElementById("cont0")
-console.log(messageId)
+
 
 document.getElementById("send").addEventListener("click", function(event){
   event.preventDefault()
@@ -280,8 +201,7 @@ function myFunction(event) {
   
   })
   txt.value = messageCont.innerText
-  //  const url =  "../controllers/update.php?id="+x
-  //  form.action = url
+
    
    var y = document.getElementById("editId" + x)
  
@@ -295,23 +215,6 @@ function myFunction(event) {
    }
   button.setAttribute("onclick", "updateMessages(event)")
  }
-
-
-
- 
-
-
-// document.getElementById("submit").addEventListener("click", function(event){
-//   var xmlhttp = new XMLHttpRequest();
-//   let rq = "../controllers/update.php?id=" + x;console.log(rq);
-//   xmlhttp.open("POST", rq,false);
-//   xmlhttp.send();
-//   console.log(true)
-//   console.log(txt.value)
-//   txt.value = "asxasx"
-//   button.id = "send"
-
-// })
 
 
 let y 
@@ -339,10 +242,7 @@ let y
            success: function (response) {
              console.log("Success !!");
              document.getElementById(x).innerText = message_cont
-            //  var xmlhttp = new XMLHttpRequest();
-            //  xmlhttp.open(this.type, this.url ,true);
-            //  xmlhttp.send(this.data);
-            //  console.log(this.type)
+            
            console.log(response)
              
            
@@ -376,10 +276,7 @@ function deleteMessages(event){
        success: function (response) {
          console.log("Success !!");
         
-        //  var xmlhttp = new XMLHttpRequest();
-        //  xmlhttp.open(this.type, this.url ,true);
-        //  xmlhttp.send(this.data);
-        //  console.log(this.type)
+      
        console.log(response)
         const element = document.getElementById(x)
         element.style.display = "none"
