@@ -1,7 +1,8 @@
 <?php
+session_start();
 header('Access-Control-Allow-Origin: *');
 require_once("../models/db.php");
-$user_id = 2;
+$user_id = $_SESSION['user_id'];
 $sql_groupid = "SELECT isInGroup_group_id FROM isInGroup WHERE isInGroup_user_id= $user_id";
 $result = mysqli_query($conn,$sql_groupid);
 $groupids=array();
@@ -47,12 +48,14 @@ foreach($groupids as $id){
 		}	
 	}else {
 		$flames = 0;
+	
 	}
 	$streaks[]=array($id['isInGroup_group_id'],$flames);
 	
 }
-echo json_encode($streaks);
 
+echo json_encode($streaks);
+//session_destroy();
 
 ?>
 
