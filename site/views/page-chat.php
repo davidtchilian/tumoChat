@@ -299,7 +299,7 @@ function startsWith($string, $startString)
         ?>
                 <div class="row" id="messages">
                     <div class="col-4"></div>
-                    <div class="col-8">
+                    <div class="col-8 test">
                         <button class="btn btn-primary messageEnvoye mt-2" onclick="show(event)" style="float : right; color: black;" id="<?= $message['message_id'] ?>">
                             <?php
                             // echo "<p class='user_email'>".$user_name."</p>";
@@ -319,9 +319,10 @@ function startsWith($string, $startString)
                             </div>
 
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
-            <?php }
+            <?php 
                         } else {
                             for ($i = 0; $i < count($group_users) && !$isingroup_message; $i++) {
                                 if ($group_users[$i] == $message["message_sender_id"]) {
