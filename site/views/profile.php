@@ -281,7 +281,7 @@
             xmlhttp.send();
         }
         }
-</script>
+    </script>
 
     <?php 
         mysqli_close($conn);

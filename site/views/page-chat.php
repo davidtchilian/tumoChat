@@ -209,7 +209,7 @@ function startsWith($string, $startString)
                 </div>
 
                 <div id="infoModal" class="modal_user">
-                    <div class="modal-content" id="modCont">
+                    <div class="modal-content">
                         <?php if ($groupTypeName == "public") { ?>
                             <div>
                                 <button id="closeButton" class="close btn modal_interaction"><img src="../assets/images/cllose.png" alt="sticker" style="width :40px" style="height : 40px" />
@@ -292,14 +292,14 @@ function startsWith($string, $startString)
 
         <?php
         while ($message = mysqli_fetch_assoc($messages)) {
-            $icon = file_get_contents($domain_name . "/controllers/getusericon.php?id=" . $message["message_sender_id"]);
-            $user_email = file_get_contents($domain_name . "/controllers/getuseremail.php?id=" . $message["message_sender_id"]);
+            $icon = getUserIcon($conn, $message['message_sender_id']);
+            $user_email = getUserEmail($conn, $message['message_sender_id']);
             $user_name = explode("@", $user_email)[0];
             if ($message['message_sender_id'] == $userId) {
         ?>
                 <div class="row" id="messages">
                     <div class="col-4"></div>
-                    <div class="col-7">
+                    <div class="col-8 test">
                         <button class="btn btn-primary messageEnvoye mt-2" onclick="show(event)" style="float : right; color: black;" id="<?= $message['message_id'] ?>">
                             <?php
                             // echo "<p class='user_email'>".$user_name."</p>";
@@ -319,22 +319,20 @@ function startsWith($string, $startString)
                             </div>
 
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
-            <?php }
+            <?php 
                         } else {
-                            for ($i = 0; $i < count($group_users); $i++) {
+                            for ($i = 0; $i < count($group_users) && !$isingroup_message; $i++) {
                                 if ($group_users[$i] == $message["message_sender_id"]) {
                                     $isingroup_message = true;
-                                    
                                 }
-                                
-                                
                             }
             ?>
             <div class="row">
                 <?php
-                            if ($isingroup_message == true) { ?>
+                            if ($isingroup_message || $groupTypeName == "public") { ?>
                     <div class="col-1"><img src="../assets/icons/<?php echo $icon; ?>.png" class="user_icon"></div>
                     <div class="col-7">
                         <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
@@ -346,7 +344,7 @@ function startsWith($string, $startString)
                                 $stickerId = $stickerSplit[1];
                                 echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 100px'>";
                             } else {
-                                echo "<pre >" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>"; 
+                                echo "<pre>" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>"; 
                             }
                                 ?>
                         </button>
@@ -358,9 +356,16 @@ function startsWith($string, $startString)
                         <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
                             <?php
                                 echo "<p class='delated_user'>Delated user</p>";
-                                echo $message['message_content'] ?>
+                                $stickerSplit = explode("_", $message['message_content']);
+                                if ($stickerSplit[0] == "STICKER") {
+                                    $stickerId = $stickerSplit[1];
+                                    echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 100px'>";
+                                } else {
+                                    echo "<pre >" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>"; 
+                                }  ?>
                         </button>
                     </div>
+
                 <?php
                             }
                 ?>
@@ -403,7 +408,7 @@ function startsWith($string, $startString)
 
                 </div>
                 <div id="stickerModal" class="modal_user">
-                    <div id="modCont1" class="modal-content modal-content-sticker" style="background-color: #664C8F;">
+                    <div class="modal-content modal-content-sticker ">
 
                         <div id="modal-extra-interactions"></div>
                         <div id="modal-default-interactions">
@@ -508,11 +513,6 @@ return rgb;
 }
 let rgb = getAverageRGB(img);
 document.getElementById("navbar").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
-document.getElementById("modCont").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
-document.getElementById("modCont1").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
-document.getElementById("closeButton").style.backgroundColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
-document.getElementById("stickerCloseButton").style.backgroundColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
-document.getElementById("groupinfo-container").style.backgroundColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
 document.getElementById("navbar1").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
 Array.from(document.getElementsByClassName("messageEnvoye")).map((element)=>{element.style.backgroundColor = 'rgb(' + rgb.r*1.2 + ',' + rgb.g*1.2 + ',' + rgb.b*1.2 + ')'; element.style.borderColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')'});
 document.getElementById("infoButton").onmouseover = function() 
