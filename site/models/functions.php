@@ -11,7 +11,6 @@
         return $return;
     }
 
-
     function getUserInfo($conn, $userId) {
         $sql = "SELECT * FROM users WHERE user_id=$userId";
         $result = mysqli_query($conn, $sql);
@@ -46,6 +45,7 @@
         return $result -> num_rows > 0;
     }
 
+<<<<<<< HEAD
     function getgroupinfo($conn, $groupId){
         $sql = "SELECT * FROM GROUPCHAT WHERE group_id = $groupId";
         $result = mysqli_query($conn, $sql);
@@ -56,4 +56,16 @@
 
     }
 
+=======
+    function getGroupUsersId($conn,$groupId){
+        $sql = "SELECT DISTINCT user_id
+        FROM USERS INNER JOIN isInGroup ON isInGroup.isInGroup_user_id = USERS.user_id
+        WHERE isInGroup_group_id = $group_id";
+        $result = mysqli_query($conn, $sql);
+        while($user = mysqli_fetch_assoc($result)){
+            $users[] = $user["user_id"];
+        }
+        return $users;
+    }
+>>>>>>> ae62f0ac95ecfe89f8813aaa3f685244c9da6e0c
 ?>

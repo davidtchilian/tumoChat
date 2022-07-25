@@ -64,7 +64,7 @@
                 </li>
             <a onClick="notification()" id="infoButton" class="notifications_btn nav-link" style="color : white">Notifications</a>
             <div id="infoModal" class="modal_user">
-                    <div class="modal-content">
+                    <div class="modal-content" id="modCont">
                       
                         <div class="groupinfo_div">
                             <p id="groupInfo"></p>

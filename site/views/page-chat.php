@@ -19,10 +19,16 @@ if (!isset($userId)) {
 
 if (!isset($groupId)) {
     header("Location: home.php");
+    echo "lol";
     return;
 }
 
+<<<<<<< HEAD
 require_once('../models/db.php');
+=======
+require('../models/db.php');
+require_once('../models/functions.php');
+>>>>>>> ae62f0ac95ecfe89f8813aaa3f685244c9da6e0c
 
 
 
@@ -52,15 +58,15 @@ $groupTypeName = mysqli_fetch_assoc(mysqli_query($conn, $getTypeSql))['typeName'
 
 
 if ($groupType == 2) {
-    $group_users = file_get_contents($domain_name . "/controllers/getgroupusers.php?id=" . $groupId);
-    $group_users = json_decode($group_users);
+    $group_users = getGroupUsersId($conn,$groupId);
     $isingroup = false;
     for ($i = 0; $i < count($group_users) && !$isingroup; $i++) {
         $isingroup = $group_users[$i] == $userId;
     }
 
     if (!$isingroup) {
-        header("Location: home.php");
+        var_dump($group_users); 
+        // header("Location: home.php");
     }
 }
 
@@ -164,7 +170,7 @@ function startsWith($string, $startString)
 <body id="bodyHTML">
 
     <div class="fixed-top">
-        <nav class="navbar navbar-expand-lg" style="background-color : #6c4b93;">
+        <nav id="navbar" class="navbar navbar-expand-lg" style="background-color : #6c4b93;">
             <?php
             if ($groupTypeName == "private") {
             ?>
@@ -207,7 +213,7 @@ function startsWith($string, $startString)
                 </div>
 
                 <div id="infoModal" class="modal_user">
-                    <div class="modal-content">
+                    <div class="modal-content" id="modCont">
                         <?php if ($groupTypeName == "public") { ?>
                             <div>
                                 <button id="closeButton" class="close btn modal_interaction"><img src="../assets/images/cllose.png" alt="sticker" style="width :40px" style="height : 40px" />
@@ -248,6 +254,12 @@ function startsWith($string, $startString)
                                 <?php
                                 $users = array();
                                 $sql = "SELECT USERS.user_email, USERS.user_id FROM USERS JOIN friends ON ((friends.user_id_1 = $userId AND USERS.user_id = friends.user_id_2) OR (friends.user_id_2 = $userId AND USERS.user_id = friends.user_id_1)) WHERE USERS.user_id!=$userId";
+                                
+                                $usersin = getGroupUsersId($conn,$groupId);
+
+                                foreach($usersin as $u){
+                                    $sql = $sql."AND user_id != $u ";
+                                }
                                 $result = mysqli_query($conn,$sql);
                                 if(mysqli_num_rows($result) > 0){
                                     while($row = $result->fetch_assoc()){
@@ -257,11 +269,13 @@ function startsWith($string, $startString)
                                         $users[] = $temp;
                                     }
                                 }
+                                
                                 foreach($users as $i){
                                     echo "<option value='$i[0]'>" . explode("@", $i[1])[0] . "</option >";
                                 }
                                 ?>
                             </select>
+                            <?php var_dump($sql); ?>
                             <input type="hidden" name="groupname" value="<?=$groupName?>">
                             <button type="submit" class="btn btn-primary mt-3"
                 style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Add</button>
@@ -315,7 +329,10 @@ function startsWith($string, $startString)
                             for ($i = 0; $i < count($group_users); $i++) {
                                 if ($group_users[$i] == $message["message_sender_id"]) {
                                     $isingroup_message = true;
+                                    
                                 }
+                                
+                                
                             }
             ?>
             <div class="row">
@@ -326,7 +343,15 @@ function startsWith($string, $startString)
                         <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
                             <?php
                                 echo "<p class='user_email'>" . $user_name . "</p>";
-                                echo  $message['message_content'] ?>
+                                //  echo  $message['message_content'];
+                                $stickerSplit = explode("_", $message['message_content']);
+                            if ($stickerSplit[0] == "STICKER") {
+                                $stickerId = $stickerSplit[1];
+                                echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 100px'>";
+                            } else {
+                                echo "<pre >" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>"; 
+                            }
+                                ?>
                         </button>
                     </div>
                 <?php
@@ -359,19 +384,19 @@ function startsWith($string, $startString)
     <br>
 
     <div class="fixed-bottom" style="position:fixed">
-        <nav class="navbar navbar-expand-lg" style="background-color:#6c4b93" id="navbarId">
+        <nav id="navbar1" class="navbar navbar-expand-lg" id="navbarId" style="background-color : #6c4b93;">
             <div class="container">
                 <a onClick="sticker()" id="stickerButton" class="sticker_btn nav-link" style="display: inline-block">
                     <img src="../assets/images/stickerr.png" alt="sticker" style="width :40px" style="height : 40px" />
                 </a>
 
-                <div class="container-fluid">
-                    <form class="d-flex" role="search" method="post" id="form">
+                <div class="container-fluid" style="align-items:center; justify-content: center">
+                    <form class="d-flex" role="search" method="post" id="form" style="align-items:center">
                         <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
                         <input type="hidden" name="group_id" value="<?php echo $groupId; ?>" id="groupId">
                         <input type="hidden" name="message_id" value="<?= $message['message_id'] ?>" id="message_id">
                         <input type="hidden" id="jsUserId" value="<?= $userId ?>">
-                        <div class="form-group" style="width: 75%;">
+                        <div class="form-group" style="margin: 0 20px; width: 75%;">
                             <textarea name="message_content" style="resize: none" class="form-control" id="text" rows="1" placeholder="Enter your message here" autofocus></textarea>
                         </div>
                         <button class="btn search" type="submit" value="Message" id="send" onClick="sendMessage(event)">
@@ -381,7 +406,7 @@ function startsWith($string, $startString)
 
                 </div>
                 <div id="stickerModal" class="modal_user">
-                    <div class="modal-content modal-content-sticker ">
+                    <div id="modCont1" class="modal-content modal-content-sticker" style="background-color: #664C8F;">
 
                         <div id="modal-extra-interactions"></div>
                         <div id="modal-default-interactions">
@@ -424,9 +449,12 @@ function startsWith($string, $startString)
             jQuery(".chosen").data("placeholder", "Select persons you want to add...").chosen();
         });
     </script>
-    <!-- <script>
+    <?php
+    if($groupTypeName=="public"){
+    ?>
+    <script>
 var img = document.createElement('img');
-img.src= "../assets/comm_icons/<?php // echo $groupIcon; ?>.png";
+img.src= "../assets/comm_icons/<?php echo $groupIcon; ?>.png";
 function getAverageRGB(imgEl) {
 
 var blockSize = 5, // only visit every 5 pixels
@@ -465,15 +493,49 @@ while ( (i += blockSize * 4) < length ) {
 }
 
 // ~~ used to floor values
-rgb.r = ~~(rgb.r/count)*7;
-rgb.g = ~~(rgb.g/count)*7;
-rgb.b = ~~(rgb.b/count)*7;
+rgb.r = ~~(rgb.r/count);
+rgb.g = ~~(rgb.g/count);
+rgb.b = ~~(rgb.b/count);
+
+let diff = 1.3/((rgb.r/255)+(rgb.g/255)+(rgb.b/255));
+console.log(diff)
+rgb.r = rgb.r*diff;
+rgb.g = rgb.g*diff;
+rgb.b = rgb.b*diff;
+
+console.log(rgb.r);
+console.log(rgb.g);
+console.log(rgb.b);
+
 return rgb;
 }
-getAverageRGB(img);
-let navBar = document.getElementsByClassName("navbar");
-navBar.style.backgroundColor = "red";
-</script> -->
+let rgb = getAverageRGB(img);
+document.getElementById("navbar").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+document.getElementById("modCont").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+document.getElementById("modCont1").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+document.getElementById("closeButton").style.backgroundColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
+document.getElementById("stickerCloseButton").style.backgroundColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
+document.getElementById("groupinfo-container").style.backgroundColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
+document.getElementById("navbar1").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+Array.from(document.getElementsByClassName("messageEnvoye")).map((element)=>{element.style.backgroundColor = 'rgb(' + rgb.r*1.2 + ',' + rgb.g*1.2 + ',' + rgb.b*1.2 + ')'; element.style.borderColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')'});
+document.getElementById("infoButton").onmouseover = function() 
+{
+    this.style.borderColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
+}
+document.getElementById("infoButton").onmouseout = function() 
+{
+    this.style.borderColor = 'rgba(255,255,255,0)';
+}
+document.getElementById("send").onmouseover = function() 
+{
+    this.style.borderColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
+}
+document.getElementById("send").onmouseout = function() 
+{
+    this.style.borderColor = 'rgba(255,255,255,0)';
+}
+</script>
+<?php } ?>
 </body>
 
 </html>
