@@ -7,6 +7,7 @@
   $user_id = $_SESSION['user_id'];
   $theme = $_SESSION['user_theme'];
   require_once("../models/db.php");
+  require_once("../models/functions.php");
   $sql = "SELECT DISTINCT group_id as gID, group_type, group_name FROM GROUPCHAT JOIN isInGroup ON isInGroup_group_id = group_id WHERE group_type = 2 AND isInGroup_user_id = " . $user_id;
   $result = mysqli_query($conn, $sql);
 
@@ -291,8 +292,7 @@
                             </li>
                             <li class="<?= $textcolor ?> list-group-item" style = "min-height: 65px !important; display: flex; flex-direction: column; justify-content: center; align-items: center">
                                 <?php
-                            $messages = file_get_contents("http://localhost:8888/site/controllers/getlastmessages.php?id=".$group['gID']);
-                            $message = json_decode($messages);
+                            $message = getLastMessages($conn, $group['gID']);
                             if(!isset($message[0]) && !isset($message[1])){ ?>
                               <span class = "<?= $textcolor ?> ">No Messages yet!</span>
                             <?php }else{
