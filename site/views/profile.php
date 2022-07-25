@@ -224,12 +224,20 @@
                     $friendMail = $friend['user_email'];
                     $friendIcon = $friend['user_icon'];
         ?>
-        <a class="friend-row" href="profile.php?id=<?php echo $friendId; ?>">
-            <img src='../assets/icons/<?php echo $friendIcon; ?>.png' class='card-img-top' alt='profile_' style='height: 75px; width: 75px;'>
-            <h3>
-                <span class="badge bg-secondary"><?php echo explode("@",$friendMail)[0];?></span>
-            </h3>
-        </a>
+
+        <div class="friend-row">
+            <div class="friend-acc">
+                <a  href="profile.php?id=<?php echo $friendId; ?>">
+                    <img src='../assets/icons/<?php echo $friendIcon; ?>.png' class='card-img-top' alt='profile_' style='height: 75px; width: 75px; margin-right: 10px;'>
+                    <h3>
+                        <span class="badge bg-secondary"><?php echo explode("@",$friendMail)[0];?></span>
+                    </h3>
+                </a>
+            </div>
+            <div>
+                <button type="button" class="btn btn-outline-dark">Direct</button>
+            </div>
+        </div>
         <?php
                 }
             }
