@@ -614,21 +614,21 @@ body {
   color: #4E4F50;
 }
 
-.navigation-bar-themes {
+/* .navigation-bar-themes {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   width: 100%;
   height: 20vh;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  flex-direction:row;
+  justify-content: wrap;
   align-items: center;
-}
+} */
 
 @media only screen and (max-width: 840px) {
   .navigation-bar-themes {
-    flex-direction: column;
+    flex-direction: row;
   }
 }
 

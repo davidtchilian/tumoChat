@@ -38,7 +38,8 @@
     <link rel="icon" type="image/png" href="../assets/images/logo_tuyu-sm.png" />
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
     <script src="../scripts/changetheme.js"></script>
     <link rel="stylesheet" href="../style/style.css">
     <style>
@@ -48,17 +49,27 @@
     </style>
 </head>
 <body>
-    <div class="navigation-bar-themes">
-        <div class="navbar-container">
-            <a href="<?php echo $isGuest ? "profile.php" : "home.php" ?>"><img src="../assets/images/flèche_retour3.png" alt="Retour" style="width : 35px; height: 35px;" /></a>
-        </div>
+
+    <nav  class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="<?php echo $isGuest ? "profile.php" : "home.php" ?>"><img src="../assets/images/flèche_retour3.png" alt="Retour" style="width : 35px; height: 35px;" /></a>
         <?php
             if (!$isGuest) {
         ?>
-        <div class="navbar-container">
-            <ul class="">
-                <div class="navigation modes">
-                    <ul>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarText"
+            aria-controls="navbarText"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse " id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex d-flex align-items-center">
+                <div class="navigation modes " style="width: 400px;">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row " >
                         <?php
                             $classes = array();
                             for ($i = 0; $i < 4; $i++) {
@@ -100,8 +111,7 @@
                     </ul>
                 </div>
             </ul>    
-        </div>  
-        <div class="navbar-container">
+       
             <?php  
                 $users = array();
                 $sql = "SELECT user_email, user_id FROM USERS WHERE user_id != $userId AND user_email LIKE '%$txt%'";
@@ -116,14 +126,15 @@
                 }
 
             ?>
-            <form class="d-flex searchform" style="margin: auto 0 !important" role="search">
-            <input type="text" id="fname" name="fname" onkeyup="showHint(this.value)">
-                <div id="txtHint"></div> 
-                <button class="btn search btn-search">
-                    <img src="../assets/images/loupe.png" alt="Rechercher" style="width : 21px; height: 30px; margin-top : 3px" />
-                </button>
-            </form>
-        </div>  
+                <form class="form-inline my-2 my-lg-0 d-flex " role="search" style="width: 400px; margin:auto;">
+                    <input class="form-control me-2 srch-input" type="text" id="fname" name="fname" onkeyup="showHint(this.value)">
+                    <div id="txtHint"></div> 
+                    <button class="btn search btn-search ">
+                        <img src="../assets/images/loupe.png" alt="Researcher" style="width : 21px; height: 30px; margin-top : 3px" />
+                    </button>
+                </form>
+        </div>
+    </nav>  
         <?php
             }
         ?>
@@ -254,7 +265,6 @@
     </script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
     <script>
         function showHint(str) {
         if (str.length == 0) {
