@@ -196,7 +196,7 @@ function startsWith($string, $startString)
                 </div>
 
                 <div id="infoModal" class="modal_user">
-                    <div class="modal-content">
+                    <div class="modal-content" id="modCont">
                         <?php if ($groupTypeName == "public") { ?>
                             <div>
                                 <button id="closeButton" class="close btn modal_interaction"><img src="../assets/images/cllose.png" alt="sticker" style="width :40px" style="height : 40px" />
@@ -370,7 +370,7 @@ function startsWith($string, $startString)
 
                 </div>
                 <div id="stickerModal" class="modal_user">
-                    <div class="modal-content modal-content-sticker ">
+                    <div id="modCont1" class="modal-content modal-content-sticker" style="background-color: #664C8F;">
 
                         <div id="modal-extra-interactions"></div>
                         <div id="modal-default-interactions">
@@ -475,7 +475,20 @@ return rgb;
 }
 let rgb = getAverageRGB(img);
 document.getElementById("navbar").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+document.getElementById("modCont").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+document.getElementById("modCont1").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+document.getElementById("closeButton").style.backgroundColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
+document.getElementById("stickerCloseButton").style.backgroundColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
+document.getElementById("groupinfo-container").style.backgroundColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
 document.getElementById("navbar1").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+document.getElementById("infoButton").onmouseover = function() 
+{
+    this.style.borderColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
+}
+document.getElementById("infoButton").onmouseout = function() 
+{
+    this.style.borderColor = 'rgba(255,255,255,0)';
+}
 </script>
 <?php } ?>
 </body>
