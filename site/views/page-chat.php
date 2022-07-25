@@ -23,12 +23,8 @@ if (!isset($groupId)) {
     return;
 }
 
-<<<<<<< HEAD
 require_once('../models/db.php');
-=======
-require('../models/db.php');
 require_once('../models/functions.php');
->>>>>>> ae62f0ac95ecfe89f8813aaa3f685244c9da6e0c
 
 
 
