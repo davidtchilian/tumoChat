@@ -61,7 +61,7 @@ if ($groupType == 2) {
 
     if (!$isingroup) {
         var_dump($group_users); 
-        // header("Location: home.php");
+        header("Location: home.php");
     }
 }
 
@@ -243,9 +243,11 @@ function startsWith($string, $startString)
                                 $usersin = getGroupUsersId($conn,$groupId);
 
                                 foreach($usersin as $u){
-                                    $sql = $sql."AND user_id != $u ";
+                                    $sql = $sql." ". "AND user_id != $u";
                                 }
+
                                 $result = mysqli_query($conn,$sql);
+
                                 if(mysqli_num_rows($result) > 0){
                                     while($row = $result->fetch_assoc()){
                                         $temp = array();
@@ -260,7 +262,6 @@ function startsWith($string, $startString)
                                 }
                                 ?>
                             </select>
-                            <?php var_dump($sql); ?>
                             <input type="hidden" name="groupname" value="<?=$groupName?>">
                             <button type="submit" class="btn btn-primary mt-3"
                 style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Add</button>
