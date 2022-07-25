@@ -224,7 +224,6 @@
                     $friendMail = $friend['user_email'];
                     $friendIcon = $friend['user_icon'];
         ?>
-
         <div class="friend-row">
             <div class="friend-acc">
                 <a  href="profile.php?id=<?php echo $friendId; ?>">
@@ -238,6 +237,7 @@
                 <button type="button" class="btn btn-outline-dark">Direct</button>
             </div>
         </div>
+
         <?php
                 }
             }
