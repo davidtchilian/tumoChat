@@ -19,10 +19,12 @@ if (!isset($userId)) {
 
 if (!isset($groupId)) {
     header("Location: home.php");
+    echo "lol";
     return;
 }
 
 require('../models/db.php');
+require_once('../models/functions.php');
 
 
 
@@ -51,15 +53,15 @@ $groupTypeName = mysqli_fetch_assoc(mysqli_query($conn, $getTypeSql))['typeName'
 
 //   $message = mysqli_fetch_assoc($messages);
 if ($groupType == 2) {
-    $group_users = file_get_contents($domain_name . "/controllers/getgroupusers.php?id=" . $groupId);
-    $group_users = json_decode($group_users);
+    $group_users = getGroupUsersId($conn,$groupId);
     $isingroup = false;
     for ($i = 0; $i < count($group_users) && !$isingroup; $i++) {
         $isingroup = $group_users[$i] == $userId;
     }
 
     if (!$isingroup) {
-        header("Location: home.php");
+        var_dump($group_users); 
+        // header("Location: home.php");
     }
 }
 
@@ -237,6 +239,12 @@ function startsWith($string, $startString)
                                 $users = array();
                                 // **CHJNJEEEEEEL** FOR ADD USER IN GC SELECT USERS.user_email, USERS.user_id FROM USERS JOIN friends ON ((friends.user_id_1 = 1 AND USERS.user_id = friends.user_id_2) OR (friends.user_id_2 = 1 AND USERS.user_id = friends.user_id_1)) WHERE USERS.user_id!=1
                                 $sql = "SELECT USERS.user_email, USERS.user_id FROM USERS JOIN friends ON ((friends.user_id_1 = $userId AND USERS.user_id = friends.user_id_2) OR (friends.user_id_2 = $userId AND USERS.user_id = friends.user_id_1)) WHERE USERS.user_id!=$userId";
+                                
+                                $usersin = getGroupUsersId($conn,$groupId);
+
+                                foreach($usersin as $u){
+                                    $sql = $sql."AND user_id != $u ";
+                                }
                                 $result = mysqli_query($conn,$sql);
                                 if(mysqli_num_rows($result) > 0){
                                     while($row = $result->fetch_assoc()){
@@ -246,11 +254,13 @@ function startsWith($string, $startString)
                                         $users[] = $temp;
                                     }
                                 }
+                                
                                 foreach($users as $i){
                                     echo "<option value='$i[0]'>" . explode("@", $i[1])[0] . "</option >";
                                 }
                                 ?>
                             </select>
+                            <?php var_dump($sql); ?>
                             <input type="hidden" name="groupname" value="<?=$groupName?>">
                             <button type="submit" class="btn btn-primary mt-3"
                 style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Add</button>
