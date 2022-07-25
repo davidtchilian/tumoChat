@@ -304,7 +304,10 @@ function startsWith($string, $startString)
                             for ($i = 0; $i < count($group_users); $i++) {
                                 if ($group_users[$i] == $message["message_sender_id"]) {
                                     $isingroup_message = true;
+                                    
                                 }
+                                
+                                
                             }
             ?>
             <div class="row">
@@ -315,7 +318,15 @@ function startsWith($string, $startString)
                         <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
                             <?php
                                 echo "<p class='user_email'>" . $user_name . "</p>";
-                                echo  $message['message_content'] ?>
+                                //  echo  $message['message_content'];
+                                $stickerSplit = explode("_", $message['message_content']);
+                            if ($stickerSplit[0] == "STICKER") {
+                                $stickerId = $stickerSplit[1];
+                                echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 100px'>";
+                            } else {
+                                echo "<pre >" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>"; 
+                            }
+                                ?>
                         </button>
                     </div>
                 <?php
