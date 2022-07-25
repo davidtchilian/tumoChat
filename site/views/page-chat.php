@@ -492,6 +492,7 @@ document.getElementById("closeButton").style.backgroundColor = 'rgb(' + rgb.r/1.
 document.getElementById("stickerCloseButton").style.backgroundColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
 document.getElementById("groupinfo-container").style.backgroundColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
 document.getElementById("navbar1").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+Array.from(document.getElementsByClassName("messageEnvoye")).map((element)=>{element.style.backgroundColor = 'rgb(' + rgb.r*1.2 + ',' + rgb.g*1.2 + ',' + rgb.b*1.2 + ')'; element.style.borderColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')'});
 document.getElementById("infoButton").onmouseover = function() 
 {
     this.style.borderColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
