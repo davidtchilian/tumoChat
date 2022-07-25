@@ -161,8 +161,9 @@ function startsWith($string, $startString)
 </head>
 
 <body id="bodyHTML">
+
     <div class="fixed-top">
-        <nav class="navbar navbar-expand-lg" style="background-color : #6c4b93;">
+        <nav id="navbar" class="navbar navbar-expand-lg" style="background-color : #6c4b93;">
             <?php
             if ($groupTypeName == "private") {
             ?>
@@ -347,14 +348,14 @@ function startsWith($string, $startString)
     <br>
 
     <div class="fixed-bottom" style="position:fixed">
-        <nav class="navbar navbar-expand-lg" style="background-color:#6c4b93" id="navbarId">
+        <nav id="navbar1" class="navbar navbar-expand-lg" id="navbarId" style="background-color : #6c4b93;">
             <div class="container">
                 <a onClick="sticker()" id="stickerButton" class="sticker_btn nav-link" style="display: inline-block">
                     <img src="../assets/images/stickerr.png" alt="sticker" style="width :40px" style="height : 40px" />
                 </a>
 
-                <div class="container-fluid">
-                    <form class="d-flex" role="search" method="post" id="form">
+                <div class="container-fluid" style="align-items:center; justify-content: center">
+                    <form class="d-flex" role="search" method="post" id="form" style="align-items:center">
                         <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
                         <input type="hidden" name="group_id" value="<?php echo $groupId; ?>" id="groupId">
                         <input type="hidden" name="message_id" value="<?= $message['message_id'] ?>" id="message_id">
@@ -412,6 +413,71 @@ function startsWith($string, $startString)
             jQuery(".chosen").data("placeholder", "Select persons you want to add...").chosen();
         });
     </script>
+    <?php
+    if($groupTypeName=="public"){
+    ?>
+    <script>
+var img = document.createElement('img');
+img.src= "../assets/comm_icons/<?php echo $groupIcon; ?>.png";
+function getAverageRGB(imgEl) {
+
+var blockSize = 5, // only visit every 5 pixels
+    defaultRGB = {r:0,g:0,b:0}, // for non-supporting envs
+    canvas = document.createElement('canvas'),
+    context = canvas.getContext && canvas.getContext('2d'),
+    data, width, height,
+    i = -4,
+    length,
+    rgb = {r:0,g:0,b:0},
+    count = 0;
+
+if (!context) {
+    return defaultRGB;
+}
+
+height = canvas.height = imgEl.naturalHeight || imgEl.offsetHeight || imgEl.height;
+width = canvas.width = imgEl.naturalWidth || imgEl.offsetWidth || imgEl.width;
+
+context.drawImage(imgEl, 0, 0);
+
+try {
+    data = context.getImageData(0, 0, width, height);
+} catch(e) {
+    /* security error, img on diff domain */
+    return defaultRGB;
+}
+
+length = data.data.length;
+
+while ( (i += blockSize * 4) < length ) {
+    ++count;
+    rgb.r += data.data[i];
+    rgb.g += data.data[i+1];
+    rgb.b += data.data[i+2];
+}
+
+// ~~ used to floor values
+rgb.r = ~~(rgb.r/count);
+rgb.g = ~~(rgb.g/count);
+rgb.b = ~~(rgb.b/count);
+
+let diff = 1.3/((rgb.r/255)+(rgb.g/255)+(rgb.b/255));
+console.log(diff)
+rgb.r = rgb.r*diff;
+rgb.g = rgb.g*diff;
+rgb.b = rgb.b*diff;
+
+console.log(rgb.r);
+console.log(rgb.g);
+console.log(rgb.b);
+
+return rgb;
+}
+let rgb = getAverageRGB(img);
+document.getElementById("navbar").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+document.getElementById("navbar1").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+</script>
+<?php } ?>
 </body>
 
 </html>

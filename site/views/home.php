@@ -111,7 +111,7 @@
     $(function (){
       // $.ajax({
 	    //     type: "GET", //we are using GET method to get data from server side
-	    //     url: 'basic.php', // get the route value
+	    //     url: 'basic.php', // get the route value 
 	    //     success: function (response) {//once the request successfully process to the server side it will return result here
 	    //         console.log(response)
 	    //     }
