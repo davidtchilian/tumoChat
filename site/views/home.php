@@ -111,7 +111,7 @@
     $(function (){
       // $.ajax({
 	    //     type: "GET", //we are using GET method to get data from server side
-	    //     url: 'basic.php', // get the route value
+	    //     url: 'basic.php', // get the route value 
 	    //     success: function (response) {//once the request successfully process to the server side it will return result here
 	    //         console.log(response)
 	    //     }
@@ -256,16 +256,20 @@
                 if ($groupCount[$index]<3) {
                   $textcolor = "dm";
                   $cardcolor = "text-white bg-dark";
-                }else {
+                  $imgsrc= "../assets/images/usercount_white1.png";
+                }
+                else {
                   $textcolor = "dm1";
                   $cardcolor = "";
+                  
+                  $imgsrc= "../assets/images/usercount.png";
                 }
                 ?>
             <div class="col-lg-4 col-sm-12 group-chats">
                 <a href="page-chat.php?id=<?php echo $group["gID"]; ?>" style="text-decoration :none">
-                    <div class=" card mb-3 <?= $cardcolor ?>">
-                        <ul class=" list-group-flush ">  <!--list-group-->
-                            <li class=  "list-group-item group-name">
+                    <div class="pad card mb-3 <?= $cardcolor ?>">
+                        <ul class="  list-group-flush ">  <!--list-group-->
+                            <li class=  "border-white list-group-item group-name">
                               <div>
                                 <span class ="streaks" id="stars_<?php echo $group["gID"]; ?>"></span>
 
@@ -280,7 +284,7 @@
                                 <div class = "userCount">
                                   <span><?php echo $groupCount[$index]; ?></span>
                                   
-                                  <img src="../assets/images/usercount.png" style="width: 28px; float:right;">
+                                  <img src= "<?= $imgsrc ?>" style="width: 28px; float:right;">
                               </div>
                               </div>
                               

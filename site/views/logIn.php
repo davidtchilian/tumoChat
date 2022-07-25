@@ -99,7 +99,7 @@
                                         <?php }
                     } ?>
                     <div class="login-buttons">
-                        <input type="submit" name="Login" id="exampleInputSubmit" class="submit-btn mb-3" href="page-accueil.html" style="margin:0 auto;">
+                        <input type="submit" name="Login" id="exampleInputSubmit" class="submit-btn mb-3" href="home.php" style="margin:0 auto;">
                         <p>━ OR ━</p>
                         <div id="g_id_onload"
                             data-client_id="409821055988-h65mtble4s6aa48ij82cp1alpariqbb1.apps.googleusercontent.com"
