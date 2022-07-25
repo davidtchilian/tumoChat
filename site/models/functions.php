@@ -52,7 +52,6 @@
             return null;
         }
         return mysqli_fetch_assoc($result);
-
     }
 
     function getGroupUsersId($conn,$groupId){
