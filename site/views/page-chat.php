@@ -292,8 +292,8 @@ function startsWith($string, $startString)
 
         <?php
         while ($message = mysqli_fetch_assoc($messages)) {
-            $icon = file_get_contents($domain_name . "/controllers/getusericon.php?id=" . $message["message_sender_id"]);
-            $user_email = file_get_contents($domain_name . "/controllers/getuseremail.php?id=" . $message["message_sender_id"]);
+            $icon = getUserIcon($conn, $message['message_sender_id']);
+            $user_email = getUserEmail($conn, $message['message_sender_id']);
             $user_name = explode("@", $user_email)[0];
             if ($message['message_sender_id'] == $userId) {
         ?>
