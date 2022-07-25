@@ -46,4 +46,14 @@
         return $result -> num_rows > 0;
     }
 
+    function getgroupinfo($conn, $groupId){
+        $sql = "SELECT * FROM GROUPCHAT WHERE group_id = $groupId";
+        $result = mysqli_query($conn, $sql);
+        if ($result -> num_rows <= 0) {
+            return null;
+        }
+        return mysqli_fetch_assoc($result);
+
+    }
+
 ?>

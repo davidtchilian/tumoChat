@@ -22,7 +22,7 @@ if (!isset($groupId)) {
     return;
 }
 
-require('../models/db.php');
+require_once('../models/db.php');
 
 
 
@@ -38,18 +38,19 @@ $sql = "SELECT q.* FROM
 $messages = mysqli_query($conn, $sql);
 
 
-$sql = "SELECT group_name, group_type, group_icon FROM groupchat WHERE group_id = $groupId";
+$sql = "SELECT group_name, group_type, group_icon, group_bio FROM groupchat WHERE group_id = $groupId";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $groupName = $row["group_name"];
 $groupType = $row['group_type'];
 $groupIcon = $row['group_icon'];
+$groupbio = $row['group_bio'];
 
 $getTypeSql = "SELECT typeName FROM typeGroupChat WHERE typeGroupChat_id = $groupType";
 $groupTypeName = mysqli_fetch_assoc(mysqli_query($conn, $getTypeSql))['typeName'];
 
 
-//   $message = mysqli_fetch_assoc($messages);
+
 if ($groupType == 2) {
     $group_users = file_get_contents($domain_name . "/controllers/getgroupusers.php?id=" . $groupId);
     $group_users = json_decode($group_users);
@@ -188,11 +189,21 @@ function startsWith($string, $startString)
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <a onClick="getGroupIdInfo('<?php echo $userId; ?>', '<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>')">
-                        <button id="infoButton" type="button" class="btn info">
-                            <img src="../assets/images/le_vrai_i.png" alt="Information" style="width: 35px; height: 35px;" />
-                        </button>
-                    </a>
+                    <?php
+                    if ($groupTypeName == "private") {
+                    ?>
+                        <a onClick="getGroupIdInfo('<?php echo $userId; ?>', '<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>')">
+                        <?php
+                    }?>
+                            <button id="infoButton" type="button" class="btn info">
+                                <img src="../assets/images/le_vrai_i.png" alt="Information" style="width: 35px; height: 35px;" />
+                            </button>
+                    <?php
+                    if ($groupTypeName == "private") {
+                    ?>
+                        </a>
+                    <?php
+                    }?>
                 </div>
 
                 <div id="infoModal" class="modal_user">
@@ -203,7 +214,8 @@ function startsWith($string, $startString)
                                 </button>
                             </div>
                             <div class="groupinfo_div" id="groupinfo-container">
-                                <p id="groupInfo" style="font-size: 2rem" class="group_name"></p>
+                                <p id="groupInfo" style="font-size: 2rem" class="group_name"><?=$groupName?></p>
+                                <p id="groupInfo" class="group_bio"><?=$groupbio?></p>
                                 <img class="comm_icon" style="margin: 1rem; width: 70px;" src="../assets/comm_icons/<?php echo $groupIcon; ?>.png" alt="">
                                 <div id="groupBio"></div>
                             </div>
@@ -235,7 +247,6 @@ function startsWith($string, $startString)
                             <select name='select' class="chosen" multiple="true" style="width:400px;">
                                 <?php
                                 $users = array();
-                                // **CHJNJEEEEEEL** FOR ADD USER IN GC SELECT USERS.user_email, USERS.user_id FROM USERS JOIN friends ON ((friends.user_id_1 = 1 AND USERS.user_id = friends.user_id_2) OR (friends.user_id_2 = 1 AND USERS.user_id = friends.user_id_1)) WHERE USERS.user_id!=1
                                 $sql = "SELECT USERS.user_email, USERS.user_id FROM USERS JOIN friends ON ((friends.user_id_1 = $userId AND USERS.user_id = friends.user_id_2) OR (friends.user_id_2 = $userId AND USERS.user_id = friends.user_id_1)) WHERE USERS.user_id!=$userId";
                                 $result = mysqli_query($conn,$sql);
                                 if(mysqli_num_rows($result) > 0){
