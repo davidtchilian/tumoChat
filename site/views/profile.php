@@ -117,14 +117,8 @@
 
             ?>
             <form class="d-flex searchform" style="margin: auto 0 !important" role="search">
-                <select name="id" class="form-select user-search-select" aria-label="Default select example">
-                    <option value="<?php echo $userId; ?>" selected>Search User</option>
-                    <?php
-                        foreach ($users as $user) {
-                            echo "<option value='$user[0]'>" . explode("@", $user[1])[0] . "</option>";
-                        }
-                    ?>
-                </select>  
+            <input type="text" id="fname" name="fname" onkeyup="showHint(this.value)">
+                <div id="txtHint"></div> 
                 <button class="btn search btn-search">
                     <img src="../assets/images/loupe.png" alt="Rechercher" style="width : 21px; height: 30px; margin-top : 3px" />
                 </button>
@@ -252,6 +246,25 @@
     </script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        function showHint(str) {
+        if (str.length == 0) {
+            document.getElementById("txtHint").innerHTML = "";
+            return;
+        } else {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtHint").innerHTML = this.responseText;
+            }
+            };
+            xmlhttp.open("GET", "../controllers/livesearch.php?q=" + str, false);
+            xmlhttp.send();
+        }
+        }
+</script>
+
     <?php 
         mysqli_close($conn);
     ?>
