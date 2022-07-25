@@ -31,5 +31,5 @@ INSERT INTO typeNotification(typeName) VALUES
 INSERT INTO Statistics_Types (statistic_type) VALUES ('LoginCount');
 INSERT INTO Statistics_Types (statistic_type) VALUES ('MessageCount');
 
-INSERT INTO Badges ('badge_name','badge_requirement_count') VALUES ('Logged in more than once!',1);
-INSERT INTO Badges ('badge_name','badge_requirement_count') VALUES ('Messaged more than once!',1);
+INSERT INTO Badges (badge_name,badge_requirement_count) VALUES ('Logged in more than once!',1);
+INSERT INTO Badges (badge_name,badge_requirement_count) VALUES ('Messaged more than once!',1);
