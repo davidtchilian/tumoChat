@@ -22,7 +22,7 @@ function find(){
     updateNames()
 
     var anun = namesArr.filter(function (elements) {
-        return elements.includes(input.value);
+        return elements.includes(String(input.value).toLowerCase());
     })
     for (i = 0; i < groups.length; i++) {
         if (anun.includes(String(namesArr[i]).toLowerCase())) {

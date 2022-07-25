@@ -622,7 +622,7 @@ body {
   height: 20vh;
   display: flex;
   flex-direction: row;
-  justify-content: left;
+  justify-content: flex-start;
   align-items: center;
 }
 
