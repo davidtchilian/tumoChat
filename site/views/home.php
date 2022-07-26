@@ -14,12 +14,10 @@
   $sqlGroup = "SELECT DISTINCT isInGroup_group_id, COUNT(*) FROM isInGroup GROUP BY isInGroup_group_id";
   $resultG = mysqli_query($conn, $sqlGroup);
 
-
   $groupsArray = array();
   while($groupsRow = mysqli_fetch_assoc($result)) {
     $groupsArray[] = $groupsRow;
   }
-
 
   $sql2 ="SELECT COUNT(notification_id) as nb FROM NOTIFICATIONS WHERE notification_receiver_id = $user_id";
   $result2 = mysqli_query($conn, $sql2);
@@ -27,20 +25,16 @@
     $notif_count = $row2['nb'];
   }
 
-  $flames=file_get_contents("../controllers/getdate.php");
-
-
+   //$flames=file_get_contents("../controllers/getdate.php");
+  $flames=getStreaks($conn,$user_id);
+var_dump($flames);
   $sql3 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
   $result3 = mysqli_query($conn, $sql3);
   if ($result3->num_rows > 0) {
     if($row1 = mysqli_fetch_assoc($result3)) {
         $usricon = $row1['user_icon'];
     }
-} else {
-    // echo "0 results";
-}
-
-
+  } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,116 +44,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>TUYU | Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="../style/page-accueil.css" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../style/page-accueil.css" />
     <script src="../scripts/jquery.js"></script>
-    <script type="text/javascript">
 
-    // Jquery Method
-    $(function (){
-        $.ajax({
-            url: '../controllers/getnotifications.php',       
-            data: "",
-            dataType: 'json', //data format      
-            success: function (data) {
-              
-                let modal = document.getElementById("modal-content");
-                data.forEach(element => {
-                console.log(element)
-                let notif_content = document.createElement("div");
-                let notif_content_text = document.createElement("p");
-                let notif_buttons = document.createElement("div");
-                let notif_accept_btn = document.createElement("a");
-                let notif_decline_btn = document.createElement("a");
-                notif_accept_btn.innerHTML = "✅";
-                notif_accept_btn.classList.add("notif_decesion_btn");
-                notif_decline_btn.innerHTML = "❌";
-                notif_decline_btn.classList.add("notif_decesion_btn");
-                console.log(element.typeName)
-                if(element.typeName == "GroupInvite"){
-                notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&notifId=" + element.notification_id + "&gID=" + element.notification_group_id ;
-                notif_decline_btn.href = "../controllers/notificationdecision.php?notifId="+ element.notification_id +"&gID=" + element.notification_group_id;
-                }
-                else if(element.typeName == "FriendRequest"){
-                notif_accept_btn.href = "../controllers/notificationdecision.php?dec=1&notifId=" + element.notification_id + "&sender=" + element.notification_sender_id;
-                notif_decline_btn.href = "../controllers/notificationdecision.php?notifId="+ element.notification_id + "&sender=" + element.notification_sender_id;
-                }
-                notif_content_text.innerHTML = element.notification_content;
-                notif_content.appendChild(notif_content_text);
-                notif_content.classList.add("notif_content_div");
-                notif_buttons.classList.add("notif_buttons");
-                notif_buttons.appendChild(notif_accept_btn);
-                notif_buttons.appendChild(notif_decline_btn);
-                notif_content.appendChild(notif_buttons);
-                modal.appendChild(notif_content);
-                
-              }
-              )
-              let notif_close_btn = document.createElement("button");
-              let modalInfo = document.getElementById("infoModal");
-                notif_close_btn.id = "closeButton";
-                notif_close_btn.className = "close btn modal_interaction";
-                notif_close_btn.onclick = function(){ 
-                  window.location.reload(true);
-                }
-                notif_close_btn.innerHTML = "Close";
-                modal.appendChild(notif_close_btn); 
-            }
-        });
-    });
-    $(function (){
-      // $.ajax({
-	    //     type: "GET", //we are using GET method to get data from server side
-	    //     url: 'basic.php', // get the route value 
-	    //     success: function (response) {//once the request successfully process to the server side it will return result here
-	    //         console.log(response)
-	    //     }
-	    // });
-        $.ajax({
-            type: "GET",
-            url: '../controllers/getdate.php',       
-            data: "",
-            dataType: 'json', //data format      
-            success: function (data) {
-            console.log(data)
-            for (let i = 0; i < data.length; i++) {
-              var idname = "stars_" + data[i][0];
-              if (data[i][1] >= 3 && data[i][1] < 7) {
-                document.getElementById(idname).innerHTML = data[i][1]+"⭐";
-              }
-              else if (data[i][1] >= 7 && data[i][1] < 21) {
-                document.getElementById(idname).innerHTML = data[i][1]+"🌟";
-
-              }
-              else if (data[i][1] >= 21 && data[i][1] < 42) {
-                document.getElementById(idname).innerHTML = data[i][1]+"💫";
-              }
-
-              else if (data[i][1] >= 42 && data[i][1] < 126) {
-                document.getElementById(idname).innerHTML = data[i][1]+"✨";
-              }
-
-              else if (data[i][1] >= 126 && data[i][1] < 182) {
-                document.getElementById(idname).innerHTML = data[i][1]+"🌠";
-              }
-
-              else if (data[i][1] >= 182 ) {
-                document.getElementById(idname).innerHTML = data[i][1]+"🌌";
-              }
-
-
-            }
-            }
-            
-         
-    });
-          });
-        
-</script>
     <style>
     body {
         background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
@@ -171,9 +60,9 @@
     <div class="fixed-top">
       <nav class="navbar navbar-expand-lg" style="background-color: #6c4b93">
         <div class="container">
-          <a class="navbar-brand" href="profile.php" style="color :white">
-            <?php  echo "<img src='../assets/icons/$usricon.png' class='card-img-top' alt='profile_' style='height: 45px; width: 45px; margin-bottom:10px;'>" ?>
-            Profile
+          <a class="navbar-brand" href="profile.php" style="color :white; flex;display: flex;justify-content: center;align-items: center;"">
+            <?php  echo "<img src='../assets/icons/$usricon.png' class='card-img-top' alt='profile_' style='height: 45px; width: 45px; margin-right:10px;'>" ?>
+            <span>Profile</span> 
           </a>
           
           <button
@@ -203,16 +92,34 @@
             <li class="nav-item">
               <a class="nav-link active" href="community.php" style="color :white">Community</a>
             </li>
-            <?php if($notif_count != 0)
+            <?php
+            $notifs = getNotifications($conn,$user_id);
+             if($notif_count != 0)
             {?>
             <div class="notifs_nb"> <?php if($notif_count > 100) {  echo "<p class='notif_limit'>" ?>  <?php echo "99+ </p>";} else{echo "<p class='notif_basic'>".$notif_count."</p>";}?></div>
             <?php } ?>
             <div id="infoModal" class="modal_user">
                     <div id="modal-content" class="modal-content">
                       <h3>Notifications</h3>
-                      <div id="notifs_block_div">
+                    <?php foreach ($notifs as $notif) { ?>
+                      <div class="notif_content_div">
+                        <p><?=$notif['notification_content']?></p>
+                        <div class="notif_buttons">
+                          <?php if($notif['typeName'] == "GroupInvite") {?>
 
+                            <a href="../controllers/notificationdecision.php?dec=1&notifId=<?=$notif['notification_id']?>&gID=<?=$notif['notification_group_id']?>" class="notif_decesion_btn">✅</a>
+                            <a href="../controllers/notificationdecision.php?notifId=<?=$notif['notification_id']?>&gID=<?=$notif['notification_group_id']?>" class="notif_decesion_btn">❌</a>
+
+                          <?php }elseif($notif['typeName'] == "FriendRequest"){ ?>
+
+                          <a href="../controllers/notificationdecision.php?dec=1&notifId=<?=$notif['notification_id']?>&sender=<?=$notif['notification_sender_id']?>" class="notif_decesion_btn">✅</a>
+                          <a href="../controllers/notificationdecision.php?notifId=<?=$notif['notification_id']?>&sender=<?=$notif['notification_sender_id']?>" class="notif_decesion_btn">❌</a>
+
+                          <?php } ?>
+                        </div>  
                       </div>
+                     <?php } ?>
+                      <button id = "closeButton" class="close btn modal_interaction" onclick = window.location.reload(true)>Close</button>
                     </div>
                 </div>
                 </ul>
@@ -234,8 +141,8 @@
     </div>
     <br />
     <div class="container">
-        <div class="div-titre" style="margin-top: 6rem;">
-            <h1 class="Titre">Home</h1>
+        <div class="div-titre" style="width: 100%; display: flex; justify-content: center; align-items: center; margin: 5rem 0 1rem 0">
+        <img src="../assets/images/groupchats.png" alt="" style="width: calc(300px);  margin: 1rem">
         </div>
         <div class="row">
             <?php
@@ -274,7 +181,7 @@
                         <ul style="margin-bottom: 0">  <!--list-group-->
                             <li class=  "border20 list-group-item group-name">
                               <div>
-                                <span class ="streaks" id="stars_<?php echo $group["gID"]; ?>"></span>
+                                <span class ="streaks" id="stars_<?php echo $group["gID"]; ?>"><?= getStreakIcon($flames[$group["gID"]]) ?></span>
 
                               <div class = " <?= $textcolor ?> groupHeader">
                                 <span class="groupChatName"><?php
@@ -294,31 +201,33 @@
                             </li>
                             <li class="<?= $textcolor ?> list-group-item" style = "min-height: 65px !important; display: flex; flex-direction: column; justify-content: center; align-items: center">
                                 <?php
-                            $message = getLastMessages($conn, $group['gID']);
-                            if(!isset($message[0]) && !isset($message[1])){ ?>
-                              <span class = "<?= $textcolor ?> ">No Messages yet!</span>
-                            <?php }else{
-                              if(!isset($message[0])){
-                                if(strlen($message[1])>40){
-                                  echo '<p style = "margin-bottom:0">' . substr($message[1], 0, 40) . "..." . "</p>";
+                            $messages = getLastMessages($conn, $group['gID']);
+                            switch (count($messages)) {
+                              case 0:
+                                echo "<span class = '$textcolor'>No Messages yet!</span>";
+                                break;
+                              case 1: 
+                                if(strlen($messages[0])>40){
+                                  echo '<p style = "margin-bottom:0">' . substr($messages[0], 0, 40) . "..." . "</p>";
                                 }else{
-                                  echo '<p style = "margin-bottom:0">' . $message[1]. "</p>";
+                                  echo '<p style = "margin-bottom:0">' . $messages[0]. "</p>";
                                 }
-                            }else{
-                              if(strlen($message[0])>40){
-                                echo '<p style = "margin-bottom:0">' . substr($message[0], 0, 40) . "..." . "</p>";
-                              }else{
-                                echo '<p style = "margin-bottom:0">' . $message[0] . "</p>";
-                              }
-                              if(strlen($message[1])>40){
-                                echo '<p style = "margin-bottom:0">' . substr($message[1], 0, 40) . "..." . "</p>";
-                              }else{
-                                echo '<p style = "margin-bottom:0">' . $message[1] . "</p>";
-                              }
-                              
+                                break;
+                              case 2:
+                                if(strlen($messages[0])>40){
+                                  echo '<p style = "margin-bottom:0">' . substr($messages[0], 0, 40) . "..." . "</p>";
+                                }else{
+                                  echo '<p style = "margin-bottom:0">' . $messages[0] . "</p>";
+                                }
+                                if(strlen($messages[1])>40){
+                                  echo '<p style = "margin-bottom:0">' . substr($messages[1], 0, 40) . "..." . "</p>";
+                                }else{
+                                  echo '<p style = "margin-bottom:0">' . $messages[1] . "</p>";
+                                }
+                                break;
+                              default:
+                                break;
                             }
-                            }
-                            
                           ?>
                             </li>
                         </ul>
@@ -332,8 +241,6 @@
         </div>
     </div>
     <script src="../scripts/search.js"></script>
-    <script src="../scripts/notifications.js"></script>
-
-    
+    <script src="../scripts/notifications.js"></script>  
   </body>
 </html>

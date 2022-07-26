@@ -81,8 +81,8 @@ function startsWith($string, $startString)
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html id = "doctype">
+<html lang="en" id = "HTML">
 
 <head>
     <meta charset="UTF-8" />
@@ -288,14 +288,14 @@ function startsWith($string, $startString)
     </div>
     </nav>
     </div>
-    <div id="cont0" class="container mt-5" style="min-height : 100vh;" style="position : relative">
+    <div id="cont0" class="container mt-5" style="min-height : 100vh;" style="position : relative" name = "ptiashxates">
         <br><br>
 
         <?php
         while ($message = mysqli_fetch_assoc($messages)) {
-            $icon = getUserIcon($conn, $message['message_sender_id']);
-
-            $user_email = getUserEmail($conn, $message['message_sender_id']);
+            $user = getUserInfo($conn, $message['message_sender_id']);
+            $icon = $user['user_icon'];
+            $user_email = $user['user_email'];
             $user_name = explode("@", $user_email)[0];
             if ($message['message_sender_id'] == $userId) {
         ?>
@@ -447,7 +447,6 @@ function startsWith($string, $startString)
         }
     </script>
     <script src="../scripts/chosen.jquery.js"></script>
-    <script type="text/javascript" src="../scripts/chat.js" refer></script>
     <script>
         jQuery(document).ready(function () {
             jQuery(".chosen").data("placeholder", "Select persons you want to add...").chosen();
@@ -456,92 +455,8 @@ function startsWith($string, $startString)
     <?php
     if($groupTypeName=="public"){
     ?>
-    <script>
-var img = document.createElement('img');
-img.src= "../assets/comm_icons/<?php echo $groupIcon; ?>.png";
-function getAverageRGB(imgEl) {
 
-var blockSize = 5, // only visit every 5 pixels
-    defaultRGB = {r:0,g:0,b:0}, // for non-supporting envs
-    canvas = document.createElement('canvas'),
-    context = canvas.getContext && canvas.getContext('2d'),
-    data, width, height,
-    i = -4,
-    length,
-    rgb = {r:0,g:0,b:0},
-    count = 0;
-
-if (!context) {
-    return defaultRGB;
-}
-
-height = canvas.height = imgEl.naturalHeight || imgEl.offsetHeight || imgEl.height;
-width = canvas.width = imgEl.naturalWidth || imgEl.offsetWidth || imgEl.width;
-
-context.drawImage(imgEl, 0, 0);
-
-try {
-    data = context.getImageData(0, 0, width, height);
-} catch(e) {
-    /* security error, img on diff domain */
-    return defaultRGB;
-}
-
-length = data.data.length;
-
-while ( (i += blockSize * 4) < length ) {
-    ++count;
-    rgb.r += data.data[i];
-    rgb.g += data.data[i+1];
-    rgb.b += data.data[i+2];
-}
-
-// ~~ used to floor values
-rgb.r = ~~(rgb.r/count);
-rgb.g = ~~(rgb.g/count);
-rgb.b = ~~(rgb.b/count);
-
-let diff = 1.3/((rgb.r/255)+(rgb.g/255)+(rgb.b/255));
-console.log(diff)
-rgb.r = rgb.r*diff;
-rgb.g = rgb.g*diff;
-rgb.b = rgb.b*diff;
-
-console.log(rgb.r);
-console.log(rgb.g);
-console.log(rgb.b);
-
-return rgb;
-}
-let rgb = getAverageRGB(img);
-document.getElementById("navbar").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
-document.getElementById("navbar1").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
-document.getElementById("modalCont").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
-document.getElementById("stickerCont").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
-document.getElementById("stickerCloseButton").style.backgroundColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
-document.getElementById("groupinfo-container").style.backgroundColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
-document.getElementById("closeButton").style.backgroundColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
-
-Array.from(document.getElementsByClassName("messageEnvoye")).map((element)=>{
-    element.style.backgroundColor = 'rgb(' + rgb.r*1.2 + ',' + rgb.g*1.2 + ',' + rgb.b*1.2 + ')'; element.style.borderColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')'
-});
-document.getElementById("infoButton").onmouseover = function() 
-{
-    this.style.borderColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
-}
-document.getElementById("infoButton").onmouseout = function() 
-{
-    this.style.borderColor = 'rgba(255,255,255,0)';
-}
-document.getElementById("send").onmouseover = function() 
-{
-    this.style.borderColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
-}
-document.getElementById("send").onmouseout = function() 
-{
-    this.style.borderColor = 'rgba(255,255,255,0)';
-}
-</script>
+<script id="chat" type="text/javascript" src="../scripts/chat.js" typeName=<?php echo $groupTypeName; ?> imageSrc=<?php echo $groupIcon; ?>></script>
 <?php } ?>
 </body>
 
