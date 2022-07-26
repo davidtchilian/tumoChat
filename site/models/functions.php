@@ -30,8 +30,10 @@
             while($friend = mysqli_fetch_assoc($friends)['user_id_2']){
                 array_push($friendsList, $friend);
             }
-            $sql = "SELECT DISTINCT * FROM friends WHERE user_id_2=$userId";
-            $friends = mysqli_query($conn, $sql);
+        }
+        $sql = "SELECT DISTINCT * FROM friends WHERE user_id_2=$userId";
+        $friends = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($friends)){
             while ($friend = mysqli_fetch_assoc($friends)['user_id_1']) {
                 array_push($friendsList, $friend);
             }
