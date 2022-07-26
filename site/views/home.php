@@ -287,7 +287,7 @@
             <div class="col-lg-4 col-sm-12 group-chats">
                 <a href="page-chat.php?id=<?php echo $group["gID"]; ?>" style="text-decoration :none">
                     <div class="pad card mb-3 <?= $cardcolor ?>">
-                        <ul class="  list-group-flush ">  <!--list-group-->
+                        <ul style="margin-bottom: 0">  <!--list-group-->
                             <li class=  "border-white list-group-item group-name">
                               <div>
                                 <span class ="streaks" id="stars_<?php echo $group["gID"]; ?>"></span>
