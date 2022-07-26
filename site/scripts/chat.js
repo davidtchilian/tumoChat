@@ -318,7 +318,7 @@ if(txt.value != ""){
                 const div3 = document.createElement("div")
                 div3.setAttribute("class", "col-4")
                 const div = document.createElement("div")
-                div.setAttribute("class", "col-7")
+                div.setAttribute("class", "col-8")
                 cont.appendChild(div3)
                 cont.appendChild(div)
                 
