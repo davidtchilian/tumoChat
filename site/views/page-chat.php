@@ -209,7 +209,7 @@ function startsWith($string, $startString)
                 </div>
 
                 <div id="infoModal" class="modal_user">
-                    <div class="modal-content">
+                    <div class="modal-content" id="modalCont">
                         <?php if ($groupTypeName == "public") { ?>
                             <div>
                                 <button id="closeButton" class="close btn modal_interaction"><img src="../assets/images/cllose.png" alt="sticker" style="width :40px" style="height : 40px" />
@@ -217,8 +217,9 @@ function startsWith($string, $startString)
                             </div>
                             <div class="groupinfo_div" id="groupinfo-container">
                                 <p id="groupInfo" style="font-size: 2rem" class="group_name"><?=$groupName?></p>
-                                <p id="groupInfo" class="group_bio"><?=$groupbio?></p>
                                 <img class="comm_icon" style="margin: 1rem; width: 70px;" src="../assets/comm_icons/<?php echo $groupIcon; ?>.png" alt="">
+                                <p id="groupInfo" class="group_bio"><?=$groupbio?></p>
+                                
                                 <div id="groupBio"></div>
                             </div>
                         <?php } else { ?>
@@ -408,7 +409,7 @@ function startsWith($string, $startString)
 
                 </div>
                 <div id="stickerModal" class="modal_user">
-                    <div class="modal-content modal-content-sticker ">
+                    <div class="modal-content modal-content-sticker" id="stickerCont">
 
                         <div id="modal-extra-interactions"></div>
                         <div id="modal-default-interactions">
@@ -514,7 +515,15 @@ return rgb;
 let rgb = getAverageRGB(img);
 document.getElementById("navbar").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
 document.getElementById("navbar1").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
-Array.from(document.getElementsByClassName("messageEnvoye")).map((element)=>{element.style.backgroundColor = 'rgb(' + rgb.r*1.2 + ',' + rgb.g*1.2 + ',' + rgb.b*1.2 + ')'; element.style.borderColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')'});
+document.getElementById("modalCont").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+document.getElementById("stickerCont").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+document.getElementById("stickerCloseButton").style.backgroundColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
+document.getElementById("groupinfo-container").style.backgroundColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
+document.getElementById("closeButton").style.backgroundColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
+
+Array.from(document.getElementsByClassName("messageEnvoye")).map((element)=>{
+    element.style.backgroundColor = 'rgb(' + rgb.r*1.2 + ',' + rgb.g*1.2 + ',' + rgb.b*1.2 + ')'; element.style.borderColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')'
+});
 document.getElementById("infoButton").onmouseover = function() 
 {
     this.style.borderColor = 'rgb(' + rgb.r/1.2 + ',' + rgb.g/1.2 + ',' + rgb.b/1.2 + ')';
