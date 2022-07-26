@@ -186,8 +186,8 @@
     </div>
     <br />
     <div class="container">
-        <div class="div-titre" style="margin-top: 6rem;">
-            <h1 class="Titre">Home</h1>
+        <div class="div-titre" style="width: 100%; display: flex; justify-content: center; align-items: center; margin: 5rem 0 1rem 0">
+        <img src="../assets/images/groupchats.png" alt="" style="width: calc(300px);  margin: 1rem">
         </div>
         <div class="row">
             <?php

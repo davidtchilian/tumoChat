@@ -117,8 +117,8 @@
     </div>
     <br />
     <div class="container" style="margin-top: 4rem;">
-      <div class="div-titre" >
-        <h1 class="Titre">Communities</h1>
+      <div class="div-titre" style="width: 100%; display: flex; justify-content: center; align-items: center;">
+        <img src="../assets/images/communities.png" alt="" style="width: calc(300px);  margin: 1rem 0">
       </div>
       <div class="row">
             <?php
