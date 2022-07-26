@@ -92,10 +92,7 @@
         return $messages;
     }
 
-<<<<<<< HEAD
-function getbio($userId,$sql){
 
-=======
     function getNotifications($conn, $userId){
         $sql = "SELECT notification_id, notification_sender_id, notification_group_id, notification_content, typeName
         FROM NOTIFICATIONS JOIN typeNotification ON notification_type_id = typeNotification_id WHERE notification_receiver_id = $userId";
@@ -111,7 +108,6 @@ function getbio($userId,$sql){
           return $notifs;
     }
 function getbio($conn, $userId){
->>>>>>> 1e7007039d24ee06969ffd4ae6c772f01dafa089
     
     $userId = $_GET['id'];
     
@@ -135,14 +131,12 @@ function getMessages($conn, $groupId){
     $sql = "SELECT * FROM message WHERE message_group_id=$groupId";
     $result = mysqli_query($conn, $sql);
 
-<<<<<<< HEAD
     while($row=msqli_fetch_assoc($result)){
     $all[]=$row;
 
     }
     return $all;
 }
-=======
 function getStreaks($conn,$user_id){
 
     $sql_groupid = "SELECT isInGroup_group_id FROM isInGroup WHERE isInGroup_user_id= $user_id";
@@ -171,7 +165,6 @@ function getStreaks($conn,$user_id){
         $res = mysqli_query($conn, $sql);
 
         $dates = array();
->>>>>>> 1e7007039d24ee06969ffd4ae6c772f01dafa089
 
         while($row = mysqli_fetch_assoc($res)){
             $dates[] = $row['date'];
