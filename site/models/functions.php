@@ -30,8 +30,10 @@
             while($friend = mysqli_fetch_assoc($friends)['user_id_2']){
                 array_push($friendsList, $friend);
             }
-            $sql = "SELECT DISTINCT * FROM friends WHERE user_id_2=$userId";
-            $friends = mysqli_query($conn, $sql);
+        }
+        $sql = "SELECT DISTINCT * FROM friends WHERE user_id_2=$userId";
+        $friends = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($friends)){
             while ($friend = mysqli_fetch_assoc($friends)['user_id_1']) {
                 array_push($friendsList, $friend);
             }
@@ -72,26 +74,44 @@
 
     function getLastMessages($conn, $groupId){
         $messages = array();
-        $sql = "SELECT message_content FROM message WHERE message_group_id=$groupId ORDER BY message_date DESC LIMIT 2";
+        $sql = "SELECT message_content FROM message WHERE message_group_id = $groupId ORDER BY message_date DESC LIMIT 2";
         $lastMessages = mysqli_query($conn, $sql);
+
         while ($message = mysqli_fetch_assoc($lastMessages)) {
             array_push($messages,$message["message_content"]);
         }
-        $temp = $messages[0];
-        $messages[0] = $messages[1];
-        $messages[1] = $temp;
+
+        array_reverse($messages);
     
         // Sticker sort
-        for ($i = 0; $i <= 1; $i++) {
-            if (explode("_", $messages[$i])[0] == "STICKER") {
-                $messages[$i] = "Sent sticker";
+        foreach($messages as $m){
+            if (explode("_", $m)[0] == "STICKER") {
+                $m = "Sent sticker";
             }
         }
         return $messages;
     }
 
+<<<<<<< HEAD
 function getbio($userId,$sql){
 
+=======
+    function getNotifications($conn, $userId){
+        $sql = "SELECT notification_id, notification_sender_id, notification_group_id, notification_content, typeName
+        FROM NOTIFICATIONS JOIN typeNotification ON notification_type_id = typeNotification_id WHERE notification_receiver_id = $userId";
+        $notifs = array();
+    
+        $result = mysqli_query($conn,$sql);
+
+        if($result->num_rows > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $notifs[] = $row;
+            }
+        } 
+          return $notifs;
+    }
+function getbio($conn, $userId){
+>>>>>>> 1e7007039d24ee06969ffd4ae6c772f01dafa089
     
     $userId = $_GET['id'];
     
@@ -115,13 +135,69 @@ function getMessages($conn, $groupId){
     $sql = "SELECT * FROM message WHERE message_group_id=$groupId";
     $result = mysqli_query($conn, $sql);
 
+<<<<<<< HEAD
     while($row=msqli_fetch_assoc($result)){
     $all[]=$row;
 
     }
     return $all;
 }
+=======
+function getStreaks($conn,$user_id){
 
+    $sql_groupid = "SELECT isInGroup_group_id FROM isInGroup WHERE isInGroup_user_id= $user_id";
+    $result = mysqli_query($conn,$sql_groupid);
+    $groupids=array();
+    if ($result->num_rows > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            $groupids[] = $row;
+        }
+    } else{
+        return $groupids;
+    }
+
+
+    $streaks=array();
+
+    foreach($groupids as $id){
+        $gid = $id['isInGroup_group_id'];
+            $sql = "
+            SELECT DISTINCT Date(message_date) AS date
+            FROM MESSAGE 
+            WHERE message_sender_id = $user_id
+            AND message_group_id = $gid
+            ORDER BY message_date DESC;";
+
+        $res = mysqli_query($conn, $sql);
+
+        $dates = array();
+>>>>>>> 1e7007039d24ee06969ffd4ae6c772f01dafa089
+
+        while($row = mysqli_fetch_assoc($res)){
+            $dates[] = $row['date'];
+        }
+        if ($dates[0] == date('Y-m-d')) {
+            
+            $flames = 1;
+            
+            for ($i=1; $i < count($dates); $i++) { 
+                if ($dates[$i] == date('Y-m-d', strtotime("-".$i." days"))) {
+                    $flames += 1;				
+                }	
+                else{
+                    $flames = 0;
+                }		
+            }	
+        }else {
+            $flames = 0;
+        
+        }
+        $streaks[]=array($id['isInGroup_group_id'],$flames);
+        
+    }
+
+    return $streaks;
+}
 
 
 ?>

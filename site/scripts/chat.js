@@ -1,3 +1,4 @@
+
 var stickerModal = document.getElementById("infoModal");
 var addUserModal = document.getElementById("addModal");
 var sticketrButton = document.getElementById("infoButton");
@@ -6,6 +7,9 @@ var groupName = document.getElementById("groupInfo");
 var usersInfo = document.getElementById("usersInfo");
 
 const groupInfoDiv = document.getElementById("groupinfo-container");
+
+var typeName = document.getElementById("chat").getAttribute("typeName");
+var imageSrc = document.getElementById("chat").getAttribute("imageSrc");
 
 var extraInteractions = document.getElementById("modal-extra-interactions");
 
@@ -16,7 +20,88 @@ window.onload = () => {
   }, document.body.scrollHeight);
 }
 
-sticketrButton.onclick = function() {
+var rgb;
+
+if (typeName == "public") {
+  //GET COLOR
+  var img = document.createElement('img');
+  img.src = "../assets/comm_icons/" + imageSrc + ".png";
+  function getAverageRGB(imgEl) {
+
+    var blockSize = 5, // only visit every 5 pixels
+      defaultRGB = { r: 0, g: 0, b: 0 }, // for non-supporting envs
+      canvas = document.createElement('canvas'),
+      context = canvas.getContext && canvas.getContext('2d'),
+      data, width, height,
+      i = -4,
+      length,
+      rgb = { r: 0, g: 0, b: 0 },
+      count = 0;
+
+    if (!context) {
+      return defaultRGB;
+    }
+
+    height = canvas.height = imgEl.naturalHeight || imgEl.offsetHeight || imgEl.height;
+    width = canvas.width = imgEl.naturalWidth || imgEl.offsetWidth || imgEl.width;
+
+    context.drawImage(imgEl, 0, 0);
+
+    try {
+      data = context.getImageData(0, 0, width, height);
+    } catch (e) {
+      /* security error, img on diff domain */
+      return defaultRGB;
+    }
+
+    length = data.data.length;
+
+    while ((i += blockSize * 4) < length) {
+      ++count;
+      rgb.r += data.data[i];
+      rgb.g += data.data[i + 1];
+      rgb.b += data.data[i + 2];
+    }
+
+    // ~~ used to floor values
+    rgb.r = ~~(rgb.r / count);
+    rgb.g = ~~(rgb.g / count);
+    rgb.b = ~~(rgb.b / count);
+
+    let diff = 1.3 / ((rgb.r / 255) + (rgb.g / 255) + (rgb.b / 255));
+    rgb.r = rgb.r * diff;
+    rgb.g = rgb.g * diff;
+    rgb.b = rgb.b * diff;
+
+
+    return rgb;
+  }
+  rgb = getAverageRGB(img);
+  document.getElementById("navbar").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+  document.getElementById("navbar1").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+  document.getElementById("modalCont").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+  document.getElementById("stickerCont").style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+  document.getElementById("stickerCloseButton").style.backgroundColor = 'rgb(' + rgb.r / 1.2 + ',' + rgb.g / 1.2 + ',' + rgb.b / 1.2 + ')';
+  document.getElementById("groupinfo-container").style.backgroundColor = 'rgb(' + rgb.r / 1.2 + ',' + rgb.g / 1.2 + ',' + rgb.b / 1.2 + ')';
+  document.getElementById("closeButton").style.backgroundColor = 'rgb(' + rgb.r / 1.2 + ',' + rgb.g / 1.2 + ',' + rgb.b / 1.2 + ')';
+
+  Array.from(document.getElementsByClassName("messageEnvoye")).map((element) => {
+    element.style.backgroundColor = 'rgb(' + rgb.r * 1.2 + ',' + rgb.g * 1.2 + ',' + rgb.b * 1.2 + ')'; element.style.borderColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')'
+  });
+  document.getElementById("infoButton").onmouseover = function () {
+    this.style.borderColor = 'rgb(' + rgb.r / 1.2 + ',' + rgb.g / 1.2 + ',' + rgb.b / 1.2 + ')';
+  }
+  document.getElementById("infoButton").onmouseout = function () {
+    this.style.borderColor = 'rgba(255,255,255,0)';
+  }
+  document.getElementById("send").onmouseover = function () {
+    this.style.borderColor = 'rgb(' + rgb.r / 1.2 + ',' + rgb.g / 1.2 + ',' + rgb.b / 1.2 + ')';
+  }
+  document.getElementById("send").onmouseout = function () {
+    this.style.borderColor = 'rgba(255,255,255,0)';
+  }}
+
+sticketrButton.onclick = function () {
   console.log("Click")
   stickerModal.style.display = "block";
 }
@@ -25,7 +110,7 @@ stickerClose.onclick = () => {
   onClose();
 }
 
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target == stickerModal) {
     onClose();
   }
@@ -101,7 +186,7 @@ function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
 
     if (isAdmin) {
       let addUserButton = createButton("add_user", "add_user", "Add User", "#");
-      addUserButton.onclick = function() {
+      addUserButton.onclick = function () {
         stickerModal.style.display = "none";
         addUserModal.style.display = "block";
       };
@@ -134,18 +219,18 @@ function createButton(className, id, innerText, href) {
 
 function removeParam(key, sourceURL) {
   var rtn = sourceURL.split("?")[0],
-      param,
-      params_arr = [],
-      queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
+    param,
+    params_arr = [],
+    queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
   if (queryString !== "") {
-      params_arr = queryString.split("&");
-      for (var i = params_arr.length - 1; i >= 0; i -= 1) {
-          param = params_arr[i].split("=")[0];
-          if (param === key) {
-              params_arr.splice(i, 1);
-          }
+    params_arr = queryString.split("&");
+    for (var i = params_arr.length - 1; i >= 0; i -= 1) {
+      param = params_arr[i].split("=")[0];
+      if (param === key) {
+        params_arr.splice(i, 1);
       }
-      if (params_arr.length) rtn = rtn + "?" + params_arr.join("&");
+    }
+    if (params_arr.length) rtn = rtn + "?" + params_arr.join("&");
   }
   return rtn;
 }
@@ -161,26 +246,26 @@ const messageId = document.getElementById("message_id")
 const cont0 = document.getElementById("cont0")
 
 
-document.getElementById("send").addEventListener("click", function(event){
+document.getElementById("send").addEventListener("click", function (event) {
   event.preventDefault()
 
 })
 
 var x
 
-function show(event){
+function show(event) {
   x = event.target.id
   let dropdownDiv = document.getElementsByClassName("dropdown")
   for (let i = 0; i < dropdownDiv.length; i++) {
     dropdownDiv[i].style.display = "none"
-    
+
   }
   var y = event.target.id
   let id = "dropdown" + x
 
-  
+
   const dropdown = document.getElementById(id)
- 
+
   dropdown.style.display = "block"
   dropdown.style.position = "absolute"
 }
@@ -196,202 +281,214 @@ function myFunction(event) {
 
   const messageCont = document.getElementById(x)
 
-  document.getElementById("send").addEventListener("click", function(event){
+  document.getElementById("send").addEventListener("click", function (event) {
     event.preventDefault()
-  
+
   })
   txt.value = messageCont.innerText
 
-   
-   var y = document.getElementById("editId" + x)
- 
-   if(event.target == y){
-     let dropdownDiv = document.getElementsByClassName("dropdown")
-     for (let i = 0; i < dropdownDiv.length; i++) {
-       dropdownDiv[i].style.display = "none"
-       
-     }  
-   
-   }
-  button.setAttribute("onclick", "updateMessages(event)")
- }
 
+  var y = document.getElementById("editId" + x)
 
-let y 
+  if (event.target == y) {
+    let dropdownDiv = document.getElementsByClassName("dropdown")
+    for (let i = 0; i < dropdownDiv.length; i++) {
+      dropdownDiv[i].style.display = "none"
 
-
-  
-  function updateMessages(event){
-    const message_cont = txt.value
-  
-   
-
-    var params = "user_id="+5+"&"+"message_id="+73+"&"+"message_content="+"hello"
-    if(message_cont != ""){
-      $.ajax(
-        {
-           type: 'post',
-           url:  "../controllers/update.php",
-           data: { 
-             "user_id" : messageSenderId,
-             "group_id" : groupId,
-             "message_id": x,
-             "message_content": message_cont
-            
-           },
-           success: function (response) {
-             console.log("Success !!");
-             document.getElementById(x).innerText = message_cont
-            
-           console.log(response)
-             
-           
-           },
-           error: function () {x
-             console.log("Error !!");
-           }
-          }        
-     );
-     
-      txt.value = ""
-      button.id = "send"
     }
-    button.setAttribute("onclick", "sendMessage(event)")
+
+  }
+  button.setAttribute("onclick", "updateMessages(event)")
+}
+
+
+let y
+
+
+
+function updateMessages(event) {
+  const message_cont = txt.value
+
+
+
+  var params = "user_id=" + 5 + "&" + "message_id=" + 73 + "&" + "message_content=" + "hello"
+  if (message_cont != "") {
+    $.ajax(
+      {
+        type: 'post',
+        url: "../controllers/update.php",
+        data: {
+          "user_id": messageSenderId,
+          "group_id": groupId,
+          "message_id": x,
+          "message_content": message_cont
+
+        },
+        success: function (response) {
+          console.log("Success !!");
+          document.getElementById(x).innerText = message_cont
+
+          console.log(response)
+
+
+        },
+        error: function () {
+          x
+          console.log("Error !!");
+        }
+      }
+    );
+
+    txt.value = ""
+    button.id = "send"
+  }
+  button.setAttribute("onclick", "sendMessage(event)")
+}
+
+
+
+
+function deleteMessages(event) {
+  $.ajax(
+    {
+      type: 'post',
+      url: "../controllers/delete.php",
+      data: {
+
+        "message_id": x,
+
+
+      },
+      success: function (response) {
+        console.log("Success !!");
+
+
+        console.log(response)
+        const element = document.getElementById(x)
+        element.style.display = "none"
+
+      },
+      error: function () {
+        x
+        console.log("Error !!");
+      }
+    }
+
+
+  );
+
+  let dropdownDiv = document.getElementsByClassName("dropdown")
+  for (let i = 0; i < dropdownDiv.length; i++) {
+    dropdownDiv[i].style.display = "none"
+
+  }
+
+}
+var id
+function sendMessage(event) {
+  if (txt.value != "") {
+    $.ajax(
+      {
+        type: 'post',
+        url: "../controllers/sendmessage.php",
+        data: {
+          "group_id": groupId,
+          "message_content": txt.value,
+          "message_id": x
+
+        },
+        success: function (response) {
+          id = response
+          const cont = document.createElement("div")
+          cont.setAttribute("class", "row")
+          cont.setAttribute("id", "messages")
+          const div3 = document.createElement("div")
+          div3.setAttribute("class", "col-4")
+          const div = document.createElement("div")
+          div.setAttribute("class", "col-8")
+          cont.appendChild(div3)
+          cont.appendChild(div)
+
+          const button2 = document.createElement("button")
+          button2.setAttribute("class", "btn btn-primary messageEnvoye mt-2")
+          if (groupId < 16) {
+            button2
+          }
+          button2.setAttribute("onclick", "show(event)")
+          button2.setAttribute("style", "float : right; color: black;")
+          button2.setAttribute("id", id)
+          button2.style.backgroundColor='rgb(' + rgb.r * 1.2 + ',' + rgb.g * 1.2 + ',' + rgb.b * 1.2 + ')';
+          button2.style.borderColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+          const pre = document.createElement("pre")
+          const span = document.createElement("span")
+          pre.setAttribute("onclick", "show(event)")
+          span.setAttribute("class", "message_content_span")
+          span.setAttribute("onclick", "show(event)")
+          if (txt.value.startsWith("STICKER_")) {
+            let sticker = document.createElement("img");
+            sticker.src = `../assets/stickers/${txt.value.split("_")[1]}.png`;
+            sticker.style.width = "100px";
+            sticker.style.height = "100px";
+            span.appendChild(sticker);
+          }
+          else {
+            span.setAttribute("id", id)
+            span.innerText = txt.value;
+          }
+          pre.appendChild(span)
+          button2.appendChild(pre)
+          div.appendChild(button2)
+          const div0 = document.createElement("div")
+          div0.setAttribute("class", "dropdown")
+          div0.setAttribute("style", "width:30px; margin-left:900px; margin-top:-30px;")
+          div0.setAttribute("id", "dropdown" + id)
+
+          const div1 = document.createElement("div")
+          div1.setAttribute("class", "dropdown-content")
+          div1.setAttribute("id", "dropdown-content")
+          const a0 = document.createElement("a")
+          a0.setAttribute("onclick", "myFunction(event)")
+          a0.setAttribute("id", "editId" + id)
+          a0.setAttribute("name", id)
+          a0.innerText = "Edit"
+          div1.appendChild(a0)
+          div0.appendChild(div1)
+          div.appendChild(div0)
+
+          const a1 = document.createElement("a")
+          a1.setAttribute("onclick", "deleteMessages(event)")
+          a1.setAttribute("id", "delete" + id)
+          a1.setAttribute("name", id)
+          a1.innerText = "Delete"
+          div1.appendChild(a1)
+          cont0.appendChild(cont)
+
+          cont.scrollIntoView({ behavior: "smooth" })
+
+
+          txt.value = ""
+
+        },
+        error: function () {
+          x
+          console.log("Error !!");
+        }
+
+
+      });
   }
 
 
 
-
-function deleteMessages(event){
-  $.ajax(
-    {
-       type: 'post',
-       url:  "../controllers/delete.php",
-       data: { 
-      
-         "message_id": x,
-    
-        
-       },
-       success: function (response) {
-         console.log("Success !!");
-        
-      
-       console.log(response)
-        const element = document.getElementById(x)
-        element.style.display = "none"
-       
-       },
-       error: function () {x
-         console.log("Error !!");
-       }
-    }
-    
-   
- );
-
- let dropdownDiv = document.getElementsByClassName("dropdown")
-    for (let i = 0; i < dropdownDiv.length; i++) {
-      dropdownDiv[i].style.display = "none"
-      
-    }
-
 }
-var id
-function sendMessage(event){
-if(txt.value != ""){
-          $.ajax(
-            {
-              type: 'post',
-              url:  "../controllers/sendmessage.php",
-              data: { 
-                "group_id" : groupId,
-                "message_content": txt.value,
-                "message_id" : x
-                
-              },
-              success: function (response) {
-                id = response
-                const cont = document.createElement("div")
-                cont.setAttribute("class", "row") 
-                cont.setAttribute("id", "messages") 
-                const div3 = document.createElement("div")
-                div3.setAttribute("class", "col-4")
-                const div = document.createElement("div")
-                div.setAttribute("class", "col-8")
-                cont.appendChild(div3)
-                cont.appendChild(div)
-                
-               
-                const button2 = document.createElement("button")
-                button2.setAttribute("class", "btn btn-primary messageEnvoye mt-2")
-                button2.setAttribute("onclick", "show(event)")
-                button2.setAttribute("style", "float : right; color: black;")
-                button2.setAttribute("id", id)
-                const pre = document.createElement("pre")
-                const span = document.createElement("span")
-                pre.setAttribute("onclick", "show(event)")
-                span.setAttribute("class", "message_content_span")
-                span.setAttribute("onclick", "show(event)")
-                if (txt.value.startsWith("STICKER_")) {
-                  let sticker = document.createElement("img");
-                  sticker.src = `../assets/stickers/${txt.value.split("_")[1]}.png`;
-                  sticker.style.width = "100px";
-                  sticker.style.height = "100px";
-                  span.appendChild(sticker);
-                }
-                else {
-                  span.setAttribute("id",  id)
-                  span.innerText = txt.value;
-                }
-                pre.appendChild(span)
-                button2.appendChild(pre)
-                div.appendChild(button2)
-                const div0 = document.createElement("div")
-                div0.setAttribute("class","dropdown")
-                div0.setAttribute("style", "width:30px; margin-left:900px; margin-top:-30px;")
-                div0.setAttribute("id", "dropdown"+id)
-                
-                const div1 = document.createElement("div")
-                div1.setAttribute("class", "dropdown-content")
-                div1.setAttribute("id", "dropdown-content")
-                const a0 = document.createElement("a")
-                a0.setAttribute("onclick", "myFunction(event)")
-                a0.setAttribute("id", "editId"+id)
-                a0.setAttribute("name", id)
-                a0.innerText = "Edit"
-                div1.appendChild(a0)
-                div0.appendChild(div1)
-                div.appendChild(div0)
-
-                const a1 = document.createElement("a")
-                a1.setAttribute("onclick", "deleteMessages(event)")
-                a1.setAttribute("id", "delete"+id)
-                a1.setAttribute("name", id)
-                a1.innerText = "Delete"
-                div1.appendChild(a1)
-                cont0.appendChild(cont)
-               
-                cont.scrollIntoView({behavior: "smooth"})
-                
-             
-                txt.value = ""
-               
-              },
-              error: function () {x
-                console.log("Error !!");
-              }
-              
-             
-            });
-          } 
-        
-
-      
-          } 
 
 function sendSticker(stickerId) {
   stickerId = stickerId.replace(" ", "");
   txt.value = `STICKER_${stickerId}`;
   sendMessage(null);
 }
+
+// let winY = window.scrollY
+
+// console.log(document.getElementById("cont0").childElementCount)
+
