@@ -92,6 +92,7 @@
         return $messages;
     }
 
+
     function getNotifications($conn, $userId){
         $sql = "SELECT notification_id, notification_sender_id, notification_group_id, notification_content, typeName
         FROM NOTIFICATIONS JOIN typeNotification ON notification_type_id = typeNotification_id WHERE notification_receiver_id = $userId";
@@ -121,8 +122,21 @@ function getGroupAdmin($conn,$gid){
     $adminid = "SELECT group_admin_id FROM GROUPCHAT WHERE group_id = $gid";
     $result = mysqli_query($conn,$adminid); 
     return mysqli_fetch_assoc($result)['group_admin_id'];
-}
 
+}
+function getMessages($conn, $groupId){
+   
+    
+    $all = array();
+    $sql = "SELECT * FROM message WHERE message_group_id=$groupId";
+    $result = mysqli_query($conn, $sql);
+
+    while($row=msqli_fetch_assoc($result)){
+    $all[]=$row;
+
+    }
+    return $all;
+}
 function getStreaks($conn,$user_id){
 
     $sql_groupid = "SELECT isInGroup_group_id FROM isInGroup WHERE isInGroup_user_id= $user_id";
@@ -171,12 +185,38 @@ function getStreaks($conn,$user_id){
             $flames = 0;
         
         }
-        $streaks[]=array($id['isInGroup_group_id'],$flames);
+        $streaks[$id['isInGroup_group_id']]=$flames;
         
     }
 
     return $streaks;
 }
 
+function getStreakIcon($streak)
+{
+    
+              if ($streak >= 3 && $streak < 7) {
+                return $streak."⭐";
+              }
+              else if ($streak >= 7 && $streak < 21) {
+                return $streak."🌟";
 
+              }
+              else if ($streak >= 21 && $streak < 42) {
+                return $streak."💫";
+              }
+
+              else if ($streak >= 42 && $streak < 126) {
+                return $streak."✨";
+              }
+
+              else if ($streak >= 126 && $streak < 182) {
+                return $streak."🌠";
+              }
+
+              else if ($streak >= 182 ) {
+                return $streak."🌌";
+              }
+  
+}
 ?>
