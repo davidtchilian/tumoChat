@@ -223,9 +223,9 @@
         <?php
             if (empty($friends)) { 
         ?>
-       <div class="nofriend"> 
+       
            <h3>You don't have any friends.</h3> 
-        </div> 
+       
         <?php 
             } else{
                 foreach ($friends as $friend) {
