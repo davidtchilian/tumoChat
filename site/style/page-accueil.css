@@ -297,20 +297,14 @@ h1, h3{
   --bs-list-group-bg: rgb(9, 6, 6);
 } 
 
-.border-white{
+.border20{
  border-right: 0;
   border-left: 0;
   border-radius: 0;
-  border-bottom: 1px solid #e3e9f0a7 !important;
+  border-bottom: 1px solid #cdd3daa7 !important;
 
 }
-.border-black{
-  border-right: 0;
-   border-left: 0;
-   border-radius: 0;
-   border-bottom: 1px solid #12131395 !important;
- 
- }
+
 
 .pad ul{
   padding:0  !important;

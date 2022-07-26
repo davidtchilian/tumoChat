@@ -73,7 +73,7 @@ $name = $_POST['grpname'];
                     ?>
                 </select>
             </div>
-            <a href="../controllers/creategroup.php" class="btn btn-primary mt-3 "
+            <a href="../views/creategroup.php" class="btn btn-primary mt-3 "
                 style="background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119);">Return</a>
                 <input type="hidden" value="<?php echo $bio;  ?>" name="groupbio">
                 <input type="hidden" value="<?php echo $name;  ?>" name="groupname">

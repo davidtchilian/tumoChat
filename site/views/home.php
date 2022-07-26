@@ -263,7 +263,7 @@
                 }
                 else {
                   $textcolor = "dm1";
-                  $cardcolor = "";
+                  $cardcolor = "text-black";
                   
                   $imgsrc= "../assets/images/usercount.png";
                 }
@@ -272,7 +272,7 @@
                 <a href="page-chat.php?id=<?php echo $group["gID"]; ?>" style="text-decoration :none">
                     <div class="pad card mb-3 <?= $cardcolor ?>">
                         <ul style="margin-bottom: 0">  <!--list-group-->
-                            <li class=  "border-white list-group-item group-name">
+                            <li class=  "border20 list-group-item group-name">
                               <div>
                                 <span class ="streaks" id="stars_<?php echo $group["gID"]; ?>"></span>
 
