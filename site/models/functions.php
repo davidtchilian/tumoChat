@@ -98,6 +98,7 @@
                 $messages[$i] = "Sent sticker";
             }
         }
-        return array_unique($messages);
+        return $messages;
     }
+
 ?>
