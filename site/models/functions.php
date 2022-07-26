@@ -83,22 +83,36 @@
 
     function getLastMessages($conn, $groupId){
         $messages = array();
-        $sql = "SELECT message_content FROM message WHERE message_group_id=$groupId ORDER BY message_date DESC LIMIT 2";
+        $sql = "SELECT message_content FROM message WHERE message_group_id = $groupId ORDER BY message_date DESC LIMIT 2";
         $lastMessages = mysqli_query($conn, $sql);
+
         while ($message = mysqli_fetch_assoc($lastMessages)) {
             array_push($messages,$message["message_content"]);
         }
-        $temp = $messages[0];
-        $messages[0] = $messages[1];
-        $messages[1] = $temp;
+
+        array_reverse($messages);
     
         // Sticker sort
-        for ($i = 0; $i <= 1; $i++) {
-            if (explode("_", $messages[$i])[0] == "STICKER") {
-                $messages[$i] = "Sent sticker";
+        foreach($messages as $m){
+            if (explode("_", $m)[0] == "STICKER") {
+                $m = "Sent sticker";
             }
         }
         return $messages;
     }
 
+    function getNotifications($conn, $userId){
+        $sql = "SELECT notification_id, notification_sender_id, notification_group_id, notification_content, typeName
+        FROM NOTIFICATIONS JOIN typeNotification ON notification_type_id = typeNotification_id WHERE notification_receiver_id = $userId";
+        $notifs = array();
+    
+        $result = mysqli_query($conn,$sql);
+
+        if($result->num_rows > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $notifs[] = $row;
+            }
+        } 
+          return $notifs;
+    }
 ?>
