@@ -283,3 +283,6 @@ pre {
   justify-content: flex-start !important;
 }
 
+.nav-link{
+  font-weight: 700;
+}
