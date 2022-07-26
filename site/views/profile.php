@@ -39,7 +39,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-
+    <script src="../scripts/jquery.js"></script>
     <script src="../scripts/changetheme.js"></script>
     <link rel="stylesheet" href="../style/style.css">
     <style>
@@ -128,7 +128,11 @@
             ?>
                 <form class="form-inline my-2 my-lg-0 d-flex " role="search" style="width: 400px; margin:auto;">
                     <input class="form-control me-2 srch-input" type="text" id="fname" name="fname" onkeyup="showHint(this.value)">
-                    <div id="txtHint"></div> 
+                    
+                        <select>
+                            <option id="result"></option>
+                        </select>
+                    
                     <button class="btn search btn-search ">
                         <img src="../assets/images/loupe.png" alt="Researcher" style="width : 21px; height: 30px; margin-top : 3px" />
                     </button>
@@ -142,7 +146,7 @@
     <div class="container">
         <div class="row">
             
-                <div class="card centered-card" style=" width: 400px; ">
+                <div class="card centered-card " style=" width: 400px; ">
                     <div class="card-body">
                         <?php 
                             echo "<img src='../assets/icons/$userIcon.png' class='card-img-top' alt='profile_' style='height: 100px; width: 100px; margin-bottom:10px'>";
@@ -267,19 +271,36 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script>
         function showHint(str) {
-        if (str.length == 0) {
-            document.getElementById("txtHint").innerHTML = "";
-            return;
-        } else {
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("txtHint").innerHTML = this.responseText;
-            }
-            };
-            xmlhttp.open("GET", "../controllers/livesearch.php?q=" + str, false);
-            xmlhttp.send();
-        }
+            
+            // console.log(str);
+            $.ajax(
+        {
+           type: 'get',
+           url:  "../controllers/livesearch.php?q=" + str,
+           data: {},
+           success: function (response) {
+            console.log("Success !!");
+
+            // console.log(response)
+            // let txt = response.split('');
+            // console.log(response);
+            
+            const arr = JSON.parse(response);
+            
+            for (let element in arr) {
+                console.log(arr[element][1]);
+                 
+                }   
+            
+            // document.getElementById("result").innerHTML = element[1];
+            // response.forEach(element => document.getElementById("result").innerHTML = element[1]);
+           },
+           error: function () {x
+             console.log("Error !!");
+           }
+          }        
+     );
+
         }
     </script>
 
