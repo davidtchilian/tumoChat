@@ -78,7 +78,7 @@
         $sql = "SELECT user_icon FROM USERS WHERE user_id = $userId";
         $icon_ = mysqli_query($conn, $sql);
         $icon = mysqli_fetch_assoc($icon_);
-        return $icon;
+        return $icon['user_icon'];
     }
 
     function getLastMessages($conn, $groupId){

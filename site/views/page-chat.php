@@ -294,6 +294,7 @@ function startsWith($string, $startString)
         <?php
         while ($message = mysqli_fetch_assoc($messages)) {
             $icon = getUserIcon($conn, $message['message_sender_id']);
+
             $user_email = getUserEmail($conn, $message['message_sender_id']);
             $user_name = explode("@", $user_email)[0];
             if ($message['message_sender_id'] == $userId) {
