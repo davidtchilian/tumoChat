@@ -67,19 +67,8 @@
     }
 
 
-    function getUserEmail($conn, $userId){
-        $sql = "SELECT user_email FROM `users` WHERE user_id = ".$userId;
-        $userEmail = mysqli_query($conn, $sql);
-        $user_email = mysqli_fetch_assoc($userEmail)["user_email"];
-        return $user_email;
-    }
-
-    function getUserIcon($conn, $userId){
-        $sql = "SELECT user_icon FROM USERS WHERE user_id = $userId";
-        $icon_ = mysqli_query($conn, $sql);
-        $icon = mysqli_fetch_assoc($icon_);
-        return $icon;
-    }
+    
+    
 
     function getLastMessages($conn, $groupId){
         $messages = array();
@@ -100,5 +89,28 @@
         }
         return $messages;
     }
+
+function getbio($userId,$sql){
+    // header('Access-Control-Allow-Origin: *');
+
+    // require_once("../models/db.php");
+    
+    $userId = $_GET['id'];
+    
+    $sql = "SELECT user_bio FROM users WHERE user_id=$userId";
+    $result = mysqli_query($conn, $sql);
+    
+    return mysqli_fetch_assoc($result)['user_bio'];
+
+}
+
+function getGroupAdmin($conn,$gid){
+    $adminid = "SELECT group_admin_id FROM GROUPCHAT WHERE group_id = $gid";
+    $result = mysqli_query($conn,$adminid); 
+    return mysqli_fetch_assoc($result)['group_admin_id'];
+}
+
+
+
 
 ?>
