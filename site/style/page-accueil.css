@@ -152,13 +152,12 @@ h1, h3{
 /* @media screen and (max-width: 991px){
   .CommImg{
     width: 6.5vw !important;
-    
-  }
+*/
 
-  .list-group-item{
-    font-size: 1.5vw !important;
-  }
-
+/* .list-group-item{
+    margin: 0.5rem 0 !important ;
+} */
+/*
   .list-title{
     font-size: 2.2vw !important;
   }
@@ -284,15 +283,13 @@ h1, h3{
 }
 
 .dm{
-  
   color:rgb(255, 255, 255);
-  
-
+  margin: 0.5rem 0;
 }
 
 .dm1{
-color: rgb(0,0,0);
-
+  color: rgb(0,0,0);
+  margin: 0.5rem 0;
 }
 
 

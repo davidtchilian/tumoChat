@@ -146,7 +146,7 @@
     <div class="container">
         <div class="row">
             
-                <div class="card centered-card" style=" width: 400px; ">
+                <div class="card centered-card " style=" width: 400px; ">
                     <div class="card-body">
                         <?php 
                             echo "<img src='../assets/icons/$userIcon.png' class='card-img-top' alt='profile_' style='height: 100px; width: 100px; margin-bottom:10px'>";
