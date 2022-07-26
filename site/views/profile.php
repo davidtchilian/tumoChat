@@ -219,11 +219,13 @@
     <div class="div-titre" style="margin-top: 6rem; text-align: center;">
         <h1 class="Titre">Friends</h1>
     </div>
-    <div class="container friends-container">
+    <div class="container friends-container ">
         <?php
             if (empty($friends)) { 
         ?>
-        <h3>You don't have any friends.</h3>
+       <div class="nofriend"> 
+           <h3>You don't have any friends.</h3> 
+        </div> 
         <?php 
             } else{
                 foreach ($friends as $friend) {
