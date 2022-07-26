@@ -543,6 +543,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   flex-direction: column;
+  /* margin-left: 38%; */
 }
 
 .friends-container .row {
