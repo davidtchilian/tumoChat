@@ -171,12 +171,38 @@ function getStreaks($conn,$user_id){
             $flames = 0;
         
         }
-        $streaks[]=array($id['isInGroup_group_id'],$flames);
+        $streaks[$id['isInGroup_group_id']]=$flames;
         
     }
 
     return $streaks;
 }
 
+function getStreakIcon($streak)
+{
+    
+              if ($streak >= 3 && $streak < 7) {
+                return $streak."⭐";
+              }
+              else if ($streak >= 7 && $streak < 21) {
+                return $streak."🌟";
 
+              }
+              else if ($streak >= 21 && $streak < 42) {
+                return $streak."💫";
+              }
+
+              else if ($streak >= 42 && $streak < 126) {
+                return $streak."✨";
+              }
+
+              else if ($streak >= 126 && $streak < 182) {
+                return $streak."🌠";
+              }
+
+              else if ($streak >= 182 ) {
+                return $streak."🌌";
+              }
+  
+}
 ?>
