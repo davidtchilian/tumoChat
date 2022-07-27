@@ -340,6 +340,7 @@ function startsWith($string, $startString)
     <div class="fixed-bottom" style="position:fixed">
         <div class="editDelete" id="EditDelete">
             <div class="editDeleteContent">
+                
                 <a id="editBtn" onclick="myFunction(event)">Edit</a>
                 <a id="deleteBtn" onclick="deleteMessages(event)">Delete</a>
             </div>

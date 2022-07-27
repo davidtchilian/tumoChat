@@ -111,6 +111,7 @@ stickerClose.onclick = () => {
   onClose();
 }
 
+
 window.onclick = function (event) {
   if (event.target == stickerModal) {
     onClose();

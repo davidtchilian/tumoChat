@@ -285,11 +285,7 @@ if (!$isGuest) {
         if (empty($friends)) {
         ?>
 
-<<<<<<< HEAD
             <h3 style="text-align:center">You don't have any friends.</h3>
-=======
-            <h4>You don't have any friends.</h4>
->>>>>>> 0d51f480c3e41c70e8dd4d008f0d9a6daa8810e0
 
             <?php
         } else {
