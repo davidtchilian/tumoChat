@@ -65,11 +65,27 @@
             FROM USERS INNER JOIN isInGroup ON isInGroup.isInGroup_user_id = USERS.user_id
             WHERE isInGroup_group_id = $groupId";
         $result = mysqli_query($conn, $sql);
+        
         while ($user = mysqli_fetch_assoc($result)) {
             $users[] = $user['user_id'];
         }
+        
         return $users;
     }
+
+    function getGroupUsersEmail($conn, $groupId) {
+        $users = array();
+        $sql = "SELECT user_email
+            FROM USERS INNER JOIN isInGroup ON isInGroup.isInGroup_user_id = USERS.user_id
+            WHERE isInGroup_group_id = $groupId";
+        $result = mysqli_query($conn, $sql);
+        while ($user = mysqli_fetch_assoc($result)) {
+            $users[] = $user['user_email'];
+        }
+        return $users;
+    }
+
+  
 
     function getLastMessages($conn, $groupId) {
         $messages = array();
@@ -188,12 +204,6 @@
         }
         return $owned_badges;
     
-
-
-    while ($row = mysqli_fetch_assoc($result)) {
-        $all[] = $row;
-    }
-    return $all;
 }
 
 function getStreakIcon($streak)
@@ -246,13 +256,13 @@ function getStreaks($conn,$user_id){
             FROM MESSAGE 
             WHERE message_sender_id = $user_id
             AND message_group_id = $gid
-            ORDER BY message_date DESC;";
+            ORDER BY date DESC;";
 
-        $res = mysqli_query($conn, $sql);
-
+        $result = mysqli_query($conn, $sql);
+        echo $sql;
         $dates = array();
 
-        while($row = mysqli_fetch_assoc($res)){
+        while($row = mysqli_fetch_assoc($result)){
             $dates[] = $row['date'];
         }
         if ($dates[0] == date('Y-m-d')) {
@@ -277,3 +287,5 @@ function getStreaks($conn,$user_id){
 
     return $streaks;
 }
+
+

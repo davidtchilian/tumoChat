@@ -1,6 +1,10 @@
-h3, h5 {
+ h3,h5 {
   margin: 0 !important;
 }
+h4{
+  margin-left: 37%;
+}
+
 a{
   padding:0 12px;
 }
@@ -221,6 +225,7 @@ body ::after {
   }
   .centered-card{
     width:70%;
+    
   }
   
 }
@@ -345,11 +350,10 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-.card {
-  text-align: center;
+.card{
+   text-align: center;
   margin: auto;
 }
-
 .button-accueil {
   position: relative;
   transform: translateY(-1000)
@@ -543,7 +547,6 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   flex-direction: column;
-  /* margin-left: 38%; */
 }
 
 .friends-container .row {

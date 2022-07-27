@@ -71,12 +71,13 @@ if ($result -> num_rows > 0) {
                             style="margin-top:25px;">   
                     </form>
                     <?php 
+                    if(isset($_GET['id'])){
                         if($_GET['id'] == 1){
                             ?>
                         <div class="alert alert-danger" role="alert">
                             <?php echo "Your bio must be less than 50 character."; ?>
                         </div> 
-                        <?php }?>
+                        <?php }}?>
                 </div>
             </div>
         </div>
