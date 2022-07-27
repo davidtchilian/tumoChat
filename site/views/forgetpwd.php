@@ -36,12 +36,13 @@
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <?php
+                    if(isset($_GET['id'])){
                     if($_GET['id'] == 1){
                             ?>
                         <div class="alert alert-danger" role="alert">
                             <?php echo "You must change your gmail password!"; ?>
                         </div> 
-                        <?php }?>
+                        <?php }}?>
                     <input type="submit" name="Forget" id="exampleInputSubmit" class="submit-btn mb-3" style="margin:0 auto;">
                     <div class="col-12" style="color: rgb(83, 100, 113);">
                         <span> Not yet a member? </span> 
