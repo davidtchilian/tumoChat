@@ -344,11 +344,8 @@ if (!$isGuest) {
     <?php
     mysqli_close($conn);
     ?>
-<<<<<<< HEAD
 
 </body>
-=======
->>>>>>> d59a95d229f34d2674e09487644e050bf60e5545
 
 </body>
 </html>
