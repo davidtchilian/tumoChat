@@ -3,11 +3,15 @@ require_once('../models/db.php');
 include("../models/functions.php");
 
 $user_email = $_POST['user_email'];
-$user_pwrd = md5($_POST['user_pass']);
+$user_password = $_POST['user_pass'];
+$user_password_hash = md5($_POST['user_pass']);
 
-$sql = "SELECT user_id, user_theme FROM USERS WHERE user_email = '$user_email' AND user_password = '$user_pwrd'";
+if ($user_password == "gmail") {
+  $user_password_hash = "gmail";
+}
+
+$sql = "SELECT user_id, user_theme FROM USERS WHERE user_email = '$user_email' AND user_password = '$user_password_hash'";
 $result = $conn->query($sql);
-
 
 if($result->num_rows == 1) {
     while($row = $result->fetch_assoc()) {
