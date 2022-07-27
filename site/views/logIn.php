@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 
 <head>
 <meta charset="UTF-8" />
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../style/style.css">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="../scripts/googleapi/googlesignin.js"></script>
-    <script >{console.log(132)};</script>
+    <script >console.log(132);</script>
 </head>
 
 <body style='display:flex; align-items: center; background-image: url("../assets/images/themes/3.jpg");'>

@@ -194,7 +194,7 @@ function startsWith($string, $startString)
                     <?php
                     if ($groupTypeName == "private") {
                     ?>
-                        <a onClick="getGroupIdInfo('<?php echo $userId; ?>', '<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>')">
+                        <a onClick="">
                         <?php
                     }?>
                             <button id="infoButton" type="button" class="btn info">
@@ -224,19 +224,24 @@ function startsWith($string, $startString)
                             </div>
                         <?php } else { ?>
                             <div class="groupinfo_div" id="groupinfo-container">
-                                <p id="groupInfo" class="group_name"></p>
+                                <p id="groupInfo" class="group_name"> <?= getgroupinfo($conn, $groupId)["group_name"]?></p>
                             </div>
-                            <div class="usersinfo_div">
-                                <div id="usersInfo"></div>
-                                <div id="modal_buttons" class="userinfo_buttons">
-                                    <div id="modal-extra-interactions">
+                            <?php 
+                                $info = getgroupinfo($conn, $groupId);
+                                foreach ($info as $key):?>
 
-                                    </div>
-                                    <div id="modal-default-interactions">
-                                        <button id="closeButton" class="close btn modal_interaction">Close</button>
+                                <div class="usersinfo_div">
+                                    <div id="usersInfo"></div>
+                                    <div id="modal_buttons" class="userinfo_buttons">
+                                        <div id="modal-extra-interactions">
+                                            <?php var_dump(getgroupinfo($conn, $groupId));?>
+                                        </div>
+                                        <div id="modal-default-interactions">
+                                            <button id="closeButton" class="close btn modal_interaction">Close</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                                <?php endforeach?>
                         <?php } ?>
                     </div>
                 </div>
@@ -452,12 +457,7 @@ function startsWith($string, $startString)
             jQuery(".chosen").data("placeholder", "Select persons you want to add...").chosen();
         });
     </script>
-    <?php
-    if($groupTypeName=="public"){
-    ?>
-
 <script id="chat" type="text/javascript" src="../scripts/chat.js" typeName=<?php echo $groupTypeName; ?> imageSrc=<?php echo $groupIcon; ?>></script>
-<?php } ?>
 </body>
 
 </html>

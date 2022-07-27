@@ -3,7 +3,8 @@
   if (!isset($_SESSION['user_id'])) {
     header('Location: ./login.php?id=4');
     exit();
-}
+  }
+  
   $user_id = $_SESSION['user_id'];
   $theme = $_SESSION['user_theme'];
   require_once("../models/db.php");
@@ -26,8 +27,7 @@
   }
 
    //$flames=file_get_contents("../controllers/getdate.php");
-  // $flames=getStreaks($conn,$user_id);
-  $flames = array();
+  $flames=getStreaks($conn,$user_id);
   $sql3 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
   $result3 = mysqli_query($conn, $sql3);
   if ($result3->num_rows > 0) {
@@ -143,7 +143,7 @@
     <br />
     <div class="container">
         <div class="div-titre" style="width: 100%; display: flex; justify-content: center; align-items: center; margin: 5rem 0 1rem 0">
-        <img src="../assets/images/groupchats.png" alt="" style="width: calc(300px);  margin: 1rem">
+        <img class="PageTitle" src="../assets/images/groupchats.png" alt="" style="width: calc(300px);  margin: 1rem">
         </div>
         <div class="row">
             <?php
@@ -183,9 +183,9 @@
                             <li class=  "border20 list-group-item group-name">
                               <div>
                                 
-                              <!-- <span class ="streaks" id="stars_<?php // echo $group["gID"]; ?>">
-                               // getStreakIcon($flames[$group["gID"]]) 
-                            </span> -->
+                              <span class ="streaks" id="stars_<?php echo $group["gID"]; ?>">
+                               <?= getStreakIcon($flames[$group["gID"]]) ?>
+                            </span>
 
                               <div class = " <?= $textcolor ?> groupHeader">
                                 <span class="groupChatName"><?php
