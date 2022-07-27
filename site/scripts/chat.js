@@ -125,84 +125,84 @@ function onClose() {
 }
 
 
-function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
-  groupName.innerText = "Loading...";
-  const Http = new XMLHttpRequest();
-  const url = `../controllers/getgroupinfo.php?id=${groupId}`;
-  Http.open("GET", url);
-  Http.send();
-  Http.onreadystatechange = (e) => {
-    if (Http.readyState !== XMLHttpRequest.DONE) {
-      return;
-    }
-    let output = Http.responseText;
-    let jsonObject = null;
+// function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
+//   groupName.innerText = "Loading...";
+//   const Http = new XMLHttpRequest();
+//   const url = `../controllers/getgroupinfo.php?id=${groupId}`;
+//   Http.open("GET", url);
+//   Http.send();
+//   Http.onreadystatechange = (e) => {
+//     if (Http.readyState !== XMLHttpRequest.DONE) {
+//       return;
+//     }
+//     let output = Http.responseText;
+//     let jsonObject = null;
 
-    try {
-      jsonObject = JSON.parse(output);
-    } catch (e) {
-      groupName.innerText = "Unexpected error, while trying to get the corresponding group information, please try again.";
-      return;
-    }
+//     try {
+//       jsonObject = JSON.parse(output);
+//     } catch (e) {
+//       groupName.innerText = "Unexpected error, while trying to get the corresponding group information, please try again.";
+//       return;
+//     }
 
-    let groupInfo = jsonObject[0][0];
-    let groupUsersInfo = jsonObject[1];
-    groupName.innerText = groupInfo.group_name;
+//     let groupInfo = jsonObject[0][0];
+//     let groupUsersInfo = jsonObject[1];
+//     groupName.innerText = groupInfo.group_name;
 
-    if (groupInfo.group_bio) {
-      let groupBio = document.createElement("p");
-      groupBio.classList.add("group_bio");
-      groupBio.innerText = groupInfo.group_bio;
-      groupInfoDiv.appendChild(groupBio);
-    }
+//     if (groupInfo.group_bio) {
+//       let groupBio = document.createElement("p");
+//       groupBio.classList.add("group_bio");
+//       groupBio.innerText = groupInfo.group_bio;
+//       groupInfoDiv.appendChild(groupBio);
+//     }
 
-    for (let user of groupUsersInfo) {
+//     for (let user of groupUsersInfo) {
 
-      let userInfo = document.createElement("div");
-      let userEmail = document.createElement("p");
-      userEmail.classList.add("user-email");
-      userEmail.innerText = user[0].user_email;
-      userInfo.classList.add("user_info_page")
-      userInfo.appendChild(userEmail);
-      usersInfo.appendChild(userInfo);
+//       let userInfo = document.createElement("div");
+//       let userEmail = document.createElement("p");
+//       userEmail.classList.add("user-email");
+//       userEmail.innerText = user[0].user_email;
+//       userInfo.classList.add("user_info_page")
+//       userInfo.appendChild(userEmail);
+//       usersInfo.appendChild(userInfo);
 
-      if (!isAdmin) {
-        continue;
-      }
+//       if (!isAdmin) {
+//         continue;
+//       }
 
-      if (user[0].user_id == groupAdminId) {
-        let adminSpan = document.createElement('span');
-        adminSpan.innerText = "⚡";
-        userInfo.appendChild(adminSpan);
-        continue;
-      }
+//       if (user[0].user_id == groupAdminId) {
+//         let adminSpan = document.createElement('span');
+//         adminSpan.innerText = "⚡";
+//         userInfo.appendChild(adminSpan);
+//         continue;
+//       }
 
-      let userDeleteButton = document.createElement("a");
-      userDeleteButton.classList.add("user_delete_button");
-      userDeleteButton.href = `../controllers/deleteuserfromgroup.php?delid=${user[0].user_id}&id=${groupId}`;
-      userDeleteButton.innerText = "X";
-      userInfo.appendChild(userDeleteButton);
+//       let userDeleteButton = document.createElement("a");
+//       userDeleteButton.classList.add("user_delete_button");
+//       userDeleteButton.href = `../controllers/deleteuserfromgroup.php?delid=${user[0].user_id}&id=${groupId}`;
+//       userDeleteButton.innerText = "X";
+//       userInfo.appendChild(userDeleteButton);
 
-    }
+//     }
 
-    if (isAdmin) {
-      let addUserButton = createButton("add_user", "add_user", "Add User", "#");
-      addUserButton.onclick = function () {
-        stickerModal.style.display = "none";
-        addUserModal.style.display = "block";
-      };
-      extraInteractions.appendChild(addUserButton);
+//     if (isAdmin) {
+//       let addUserButton = createButton("add_user", "add_user", "Add User", "#");
+//       addUserButton.onclick = function () {
+//         stickerModal.style.display = "none";
+//         addUserModal.style.display = "block";
+//       };
+//       extraInteractions.appendChild(addUserButton);
 
-      let deleteGroup = createButton("delete_group", "delete_group", "Delete Group", `../controllers/deletegroup.php?id=${groupId}`);
-      extraInteractions.appendChild(deleteGroup);
-    }
-    else {
-      let leaveGroup = createButton("leave_group", "leave_group", "Leave Group", `../controllers/deleteuserfromgroup.php?delid=${userId}&id=${groupId}`);
-      extraInteractions.appendChild(leaveGroup);
-    }
+//       let deleteGroup = createButton("delete_group", "delete_group", "Delete Group", `../controllers/deletegroup.php?id=${groupId}`);
+//       extraInteractions.appendChild(deleteGroup);
+//     }
+//     else {
+//       let leaveGroup = createButton("leave_group", "leave_group", "Leave Group", `../controllers/deleteuserfromgroup.php?delid=${userId}&id=${groupId}`);
+//       extraInteractions.appendChild(leaveGroup);
+//     }
 
-  }
-}
+//   }
+// }
 
 
 
@@ -418,8 +418,10 @@ function sendMessage(event) {
           button2.setAttribute("onclick", "show(event)")
           button2.setAttribute("style", "float : right; color: black;")
           button2.setAttribute("id", id)
-          button2.style.backgroundColor='rgb(' + rgb.r * 1.2 + ',' + rgb.g * 1.2 + ',' + rgb.b * 1.2 + ')';
-          button2.style.borderColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+          if(typeName == "public"){
+            button2.style.backgroundColor='rgb(' + rgb.r * 1.2 + ',' + rgb.g * 1.2 + ',' + rgb.b * 1.2 + ')';
+            button2.style.borderColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+          }
           const pre = document.createElement("pre")
           const span = document.createElement("span")
           pre.setAttribute("onclick", "show(event)")
@@ -493,3 +495,4 @@ function sendSticker(stickerId) {
 
 // console.log(document.getElementById("cont0").childElementCount)
 
+console.log(true)
