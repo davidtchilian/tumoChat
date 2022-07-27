@@ -54,14 +54,14 @@ $groupTypeName = mysqli_fetch_assoc(mysqli_query($conn, $getTypeSql))['typeName'
 
 
 if ($groupType == 2) {
-    $group_users = getGroupUsersId($conn,$groupId);
+    $group_users = getGroupUsersId($conn, $groupId);
     $isingroup = false;
     for ($i = 0; $i < count($group_users) && !$isingroup; $i++) {
         $isingroup = $group_users[$i] == $userId;
     }
 
     if (!$isingroup) {
-        var_dump($group_users); 
+        var_dump($group_users);
         header("Location: home.php");
     }
 }
@@ -81,8 +81,8 @@ function startsWith($string, $startString)
 
 ?>
 
-<!DOCTYPE html id = "doctype">
-<html lang="en" id = "HTML">
+<!DOCTYPE html id="doctype">
+<html lang="en" id="HTML">
 
 <head>
     <meta charset="UTF-8" />
@@ -94,52 +94,6 @@ function startsWith($string, $startString)
     <title><?php echo $groupName . " - TUYU"; ?></title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100&display=swap');
-
-        .dropbtn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 16px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .dropdown {
-            position: relative;
-            display: none;
-        }
-
-        .dropdown-content {
-            display: block;
-            position: absolute;
-            background-color: #f9f9f9;
-            border-radius: .375rem;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            /* margin-left: -160px; */
-            transform: translateX(24rem);
-            width: 200px;
-            margin-top: 70px;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-            border-radius: .375rem;
-        }
-
-
-        .dropdown:hover .dropbtn {
-            background-color: #3e8e41;
-        }
-
         .user_icon {
             height: 35px;
         }
@@ -196,16 +150,16 @@ function startsWith($string, $startString)
                     ?>
                         <a onClick="">
                         <?php
-                    }?>
-                            <button id="infoButton" type="button" class="btn info">
-                                <img src="../assets/images/le_vrai_i.png" alt="Information" style="width: 35px; height: 35px;" />
-                            </button>
-                    <?php
-                    if ($groupTypeName == "private") {
-                    ?>
+                    } ?>
+                        <button id="infoButton" type="button" class="btn info">
+                            <img src="../assets/images/le_vrai_i.png" alt="Information" style="width: 35px; height: 35px;" />
+                        </button>
+                        <?php
+                        if ($groupTypeName == "private") {
+                        ?>
                         </a>
                     <?php
-                    }?>
+                        } ?>
                 </div>
 
                 <div id="infoModal" class="modal_user">
@@ -216,73 +170,72 @@ function startsWith($string, $startString)
                                 </button>
                             </div>
                             <div class="groupinfo_div" id="groupinfo-container">
-                                <p id="groupInfo" style="font-size: 2rem" class="group_name"><?=$groupName?></p>
+                                <p id="groupInfo" style="font-size: 2rem" class="group_name"><?= $groupName ?></p>
                                 <img class="comm_icon" style="margin: 1rem; width: 70px;" src="../assets/comm_icons/<?php echo $groupIcon; ?>.png" alt="">
-                                <p id="groupInfo" class="group_bio"><?=$groupbio?></p>
-                                
+                                <p id="groupInfo" class="group_bio"><?= $groupbio ?></p>
+
                                 <div id="groupBio"></div>
                             </div>
                         <?php } else { ?>
                             <div class="groupinfo_div" id="groupinfo-container">
-                                <p id="groupInfo" class="group_name"> <?= getgroupinfo($conn, $groupId)["group_name"]?></p>
+                                <p id="groupInfo" class="group_name"> <?= getgroupinfo($conn, $groupId)["group_name"] ?></p>
                             </div>
-                            <?php 
-                                $info = getgroupinfo($conn, $groupId);
-                                foreach ($info as $key):?>
+                            <?php
+                            $info = getgroupinfo($conn, $groupId);
+                            foreach ($info as $key) : ?>
 
                                 <div class="usersinfo_div">
                                     <div id="usersInfo"></div>
                                     <div id="modal_buttons" class="userinfo_buttons">
                                         <div id="modal-extra-interactions">
-                                            <?php var_dump(getgroupinfo($conn, $groupId));?>
+                                            <?php var_dump(getgroupinfo($conn, $groupId)); ?>
                                         </div>
                                         <div id="modal-default-interactions">
                                             <button id="closeButton" class="close btn modal_interaction">Close</button>
                                         </div>
                                     </div>
                                 </div>
-                                <?php endforeach?>
+                            <?php endforeach ?>
                         <?php } ?>
                     </div>
                 </div>
                 <div id="addModal" class="modal_user">
                     <div class="modal-content">
                         <div class="modal-add-users">
-                        <form action="../controllers/adduser.php?group_id=<?= $groupId?>" method="POST">
-                        <label for="exampleFormControlTextarea1" class="form-label; float: left;">Name of Persons</label>
-                        <div class="center clear">
-                            <div id="promoNode"></div>
-                            <select name='select' class="chosen" multiple="true" style="width:400px;">
-                                <?php
-                                $users = array();
-                                $sql = "SELECT USERS.user_email, USERS.user_id FROM USERS JOIN friends ON ((friends.user_id_1 = $userId AND USERS.user_id = friends.user_id_2) OR (friends.user_id_2 = $userId AND USERS.user_id = friends.user_id_1)) WHERE USERS.user_id!=$userId";
-                                
-                                $usersin = getGroupUsersId($conn,$groupId);
+                            <form action="../controllers/adduser.php?group_id=<?= $groupId ?>" method="POST">
+                                <label for="exampleFormControlTextarea1" class="form-label; float: left;">Name of Persons</label>
+                                <div class="center clear">
+                                    <div id="promoNode"></div>
+                                    <select name='select' class="chosen" multiple="true" style="width:400px;">
+                                        <?php
+                                        $users = array();
+                                        $sql = "SELECT USERS.user_email, USERS.user_id FROM USERS JOIN friends ON ((friends.user_id_1 = $userId AND USERS.user_id = friends.user_id_2) OR (friends.user_id_2 = $userId AND USERS.user_id = friends.user_id_1)) WHERE USERS.user_id!=$userId";
 
-                                foreach($usersin as $u){
-                                    $sql = $sql." ". "AND user_id != $u";
-                                }
+                                        $usersin = getGroupUsersId($conn, $groupId);
 
-                                $result = mysqli_query($conn,$sql);
+                                        foreach ($usersin as $u) {
+                                            $sql = $sql . " " . "AND user_id != $u";
+                                        }
 
-                                if(mysqli_num_rows($result) > 0){
-                                    while($row = $result->fetch_assoc()){
-                                        $temp = array();
-                                        array_push($temp, $row["user_id"]);
-                                        array_push($temp, $row["user_email"]);
-                                        $users[] = $temp;
-                                    }
-                                }
-                                
-                                foreach($users as $i){
-                                    echo "<option value='$i[0]'>" . explode("@", $i[1])[0] . "</option >";
-                                }
-                                ?>
-                            </select>
-                            <input type="hidden" name="groupname" value="<?=$groupName?>">
-                            <button type="submit" class="btn btn-primary mt-3"
-                style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Add</button>
-                        </div>
+                                        $result = mysqli_query($conn, $sql);
+
+                                        if (mysqli_num_rows($result) > 0) {
+                                            while ($row = $result->fetch_assoc()) {
+                                                $temp = array();
+                                                array_push($temp, $row["user_id"]);
+                                                array_push($temp, $row["user_email"]);
+                                                $users[] = $temp;
+                                            }
+                                        }
+
+                                        foreach ($users as $i) {
+                                            echo "<option value='$i[0]'>" . explode("@", $i[1])[0] . "</option >";
+                                        }
+                                        ?>
+                                    </select>
+                                    <input type="hidden" name="groupname" value="<?= $groupName ?>">
+                                    <button type="submit" class="btn btn-primary mt-3" style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Add</button>
+                                </div>
                         </div>
                         </form>
                     </div>
@@ -293,7 +246,7 @@ function startsWith($string, $startString)
     </div>
     </nav>
     </div>
-    <div id="cont0" class="container mt-5" style="min-height : 100vh;" style="position : relative" name = "ptiashxates">
+    <div id="cont0" class="container mt-5" style="min-height : 100vh;" style="position : relative" name="ptiashxates">
         <br><br>
 
         <?php
@@ -318,70 +271,62 @@ function startsWith($string, $startString)
                                 echo "<pre >" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>";
                             ?>
                         </button>
-                        <div class="dropdown" style="width:30px; margin-top:-30px;" id="<?= "dropdown" . $message['message_id'] ?>">
-
-                            <div class="dropdown-content" id="dropdown-content">
-                                <a onclick="myFunction(event)" id=<?= "editId" . $message['message_id'] ?> name="<?= $message['message_id'] ?>">Edit</a>
-                                <a onclick="deleteMessages(event)" id="<?= "delete" . $message['message_id'] ?>">Delete</a>
-                            </div>
-
-                        </div>
-                        <?php } ?>
+                    <?php } ?>
                     </div>
                 </div>
-            <?php 
-                        } else {
-                            for ($i = 0; $i < count($group_users) && !$isingroup_message; $i++) {
-                                if ($group_users[$i] == $message["message_sender_id"]) {
-                                    $isingroup_message = true;
-                                }
-                            }
+            <?php
+            } else {
+                for ($i = 0; $i < count($group_users) && !$isingroup_message; $i++) {
+                    if ($group_users[$i] == $message["message_sender_id"]) {
+                        $isingroup_message = true;
+                    }
+                }
             ?>
-            <div class="row">
-                <?php
-                            if ($isingroup_message || $groupTypeName == "public") { ?>
-                    <div class="col-1"><img src="../assets/icons/<?php echo $icon; ?>.png" class="user_icon"></div>
-                    <div class="col-7">
-                        <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
-                            <?php
+                <div class="row">
+                    <?php
+                    if ($isingroup_message || $groupTypeName == "public") { ?>
+                        <div class="col-1"><img src="../assets/icons/<?php echo $icon; ?>.png" class="user_icon"></div>
+                        <div class="col-7">
+                            <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
+                                <?php
                                 echo "<p class='user_email'>" . $user_name . "</p>";
                                 //  echo  $message['message_content'];
                                 $stickerSplit = explode("_", $message['message_content']);
-                            if ($stickerSplit[0] == "STICKER") {
-                                $stickerId = $stickerSplit[1];
-                                echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 100px'>";
-                            } else {
-                                echo "<pre>" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>"; 
-                            }
+                                if ($stickerSplit[0] == "STICKER") {
+                                    $stickerId = $stickerSplit[1];
+                                    echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 100px'>";
+                                } else {
+                                    echo "<pre>" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>";
+                                }
                                 ?>
-                        </button>
-                    </div>
-                <?php
-                            } else { ?>
-                    <div class="col-1"><img src="../assets/comm_icons/100.png" class="user_icon"></div>
-                    <div class="col-7">
-                        <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
-                            <?php
+                            </button>
+                        </div>
+                    <?php
+                    } else { ?>
+                        <div class="col-1"><img src="../assets/comm_icons/100.png" class="user_icon"></div>
+                        <div class="col-7">
+                            <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
+                                <?php
                                 echo "<p class='delated_user'>Delated user</p>";
                                 $stickerSplit = explode("_", $message['message_content']);
                                 if ($stickerSplit[0] == "STICKER") {
                                     $stickerId = $stickerSplit[1];
                                     echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 100px'>";
                                 } else {
-                                    echo "<pre >" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>"; 
+                                    echo "<pre >" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>";
                                 }  ?>
-                        </button>
-                    </div>
+                            </button>
+                        </div>
 
-                <?php
-                            }
-                ?>
-                <div class="col-4"></div>
-            </div>
-    <?php
-                        }
+                    <?php
                     }
-    ?>
+                    ?>
+                    <div class="col-4"></div>
+                </div>
+        <?php
+            }
+        }
+        ?>
 
     </div>
     <!-- <form >
@@ -393,6 +338,12 @@ function startsWith($string, $startString)
     <br>
 
     <div class="fixed-bottom" style="position:fixed">
+        <div class="editDelete" id="EditDelete">
+            <div class="editDeleteContent">
+                <a id="editBtn" onclick="myFunction(event)">Edit</a>
+                <a id="deleteBtn" onclick="deleteMessages(event)">Delete</a>
+            </div>
+        </div>
         <nav id="navbar1" class="navbar navbar-expand-lg" id="navbarId" style="background-color : #6c4b93;">
             <div class="container">
                 <a onClick="sticker()" id="stickerButton" class="sticker_btn nav-link" style="display: inline-block">
@@ -453,11 +404,11 @@ function startsWith($string, $startString)
     </script>
     <script src="../scripts/chosen.jquery.js"></script>
     <script>
-        jQuery(document).ready(function () {
+        jQuery(document).ready(function() {
             jQuery(".chosen").data("placeholder", "Select persons you want to add...").chosen();
         });
     </script>
-<script id="chat" type="text/javascript" src="../scripts/chat.js" typeName=<?php echo $groupTypeName; ?> imageSrc=<?php echo $groupIcon; ?>></script>
+    <script id="chat" type="text/javascript" src="../scripts/chat.js" typeName=<?php echo $groupTypeName; ?> imageSrc=<?php echo $groupIcon; ?>></script>
 </body>
 
 </html>

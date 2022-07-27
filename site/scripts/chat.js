@@ -253,22 +253,18 @@ document.getElementById("send").addEventListener("click", function (event) {
 })
 
 var x
+const editDelete = document.getElementById("EditDelete")
 
 function show(event) {
   x = event.target.id
-  let dropdownDiv = document.getElementsByClassName("dropdown")
-  for (let i = 0; i < dropdownDiv.length; i++) {
-    dropdownDiv[i].style.display = "none"
 
-  }
-  var y = event.target.id
-  let id = "dropdown" + x
+  const editBtn = document.getElementById("editBtn")
+  const deleteBtn = document.getElementById("deleteBtn")
 
+  editBtn.setAttribute("name", x)
+  deleteBtn.setAttribute("name", x)
 
-  const dropdown = document.getElementById(id)
-
-  dropdown.style.display = "block"
-  dropdown.style.position = "absolute"
+  editDelete.style.opacity = 1
 }
 
 
@@ -277,9 +273,7 @@ function show(event) {
 
 function myFunction(event) {
 
-
-  x = event.target.name
-
+  console.log(x)
   const messageCont = document.getElementById(x)
 
   document.getElementById("send").addEventListener("click", function (event) {
@@ -289,16 +283,8 @@ function myFunction(event) {
   txt.value = messageCont.innerText
 
 
-  var y = document.getElementById("editId" + x)
+  var y = document.getElementById("editBtn")
 
-  if (event.target == y) {
-    let dropdownDiv = document.getElementsByClassName("dropdown")
-    for (let i = 0; i < dropdownDiv.length; i++) {
-      dropdownDiv[i].style.display = "none"
-
-    }
-
-  }
   button.setAttribute("onclick", "updateMessages(event)")
 }
 
@@ -311,8 +297,6 @@ function updateMessages(event) {
   const message_cont = txt.value
 
 
-
-  var params = "user_id=" + 5 + "&" + "message_id=" + 73 + "&" + "message_content=" + "hello"
   if (message_cont != "") {
     $.ajax(
       {
@@ -343,7 +327,9 @@ function updateMessages(event) {
     txt.value = ""
     button.id = "send"
   }
+
   button.setAttribute("onclick", "sendMessage(event)")
+  editDelete.style.opacity = 0
 }
 
 
@@ -377,12 +363,7 @@ function deleteMessages(event) {
 
 
   );
-
-  let dropdownDiv = document.getElementsByClassName("dropdown")
-  for (let i = 0; i < dropdownDiv.length; i++) {
-    dropdownDiv[i].style.display = "none"
-
-  }
+  editDelete.style.opacity = 0
 
 }
 var id
