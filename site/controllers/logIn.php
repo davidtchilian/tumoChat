@@ -1,6 +1,6 @@
 <?php 
 require_once('../models/db.php');
-include("updatestatisticsinfo.php");
+include("../models/functions.php");
 
 $user_email = $_POST['user_email'];
 $user_pwrd = md5($_POST['user_pass']);

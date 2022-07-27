@@ -10,7 +10,7 @@ if ($messagecontent != "" && !ctype_space($messagecontent)) {
     $userId = $_SESSION["user_id"];
 
     require_once('../models/db.php');
-    include("updatestatisticsinfo.php");
+    include("../models/functions.php");
 
     addStatistic($userId, 2, $conn);
 
