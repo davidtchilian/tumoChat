@@ -121,9 +121,23 @@ function getGroupAdmin($conn,$gid){
     $adminid = "SELECT group_admin_id FROM GROUPCHAT WHERE group_id = $gid";
     $result = mysqli_query($conn,$adminid); 
     return mysqli_fetch_assoc($result)['group_admin_id'];
+
 }
 
+function getMessages($conn, $groupId){
+   
+    
+    $all = array();
+    $sql = "SELECT * FROM message WHERE message_group_id=$groupId";
+    $result = mysqli_query($conn, $sql);
 
+    while($row=mysqli_fetch_assoc($result)){
+    $all[]=$row;
 
+    }
+    return $all;
+
+      
+}
 
 ?>

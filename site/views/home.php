@@ -25,8 +25,10 @@
     $notif_count = $row2['nb'];
   }
 
-  $flames=file_get_contents("../controllers/getdate.php");
-
+   //$flames=file_get_contents("../controllers/getdate.php");
+  // $flames=getStreaks($conn,$user_id);
+  $flames = array();
+var_dump($flames);
   $sql3 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
   $result3 = mysqli_query($conn, $sql3);
   if ($result3->num_rows > 0) {
@@ -47,52 +49,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="../style/page-accueil.css" />
     <script src="../scripts/jquery.js"></script>
-     <script type="text/javascript">
-    $(function (){
-      // $.ajax({
-	    //     type: "GET", //we are using GET method to get data from server side
-	    //     url: 'basic.php', // get the route value 
-	    //     success: function (response) {//once the request successfully process to the server side it will return result here
-	    //         console.log(response)
-	    //     }
-	    // });
-        $.ajax({
-            type: "GET",
-            url: '../controllers/getdate.php',       
-            data: "",
-            dataType: 'json', //data format      
-            success: function (data) {
-            console.log(data)
-            for (let i = 0; i < data.length; i++) {
-              var idname = "stars_" + data[i][0];
-              if (data[i][1] >= 3 && data[i][1] < 7) {
-                document.getElementById(idname).innerHTML = data[i][1]+"⭐";
-              }
-              else if (data[i][1] >= 7 && data[i][1] < 21) {
-                document.getElementById(idname).innerHTML = data[i][1]+"🌟";
 
-              }
-              else if (data[i][1] >= 21 && data[i][1] < 42) {
-                document.getElementById(idname).innerHTML = data[i][1]+"💫";
-              }
-
-              else if (data[i][1] >= 42 && data[i][1] < 126) {
-                document.getElementById(idname).innerHTML = data[i][1]+"✨";
-              }
-
-              else if (data[i][1] >= 126 && data[i][1] < 182) {
-                document.getElementById(idname).innerHTML = data[i][1]+"🌠";
-              }
-
-              else if (data[i][1] >= 182 ) {
-                document.getElementById(idname).innerHTML = data[i][1]+"🌌";
-              }
-            }
-            }        
-    });
-          });
-        
-</script>
     <style>
     body {
         background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
@@ -104,9 +61,9 @@
     <div class="fixed-top">
       <nav class="navbar navbar-expand-lg" style="background-color: #6c4b93">
         <div class="container">
-          <a class="navbar-brand" href="profile.php" style="color :white">
-            <?php  echo "<img src='../assets/icons/$usricon.png' class='card-img-top' alt='profile_' style='height: 45px; width: 45px; margin-bottom:10px;'>" ?>
-            Profile
+          <a class="navbar-brand" href="profile.php" style="color: white; display: flex; justify-content: center; align-items: center;">
+            <?php  echo "<img src='../assets/icons/$usricon.png' class='card-img-top' alt='profile_' style='height: 45px; width: 45px; margin-right:10px;'>" ?>
+            <span>Profile</span> 
           </a>
           
           <button
@@ -185,8 +142,8 @@
     </div>
     <br />
     <div class="container">
-        <div class="div-titre" style="margin-top: 6rem;">
-            <h1 class="Titre">Home</h1>
+        <div class="div-titre" style="width: 100%; display: flex; justify-content: center; align-items: center; margin: 5rem 0 1rem 0">
+        <img src="../assets/images/groupchats.png" alt="" style="width: calc(300px);  margin: 1rem">
         </div>
         <div class="row">
             <?php
@@ -214,7 +171,7 @@
                 }
                 else {
                   $textcolor = "dm1";
-                  $cardcolor = "";
+                  $cardcolor = "text-black";
                   
                   $imgsrc= "../assets/images/usercount.png";
                 }
@@ -223,9 +180,12 @@
                 <a href="page-chat.php?id=<?php echo $group["gID"]; ?>" style="text-decoration :none">
                     <div class="pad card mb-3 <?= $cardcolor ?>">
                         <ul style="margin-bottom: 0">  <!--list-group-->
-                            <li class=  "border-white list-group-item group-name">
+                            <li class=  "border20 list-group-item group-name">
                               <div>
-                                <span class ="streaks" id="stars_<?php echo $group["gID"]; ?>"></span>
+                                
+                              <!-- <span class ="streaks" id="stars_<?php // echo $group["gID"]; ?>">
+                               // getStreakIcon($flames[$group["gID"]]) 
+                            </span> -->
 
                               <div class = " <?= $textcolor ?> groupHeader">
                                 <span class="groupChatName"><?php

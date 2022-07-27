@@ -18,6 +18,8 @@ $sql = "DELETE FROM MESSAGE WHERE message_sender_id = $userId";
 mysqli_query($conn, $sql);
 $sql = "DELETE FROM GROUPCHAT WHERE group_admin_id = $userId";
 mysqli_query($conn, $sql);
+$sql = "DELETE FROM Statistics_Main WHERE statistic_user_id = $userId";
+mysqli_query($conn, $sql);
 $sql = "DELETE FROM USERS WHERE user_id = $userId";
 mysqli_query($conn, $sql);
 

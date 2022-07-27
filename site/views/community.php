@@ -16,6 +16,13 @@
 
   $sql = "SELECT DISTINCT group_id, group_type, group_name, group_icon, group_bio FROM GROUPCHAT WHERE group_type = 1";
   $result = mysqli_query($conn, $sql);
+  $sql3 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
+  $result3 = mysqli_query($conn, $sql3);
+  if ($result3->num_rows > 0) {
+    if($row1 = mysqli_fetch_assoc($result3)) {
+        $usricon = $row1['user_icon'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,9 +55,10 @@
     <div class="fixed-top">
       <nav class="navbar navbar-expand-lg" style="background-color: #6c4b93">
         <div class="container">
-          <a class="navbar-brand" href="profile.php" style="color :white"
-            >Profile</a
-          >
+        <a class="navbar-brand" href="profile.php" style="color :white; flex;display: flex;justify-content: center;align-items: center;"">
+            <?php  echo "<img src='../assets/icons/$usricon.png' class='card-img-top' alt='profile_' style='height: 45px; width: 45px; margin-right:10px;'>" ?>
+            <span>Profile</span> 
+          </a>
           
           <button
             class="navbar-toggler"
@@ -109,8 +117,8 @@
     </div>
     <br />
     <div class="container" style="margin-top: 4rem;">
-      <div class="div-titre" >
-        <h1 class="Titre">Communities</h1>
+      <div class="div-titre" style="width: 100%; display: flex; justify-content: center; align-items: center;">
+        <img src="../assets/images/communities.png" alt="" style="width: calc(300px);  margin: 1rem 0">
       </div>
       <div class="row">
             <?php
