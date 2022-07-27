@@ -194,7 +194,7 @@ function startsWith($string, $startString)
                     <?php
                     if ($groupTypeName == "private") {
                     ?>
-                        <a onClick="getGroupIdInfo('<?php echo $userId; ?>', '<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>')">
+                        <a onClick="">
                         <?php
                     }?>
                             <button id="infoButton" type="button" class="btn info">

@@ -68,7 +68,7 @@ if (typeName == "public") {
     rgb.g = ~~(rgb.g / count);
     rgb.b = ~~(rgb.b / count);
 
-    let diff = 1.3 / ((rgb.r / 255) + (rgb.g / 255) + (rgb.b / 255));
+    let diff = 1.4 / ((rgb.r / 255) + (rgb.g / 255) + (rgb.b / 255));
     rgb.r = rgb.r * diff;
     rgb.g = rgb.g * diff;
     rgb.b = rgb.b * diff;
@@ -99,7 +99,8 @@ if (typeName == "public") {
   }
   document.getElementById("send").onmouseout = function () {
     this.style.borderColor = 'rgba(255,255,255,0)';
-  }}
+  }
+}
 
 sticketrButton.onclick = function () {
   console.log("Click")
