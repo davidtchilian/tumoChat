@@ -97,6 +97,9 @@ h1, h3{
   .notifs_nb{
     transform: translate(86px,-78px) !important;
   }
+  .notifs_nb_comm{
+    transform: translate(86px,-38px) !important;
+  }
 }
 
 
@@ -212,6 +215,13 @@ h1, h3{
 }
 .notifs_nb{
   transform: translate(-117px, -2px);
+  background: rgb(22, 114, 194);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+}
+.notifs_nb_comm{
+  transform: translate(-15px, 2px);
   background: rgb(22, 114, 194);
   border-radius: 50%;
   width: 16px;

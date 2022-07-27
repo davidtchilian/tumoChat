@@ -7,7 +7,7 @@
   $user_id = $_SESSION['user_id'];
   require_once("../models/db.php");
   require_once("../models/functions.php");
-  
+
   $sql2 ="SELECT COUNT(notification_id) as nb FROM NOTIFICATIONS WHERE notification_receiver_id = $user_id";
   $result2 = mysqli_query($conn, $sql2);
   if($row2 = mysqli_fetch_assoc($result2)){
@@ -74,7 +74,7 @@
                 <?php
              if($notif_count != 0)
             {?>
-            <div class="notifs_nb"> <?php if($notif_count > 100) {  echo "<p class='notif_limit'>" ?>  <?php echo "99+ </p>";} else{echo "<p class='notif_basic'>".$notif_count."</p>";}?></div>
+            <div class="notifs_nb_comm"> <?php if($notif_count > 100) {  echo "<p class='notif_limit'>" ?>  <?php echo "99+ </p>";} else{echo "<p class='notif_basic'>".$notif_count."</p>";}?></div>
             <?php } ?>
                 <div id="infoModal" class="modal_user">
                     <div id="modal-content" class="modal-content">
