@@ -4,7 +4,7 @@
     header('Location: ./login.php?id=4');
     exit();
 }
-//local nothin'
+//local nothing
 
   $user_id = $_SESSION['user_id'];
   $theme = $_SESSION['user_theme'];
