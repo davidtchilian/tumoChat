@@ -255,19 +255,17 @@ document.getElementById("send").addEventListener("click", function (event) {
 
 var x
 const editDelete = document.getElementById("EditDelete")
-
 function show(event) {
   x = event.target.id
-
+  
   const editBtn = document.getElementById("editBtn")
   const deleteBtn = document.getElementById("deleteBtn")
-
+  
   editBtn.setAttribute("name", x)
   deleteBtn.setAttribute("name", x)
-
-  editDelete.style.opacity = 1
+  
+  editDelete.style.display = "block"
 }
-
 
 //update
 
@@ -330,7 +328,7 @@ function updateMessages(event) {
   }
 
   button.setAttribute("onclick", "sendMessage(event)")
-  editDelete.style.opacity = 0
+  editDelete.style.display = "none"
 }
 
 
@@ -364,7 +362,7 @@ function deleteMessages(event) {
 
 
   );
-  editDelete.style.opacity = 0
+  editDelete.style.display = "none";
 
 }
 var id
@@ -404,52 +402,31 @@ function sendMessage(event) {
             button2.style.backgroundColor='rgb(' + rgb.r * 1.2 + ',' + rgb.g * 1.2 + ',' + rgb.b * 1.2 + ')';
             button2.style.borderColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
           }
-          const pre = document.createElement("pre")
           const span = document.createElement("span")
-          pre.setAttribute("onclick", "show(event)")
           span.setAttribute("class", "message_content_span")
           span.setAttribute("onclick", "show(event)")
           if (txt.value.startsWith("STICKER_")) {
             let sticker = document.createElement("img");
             sticker.src = `../assets/stickers/${txt.value.split("_")[1]}.png`;
-            sticker.style.width = "100px";
+            sticker.style.width = "140px";
             sticker.style.height = "100px";
+            sticker.setAttribute("name", id)
             span.appendChild(sticker);
           }
           else {
             span.setAttribute("id", id)
             span.innerText = txt.value;
           }
-          pre.appendChild(span)
-          button2.appendChild(pre)
+          button2.appendChild(span)
           div.appendChild(button2)
-          const div0 = document.createElement("div")
-          div0.setAttribute("class", "dropdown")
-          div0.setAttribute("style", "width:30px; margin-left:900px; margin-top:-30px;")
-          div0.setAttribute("id", "dropdown" + id)
 
-          const div1 = document.createElement("div")
-          div1.setAttribute("class", "dropdown-content")
-          div1.setAttribute("id", "dropdown-content")
-          const a0 = document.createElement("a")
-          a0.setAttribute("onclick", "myFunction(event)")
-          a0.setAttribute("id", "editId" + id)
-          a0.setAttribute("name", id)
-          a0.innerText = "Edit"
-          div1.appendChild(a0)
-          div0.appendChild(div1)
-          div.appendChild(div0)
 
-          const a1 = document.createElement("a")
-          a1.setAttribute("onclick", "deleteMessages(event)")
-          a1.setAttribute("id", "delete" + id)
-          a1.setAttribute("name", id)
-          a1.innerText = "Delete"
-          div1.appendChild(a1)
+          
+
+         
           cont0.appendChild(cont)
 
           cont.scrollIntoView({ behavior: "smooth" })
-
 
           txt.value = ""
 

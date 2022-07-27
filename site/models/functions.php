@@ -247,7 +247,7 @@ function getStreaks($conn,$user_id){
     }
 
 
-    $streaks=array();
+    $streaks = array();
 
     foreach($groupids as $id){
         $gid = $id['isInGroup_group_id'];

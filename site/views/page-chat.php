@@ -257,8 +257,8 @@ function startsWith($string, $startString)
     </div>
     </nav>
     </div>
-    <div id="cont0" class="container mt-5" style="min-height : 100vh;" style="position : relative" name="ptiashxates">
-        <br><br>
+    <div id="cont0" class="container mt-5" style="min-height : 65vh;" style="position : relative" name="ptiashxates">
+        <br>
 
         <?php
         while ($message = mysqli_fetch_assoc($messages)) {
@@ -277,7 +277,7 @@ function startsWith($string, $startString)
                             $stickerSplit = explode("_", $message['message_content']);
                             if ($stickerSplit[0] == "STICKER") {
                                 $stickerId = $stickerSplit[1];
-                                echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 100px'>";
+                                echo "<img id=" . $message['message_id']." src='../assets/stickers/$stickerId.png' style='height: 100px; width: 140px' >";
                             } else {
                                 echo "<pre >" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>";
                             ?>
@@ -305,7 +305,7 @@ function startsWith($string, $startString)
                                 $stickerSplit = explode("_", $message['message_content']);
                                 if ($stickerSplit[0] == "STICKER") {
                                     $stickerId = $stickerSplit[1];
-                                    echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 100px'>";
+                                    echo "<img id=" . $message['message_id'] . "src='../assets/stickers/$stickerId.png' style='height: 100px; width: 400px'>";
                                 } else {
                                     echo "<pre>" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>";
                                 }
@@ -358,7 +358,7 @@ function startsWith($string, $startString)
         </div>
         <nav id="navbar1" class="navbar navbar-expand-lg" id="navbarId" style="background-color : #6c4b93;">
             <div class="container">
-                <a onClick="sticker()" id="stickerButton" class="sticker_btn nav-link" style="display: inline-block">
+                <a onClick="sticker()" id="stickerButton" class="sticker_btn nav-link sticker_a" style="display: inline-block; margin-bottom:1rem;">
                     <img src="../assets/images/stickerr.png" alt="sticker" style="width :40px" style="height : 40px" />
                 </a>
 
@@ -385,15 +385,15 @@ function startsWith($string, $startString)
                             <button id="stickerCloseButton" class="close btn modal_interaction"><img src="../assets/images/cllose.png" alt="sticker" style="width :40px" style="height : 40px" />
                             </button>
                         </div>
-                        <div>
+                        <div class="stickerList">
                             <?php
                             for ($i = 0; $i < count($files); $i++) {
                                 $result =  $dir . $files[$i] . "\n";
                                 $number = explode(".", $files[$i])[0];
                                 $sticker = "<button onClick='sendSticker('$number','$groupId')' ><img src='$result' class='card-img-top'
-                                alt='profile_' style='height: 70px; width: 70px'></button>";
+                                alt='profile_' style='height: 71px; width: 100px'></button>";
                             ?>
-                                <a onClick="sendSticker(' <?php echo $number ?>','<?php echo $groupId; ?>')"><img src="<?php echo $result ?>" class='card-img-top' alt='profile_' style='height: 70px; width: 70px'></a>
+                                <a onClick="sendSticker(' <?php echo $number ?>','<?php echo $groupId; ?>')"><img src="<?php echo $result ?>" class='card-img-top sticker_a' alt='profile_' style='height: 71px; width: 100px'></a>
                             <?php
                             } ?>
                         </div>
