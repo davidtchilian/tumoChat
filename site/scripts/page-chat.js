@@ -41,7 +41,7 @@ function onClose() {
 function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
   groupName.innerText = "Loading...";
   const Http = new XMLHttpRequest();
-  const url = `../controllers/getgroupinfo.php?id=${groupId}`;
+  const url = `../controllers/getgroupinfo.php?id=`+groupId;
   Http.open("GET", url);
   Http.send();
   Http.onreadystatechange = (e) => {
