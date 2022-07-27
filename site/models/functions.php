@@ -131,3 +131,84 @@ function getMessages($conn, $groupId){
     }
     return $all;
 }
+function getStreakIcon($streak)
+{
+
+              if ($streak >= 3 && $streak < 7) {
+                return $streak."⭐";
+              }
+              else if ($streak >= 7 && $streak < 21) {
+                return $streak."🌟";
+
+              }
+              else if ($streak >= 21 && $streak < 42) {
+                return $streak."💫";
+              }
+
+              else if ($streak >= 42 && $streak < 126) {
+                return $streak."✨";
+              }
+
+              else if ($streak >= 126 && $streak < 182) {
+                return $streak."🌠";
+              }
+
+              else if ($streak >= 182 ) {
+                return $streak."🌌";
+              }
+
+}
+function getStreaks($conn,$user_id){
+
+    $sql_groupid = "SELECT isInGroup_group_id FROM isInGroup WHERE isInGroup_user_id= $user_id";
+    $result = mysqli_query($conn,$sql_groupid);
+    $groupids=array();
+    if ($result->num_rows > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            $groupids[] = $row;
+        }
+    } else{
+        return $groupids;
+    }
+
+
+    $streaks=array();
+
+    foreach($groupids as $id){
+        $gid = $id['isInGroup_group_id'];
+            $sql = "
+            SELECT DISTINCT Date(message_date) AS date
+            FROM MESSAGE 
+            WHERE message_sender_id = $user_id
+            AND message_group_id = $gid
+            ORDER BY message_date DESC;";
+
+        $res = mysqli_query($conn, $sql);
+
+        $dates = array();
+
+        while($row = mysqli_fetch_assoc($res)){
+            $dates[] = $row['date'];
+        }
+        if ($dates[0] == date('Y-m-d')) {
+
+            $flames = 1;
+
+            for ($i=1; $i < count($dates); $i++) { 
+                if ($dates[$i] == date('Y-m-d', strtotime("-".$i." days"))) {
+                    $flames += 1;				
+                }	
+                else{
+                    $flames = 0;
+                }		
+            }	
+        }else {
+            $flames = 0;
+
+        }
+        $streaks[$id['isInGroup_group_id']]=$flames;
+
+    }
+
+    return $streaks;
+}
