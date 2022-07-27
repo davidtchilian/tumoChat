@@ -8,6 +8,8 @@ session_start();
 $userId = $_SESSION['user_id'];
 $theme = $_SESSION['user_theme'];
 
+
+
 if (!isset($userId)) {
     header('Location: ./login.php?id=4');
     exit();
@@ -29,6 +31,8 @@ if ($userInfo == null) {
 $friends = getFriends($conn, $userId);
 
 ?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -84,7 +88,7 @@ $friends = getFriends($conn, $userId);
                                         <ion-icon name="moon-outline"></ion-icon>
                                     </span>
                                     <span class="text"> Dark </span>
-                                </a>
+                                </a> 
                             </li>
                             <li class="<?php echo $classes[2]; ?>">
                                 <a onclick="changetheme(2)">
@@ -141,7 +145,7 @@ $friends = getFriends($conn, $userId);
 <div class="container">
     <div class="row">
 
-        <div class="card centered-card" style=" width: 400px; ">
+        <div class="card centered-card " style=" width: 400px;">
             <div class="card-body">
                 <?php
                 echo "<img src='../assets/icons/$userIcon.png' class='card-img-top' alt='profile_' style='height: 100px; width: 100px; margin-bottom:10px'>";
@@ -241,15 +245,20 @@ $friends = getFriends($conn, $userId);
 <?php
 if (!$isGuest) {
 ?>
-    <div class="div-titre" style="margin-top: 6rem; text-align: center;">
-        <h1 class="Titre">Friends</h1>
-    </div>
-    <div class="container friends-container ">
+    
+    <div class="container friends-container  d-flex align-content-center flex-wrap">
+    <?php 
+    if($theme == 1 || $theme == 3){ 
+        echo "<h1 class='Titre text-center' style='color:white;'>Friends</h1>";
+    }else {
+        echo "<h1 class='Titre text-center' >Friends</h1>";
+    }
+?>
         <?php
         if (empty($friends)) {
         ?>
 
-            <h3>You don't have any friends.</h3>
+            <h4>You don't have any friends.</h4>
 
             <?php
         } else {
@@ -262,7 +271,7 @@ if (!$isGuest) {
                 $friendMail = $friend['user_email'];
                 $friendIcon = $friend['user_icon'];
             ?>
-                <div class="friend-row">
+                <div class= "friend-row">
                     <div class="friend-acc">
                         <a href="profile.php?id=<?php echo $friendId; ?>">
                             <img src='../assets/icons/<?php echo $friendIcon; ?>.png' class='card-img-top' alt='profile_' style='height: 75px; width: 75px; margin-right: 10px;'>
@@ -308,7 +317,7 @@ if (!$isGuest) {
                 xmlhttp.send();
             }
 
-            // console.log(str);
+           
             $.ajax({
                 type: 'get',
                 url: "../controllers/livesearch.php?q=" + str,
@@ -316,9 +325,7 @@ if (!$isGuest) {
                 success: function(response) {
                     console.log("Success !!");
 
-                    // console.log(response)
-                    // let txt = response.split('');
-                    // console.log(response);
+                   
 
                     const arr = JSON.parse(response);
 
@@ -327,8 +334,7 @@ if (!$isGuest) {
 
                     }
 
-                    // document.getElementById("result").innerHTML = element[1];
-                    // response.forEach(element => document.getElementById("result").innerHTML = element[1]);
+                    
                 },
                 error: function() {
                     x
@@ -341,6 +347,7 @@ if (!$isGuest) {
     <?php
     mysqli_close($conn);
     ?>
+
 </body>
 
 </html>
