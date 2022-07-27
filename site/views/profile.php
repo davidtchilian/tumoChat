@@ -2,7 +2,6 @@
 
 require_once('../models/db.php');
 include('../models/functions.php');
-include("../controllers/updatestatisticsinfo.php");
 
 session_start();
 $userId = $_SESSION['user_id'];
@@ -35,7 +34,6 @@ $friends = getFriends($conn, $userId);
 
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <title>Tumo Chat | Profile </title>
@@ -53,7 +51,6 @@ $friends = getFriends($conn, $userId);
         }
     </style>
 </head>
-
 <body>
 
     <nav class="navbar navbar-expand-lg">
@@ -347,7 +344,11 @@ if (!$isGuest) {
     <?php
     mysqli_close($conn);
     ?>
+<<<<<<< HEAD
 
 </body>
+=======
+>>>>>>> d59a95d229f34d2674e09487644e050bf60e5545
 
+</body>
 </html>

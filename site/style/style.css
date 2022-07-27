@@ -715,3 +715,7 @@ ul {
   background-color: #585858;
 }
 
+img{
+  -webkit-filter: drop-shadow(0 0 4px black);
+  filter: drop-shadow(0 0 4px black)
+}
