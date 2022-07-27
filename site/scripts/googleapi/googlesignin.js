@@ -3,7 +3,8 @@ function handleCredentialResponse(response) {
     const email = responsePayload.email;
     post('../controllers/login.php', {
         user_email: email,
-        user_pass: "gmail"
+        user_pass: "gmail",
+        gmail_pass: "1"
     });
 }
 
