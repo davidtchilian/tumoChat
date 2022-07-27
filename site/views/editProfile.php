@@ -22,7 +22,7 @@ if ($result -> num_rows > 0) {
 ?>
 
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
