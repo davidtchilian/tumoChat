@@ -495,3 +495,33 @@ function sendSticker(stickerId) {
 // console.log(document.getElementById("cont0").childElementCount)
 
 console.log(true)
+
+function deleteUser(event){
+  $.ajax(
+    {
+      type: 'post',
+      url: "../controllers/deleteuserfromgroup.php",
+      data: {
+        "user_id": event.target.id,
+        "group_id": groupId,
+
+      },
+      success: function (response) {
+        console.log("Success !!");
+        console.log(response)
+
+
+      },
+      error: function () {
+        console.log("Error !!");
+      }
+    }
+    
+  );
+
+  const div = document.getElementById(event.target.id)
+  div.setAttribute("style", "display: none;")
+
+
+}
+

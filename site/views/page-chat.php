@@ -191,12 +191,7 @@ function startsWith($string, $startString)
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <?php
-                    if ($groupTypeName == "private") {
-                    ?>
-                        <a onClick="getGroupIdInfo('<?php echo $userId; ?>', '<?php echo $groupId; ?>', '<?php echo $isAdmin; ?>', '<?php echo $groupAdminId; ?>')">
-                        <?php
-                    }?>
+                 
                             <button id="infoButton" type="button" class="btn info">
                                 <img src="../assets/images/le_vrai_i.png" alt="Information" style="width: 35px; height: 35px;" />
                             </button>
@@ -225,23 +220,44 @@ function startsWith($string, $startString)
                         <?php } else { ?>
                             <div class="groupinfo_div" id="groupinfo-container">
                                 <p id="groupInfo" class="group_name"> <?= getgroupinfo($conn, $groupId)["group_name"]?></p>
+                                    <?php if(getgroupinfo($conn, $groupId)["group_bio"] != ""){?>
+                                        <p class="group_name"><?=  getgroupinfo($conn, $groupId)["group_bio"]?></p>\
+                                       
+                                    <?php } ?>
                             </div>
                             <?php 
-                                $info = getgroupinfo($conn, $groupId);
-                                foreach ($info as $key):?>
-
-                                <div class="usersinfo_div">
+                             $usersId =  getGroupUsersId($conn, $groupId);
+                            
+                             $admin = getGroupAdmin($conn, $groupId);
+                                      
+                             
+                             
+                                
+                                foreach ($usersId as $uId):
+                                    $usersInfo = getUserInfo($conn,$uId);
+                                    ?>
+                                    <div class="usersinfo_div" id="<?=$uId?>">
                                     <div id="usersInfo"></div>
-                                    <div id="modal_buttons" class="userinfo_buttons">
-                                        <div id="modal-extra-interactions">
-                                            <?php var_dump(getgroupinfo($conn, $groupId));?>
+                                    <div id="modal_buttons" class="userinfo_buttons; display: flex;">
+                                        <div id=<?= $uId."modal-extra-interactions" ?>>
+                                        <?php if($uId == $groupAdminId) {?>
+
+                                            
+                                                <p><?= $usersInfo["user_email"]."⚡"?></p>
+                                               
+                                             </a>
+                                            
+                                        <?php } else {?>
+                                        <p><?= $usersInfo["user_email"]." <a onclick='deleteUser(event)' style="."cursor:pointer"."><span id=".$uId." style='margin-left:110px;'>❌</span></a>"?>  <?php }?>
+                                      
                                         </div>
-                                        <div id="modal-default-interactions">
-                                            <button id="closeButton" class="close btn modal_interaction">Close</button>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                                 <?php endforeach?>
+                                <div id="modal-default-interactions">
+                                            <button id="closeButton" class="close btn modal_interaction">Close</button>
+                                        </div>
                         <?php } ?>
                     </div>
                 </div>
@@ -434,6 +450,7 @@ function startsWith($string, $startString)
                             <?php
                             } ?>
                         </div>
+                        
                     </div>
                 </div>
             </div>

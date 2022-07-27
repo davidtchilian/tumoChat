@@ -65,11 +65,27 @@
             FROM USERS INNER JOIN isInGroup ON isInGroup.isInGroup_user_id = USERS.user_id
             WHERE isInGroup_group_id = $groupId";
         $result = mysqli_query($conn, $sql);
+        
         while ($user = mysqli_fetch_assoc($result)) {
             $users[] = $user['user_id'];
         }
+        
         return $users;
     }
+
+    function getGroupUsersEmail($conn, $groupId) {
+        $users = array();
+        $sql = "SELECT user_email
+            FROM USERS INNER JOIN isInGroup ON isInGroup.isInGroup_user_id = USERS.user_id
+            WHERE isInGroup_group_id = $groupId";
+        $result = mysqli_query($conn, $sql);
+        while ($user = mysqli_fetch_assoc($result)) {
+            $users[] = $user['user_email'];
+        }
+        return $users;
+    }
+
+  
 
     function getLastMessages($conn, $groupId) {
         $messages = array();
@@ -277,3 +293,5 @@ function getStreaks($conn,$user_id){
 
     return $streaks;
 }
+
+
