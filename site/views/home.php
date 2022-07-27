@@ -27,8 +27,7 @@
   }
 
    //$flames=file_get_contents("../controllers/getdate.php");
-  // $flames=getStreaks($conn,$user_id);
-  $flames = array();
+  $flames=getStreaks($conn,$user_id);
   $sql3 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
   $result3 = mysqli_query($conn, $sql3);
   if ($result3->num_rows > 0) {
@@ -183,9 +182,9 @@
                             <li class=  "border20 list-group-item group-name">
                               <div>
                                 
-                              <!-- <span class ="streaks" id="stars_<?php // echo $group["gID"]; ?>">
-                               // getStreakIcon($flames[$group["gID"]]) 
-                            </span> -->
+                              <span class ="streaks" id="stars_<?php echo $group["gID"]; ?>">
+                               <?= getStreakIcon($flames[$group["gID"]]) ?>
+                            </span>
 
                               <div class = " <?= $textcolor ?> groupHeader">
                                 <span class="groupChatName"><?php
