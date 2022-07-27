@@ -5,9 +5,12 @@ include("../models/functions.php");
 $user_email = $_POST['user_email'];
 $user_password = $_POST['user_pass'];
 $user_password_hash = md5($_POST['user_pass']);
+$gmail_pass = $_POST['gmail_pass'];
 
-if ($user_password == "gmail") {
-  $user_password_hash = "gmail";
+if ($gmail_pass == "1") {
+  if ($user_password == "gmail") {
+    $user_password_hash = "gmail";
+  }
 }
 
 $sql = "SELECT user_id, user_theme FROM USERS WHERE user_email = '$user_email' AND user_password = '$user_password_hash'";
