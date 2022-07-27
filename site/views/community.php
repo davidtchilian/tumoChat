@@ -55,7 +55,7 @@
     <div class="fixed-top">
       <nav class="navbar navbar-expand-lg" style="background-color: #6c4b93">
         <div class="container">
-        <a class="navbar-brand" href="profile.php" style="color :white; flex;display: flex;justify-content: center;align-items: center;"">
+        <a class="navbar-brand" href="profile.php" style="color :white; display: flex;justify-content: center;align-items: center;">
             <?php  echo "<img src='../assets/icons/$usricon.png' class='card-img-top' alt='profile_' style='height: 45px; width: 45px; margin-right:10px;'>" ?>
             <span>Profile</span> 
           </a>

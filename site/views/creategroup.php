@@ -38,7 +38,7 @@ if (!isset($_SESSION['user_id'])) {
 			<h5 class="card-title">Creating Groups</h5>
 
 			<label for="exampleFormControlInput1" class="form-label">Name of Group</label>
-			<input name="grpname" type="text" class="form-control" id="exampleFormControlInput1" minlength = "3" maxlength = "50" >
+			<input name="grpname" type="text" class="form-control" id="exampleFormControlInput1" minlength = "3" maxlength = "50" required>
 
 
 			<label for="exampleFormControlTextarea1" class="form-label; float: left;">Bio</label>

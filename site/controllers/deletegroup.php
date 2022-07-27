@@ -9,11 +9,11 @@ mysqli_query($conn,$sql2);
 $sql3 = "DELETE FROM isInGroup WHERE isInGroup_group_id = $groupid";
 mysqli_query($conn,$sql3);
 
-$sql = "DELETE FROM GROUPCHAT WHERE group_id = $groupid";
-mysqli_query($conn,$sql);
-
 $deleteNotifs= "DELETE FROM NOTIFICATIONS WHERE notification_group_id = $groupid";
 mysqli_query($conn,$deleteNotifs);
+
+$sql = "DELETE FROM GROUPCHAT WHERE group_id = $groupid";
+mysqli_query($conn,$sql);
 
 mysqli_close($conn);
 header("Location: ../views/home.php");

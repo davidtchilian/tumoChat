@@ -123,11 +123,11 @@ $friends = getFriends($conn, $userId);
                 <form class="form-inline my-2 my-lg-0 d-flex " role="search" style="width: 400px; margin:auto;">
                     <input class="form-control me-2 srch-input" type="text" id="fname" name="fname" onkeyup="showHint(this.value)">
                     <div id="txtHint"></div>
-                    
-                        <select>
-                            <option id="result"></option>
-                        </select>
-                    
+
+                    <select>
+                        <option id="result"></option>
+                    </select>
+
                     <button class="btn search btn-search ">
                         <img src="../assets/images/loupe.png" alt="Researcher" style="width : 21px; height: 30px; margin-top : 3px" />
                     </button>
@@ -198,9 +198,9 @@ $friends = getFriends($conn, $userId);
                     </div>
 
 
-                    <?php
+                <?php
                 } else {
-                    ?>
+                ?>
                     <a href="editProfile.php" class="card-link" style="font-size: 20px; color: gray;">Edit Profile</a><br>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -227,14 +227,12 @@ $friends = getFriends($conn, $userId);
                             </div>
                         </div>
                     </div>
-
-
-
+                    <?php }?>
             </div>
         </div>
     </div>
 <?php
-                }
+                
 ?>
 </div>
 </div>
@@ -248,14 +246,13 @@ if (!$isGuest) {
     </div>
     <div class="container friends-container ">
         <?php
-            if (empty($friends)) { 
+        if (empty($friends)) {
         ?>
-       
-           <h3>You don't have any friends.</h3> 
-       
-        <?php 
-            }
-        else {
+
+            <h3>You don't have any friends.</h3>
+
+            <?php
+        } else {
             foreach ($friends as $friend) {
                 $friendId = intval($friend);
                 $friend = getUserInfo($conn, $friendId);
@@ -278,11 +275,10 @@ if (!$isGuest) {
                         <button type="button" class="btn btn-outline-dark">Direct</button>
                     </div>
                 </div>
-
     <?php
             }
         }
-}
+    }
     ?>
     </div>
     <script>
@@ -311,36 +307,34 @@ if (!$isGuest) {
                 xmlhttp.open("GET", "../controllers/livesearch.php?q=" + str, false);
                 xmlhttp.send();
             }
-            
+
             // console.log(str);
-            $.ajax(
-        {
-           type: 'get',
-           url:  "../controllers/livesearch.php?q=" + str,
-           data: {},
-           success: function (response) {
-            console.log("Success !!");
+            $.ajax({
+                type: 'get',
+                url: "../controllers/livesearch.php?q=" + str,
+                data: {},
+                success: function(response) {
+                    console.log("Success !!");
 
-            // console.log(response)
-            // let txt = response.split('');
-            // console.log(response);
-            
-            const arr = JSON.parse(response);
-            
-            for (let element in arr) {
-                console.log(arr[element][1]);
-                 
-                }   
-            
-            // document.getElementById("result").innerHTML = element[1];
-            // response.forEach(element => document.getElementById("result").innerHTML = element[1]);
-           },
-           error: function () {x
-             console.log("Error !!");
-           }
-          }        
-     );
+                    // console.log(response)
+                    // let txt = response.split('');
+                    // console.log(response);
 
+                    const arr = JSON.parse(response);
+
+                    for (let element in arr) {
+                        console.log(arr[element][1]);
+
+                    }
+
+                    // document.getElementById("result").innerHTML = element[1];
+                    // response.forEach(element => document.getElementById("result").innerHTML = element[1]);
+                },
+                error: function() {
+                    x
+                    console.log("Error !!");
+                }
+            });
         }
     </script>
 

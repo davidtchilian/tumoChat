@@ -4,8 +4,6 @@
     header('Location: ./login.php?id=4');
     exit();
 }
-//local nothing
-
   $user_id = $_SESSION['user_id'];
   $theme = $_SESSION['user_theme'];
   require_once("../models/db.php");
@@ -30,7 +28,6 @@
    //$flames=file_get_contents("../controllers/getdate.php");
   // $flames=getStreaks($conn,$user_id);
   $flames = array();
-var_dump($flames);
   $sql3 = "SELECT user_icon FROM USERS WHERE user_id = $user_id";
   $result3 = mysqli_query($conn, $sql3);
   if ($result3->num_rows > 0) {
