@@ -204,7 +204,7 @@ function startsWith($string, $startString)
                             <div class="userinfo_buttons" id="modal-extra-interactions">
                                 <?php if ($isAdmin) { ?>
                                     <div class="userinfo_buttons_restyle">
-                                        <a href="#" class="add_user" id="add_user">Add User</a>
+                                        <a href="#" class="add_user" id="add_user" >Add User</a>
                                         <a href="../controllers/deletegroup.php?delid=<?= $userId ?>&id=<?= $groupId ?>" class="delete_group" id="delete_group">Delete Group</a>
                                     </div>
                                 <?php } else { ?>
@@ -217,6 +217,9 @@ function startsWith($string, $startString)
                         <?php } ?>
                     </div>
                 </div>
+
+
+
                 <div id="addModal" class="modal_user">
                     <div class="modal-content" id="modalCont">
                         <div class="modal-add-users">
@@ -252,6 +255,8 @@ function startsWith($string, $startString)
                                         ?>
                                     </select>
                                     <input type="hidden" name="groupname" value="<?= $groupName ?>">
+                                    
+                                    <button id="closeButton" class="close btn modal_interaction mt-3">Close</button>
                                     <button type="submit" class="btn btn-primary mt-3" style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Add</button>
                                 </div>
                         </div>

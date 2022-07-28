@@ -125,9 +125,9 @@ function onClose() {
   window.location.replace(removeParam("modal", window.location.href));
 }
 addUserButton.onclick = function () {
-          stickerModal.style.display = "none";
-          addUserModal.style.display = "block";
-        };
+  stickerModal.style.display = "none";
+  addUserModal.style.display = "block";
+};
 
 // function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
 //   groupName.innerText = "Loading...";
@@ -260,13 +260,13 @@ var x
 const editDelete = document.getElementById("EditDelete")
 function show(event) {
   x = event.target.id
-  
+
   const editBtn = document.getElementById("editBtn")
   const deleteBtn = document.getElementById("deleteBtn")
-  
+
   editBtn.setAttribute("name", x)
   deleteBtn.setAttribute("name", x)
-  
+
   editDelete.style.display = "block"
 }
 
@@ -401,8 +401,8 @@ function sendMessage(event) {
           button2.setAttribute("onclick", "show(event)")
           button2.setAttribute("style", "float : right; color: black;")
           button2.setAttribute("id", id)
-          if(typeName == "public"){
-            button2.style.backgroundColor='rgb(' + rgb.r * 1.2 + ',' + rgb.g * 1.2 + ',' + rgb.b * 1.2 + ')';
+          if (typeName == "public") {
+            button2.style.backgroundColor = 'rgb(' + rgb.r * 1.2 + ',' + rgb.g * 1.2 + ',' + rgb.b * 1.2 + ')';
             button2.style.borderColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
           }
           const span = document.createElement("span")
@@ -424,9 +424,9 @@ function sendMessage(event) {
           div.appendChild(button2)
 
 
-          
 
-         
+
+
           cont0.appendChild(cont)
 
           cont.scrollIntoView({ behavior: "smooth" })
@@ -459,7 +459,7 @@ function sendSticker(stickerId) {
 
 console.log(true)
 
-function deleteUser(event){
+function deleteUser(event) {
   $.ajax(
     {
       type: 'post',
@@ -479,7 +479,7 @@ function deleteUser(event){
         console.log("Error !!");
       }
     }
-    
+
   );
 
   const div = document.getElementById(event.target.id)
