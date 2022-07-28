@@ -308,7 +308,7 @@ body ::after {
   .indexlogo{
     height: 18vw !important;
     width: auto !important;
-    content:url("../assets/images/logo_tuyu.png");
+    content:url("../assets/tumologos/purple_logo.png");
     /* width: auto !important; */
   }
   .main-buttons{
@@ -332,7 +332,7 @@ body {
   height: 100%;
   font-family: "Roboto", sans-serif;
   background-image: url('../assets/images/themes/0.jpg');
-  background-size: 10%;
+  background-size: 15%; 
 }
 
 .centered-card {

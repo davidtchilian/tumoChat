@@ -113,6 +113,7 @@ function startsWith($string, $startString)
 
         ?>body {
             background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
+            background-size: 15%;
         }
     </style>
 </head>
@@ -306,7 +307,7 @@ function startsWith($string, $startString)
             ?>
                 <div class="row">
                     <?php
-                    if ($isingroup_message || $groupTypeName == "public") { ?>
+                    if ($isingroup_message || $groupTypename = "public") { ?>
                         <div class="col-1"><img src="../assets/icons/<?php echo $icon; ?>.png" class="user_icon"></div>
                         <div class="col-7">
                             <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
@@ -316,7 +317,7 @@ function startsWith($string, $startString)
                                 $stickerSplit = explode("_", $message['message_content']);
                                 if ($stickerSplit[0] == "STICKER") {
                                     $stickerId = $stickerSplit[1];
-                                    echo "<img id=" . $message['message_id'] . "src='../assets/stickers/$stickerId.png' style='height: 100px; width: 400px'>";
+                                    echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 100px'>";
                                 } else {
                                     echo "<pre>" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>";
                                 }

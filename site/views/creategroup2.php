@@ -25,6 +25,7 @@ $name = $_POST['grpname'];
     <style>
         <?php $theme = $_SESSION['user_theme']; ?>body {
             background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
+            background-size: 15%;
         }
     </style>
 
