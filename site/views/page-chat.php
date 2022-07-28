@@ -323,7 +323,7 @@ function startsWith($string, $startString)
                                 $stickerSplit = explode("_", $message['message_content']);
                                 if ($stickerSplit[0] == "STICKER") {
                                     $stickerId = $stickerSplit[1];
-                                    echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 100px'>";
+                                    echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 140px'>";
                                 } else {
                                     echo "<pre>" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>";
                                 }
@@ -334,7 +334,7 @@ function startsWith($string, $startString)
                     } else { ?>
                         <div class="col-1"><img src="../assets/comm_icons/100.png" class="user_icon"></div>
                         <div class="col-7">
-                            <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
+                            <button type="button" class="btn btn-primary messageRecu mt-2" style=" float :left; color: black;">
                                 <?php
                                 echo "<p class='delated_user'>Delated user</p>";
                                 $stickerSplit = explode("_", $message['message_content']);
