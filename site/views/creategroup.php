@@ -23,6 +23,7 @@ if (!isset($_SESSION['user_id'])) {
        
         body{
            background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
+		   background-size: 15%;
         }
         
         </style>

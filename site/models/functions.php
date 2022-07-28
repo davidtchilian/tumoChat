@@ -40,7 +40,7 @@
                 array_push($friendsList, $friend['user_id_1']);
             }
         }
-        
+        $friendsList=array_unique($friendsList);
         return $friendsList;
     }
 
