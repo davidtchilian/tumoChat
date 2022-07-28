@@ -159,8 +159,9 @@ tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="tru
                     <input class="form-control me-2 srch-input" type="text" id="fname" name="fname" onkeyup="showHint(this.value)">
                     <div id="txtHint"></div>
 
-                    <select>
-                        <option id="result"></option>
+                    <select id="sel">
+                        <!-- <option id="result"></option> -->
+                        
                     </select>
 
                     <button class="btn search btn-search ">
@@ -331,18 +332,18 @@ if (!$isGuest) {
     <script>
         function showHint(str) {
             if (str.length == 0) {
-                document.getElementById("txtHint").innerHTML = "";
+                document.getElementById("sel").innerHTML = "";
                 return;
-            } else {
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("txtHint").innerHTML = this.responseText;
-                    }
-                };
-                xmlhttp.open("GET", "../controllers/livesearch.php?q=" + str, false);
-                xmlhttp.send();
-            }
+            } //else {
+            //     var xmlhttp = new XMLHttpRequest();
+            //     xmlhttp.onreadystatechange = function() {
+            //         if (this.readyState == 4 && this.status == 200) {
+            //             document.getElementById("txtHint").innerHTML = this.responseText;
+            //         }
+            //     };
+            //     xmlhttp.open("GET", "../controllers/livesearch.php?q=" + str, false);
+            //     xmlhttp.send();
+            // }
 
            
             $.ajax({
@@ -352,13 +353,19 @@ if (!$isGuest) {
                 success: function(response) {
                     console.log("Success !!");
 
-                   
+                    
 
                     const arr = JSON.parse(response);
-
+                    const sel = document.getElementById("sel");
+                    sel.innerHTML = "";
                     for (let element in arr) {
-                        console.log(arr[element][1]);
-
+                        var b = document.createElement("a");
+                        b.href = "profile.php?id=" + arr[element][0];
+                        var o = document.createElement("option");
+                        o.innerHTML = arr[element][1];
+                        b.appendChild(o);
+                        sel.appendChild(b);
+                        
                     }
 
                     
