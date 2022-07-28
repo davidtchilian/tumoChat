@@ -124,12 +124,12 @@ function startsWith($string, $startString)
     </style>
 </head>
 
-<body id="bodyHTML">
+<body id="bodyHTML" onclick="hideAdvance(event)">
 <input type="hidden" id="groupType" name="<?= $groupTypeName?>">
 <input type="hidden" id="admin" name="<?=$isAdmin?>">
 
-    <div class="fixed-top" >
-        <nav id="navbar" class="navbar navbar-expand-lg" style="background-color : #6c4b93;">
+    <div class="fixed-top" onclick="hideAdvance(event)" >
+        <nav id="navbar" onclick="hideAdvance(event)"class="navbar navbar-expand-lg" style="background-color : #6c4b93;">
             <?php
             if ($groupTypeName == "private") {
             ?>
@@ -277,7 +277,7 @@ function startsWith($string, $startString)
     </div>
     </nav>
     </div>
-    <div id="cont0" class="container mt-5" style="min-height : 65vh;" style="position : relative" name="ptiashxates">
+    <div id="cont0" class="container mt-5" style="min-height : 65vh;" style="position : relative" name="ptiashxates" onclick="hideAdvance(event)">
         <br>
 
         <?php
@@ -324,7 +324,7 @@ function startsWith($string, $startString)
                                 $stickerSplit = explode("_", $message['message_content']);
                                 if ($stickerSplit[0] == "STICKER") {
                                     $stickerId = $stickerSplit[1];
-                                    echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 100px'>";
+                                    echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 140px'>";
                                 } else {
                                     echo "<pre>" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>";
                                 }
@@ -335,7 +335,7 @@ function startsWith($string, $startString)
                     } else { ?>
                         <div class="col-1"><img src="../assets/comm_icons/100.png" class="user_icon"></div>
                         <div class="col-7">
-                            <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
+                            <button type="button" class="btn btn-primary messageRecu mt-2" style=" float :left; color: black;">
                                 <?php
                                 echo "<p class='delated_user'>Delated user</p>";
                                 $stickerSplit = explode("_", $message['message_content']);
@@ -367,16 +367,17 @@ function startsWith($string, $startString)
     <br>
     <br>
 
-    <div class="fixed-bottom" style="position:fixed">
+    <div class="fixed-bottom" style="position:fixed" >
         <div class="editDelete" id="EditDelete">
+        <?= $message?>
             <div class="editDeleteContent">
 
                 <a id="editBtn" onclick="myFunction(event)">Edit</a>
                 <a id="deleteBtn" onclick="deleteMessages(event)">Delete</a>
             </div>
         </div>
-        <nav id="navbar1" class="navbar navbar-expand-lg" id="navbarId" style="background-color : #6c4b93;">
-            <div class="container">
+        <nav id="navbar1" onclick="hideAdvance(event)" class="navbar navbar-expand-lg" id="navbarId" style="background-color : #6c4b93;">
+            <div class="container" onclick="hideAdvance(event)">
                 <a onClick="sticker()" id="stickerButton" class="sticker_btn nav-link sticker_a" style="display: inline-block; margin-bottom:1rem;">
                     <img src="../assets/images/stickerr.png" alt="sticker" style="width :40px" style="height : 40px" />
                 </a>
@@ -388,7 +389,7 @@ function startsWith($string, $startString)
                         <input type="hidden" name="message_id" value="<?= $message['message_id'] ?>" id="message_id">
                         <input type="hidden" id="jsUserId" value="<?= $userId ?>">
                         <div class="form-group" style="margin: 0 20px; width: 75%;">
-                            <textarea name="message_content" style="resize: none" class="form-control" id="text" rows="1" placeholder="Enter your message here" autofocus></textarea>
+                            <textarea onclick="hide()" name="message_content" style="resize: none" class="form-control" id="text" rows="1" placeholder="Enter your message here" autofocus></textarea>
                         </div>
                         <button class="btn search" type="submit" value="Message" id="send" onClick="sendMessage(event)">
                             <img src="../assets/images/avion_papier_nour_1.png" alt="envoye" style="width :40px" style="height : 40px" />
