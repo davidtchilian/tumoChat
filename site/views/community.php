@@ -46,6 +46,7 @@
        
         body{
            background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
+           background-size: 15%;
         }
         
         

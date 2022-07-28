@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>| TUYU | </title>
+    <title>| TUMO | </title>
     <link rel="icon" type="image/png" href="../assets/images/logo_tuyu-sm.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,7 @@
 <body>
     <div class="flex-container">
         <div class="col-6 main-img">
-            <img src="../assets/images/white_logo.png" class="indexlogo">
+            <img src="../assets/tumologos/white_logo.png" class="indexlogo">
             <!-- <img id="logo" src="../assets/images/fond_page_dacceuil.jpg" class="imaj" style="width:auto"> -->
         </div>
 
