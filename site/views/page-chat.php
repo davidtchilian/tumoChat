@@ -177,35 +177,39 @@ function startsWith($string, $startString)
                                 <?php } ?>
                             </div>
                             <div class="usersinfo_div" id="usersinfo_div">
-                            <div id="usersInfo">
-                                <?php foreach ($usersId as $uId) :
-                                    $usersInfo = getUserInfo($conn, $uId);
-                                ?>
-                                    <div class="user_info_page">
-                                        <?php if($isAdmin) {
-                                            if ($uId == $groupAdminId) { ?>
-                                                <p><?= $usersInfo["user_email"] ?></p><span>⚡</span>
+                                <div id="usersInfo">
+                                    <?php foreach ($usersId as $uId) :
+                                        $usersInfo = getUserInfo($conn, $uId);
+                                    ?>
+                                        <div class="user_info_page">
+                                            <?php if ($isAdmin) {
+                                                if ($uId == $groupAdminId) { ?>
+                                                    <p><?= $usersInfo["user_email"] ?></p><span style="padding-right:10px">⚡</span>
 
-                                            <?php } else { ?>
-                                                <p><?= $usersInfo["user_email"] ?> </p><a onclick="deleteUser(event)" class="user_delete_button" style="cursor:pointer"><span id="<?= $uId ?>">❌</span></a>
+                                                <?php } else { ?>
+                                                    <p><?= $usersInfo["user_email"] ?> </p><a style="margin-right:10px" onclick="deleteUser(event)" class="user_delete_button" style="cursor:pointer"><span id="<?= $uId ?>">❌</span></a>
+                                                <?php }
+                                            } else {
+                                                if ($uId == $groupAdminId) { ?>
+                                                    <p><?= $usersInfo["user_email"] ?></p><span style="padding-right:10px">⚡</span>
+                                                <?php } else { ?>
+                                                    <p><?= $usersInfo["user_email"] ?></p>
                                             <?php }
-                                        } else {
-                                            if ($userId == $groupAdminId) { ?>
-                                                <p><?= $usersInfo["user_email"] ?></p><span>⚡</span>
-                                            <?php } else { ?>
-                                                <p><?= $usersInfo["user_email"] ?></p>
-                                        <?php }
-                                        } ?>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
+                                            } ?>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
                             </div>
                             <div class="userinfo_buttons" id="modal-extra-interactions">
                                 <?php if ($isAdmin) { ?>
                                     <div class="userinfo_buttons_restyle">
-                                    <a href="#" class="add_user" id="add_user">Add User</a>
-                                    <a href="../controllers/deletegroup.php?delid=<?= $userId ?>&id=<?= $groupId ?>" class="delete_group" id="delete_group">Delete Group</a>
+                                        <a href="#" class="add_user" id="add_user">Add User</a>
+                                        <a href="../controllers/deletegroup.php?delid=<?= $userId ?>&id=<?= $groupId ?>" class="delete_group" id="delete_group">Delete Group</a>
                                     </div>
+                                <?php } else { ?>
+                                    <div class="userinfo_buttons_restyle">
+                                        <a href="../controllers/deleteuserfromgroup.php?delid=<?= $userId ?>&id=<?= $groupId ?>" class="leave_group" id="leave_group">Leave Group</a>
+                                    </div>  
                                 <?php } ?>
                                 <button id="closeButton" class="close btn modal_interaction">Close</button>
                             </div>
