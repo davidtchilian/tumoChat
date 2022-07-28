@@ -1,4 +1,5 @@
-
+var groupType = document.getElementById("groupType").name
+var isadmin = document.getElementById("admin").name
 var stickerModal = document.getElementById("infoModal");
 var addUserModal = document.getElementById("addModal");
 var sticketrButton = document.getElementById("infoButton");
@@ -12,7 +13,7 @@ var typeName = document.getElementById("chat").getAttribute("typeName");
 var imageSrc = document.getElementById("chat").getAttribute("imageSrc");
 
 var extraInteractions = document.getElementById("modal-extra-interactions");
-var addUserButton = document.getElementById("add_user")
+var addUserButton = document.getElementById("add_user");
 window.onload = () => {
   window.scrollTo({
     top: 1000,
@@ -124,10 +125,12 @@ function onClose() {
   extraInteractions.innerHTML = "";
   window.location.replace(removeParam("modal", window.location.href));
 }
-addUserButton.onclick = function () {
-          stickerModal.style.display = "none";
-          addUserModal.style.display = "block";
-        };
+if(groupType == "private" && isadmin == 1){
+  addUserButton.onclick = function () {
+            stickerModal.style.display = "none";
+            addUserModal.style.display = "block";
+          };
+ }
 
 // function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
 //   groupName.innerText = "Loading...";
@@ -482,8 +485,9 @@ function deleteUser(event){
     
   );
 
-  const div = document.getElementById(event.target.id)
+  const div = document.getElementById("div"+event.target.id)
   div.setAttribute("style", "display: none;")
+  console.log(div)
 
 
 }
