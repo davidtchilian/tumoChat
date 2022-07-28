@@ -30,7 +30,9 @@ if (!isset($groupId)) {
 require_once('../models/db.php');
 require_once('../models/functions.php');
 
-
+$userInfo = getUserInfo($conn, $userId);
+$userIcon = $userInfo['user_icon'];
+$userName = explode("@", $userInfo['user_email'])[0];
 
 $limit = 23;
 
@@ -120,16 +122,6 @@ function startsWith($string, $startString)
             background-size: 15%;
         }
     </style>
-    <script>
-        let host = 'ws://0.0.0.0:1000/site/models/socket-server.php';
-        let socket = new WebSocket(host);
-        socket.onmessage = (e) => {
-            if (e.data == "ping") {
-                // Pong!
-            }
-            socket.send("Hello")
-        };
-    </script>
 </head>
 
 <body id="bodyHTML">
@@ -329,7 +321,6 @@ function startsWith($string, $startString)
                             <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
                                 <?php
                                 echo "<p class='user_email'>" . $user_name . "</p>";
-                                //  echo  $message['message_content'];
                                 $stickerSplit = explode("_", $message['message_content']);
                                 if ($stickerSplit[0] == "STICKER") {
                                     $stickerId = $stickerSplit[1];
@@ -449,7 +440,108 @@ function startsWith($string, $startString)
             jQuery(".chosen").data("placeholder", "Select persons you want to add...").chosen();
         });
     </script>
+    <script>
+
+        console.log("IM HERE")
+
+        var conn = new WebSocket('ws://localhost:1000');
+
+        // <div class="col-1"><img src="../assets/icons/ echo $icon; .png" class="user_icon"></div>
+        // <div class="col-7">
+        //     <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
+        //         
+        //         echo "<p class='user_email'>" . $user_name . "</p>";
+        //         $stickerSplit = explode("_", $message['message_content']);
+        //         if ($stickerSplit[0] == "STICKER") {
+        //             $stickerId = $stickerSplit[1];
+        //             echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 100px'>";
+        //         } else {
+        //             echo "<pre>" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>";
+        //         }
+        //         
+        //     </button>
+        // </div>
+
+
+        conn.onmessage = function(e) {
+            const messageData = JSON.parse(e.data);
+            console.log(messageData)
+
+            const chatContainer = document.getElementById("cont0")
+
+            const cont = document.createElement("div");
+            cont.setAttribute("class", "row");
+            cont.setAttribute("id", "messages");
+
+            // DIV col-1 START
+
+            const divCol1 = document.createElement("div");
+            divCol1.setAttribute("class", "col-1");
+
+            const userIcon = document.createElement("img");
+            userIcon.setAttribute("src", `../assets/icons/${messageData.icon}.png`);
+            userIcon.setAttribute("class", "user_icon");
+
+
+            divCol1.appendChild(userIcon);
+
+            // DIV col-1 END
+
+            const divCol7 = document.createElement("div");
+            divCol7.setAttribute("class", "col-7");
+
+            const userName = document.createElement("p");
+            userName.setAttribute("class", "user_email");
+            userName.innerText = messageData.userName;
+
+            cont.appendChild(divCol1);
+            cont.appendChild(divCol7);
+
+            const button = document.createElement("button");
+            button.setAttribute("class", "btn btn-primary messageRecu mt-2");
+            button.setAttribute("onclick", "show(event)");
+            button.setAttribute("style", "float : left; color: black;");
+
+            if (typeName == "public") {
+                button.style.backgroundColor = 'rgb(' + rgb.r * 1.2 + ',' + rgb.g * 1.2 + ',' + rgb.b * 1.2 + ')';
+                button.style.borderColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+            }
+
+            const span = document.createElement("span");
+            span.setAttribute("class", "message_content_span");
+            span.setAttribute("onclick", "show(event)");
+
+            if (messageData.message_content.startsWith("STICKER_")) {
+                let sticker = document.createElement("img");
+                sticker.src = `../assets/stickers/${messageData.message_content.split("_")[1]}.png`;
+                sticker.style.width = "140px";
+                sticker.style.height = "100px";
+                sticker.setAttribute("name", id)
+                span.appendChild(sticker);
+            } else {
+                span.setAttribute("id", id)
+                span.innerText = messageData.message_content;
+            }
+
+            button.appendChild(userName)
+            button.appendChild(span)
+            divCol7.appendChild(button)
+            chatContainer.appendChild(cont)
+        };
+
+        function sendMsg(message) {
+            conn.send(JSON.stringify({
+                userId: <?php echo $userId; ?>,
+                groupId: <?php echo $groupId; ?>,
+                message_content: message,
+                icon: <?php echo $userIcon; ?>,
+                userName: "<?php echo $userName; ?>"
+            }));
+        }
+
+    </script>
     <script id="chat" type="text/javascript" src="../scripts/chat.js" typeName=<?php echo $groupTypeName; ?> imageSrc=<?php echo $groupIcon; ?>></script>
+
 </body>
 
 </html>
