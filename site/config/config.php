@@ -14,6 +14,9 @@ $config = array(
     // Domain Name
     'DOMAIN_NAME' => 'http://localhost:8888/site',
 
+    // Login With Google Account Configuration
+
+    'GOOGLE_DATA_CLIENT_ID' => '409821055988-h65mtble4s6aa48ij82cp1alpariqbb1.apps.googleusercontent.com',
 
 );
 
