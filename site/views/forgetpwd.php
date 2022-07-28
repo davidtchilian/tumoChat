@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>TUYU | connexion </title>
+    <title>TUMO | connexion </title>
     <link rel="icon" type="image/png" href="../assets/images/logo_tuyu-sm.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -24,7 +24,7 @@
     <div class="wrap">
         <div class="row pb-5">
             <div class="col text-center welcome">
-                <a href="index.php"><img src="../assets/images/logo_tuyu.png" class="logo" alt="TUYU"></a>
+                <a href="index.php"><img src="../assets/tumologos/image.png" class="logo" alt="TUYU"></a>
             </div>
         </div>
         <div class="card centered-card">

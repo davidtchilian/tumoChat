@@ -244,7 +244,8 @@ p {
 }
 
 .add_user {
-  margin-left: 5px;
+  margin-left: 500px;
+  text-decoration: none;
 }
 #smska {
   width: 800px;
@@ -259,6 +260,8 @@ pre {
   font-family: Arial;
   font-weight: 400;
   margin-bottom: .5rem;
+  display: flex;
+  text-align: left;
 }
 .comm_icon{
   width: 55px;

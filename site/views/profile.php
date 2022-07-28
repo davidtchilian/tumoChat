@@ -141,26 +141,13 @@ tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="tru
                     </div>
                 </ul>
 
-                <?php
-                $users = array();
-                $sql = "SELECT user_email, user_id FROM USERS WHERE user_id != $userId AND user_email LIKE '%$txt%'";
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $temp = array();
-                        array_push($temp, $row["user_id"]);
-                        array_push($temp, $row["user_email"]);
-                        $users[] = $temp;
-                    }
-                }
-
-                ?>
-                <form class="form-inline my-2 my-lg-0 d-flex " role="search" style="width: 400px; margin:auto;">
+                <form class="form-inline my-2 my-lg-0 d-flex " role="search" style="width: 400px; margin:auto;" action="../controllers/redirect_profile.php" method="post">
                     <input class="form-control me-2 srch-input" type="text" id="fname" name="fname" onkeyup="showHint(this.value)">
                     <div id="txtHint"></div>
 
-                    <select>
-                        <option id="result"></option>
+                    <select id="sel" name="user_id">
+                        
+                        
                     </select>
 
                     <button class="btn search btn-search ">
@@ -168,10 +155,10 @@ tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="tru
                     </button>
                 </form>
             </div>
-    </nav>
-<?php
+            <?php
         }
-?>
+        ?>
+        </nav>
 </div>
 <div class="container">
     <div class="row">
@@ -308,7 +295,9 @@ if (!$isGuest) {
                         </a>
                     </div>
                     <div>
-                        <button type="button" class="btn btn-outline-dark">Direct</button>
+                        <a href="../controllers/direct.php?id=<?= $friendId ?>">
+                            <button type="button" class="btn btn-outline-dark">Direct</button>
+                        </a>
                     </div>
                 </div>
     <?php
@@ -331,18 +320,18 @@ if (!$isGuest) {
     <script>
         function showHint(str) {
             if (str.length == 0) {
-                document.getElementById("txtHint").innerHTML = "";
+                document.getElementById("sel").innerHTML = "";
                 return;
-            } else {
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("txtHint").innerHTML = this.responseText;
-                    }
-                };
-                xmlhttp.open("GET", "../controllers/livesearch.php?q=" + str, false);
-                xmlhttp.send();
-            }
+            } //else {
+            //     var xmlhttp = new XMLHttpRequest();
+            //     xmlhttp.onreadystatechange = function() {
+            //         if (this.readyState == 4 && this.status == 200) {
+            //             document.getElementById("txtHint").innerHTML = this.responseText;
+            //         }
+            //     };
+            //     xmlhttp.open("GET", "../controllers/livesearch.php?q=" + str, false);
+            //     xmlhttp.send();
+            // }
 
            
             $.ajax({
@@ -352,13 +341,18 @@ if (!$isGuest) {
                 success: function(response) {
                     console.log("Success !!");
 
-                   
+                    
 
                     const arr = JSON.parse(response);
-
+                    const sel = document.getElementById("sel");
+                    sel.innerHTML = "";
                     for (let element in arr) {
-                        console.log(arr[element][1]);
-
+                        
+                        var o = document.createElement("option");
+                        o.innerHTML = arr[element][1];
+                        o.value = arr[element][0];
+                        sel.appendChild(o);
+                        
                     }
 
                     
