@@ -61,7 +61,6 @@ if ($groupType == 2) {
     }
 
     if (!$isingroup) {
-        var_dump($group_users);
         header("Location: home.php");
     }
 }
@@ -94,6 +93,7 @@ function startsWith($string, $startString)
     <title><?php echo $groupName . " - TUYU"; ?></title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100&display=swap');
+
         .user_icon {
             height: 35px;
         }
@@ -145,11 +145,11 @@ function startsWith($string, $startString)
                     </li>
                 </ul>
                 <div class="d-flex">
-                 
-                            <button id="infoButton" type="button" class="btn info">
-                                <img src="../assets/images/le_vrai_i.png" alt="Information" style="width: 35px; height: 35px;" />
-                            </button>
-                    
+
+                    <button id="infoButton" type="button" class="btn info">
+                        <img src="../assets/images/le_vrai_i.png" alt="Information" style="width: 35px; height: 35px;" />
+                    </button>
+
                 </div>
 
                 <div id="infoModal" class="modal_user">
@@ -166,55 +166,57 @@ function startsWith($string, $startString)
 
                                 <div id="groupBio"></div>
                             </div>
-                        <?php } else { ?>
+                        <?php } else {
+                            $usersId =  getGroupUsersId($conn, $groupId);
+                            $admin = getGroupAdmin($conn, $groupId);
+                        ?>
                             <div class="groupinfo_div" id="groupinfo-container">
-                                <p id="groupInfo" class="group_name"> <?= getgroupinfo($conn, $groupId)["group_name"]?></p>
-                                    <?php if(getgroupinfo($conn, $groupId)["group_bio"] != ""){?>
-                                        <p class="group_name"><?=  getgroupinfo($conn, $groupId)["group_bio"]?></p>\
-                                       
-                                    <?php } ?>
+                                <p id="groupInfo" class="group_name"> <?= getgroupinfo($conn, $groupId)["group_name"] ?></p>
+                                <?php if (getgroupinfo($conn, $groupId)["group_bio"] != "") { ?>
+                                    <p class="group_bio"><?= getgroupinfo($conn, $groupId)["group_bio"] ?></p>
+                                <?php } ?>
                             </div>
-                            <?php 
-                             $usersId =  getGroupUsersId($conn, $groupId);
-                            
-                             $admin = getGroupAdmin($conn, $groupId);
-                                      
-                             
-                             
-                                
-                                foreach ($usersId as $uId):
-                                    $usersInfo = getUserInfo($conn,$uId);
-                                    ?>
-                                    <div class="usersinfo_div" id="<?=$uId?>">
-                                    <div id="usersInfo"></div>
-                                    <div id="modal_buttons" class="userinfo_buttons; display: flex;">
-                                        <div id=<?= $uId."modal-extra-interactions" ?>>
-                                        <?php if($uId == $groupAdminId) {?>
+                            <div class="usersinfo_div" id="usersinfo_div">
+                            <div id="usersInfo">
+                                <?php foreach ($usersId as $uId) :
+                                    $usersInfo = getUserInfo($conn, $uId);
+                                ?>
+                                    <div class="user_info_page">
+                                        <?php if($isAdmin) {
+                                            if ($uId == $groupAdminId) { ?>
+                                                <p><?= $usersInfo["user_email"] ?></p><span>⚡</span>
 
-                                            
-                                                <p><?= $usersInfo["user_email"]."⚡"?></p>
-                                               
-                                             </a>
-                                            
-                                        <?php } else {?>
-                                        <p><?= $usersInfo["user_email"]." <a onclick='deleteUser(event)' style="."cursor:pointer"."><span id=".$uId." style='margin-left:110px;'>❌</span></a>"?>  <?php }?>
-                                      
-                                        </div>
-                                       
+                                            <?php } else { ?>
+                                                <p><?= $usersInfo["user_email"] ?> </p><a onclick="deleteUser(event)" class="user_delete_button" style="cursor:pointer"><span id="<?= $uId ?>">❌</span></a>
+                                            <?php }
+                                        } else {
+                                            if ($userId == $groupAdminId) { ?>
+                                                <p><?= $usersInfo["user_email"] ?></p><span>⚡</span>
+                                            <?php } else { ?>
+                                                <p><?= $usersInfo["user_email"] ?></p>
+                                        <?php }
+                                        } ?>
                                     </div>
-                                </div>
-                                <?php endforeach?>
-                                <div id="modal-default-interactions">
-                                            <button id="closeButton" class="close btn modal_interaction">Close</button>
-                                        </div>
+                                <?php endforeach; ?>
+                            </div>
+                            </div>
+                            <div class="userinfo_buttons" id="modal-extra-interactions">
+                                <?php if ($isAdmin) { ?>
+                                    <div class="userinfo_buttons_restyle">
+                                    <a href="#" class="add_user" id="add_user">Add User</a>
+                                    <a href="../controllers/deletegroup.php?delid=<?= $userId ?>&id=<?= $groupId ?>" class="delete_group" id="delete_group">Delete Group</a>
+                                    </div>
+                                <?php } ?>
+                                <button id="closeButton" class="close btn modal_interaction">Close</button>
+                            </div>
                         <?php } ?>
                     </div>
                 </div>
                 <div id="addModal" class="modal_user">
-                    <div class="modal-content">
+                    <div class="modal-content" id="modalCont">
                         <div class="modal-add-users">
                             <form action="../controllers/adduser.php?group_id=<?= $groupId ?>" method="POST">
-                                <label for="exampleFormControlTextarea1" class="form-label; float: left;">Name of Persons</label>
+                                <label for="exampleFormControlTextarea1" class="form-label;" style="color: #fff;">Name of Persons</label>
                                 <div class="center clear">
                                     <div id="promoNode"></div>
                                     <select name='select' class="chosen" multiple="true" style="width:400px;">
@@ -277,7 +279,7 @@ function startsWith($string, $startString)
                             $stickerSplit = explode("_", $message['message_content']);
                             if ($stickerSplit[0] == "STICKER") {
                                 $stickerId = $stickerSplit[1];
-                                echo "<img id=" . $message['message_id']." src='../assets/stickers/$stickerId.png' style='height: 100px; width: 140px' >";
+                                echo "<img id=" . $message['message_id'] . " src='../assets/stickers/$stickerId.png' style='height: 100px; width: 140px' >";
                             } else {
                                 echo "<pre >" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>";
                             ?>
@@ -351,7 +353,7 @@ function startsWith($string, $startString)
     <div class="fixed-bottom" style="position:fixed">
         <div class="editDelete" id="EditDelete">
             <div class="editDeleteContent">
-                
+
                 <a id="editBtn" onclick="myFunction(event)">Edit</a>
                 <a id="deleteBtn" onclick="deleteMessages(event)">Delete</a>
             </div>
@@ -397,7 +399,7 @@ function startsWith($string, $startString)
                             <?php
                             } ?>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

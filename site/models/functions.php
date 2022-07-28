@@ -259,7 +259,6 @@ function getStreaks($conn,$user_id){
             ORDER BY date DESC;";
 
         $result = mysqli_query($conn, $sql);
-        echo $sql;
         $dates = array();
 
         while($row = mysqli_fetch_assoc($result)){

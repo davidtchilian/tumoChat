@@ -12,7 +12,7 @@ var typeName = document.getElementById("chat").getAttribute("typeName");
 var imageSrc = document.getElementById("chat").getAttribute("imageSrc");
 
 var extraInteractions = document.getElementById("modal-extra-interactions");
-
+var addUserButton = document.getElementById("add_user")
 window.onload = () => {
   window.scrollTo({
     top: 1000,
@@ -124,7 +124,10 @@ function onClose() {
   extraInteractions.innerHTML = "";
   window.location.replace(removeParam("modal", window.location.href));
 }
-
+addUserButton.onclick = function () {
+          stickerModal.style.display = "none";
+          addUserModal.style.display = "block";
+        };
 
 // function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
 //   groupName.innerText = "Loading...";
