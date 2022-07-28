@@ -133,8 +133,10 @@ function startsWith($string, $startString)
 </head>
 
 <body id="bodyHTML">
+<input type="hidden" id="groupType" name="<?= $groupTypeName?>">
+<input type="hidden" id="admin" name="<?=$isAdmin?>">
 
-    <div class="fixed-top">
+    <div class="fixed-top" >
         <nav id="navbar" class="navbar navbar-expand-lg" style="background-color : #6c4b93;">
             <?php
             if ($groupTypeName == "private") {
@@ -167,7 +169,7 @@ function startsWith($string, $startString)
 
                 </div>
 
-                <div id="infoModal" class="modal_user">
+                <div id="infoModal" class="modal_user" >
                     <div class="modal-content" id="modalCont">
                         <?php if ($groupTypeName == "public") { ?>
                             <div>
@@ -196,13 +198,13 @@ function startsWith($string, $startString)
                                     <?php foreach ($usersId as $uId) :
                                         $usersInfo = getUserInfo($conn, $uId);
                                     ?>
-                                        <div class="user_info_page">
+                                        <div class="user_info_page" id="<?="div".$uId?>">
                                             <?php if ($isAdmin) {
                                                 if ($uId == $groupAdminId) { ?>
                                                     <p><?= $usersInfo["user_email"] ?></p><span style="padding-right:10px">⚡</span>
 
                                                 <?php } else { ?>
-                                                    <p><?= $usersInfo["user_email"] ?> </p><a style="margin-right:10px" onclick="deleteUser(event)" class="user_delete_button" style="cursor:pointer"><span id="<?= $uId ?>">❌</span></a>
+                                                    <p><?= $usersInfo["user_email"] ?> </p><a style="margin-right:10px" onclick="deleteUser(event)" class="user_delete_button" ><span style="cursor:pointer" id="<?= $uId ?>">❌</span></a>
                                                 <?php }
                                             } else {
                                                 if ($uId == $groupAdminId) { ?>
@@ -217,13 +219,13 @@ function startsWith($string, $startString)
                             </div>
                             <div class="userinfo_buttons" id="modal-extra-interactions">
                                 <?php if ($isAdmin) { ?>
-                                    <div class="userinfo_buttons_restyle">
-                                        <a href="#" class="add_user" id="add_user" >Add Friend</a>
+                                    <div class="userinfo_buttons_restyle" style="margin-left:-500px;">
+                                        <a href="#" class="add_user " id="add_user">Add User</a>
                                         <a href="../controllers/deletegroup.php?delid=<?= $userId ?>&id=<?= $groupId ?>" class="delete_group" id="delete_group">Delete Group</a>
                                     </div>
                                 <?php } else { ?>
                                     <div class="userinfo_buttons_restyle">
-                                        <a href="../controllers/deleteuserfromgroup.php?delid=<?= $userId ?>&id=<?= $groupId ?>" class="leave_group" id="leave_group">Leave Group</a>
+                                        <a href="../controllers/leaveGroup.php?delid=<?= $userId ?>&id=<?= $groupId ?>" class="leave_group" id="leave_group">Leave Group</a>
                                     </div>  
                                 <?php } ?>
                                 <button id="closeButton" class="close btn modal_interaction">Close</button>
