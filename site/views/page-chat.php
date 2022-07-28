@@ -215,7 +215,7 @@ function startsWith($string, $startString)
                                     </div>
                                 <?php } else { ?>
                                     <div class="userinfo_buttons_restyle">
-                                        <a href="../controllers/deleteuserfromgroup.php?delid=<?= $userId ?>&id=<?= $groupId ?>" class="leave_group" id="leave_group">Leave Group</a>
+                                        <a href="../controllers/leaveGroup.php?delid=<?= $userId ?>&id=<?= $groupId ?>" class="leave_group" id="leave_group">Leave Group</a>
                                     </div>  
                                 <?php } ?>
                                 <button id="closeButton" class="close btn modal_interaction">Close</button>
