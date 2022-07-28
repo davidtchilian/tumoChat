@@ -262,15 +262,22 @@ document.getElementById("send").addEventListener("click", function (event) {
 var x
 const editDelete = document.getElementById("EditDelete")
 function show(event) {
+  
   x = event.target.id
 
   const editBtn = document.getElementById("editBtn")
   const deleteBtn = document.getElementById("deleteBtn")
+  editBtn.setAttribute("style", "display: block;")
 
   editBtn.setAttribute("name", x)
   deleteBtn.setAttribute("name", x)
 
   editDelete.style.display = "block"
+  let messageCont = document.getElementById(x).innerText
+  if(messageCont == ""){
+    editBtn.setAttribute("style", "display: none;")
+  }
+  
 }
 
 //update
@@ -278,7 +285,7 @@ function show(event) {
 
 function myFunction(event) {
 
-  console.log(x)
+  
   const messageCont = document.getElementById(x)
 
   document.getElementById("send").addEventListener("click", function (event) {
@@ -286,11 +293,15 @@ function myFunction(event) {
 
   })
   txt.value = messageCont.innerText
+  
+ 
 
 
   var y = document.getElementById("editBtn")
 
   button.setAttribute("onclick", "updateMessages(event)")
+  txt.setAttribute("onclick", "")
+  
 }
 
 
@@ -491,3 +502,16 @@ function deleteUser(event) {
 
 
   }
+
+
+  function hide(){
+    editDelete.setAttribute("style", "none")
+  }
+
+function hideAdvance(event){
+  if(event.target.id == "" || event.target.id == "navbar1" || event.target.id == "navbar"|| event.target.id == "bodyHTML" ){
+    console.log(true)
+    hide()
+  }
+
+}
