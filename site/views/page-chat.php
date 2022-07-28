@@ -120,6 +120,16 @@ function startsWith($string, $startString)
             background-size: 15%;
         }
     </style>
+    <script>
+        let host = 'ws://0.0.0.0:1000/site/models/socket-server.php';
+        let socket = new WebSocket(host);
+        socket.onmessage = (e) => {
+            if (e.data == "ping") {
+                // Pong!
+            }
+            socket.send("Hello")
+        };
+    </script>
 </head>
 
 <body id="bodyHTML">
