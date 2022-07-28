@@ -30,7 +30,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>TUYU | Communities</title>
+    <title>TUMO | Communities</title>
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
@@ -46,6 +46,7 @@
        
         body{
            background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
+           background-size: 15%;
         }
         
         
@@ -132,7 +133,7 @@
                   <a href="page-chat.php?id=<?php echo $group["group_id"]; ?>" style="text-decoration :none">
                     <div class="card">
                       <ul class="list-group list-group-flush" style="list-style-type: none;">
-                        <li class="list-group-item group-name" style="font-size: 0.8vw; display: flex; flex-direction: column; justify-content: center; align-items: center"><h3 class="list-group-item-margin list-title" style="margin-bottom: 0"><?php echo $group["group_name"]; ?></h3></li>
+                        <li class="list-group-item group-name" style="font-size: 0.8vw; display: flex; flex-direction: column; justify-content: center; align-items: center"><h3 id="commChatName<?php echo $group["group_id"]; ?>" class="list-group-item-margin list-title" style="margin-bottom: 0"><?php echo $group["group_name"]; ?></h3></li>
                         <li class="list-group-item list-bottom list-group-item-margin" style="font-size: calc(7px + 0.3vw)">
                           <?php
                             echo  substr($group["group_bio"], 0, 200) . "...";
@@ -142,6 +143,7 @@
                     </div>
                   </a>
                 </div>
+                
               <?php
               }
               ?>

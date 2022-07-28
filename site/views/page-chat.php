@@ -1,5 +1,9 @@
 <?php
 
+if (!isset($_GET['id']) || $_GET['id'] == "") {
+    header("Location: home.php");
+    exit();
+}
 $messageCount;
 $groupId = $_GET['id'];
 
@@ -113,6 +117,7 @@ function startsWith($string, $startString)
 
         ?>body {
             background-image: url("../assets/images/themes/<?php echo $theme; ?>.jpg");
+            background-size: 15%;
         }
     </style>
 </head>
@@ -218,6 +223,9 @@ function startsWith($string, $startString)
                         <?php } ?>
                     </div>
                 </div>
+
+
+
                 <div id="addModal" class="modal_user">
                     <div class="modal-content" id="modalCont">
                         <div class="modal-add-users">
@@ -253,6 +261,8 @@ function startsWith($string, $startString)
                                         ?>
                                     </select>
                                     <input type="hidden" name="groupname" value="<?= $groupName ?>">
+                                    
+                                    <button id="closeButton" class="close btn modal_interaction mt-3">Close</button>
                                     <button type="submit" class="btn btn-primary mt-3" style="float: right; background-color: rgb(108, 2, 119); border-color: rgb(108, 2, 119); ">Add</button>
                                 </div>
                         </div>
@@ -303,7 +313,7 @@ function startsWith($string, $startString)
             ?>
                 <div class="row">
                     <?php
-                    if ($isingroup_message || $groupTypeName == "public") { ?>
+                    if ($isingroup_message || $groupTypename = "public") { ?>
                         <div class="col-1"><img src="../assets/icons/<?php echo $icon; ?>.png" class="user_icon"></div>
                         <div class="col-7">
                             <button type="button" class="btn btn-primary messageRecu mt-2" style="float : left; color: black;">
@@ -313,7 +323,7 @@ function startsWith($string, $startString)
                                 $stickerSplit = explode("_", $message['message_content']);
                                 if ($stickerSplit[0] == "STICKER") {
                                     $stickerId = $stickerSplit[1];
-                                    echo "<img id=" . $message['message_id'] . "src='../assets/stickers/$stickerId.png' style='height: 100px; width: 400px'>";
+                                    echo "<img src='../assets/stickers/$stickerId.png' style='height: 100px; width: 100px'>";
                                 } else {
                                     echo "<pre>" . "<span class='message_content_span' onclick='show(event)' id=" . $message['message_id'] . ">" . $message['message_content'] . "</span>" . "</pre>";
                                 }

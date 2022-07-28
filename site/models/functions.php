@@ -40,7 +40,7 @@
                 array_push($friendsList, $friend['user_id_1']);
             }
         }
-        
+        $friendsList=array_unique($friendsList);
         return $friendsList;
     }
 
@@ -209,26 +209,26 @@
 function getStreakIcon($streak)
 {
 
-              if ($streak >= 3 && $streak < 7) {
+              if ($streak >= 5 && $streak < 10) {
                 return $streak."⭐";
               }
-              else if ($streak >= 7 && $streak < 21) {
+              else if ($streak >= 20 && $streak < 30) {
                 return $streak."🌟";
 
               }
-              else if ($streak >= 21 && $streak < 42) {
+              else if ($streak >= 30 && $streak < 40) {
                 return $streak."💫";
               }
 
-              else if ($streak >= 42 && $streak < 126) {
+              else if ($streak >= 40 && $streak < 50) {
                 return $streak."✨";
               }
 
-              else if ($streak >= 126 && $streak < 182) {
+              else if ($streak >=50 && $streak < 60) {
                 return $streak."🌠";
               }
 
-              else if ($streak >= 182 ) {
+              else if ($streak >= 60 ) {
                 return $streak."🌌";
               }
 
@@ -264,7 +264,7 @@ function getStreaks($conn,$user_id){
         while($row = mysqli_fetch_assoc($result)){
             $dates[] = $row['date'];
         }
-        if ($dates[0] == date('Y-m-d')) {
+        if (isset($dates[0]) && $dates[0] == date('Y-m-d')) {
 
             $flames = 1;
 
