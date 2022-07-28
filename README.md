@@ -42,3 +42,35 @@ It was created for Tumo students and workers by Tumo students to make communicat
 - Then choose a profile picture from the given ones and write a small bio.
 
 - Now you are ready to communicate, make groups, talk in DMs and enjoy your time in **TUMO Chat**.
+
+# TUMO Chat Installation
+
+You're also able to run this awesome project on your own machine.
+
+## Requirements
+
+- PHP 8
+- MySQL 5
+- Apache 
+- NodeJS 13+
+
+## Installation
+
+Please Note
+The configuration file is located at `site/config/config.php`, configure everything you need for TUMO Chat from here.
+
+1. Clone the repository.
+
+```
+$ git clone https://github.com/fredidas/tumoChat.git
+```
+
+2. Setup the Apache server and set the root of it to `tumoChat`.
+
+3. Create a database and name it `tumoChat` then get the `database.sql` file and import it to the MySQL database.
+
+4. Change your working directory to the `socket-server` folder, and run the `npm install` command.
+
+5. Run the `npm start` command to start the WebSocket server.
+
+6. Done, TUMO Chat is ready to use.
