@@ -1,5 +1,9 @@
 <?php
 
+if (!isset($_GET['id']) || $_GET['id'] == "") {
+    header("Location: home.php");
+    exit();
+}
 $messageCount;
 $groupId = $_GET['id'];
 
@@ -204,7 +208,7 @@ function startsWith($string, $startString)
                             <div class="userinfo_buttons" id="modal-extra-interactions">
                                 <?php if ($isAdmin) { ?>
                                     <div class="userinfo_buttons_restyle">
-                                        <a href="#" class="add_user" id="add_user" >Add User</a>
+                                        <a href="#" class="add_user" id="add_user" >Add Friend</a>
                                         <a href="../controllers/deletegroup.php?delid=<?= $userId ?>&id=<?= $groupId ?>" class="delete_group" id="delete_group">Delete Group</a>
                                     </div>
                                 <?php } else { ?>
