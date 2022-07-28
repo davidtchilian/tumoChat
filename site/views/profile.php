@@ -177,7 +177,7 @@ tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="tru
     <div class="row">
 
         <div class="card centered-card " style=" width: 400px;">
-            <div class="card-body">
+            <div class="card-body img-shadow">
                 <?php
                 echo "<img src='../assets/icons/$userIcon.png' class='card-img-top' alt='profile_' style='height: 100px; width: 100px; margin-bottom:10px'>";
                 ?>
