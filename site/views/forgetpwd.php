@@ -24,7 +24,7 @@
     <div class="wrap">
         <div class="row pb-5">
             <div class="col text-center welcome">
-                <a href="index.php"><img src="../assets/images/logo_tuyu.png" class="logo" alt="TUYU"></a>
+                <a href="index.php"><img src="../assets/tumologos/image.png" class="logo" alt="TUYU"></a>
             </div>
         </div>
         <div class="card centered-card">
