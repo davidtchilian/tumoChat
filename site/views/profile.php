@@ -141,20 +141,6 @@ tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="tru
                     </div>
                 </ul>
 
-                <?php
-                $users = array();
-                $sql = "SELECT user_email, user_id FROM USERS WHERE user_id != $userId AND user_email LIKE '%$txt%'";
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $temp = array();
-                        array_push($temp, $row["user_id"]);
-                        array_push($temp, $row["user_email"]);
-                        $users[] = $temp;
-                    }
-                }
-
-                ?>
                 <form class="form-inline my-2 my-lg-0 d-flex " role="search" style="width: 400px; margin:auto;" action="../controllers/redirect_profile.php" method="post">
                     <input class="form-control me-2 srch-input" type="text" id="fname" name="fname" onkeyup="showHint(this.value)">
                     <div id="txtHint"></div>

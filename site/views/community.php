@@ -87,8 +87,8 @@
             <?php } ?>
                 <div id="infoModal" class="modal_user">
                     <div id="modal-content" class="modal-content">
-                      <h3>Notifications</h3>
-                      <?php $notifs = getNotifications($conn,$user_id);
+                      <h3 style="color:white">Notifications</h3>
+                     <?php if($notif_count != 0){
                       foreach ($notifs as $notif) { ?>
                       <div class="notif_content_div">
                         <p><?=$notif['notification_content']?></p>
@@ -106,7 +106,9 @@
                           <?php } ?>
                         </div>  
                       </div>
-                     <?php } ?>
+                     <?php } } else{?>
+                        <p style="text-align:center; margin-top:15px">you don't have any notifications yet</p>
+                      <?php }?>
                       <button id = "closeButton" class="close btn modal_interaction" onclick = window.location.reload(true)>Close</button>
                     </div>
                 </div>
