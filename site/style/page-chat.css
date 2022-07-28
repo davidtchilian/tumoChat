@@ -79,18 +79,28 @@ p {
   background-color: #664c8f;
   margin: auto;
   padding: 10px;
-  width: 30%;
+  width: 50%;
   border-radius: var(--bs-navbar-toggler-border-radius);
-  
 }
 .modal-content-sticker {
   position: absolute;
-  bottom: 6%;
-  left: 21%;
-  z-index: 10040;
+  bottom: 10.5%;
+  left: 7%;
+  z-index: 1;
   overflow: auto;
   overflow-y: auto;
 }
+
+.sticker_a{
+  cursor: pointer;
+}
+
+.stickerList{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .group_name {
   font-weight: bold;
   font-size: 20px;
@@ -136,6 +146,10 @@ p {
   padding: 15px;
   border-radius: var(--bs-navbar-toggler-border-radius);
 }
+.usersinfo_div p {
+  text-align: left;
+  padding-left: 5px;
+}
 
 #usersInfo {
   display: flex;
@@ -171,7 +185,7 @@ p {
   font-size: 15px;
   font-weight: bold;
   background-color: #664c8f;
-  transition: 0.1s transform ease-out;
+  transition: all ease-out .2s;
 }
 
 .modal_interaction:hover,
@@ -179,6 +193,7 @@ p {
   color: white;
   text-decoration: none;
   cursor: pointer;
+  transition: all ease-out .2s;
 }
 
 .delete_group,
@@ -243,7 +258,7 @@ pre {
   font-size: 16px;
   font-family: Arial;
   font-weight: 400;
- 
+  margin-bottom: .5rem;
 }
 .comm_icon{
   width: 55px;
@@ -275,7 +290,15 @@ pre {
 @media (max-width: 850px){
   .modal-content{
     width: 85% !important;
+    bottom: 35%;
   }
+  #modalCont{
+    bottom: 0 !important;;
+  }
+  .chzn-container{
+    width: 60vw !important;;
+  }
+  
 }
 
 .navbar-expand-lg {
@@ -285,4 +308,76 @@ pre {
 
 .nav-link{
   font-weight: 700;
+}
+
+.editDelete{
+  display: none;
+  background: white;
+  border: #aaaaaa 1px solid;
+  border-top-right-radius: .375rem;
+  border-top-left-radius: .375rem;
+  border-bottom: none;
+}
+
+.editDeleteContent{
+  display: flex;
+  flex-direction: column;
+}
+
+.editDeleteContent a{
+  padding-left: 2vw;
+  transition: all ease-in-out .2s;
+}
+.editDeleteContent a:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+  transition: all ease-in-out .2s;
+}
+
+.editDeleteContent a:first-child{
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+.editDeleteContent a:last-child{
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+.userinfo_buttons_restyle{
+  display: flex;
+  align-items: center;
+}
+
+.userinfo_buttons_restyle a{
+  text-decoration: none;
+}
+
+.userinfo_buttons_restyle a:first-child{
+  color: #a69bc7;
+  border: 2px solid #4f3774;
+  border-radius: .375rem;
+  padding: 8px 10px;
+  transition: all ease-in-out .2s;
+}
+
+.userinfo_buttons_restyle a:first-child:hover{
+  color: #fff;
+  background: #4f3774;
+  transition: all ease-in-out .2s;
+}
+
+.userinfo_buttons_restyle a:last-child{
+  margin-left: 10px;
+  color: #ff5b4f;
+  border: 2px solid #bc392f;
+  border-radius: .375rem;
+  padding: 8px 10px;
+  transition: all ease-in-out .2s;
+}
+
+.userinfo_buttons_restyle a:last-child:hover{
+  background: #bc392f;
+  color: #fff;
+  border-color: #bc392f;
+  transition: all ease-in-out .2s;
 }

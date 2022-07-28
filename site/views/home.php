@@ -92,6 +92,7 @@
             <li class="nav-item">
               <a class="nav-link active" href="community.php" style="color :white">Community</a>
             </li>
+            
             <?php
             $notifs = getNotifications($conn,$user_id);
              if($notif_count != 0)

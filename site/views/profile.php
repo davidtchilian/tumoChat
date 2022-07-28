@@ -41,6 +41,9 @@ $friends = getFriends($conn, $userId);
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="../scripts/jquery.js"></script>
     <script src="../scripts/changetheme.js"></script>
     <script type="text/javascript" src="../scripts/delete.js"></script>
@@ -53,6 +56,37 @@ $friends = getFriends($conn, $userId);
 </head>
 <body>
 
+
+<!-- Modal
+<div class ="container">
+<div class ="row">
+<div class ="col-md-12">
+<div class="modal fade" id="myModal" > 
+tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" -->
+  <!-- <div class="modal-dialog modal-sm" > -->
+  <!-- role="document" -->
+    <!-- <div class="modal-content">
+      <div class="modal-header">
+        <h5 >Modal title</h5> -->
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      <!-- </div>
+      <div class="modal-body">
+        hhghbg
+      </div>
+      <div class="modal-footer">
+      <input  class="btn btn-default" value="Close"> -->
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button> -->
+      <!-- </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+   </div> -->
+   
     <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand" href="<?php echo $isGuest ? "profile.php" : "home.php" ?>"><img src="../assets/images/flèche_retour3.png" alt="Retour" style="width : 35px; height: 35px;" /></a>
         <?php
@@ -143,7 +177,7 @@ $friends = getFriends($conn, $userId);
     <div class="row">
 
         <div class="card centered-card " style=" width: 400px;">
-            <div class="card-body">
+            <div class="card-body img-shadow">
                 <?php
                 echo "<img src='../assets/icons/$userIcon.png' class='card-img-top' alt='profile_' style='height: 100px; width: 100px; margin-bottom:10px'>";
                 ?>
@@ -203,42 +237,38 @@ $friends = getFriends($conn, $userId);
                 } else {
                 ?>
                     <a href="editProfile.php" class="card-link" style="font-size: 20px; color: gray;">Edit Profile</a><br>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        Launch demo modal
-                    </button>
+                    <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#exampleModal">
+  Delete Account
+</button>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    ...
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+          <!-- <span aria-hidden="true">&times;</span> -->
+        </button>
+      </div>
+      <div class="modal-body">
+        Deleting your account will remove all of your information permanently. This cannot be undone.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <a href="../controllers/delete_acc.php" class="btn btn-danger">Delete Account</a>
+      </div>
+    </div>
+  </div>
+</div>
+                    
                     <?php }?>
             </div>
         </div>
     </div>
-<?php
-                
-?>
+
 </div>
-</div>
-</div>
-</div>
+
 <?php
 if (!$isGuest) {
 ?>
@@ -255,7 +285,7 @@ if (!$isGuest) {
         if (empty($friends)) {
         ?>
 
-            <h4>You don't have any friends.</h4>
+            <h3 style="text-align:center">You don't have any friends.</h3>
 
             <?php
         } else {

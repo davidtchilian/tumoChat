@@ -29,7 +29,7 @@ if(mysqli_num_rows($result) == 1){
   $hash = md5(date('h-i-s, j-m-y, it is w Day') . rand(0, 1000));
   $subject = 'reset password';
   $message = "<h1> If you want to reset your password click link below </h1> <br>" . $domain_name . "/views/reset_pwd_form.php?h=" . $hash . "&uid=". $user_id;
-  $headers = "From: <narek.h30.y@tumo.org>"."\r\n";
+  $headers = "From: <georgezargaryan7@gmail.com>"."\r\n";
   $headers .= "Content-type: text/html\r\n";  
   mail($to,$subject,$message,$headers);
 

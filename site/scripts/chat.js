@@ -12,7 +12,7 @@ var typeName = document.getElementById("chat").getAttribute("typeName");
 var imageSrc = document.getElementById("chat").getAttribute("imageSrc");
 
 var extraInteractions = document.getElementById("modal-extra-interactions");
-
+var addUserButton = document.getElementById("add_user")
 window.onload = () => {
   window.scrollTo({
     top: 1000,
@@ -111,6 +111,7 @@ stickerClose.onclick = () => {
   onClose();
 }
 
+
 window.onclick = function (event) {
   if (event.target == stickerModal) {
     onClose();
@@ -123,7 +124,10 @@ function onClose() {
   extraInteractions.innerHTML = "";
   window.location.replace(removeParam("modal", window.location.href));
 }
-
+addUserButton.onclick = function () {
+          stickerModal.style.display = "none";
+          addUserModal.style.display = "block";
+        };
 
 // function getGroupIdInfo(userId, groupId, isAdmin, groupAdminId) {
 //   groupName.innerText = "Loading...";
@@ -253,33 +257,25 @@ document.getElementById("send").addEventListener("click", function (event) {
 })
 
 var x
-
+const editDelete = document.getElementById("EditDelete")
 function show(event) {
   x = event.target.id
-  let dropdownDiv = document.getElementsByClassName("dropdown")
-  for (let i = 0; i < dropdownDiv.length; i++) {
-    dropdownDiv[i].style.display = "none"
-
-  }
-  var y = event.target.id
-  let id = "dropdown" + x
-
-
-  const dropdown = document.getElementById(id)
-
-  dropdown.style.display = "block"
-  dropdown.style.position = "absolute"
+  
+  const editBtn = document.getElementById("editBtn")
+  const deleteBtn = document.getElementById("deleteBtn")
+  
+  editBtn.setAttribute("name", x)
+  deleteBtn.setAttribute("name", x)
+  
+  editDelete.style.display = "block"
 }
-
 
 //update
 
 
 function myFunction(event) {
 
-
-  x = event.target.name
-
+  console.log(x)
   const messageCont = document.getElementById(x)
 
   document.getElementById("send").addEventListener("click", function (event) {
@@ -289,16 +285,8 @@ function myFunction(event) {
   txt.value = messageCont.innerText
 
 
-  var y = document.getElementById("editId" + x)
+  var y = document.getElementById("editBtn")
 
-  if (event.target == y) {
-    let dropdownDiv = document.getElementsByClassName("dropdown")
-    for (let i = 0; i < dropdownDiv.length; i++) {
-      dropdownDiv[i].style.display = "none"
-
-    }
-
-  }
   button.setAttribute("onclick", "updateMessages(event)")
 }
 
@@ -311,8 +299,6 @@ function updateMessages(event) {
   const message_cont = txt.value
 
 
-
-  var params = "user_id=" + 5 + "&" + "message_id=" + 73 + "&" + "message_content=" + "hello"
   if (message_cont != "") {
     $.ajax(
       {
@@ -343,7 +329,9 @@ function updateMessages(event) {
     txt.value = ""
     button.id = "send"
   }
+
   button.setAttribute("onclick", "sendMessage(event)")
+  editDelete.style.display = "none"
 }
 
 
@@ -377,12 +365,7 @@ function deleteMessages(event) {
 
 
   );
-
-  let dropdownDiv = document.getElementsByClassName("dropdown")
-  for (let i = 0; i < dropdownDiv.length; i++) {
-    dropdownDiv[i].style.display = "none"
-
-  }
+  editDelete.style.display = "none";
 
 }
 var id
@@ -422,52 +405,31 @@ function sendMessage(event) {
             button2.style.backgroundColor='rgb(' + rgb.r * 1.2 + ',' + rgb.g * 1.2 + ',' + rgb.b * 1.2 + ')';
             button2.style.borderColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
           }
-          const pre = document.createElement("pre")
           const span = document.createElement("span")
-          pre.setAttribute("onclick", "show(event)")
           span.setAttribute("class", "message_content_span")
           span.setAttribute("onclick", "show(event)")
           if (txt.value.startsWith("STICKER_")) {
             let sticker = document.createElement("img");
             sticker.src = `../assets/stickers/${txt.value.split("_")[1]}.png`;
-            sticker.style.width = "100px";
+            sticker.style.width = "140px";
             sticker.style.height = "100px";
+            sticker.setAttribute("name", id)
             span.appendChild(sticker);
           }
           else {
             span.setAttribute("id", id)
             span.innerText = txt.value;
           }
-          pre.appendChild(span)
-          button2.appendChild(pre)
+          button2.appendChild(span)
           div.appendChild(button2)
-          const div0 = document.createElement("div")
-          div0.setAttribute("class", "dropdown")
-          div0.setAttribute("style", "width:30px; margin-left:900px; margin-top:-30px;")
-          div0.setAttribute("id", "dropdown" + id)
 
-          const div1 = document.createElement("div")
-          div1.setAttribute("class", "dropdown-content")
-          div1.setAttribute("id", "dropdown-content")
-          const a0 = document.createElement("a")
-          a0.setAttribute("onclick", "myFunction(event)")
-          a0.setAttribute("id", "editId" + id)
-          a0.setAttribute("name", id)
-          a0.innerText = "Edit"
-          div1.appendChild(a0)
-          div0.appendChild(div1)
-          div.appendChild(div0)
 
-          const a1 = document.createElement("a")
-          a1.setAttribute("onclick", "deleteMessages(event)")
-          a1.setAttribute("id", "delete" + id)
-          a1.setAttribute("name", id)
-          a1.innerText = "Delete"
-          div1.appendChild(a1)
+          
+
+         
           cont0.appendChild(cont)
 
           cont.scrollIntoView({ behavior: "smooth" })
-
 
           txt.value = ""
 

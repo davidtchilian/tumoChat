@@ -204,12 +204,6 @@
         }
         return $owned_badges;
     
-
-
-    while ($row = mysqli_fetch_assoc($result)) {
-        $all[] = $row;
-    }
-    return $all;
 }
 
 function getStreakIcon($streak)
@@ -253,7 +247,7 @@ function getStreaks($conn,$user_id){
     }
 
 
-    $streaks=array();
+    $streaks = array();
 
     foreach($groupids as $id){
         $gid = $id['isInGroup_group_id'];
@@ -262,13 +256,12 @@ function getStreaks($conn,$user_id){
             FROM MESSAGE 
             WHERE message_sender_id = $user_id
             AND message_group_id = $gid
-            ORDER BY message_date DESC;";
+            ORDER BY date DESC;";
 
-        $res = mysqli_query($conn, $sql);
-
+        $result = mysqli_query($conn, $sql);
         $dates = array();
 
-        while($row = mysqli_fetch_assoc($res)){
+        while($row = mysqli_fetch_assoc($result)){
             $dates[] = $row['date'];
         }
         if ($dates[0] == date('Y-m-d')) {
