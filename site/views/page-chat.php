@@ -1,5 +1,9 @@
 <?php
 
+if (!isset($_GET['id']) || $_GET['id'] == "") {
+    header("Location: home.php");
+    exit();
+}
 $messageCount;
 $groupId = $_GET['id'];
 

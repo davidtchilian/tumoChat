@@ -169,10 +169,10 @@ tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="tru
                     </button>
                 </form>
             </div>
-    </nav>
-<?php
+            <?php
         }
-?>
+        ?>
+        </nav>
 </div>
 <div class="container">
     <div class="row">
@@ -309,7 +309,9 @@ if (!$isGuest) {
                         </a>
                     </div>
                     <div>
-                        <button type="button" class="btn btn-outline-dark">Direct</button>
+                        <a href="../controllers/direct.php?id=<?= $friendId ?>">
+                            <button type="button" class="btn btn-outline-dark">Direct</button>
+                        </a>
                     </div>
                 </div>
     <?php
