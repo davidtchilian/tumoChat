@@ -273,9 +273,12 @@ if (!$isGuest) {
         <?php
         if (empty($friends)) {
         ?>
-
-            <h3 id="noFriends"style='text-align:center;'.<?php if($theme == 1 || $theme == 3){ echo "color:white;";}?>>You don't have any friends.</h3>
-
+<?php if($theme == 1 || $theme == 3){ 
+    echo "<h3 id='noFriends' style='text-align:center; color:white;'>You don't have any friends.</h3>"; 
+}else{
+    echo "<h3 id='noFriends' style='text-align:center;'>You don't have any friends.</h3>";
+}
+?>
             <?php
         } else {
             foreach ($friends as $friend) {
