@@ -1,17 +1,17 @@
 <?php
 
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $database = "tumoChat"; // Database name
-  $domain_name = "http://localhost/tumoChat/site/";
+  include "../config/config.php";
 
-  // Create connection
-  $conn = mysqli_connect($servername, $username, $password, $database);
+  $host = $config['DB_HOST'];
+  $username = $config['DB_USERNAME'];
+  $password = $config['DB_PASSWORD'];
+  $database = $config['DB_DATABASE'];
+  $port = $config['DB_PORT'];
 
-  // Check connection
+  $conn = mysqli_connect($host, $username, $password, $database, $port);
+
   if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
   }
-
+  
 ?>

@@ -1,3 +1,6 @@
+<?php
+    include '../config/config.php';
+?>
 <!doctype html>
 <html lang="en">
 
@@ -102,7 +105,7 @@
                         <input type="submit" name="Login" value="Log In" id="exampleInputSubmit" class="submit-btn mb-3" href="home.php" style="margin:0 auto;">
                         <p>━ OR ━</p>
                         <div id="g_id_onload"
-                            data-client_id="409821055988-h65mtble4s6aa48ij82cp1alpariqbb1.apps.googleusercontent.com"
+                            data-client_id="<?php echo $config['GOOGLE_DATA_CLIENT_ID']; ?>"
                             data-context="signin"
                             data-ux_mode="popup"
                             data-auto_prompt="false"

@@ -527,7 +527,12 @@ function startsWith($string, $startString)
             button.appendChild(userName)
             button.appendChild(span)
             divCol7.appendChild(button)
-            chatContainer.appendChild(cont)
+            chatContainer.appendChild(cont);
+
+            cont.scrollIntoView({
+                    behavior: "smooth"
+            });
+
         };
 
         function sendMsg(message) {
