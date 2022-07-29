@@ -14,6 +14,8 @@ if (!isset($userId)) {
     exit();
 }
 
+//relocating when searching profile !!! 
+
 $guestId = isset($_GET['id']) ? $_GET['id'] : $userId;
 $isGuest = $guestId != $userId;
 
@@ -260,19 +262,19 @@ tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="tru
 if (!$isGuest) {
 ?>
     
-    <div class="container friends-container  d-flex align-content-center flex-wrap">
+    <div class="container friends-container  d-flex align-content-center flex-wrap mt-2">
     <?php 
     if($theme == 1 || $theme == 3){ 
-        echo "<h1 class='Titre text-center' style='color:white;'>Friends</h1>";
+        echo "<h1 id='FriendsText' class='Titre text-center' style='color:white;'>Friends</h1>";
     }else {
-        echo "<h1 class='Titre text-center' >Friends</h1>";
+        echo "<h1 id='FriendsText' class='Titre text-center' >Friends</h1>";
     }
 ?>
         <?php
         if (empty($friends)) {
         ?>
 
-            <h3 style="text-align:center">You don't have any friends.</h3>
+            <h3 id="noFriends"style='text-align:center;'.<?php if($theme == 1 || $theme == 3){ echo "color:white;";}?>>You don't have any friends.</h3>
 
             <?php
         } else {
