@@ -2,9 +2,9 @@
 
   $servername = "localhost";
   $username = "root";
-  $password = "root";
+  $password = "";
   $database = "tumoChat"; // Database name
-  $domain_name = "http://localhost:8888/site";
+  $domain_name = "http://localhost/tumoChat/site/";
 
   // Create connection
   $conn = mysqli_connect($servername, $username, $password, $database);
