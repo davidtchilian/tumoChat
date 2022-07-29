@@ -81,6 +81,7 @@
                 </li>
                 <a onClick="notification()" id="infoButton" class="notifications_btn nav-link" style="color : white" href ="#">Notifications</a>
                 <?php
+                $notifs = getNotifications($conn,$user_id);
              if($notif_count != 0)
             {?>
             <div class="notifs_nb_comm"> <?php if($notif_count > 100) {  echo "<p class='notif_limit'>" ?>  <?php echo "99+ </p>";} else{echo "<p class='notif_basic'>".$notif_count."</p>";}?></div>
